@@ -75,10 +75,70 @@ function shopping_widgets_init() {
 }
 
 function shopping_init() {
-	if(!is_admin()){
-		wp_enqueue_script("tinynav", get_stylesheet_directory_uri() . '/js/tinynav.js', array('jquery'));
-	} 
+	if ( ! is_admin() ) {
+		wp_enqueue_script( 'tinynav', get_stylesheet_directory_uri() . '/js/tinynav.js', array( 'jquery' ) );
+	}
 }
+
+/* ── Alluvia Landing Page Assets ── */
+function alluvia_landing_assets() {
+	if ( ! is_front_page() ) return;
+
+	wp_enqueue_style(
+		'alluvia-landing',
+		get_stylesheet_directory_uri() . '/assets/css/alluvia-landing.css',
+		array(),
+		'1.0.0'
+	);
+
+	wp_enqueue_script(
+		'alluvia-landing',
+		get_stylesheet_directory_uri() . '/assets/js/alluvia-landing.js',
+		array(),
+		'1.0.0',
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'alluvia_landing_assets' );
+
+/* ── Alluvia SEO Meta Tags ── */
+function alluvia_seo_meta() {
+	if ( ! is_front_page() ) return;
+	?>
+<meta name="description" content="Alluvia Peptides — Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. COA on every batch.">
+<meta name="keywords" content="peptides, bioactive peptides, skincare peptides, collagen peptides, BPC-157, TB-500, Ipamorelin, hair growth peptides, anti-aging peptides, sports peptides, research peptides">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alluvia Peptides — Premium Bioactive Peptides">
+<meta property="og:description" content="Pharmaceutical-grade peptides for peak performance and longevity. HPLC tested. COA guaranteed.">
+<meta property="og:url" content="<?php echo esc_url( home_url( '/' ) ); ?>">
+<meta property="og:site_name" content="Alluvia Peptides">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alluvia Peptides — Premium Bioactive Peptides">
+<meta name="twitter:description" content="Pharmaceutical-grade peptides for peak performance and longevity.">
+<link rel="canonical" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Alluvia Peptides",
+  "url": "<?php echo esc_url( home_url( '/' ) ); ?>",
+  "description": "Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, and longevity.",
+  "sameAs": []
+}
+</script>
+	<?php
+}
+add_action( 'wp_head', 'alluvia_seo_meta' );
+
+/* ── Hide default theme header/footer on front page ── */
+function alluvia_landing_body_class( $classes ) {
+	if ( is_front_page() ) {
+		$classes[] = 'alluvia-front-page';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'alluvia_landing_body_class' );
 
 add_action( 'tgmpa_register', 'shopping_register_plugins' );
 /**
