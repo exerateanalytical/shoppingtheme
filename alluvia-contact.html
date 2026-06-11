@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Alluvia Peptides — Get Expert Support</title>
+<meta name="description" content="Reach out to the Alluvia Peptides team. Expert support from real scientists. Protocol questions, orders, and general inquiries welcome.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+:root{
+  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
+  --teal:#00c6b3;--teal-dark:#009e8e;--teal-glow:rgba(0,198,179,.18);
+  --gold:#c8a96e;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;
+  --text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;
+  --radius-sm:8px;--radius-md:16px;--radius-lg:28px;
+  --shadow-sm:0 2px 12px rgba(13,27,42,.08);
+  --shadow-md:0 8px 32px rgba(13,27,42,.14);
+  --shadow-lg:0 20px 60px rgba(13,27,42,.2);
+  --shadow-glow:0 0 40px rgba(0,198,179,.25);
+  --transition:.45s cubic-bezier(.23,1,.32,1);
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-ui:'Space Grotesk',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;background:var(--pearl)}
+
+.icon-sm{width:16px;height:16px;stroke-width:2;flex-shrink:0}
+.icon-md{width:20px;height:20px;stroke-width:1.8;flex-shrink:0}
+.icon-lg{width:24px;height:24px;stroke-width:1.6;flex-shrink:0}
+.icon-xl{width:32px;height:32px;stroke-width:1.5;flex-shrink:0}
+
+/* NAV */
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,.97);backdrop-filter:blur(20px);padding:14px 0;box-shadow:0 2px 30px rgba(0,0,0,.2)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;flex-direction:column;line-height:1;text-decoration:none}
+.nav-logo-word{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--white);letter-spacing:.05em}
+.nav-logo-sub{font-family:var(--font-ui);font-size:9px;font-weight:500;letter-spacing:.35em;color:var(--teal);text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-family:var(--font-ui);font-size:13px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.7);text-decoration:none;text-transform:uppercase;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--teal)}
+.nav-cta{color:var(--navy)!important;background:var(--teal);padding:9px 22px;border-radius:100px;font-weight:600!important}
+.nav-cta:hover{background:var(--teal-dark)!important}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px}
+.mobile-overlay{position:fixed;inset:0;z-index:999;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity .35s}
+.mobile-overlay.open{opacity:1;pointer-events:all}
+.mobile-overlay a{font-family:var(--font-display);font-size:40px;font-weight:300;color:var(--white);text-decoration:none;transition:color .25s}
+.mobile-overlay a:hover{color:var(--teal)}
+.mobile-close{position:absolute;top:24px;right:28px;background:none;border:none;color:var(--white);cursor:pointer;padding:8px;display:flex}
+
+/* PAGE HERO */
+.page-hero{position:relative;background:var(--navy);padding:160px 0 80px;overflow:hidden;text-align:center}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,198,179,.08) 0%,transparent 60%)}
+.page-hero-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:0 40px}
+.breadcrumb{display:flex;align-items:center;gap:8px;justify-content:center;font-family:var(--font-ui);font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:28px}
+.breadcrumb a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .25s}
+.breadcrumb a:hover{color:var(--teal)}
+.page-hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(0,198,179,.1);border:1px solid rgba(0,198,179,.25);border-radius:100px;padding:7px 16px;margin-bottom:24px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(36px,6vw,72px);font-weight:300;line-height:1.05;color:var(--white);margin-bottom:20px}
+.page-hero h1 em{font-style:italic;color:var(--teal)}
+.page-hero-desc{font-size:17px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto}
+
+/* COMMONS */
+.section-label{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.section-label::before{content:'';display:block;width:28px;height:1px;background:var(--teal)}
+.section-title{font-family:var(--font-display);font-size:clamp(28px,3.5vw,48px);font-weight:300;line-height:1.1;color:var(--navy);margin-bottom:16px}
+.section-title em{font-style:italic;color:var(--teal)}
+.section-desc{font-size:16px;font-weight:300;line-height:1.85;color:var(--text-mid)}
+.container{max-width:1280px;margin:0 auto;padding:0 40px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.reveal-done{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* CONTACT CARDS */
+.info-section{padding:80px 0 0;background:var(--pearl)}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.info-card{background:var(--white);border-radius:var(--radius-md);padding:32px 24px;border:1px solid var(--pearl-dark);transition:var(--transition);display:flex;flex-direction:column;gap:14px}
+.info-card:hover{border-color:rgba(0,198,179,.25);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.info-card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(0,198,179,.08);border:1px solid rgba(0,198,179,.15);color:var(--teal)}
+.info-card-label{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
+.info-card-value{font-family:var(--font-ui);font-size:15px;font-weight:600;color:var(--navy)}
+.info-card-sub{font-size:13px;color:var(--text-light);line-height:1.5}
+
+/* MAIN CONTACT SECTION */
+.contact-section{padding:80px 0 120px;background:var(--pearl)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start;margin-top:60px}
+
+/* FORM */
+.contact-form-wrap{background:var(--white);border-radius:var(--radius-lg);padding:48px 44px;border:1px solid var(--pearl-dark);box-shadow:var(--shadow-sm)}
+.form-title{font-family:var(--font-display);font-size:32px;font-weight:300;color:var(--navy);margin-bottom:8px}
+.form-subtitle{font-size:14px;color:var(--text-mid);margin-bottom:36px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.form-group:last-of-type{margin-bottom:0}
+.form-label{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+.form-input,.form-select,.form-textarea{background:var(--pearl);border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:13px 16px;font-family:var(--font-body);font-size:14px;color:var(--text-dark);transition:border-color .25s,box-shadow .25s;outline:none;width:100%;-webkit-appearance:none}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-light)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,198,179,.12);background:var(--white)}
+.form-textarea{resize:vertical;min-height:130px;line-height:1.6}
+.form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238899aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.form-note{font-size:12px;color:var(--text-light);margin-top:6px;display:flex;align-items:center;gap:5px}
+.form-note svg{color:var(--text-light)}
+.submit-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:14px;font-weight:700;letter-spacing:.04em;padding:16px 36px;border-radius:100px;border:none;cursor:pointer;transition:var(--transition);width:100%;margin-top:24px}
+.submit-btn:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,198,179,.4)}
+.submit-btn:disabled{opacity:.6;pointer-events:none}
+.form-success{display:none;text-align:center;padding:40px 20px}
+.form-success.show{display:block}
+.form-success-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,198,179,.1);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--teal)}
+.form-success h3{font-family:var(--font-display);font-size:28px;font-weight:300;color:var(--navy);margin-bottom:10px}
+.form-success p{font-size:15px;color:var(--text-mid)}
+
+/* SIDEBAR */
+.contact-sidebar{display:flex;flex-direction:column;gap:24px}
+.sidebar-card{background:var(--white);border-radius:var(--radius-md);padding:32px 28px;border:1px solid var(--pearl-dark)}
+.sidebar-card-title{font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--navy);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sidebar-card-title svg{color:var(--teal)}
+.response-list{display:flex;flex-direction:column;gap:12px}
+.response-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--pearl-dark)}
+.response-item:last-child{border-bottom:none;padding-bottom:0}
+.response-type{font-size:13px;color:var(--text-mid);display:flex;align-items:center;gap:8px}
+.response-type svg{color:var(--teal)}
+.response-time{font-family:var(--font-ui);font-size:12px;font-weight:600;color:var(--navy)}
+.hours-list{display:flex;flex-direction:column;gap:10px}
+.hours-row{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.hours-day{color:var(--text-mid)}
+.hours-time{font-family:var(--font-ui);font-size:12px;font-weight:600;color:var(--navy)}
+.hours-closed{color:var(--text-light)!important;font-weight:400!important}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
+.live-status{display:flex;align-items:center;gap:8px;font-size:12px;color:#22c55e;font-weight:600;font-family:var(--font-ui)}
+
+/* FAQ */
+.faq-section{padding:100px 0;background:var(--white)}
+.faq-header{text-align:center;margin-bottom:64px}
+.faq-header .section-desc{margin:0 auto;max-width:520px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1040px;margin:0 auto}
+.faq-item{background:var(--pearl);border-radius:var(--radius-md);border:1px solid var(--pearl-dark);overflow:hidden;transition:border-color .25s}
+.faq-item.open{border-color:rgba(0,198,179,.3)}
+.faq-question{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px;cursor:pointer;user-select:none}
+.faq-q-text{font-family:var(--font-ui);font-size:14px;font-weight:600;color:var(--navy);line-height:1.4}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1px solid var(--pearl-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-mid);transition:var(--transition)}
+.faq-item.open .faq-icon{background:var(--teal);border-color:var(--teal);color:var(--navy);transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.faq-answer.open{max-height:300px;padding:0 24px 22px}
+.faq-answer p{font-size:14px;color:var(--text-mid);line-height:1.75}
+
+/* MAP PLACEHOLDER */
+.map-section{padding:0 0 100px;background:var(--white)}
+.map-wrap{border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);height:320px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,198,179,.1);position:relative}
+.map-overlay{text-align:center;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px}
+.map-pin-wrap{width:64px;height:64px;border-radius:50%;background:rgba(0,198,179,.12);border:1px solid rgba(0,198,179,.3);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.map-text{font-family:var(--font-ui);font-size:14px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.05em}
+.map-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(0,198,179,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,198,179,.04) 1px,transparent 1px);background-size:40px 40px}
+
+/* NEWSLETTER */
+.newsletter-section{padding:80px 0 100px;background:var(--navy);position:relative;overflow:hidden;text-align:center}
+.newsletter-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,198,179,.08) 0%,transparent 65%);pointer-events:none}
+.newsletter-inner{position:relative;z-index:2;max-width:600px;margin:0 auto;padding:0 40px}
+.newsletter-inner .section-label{justify-content:center}
+.newsletter-title{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--white);margin-bottom:16px}
+.newsletter-title .gold{font-style:italic;color:var(--gold)}
+.newsletter-desc{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:36px;line-height:1.75}
+.email-form{display:flex;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);border-radius:100px;padding:6px 6px 6px 22px;width:100%;max-width:440px;margin:0 auto;transition:border-color .3s}
+.email-form:focus-within{border-color:rgba(0,198,179,.5)}
+.email-form input{flex:1;background:transparent;border:none;color:var(--white);font-family:var(--font-body);font-size:14px;padding:10px 0;outline:none;min-width:0}
+.email-form input::placeholder{color:rgba(255,255,255,.3)}
+.email-form button{display:flex;align-items:center;gap:8px;background:var(--teal);color:var(--navy);border:none;border-radius:100px;padding:12px 22px;font-family:var(--font-ui);font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.email-form button:hover{background:var(--teal-dark)}
+.nl-note{font-size:12px;color:rgba(255,255,255,.25);margin-top:16px;display:flex;align-items:center;justify-content:center;gap:5px}
+
+/* FOOTER */
+.alluvia-footer{background:#060e17;padding:80px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-brand{display:flex;flex-direction:column;gap:20px}
+.footer-desc{font-size:14px;line-height:1.8;color:rgba(255,255,255,.4);max-width:280px}
+.footer-socials{display:flex;gap:10px}
+.social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:var(--transition);color:rgba(255,255,255,.5)}
+.social-btn:hover{background:var(--teal);border-color:var(--teal);color:var(--navy);transform:translateY(-3px)}
+.footer-col-title{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px;margin:0;padding:0}
+.footer-links a{font-size:14px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .25s;display:flex;align-items:center;gap:6px}
+.footer-links a:hover{color:var(--teal)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding:24px 0;font-size:13px;color:rgba(255,255,255,.25);flex-wrap:wrap;gap:12px}
+.footer-bottom-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-bottom-links a{color:rgba(255,255,255,.25);text-decoration:none;font-size:13px;transition:color .25s}
+.footer-bottom-links a:hover{color:rgba(255,255,255,.6)}
+
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+
+@media(max-width:1100px){
+  .info-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr;gap:40px}
+  .faq-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .nav-inner{padding:0 24px}
+  .container{padding:0 24px}
+}
+@media(max-width:640px){
+  .info-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .page-hero{padding:120px 0 60px}
+  .page-hero-inner{padding:0 24px}
+  .contact-form-wrap{padding:32px 24px}
+  .newsletter-inner{padding:0 24px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:400px){
+  .info-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="alluvia-nav">
+  <div class="nav-inner">
+    <a href="alluvia-landing-v2.html" class="nav-logo">
+      <span class="nav-logo-word">Alluvia</span>
+      <span class="nav-logo-sub">Peptides</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="alluvia-landing-v2.html#categories">Products</a></li>
+      <li><a href="alluvia-landing-v2.html#science">Science</a></li>
+      <li><a href="alluvia-about.html">About</a></li>
+      <li><a href="alluvia-landing-v2.html#testimonials">Reviews</a></li>
+      <li><a href="alluvia-contact.html" class="active">Contact</a></li>
+      <li><a href="#" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobileNav">
+  <button class="mobile-close" id="mobileClose"><i data-lucide="x" style="width:28px;height:28px;color:white"></i></button>
+  <a href="alluvia-landing-v2.html#categories" onclick="closeMobile()">Products</a>
+  <a href="alluvia-landing-v2.html#science"    onclick="closeMobile()">Science</a>
+  <a href="alluvia-about.html"                 onclick="closeMobile()">About</a>
+  <a href="alluvia-landing-v2.html#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="alluvia-contact.html"               onclick="closeMobile()" style="color:var(--teal)">Contact</a>
+  <a href="#"                                  onclick="closeMobile()">Shop Now</a>
+</div>
+
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="alluvia-landing-v2.html">Home</a>
+      <span style="color:rgba(255,255,255,.2)"><i data-lucide="chevron-right" style="width:12px;height:12px"></i></span>
+      <span>Contact</span>
+    </div>
+    <div class="page-hero-label">
+      <i data-lucide="headphones" style="width:14px;height:14px"></i>
+      Expert Support
+    </div>
+    <h1>Talk to a <em>Real Scientist</em></h1>
+    <p class="page-hero-desc">Protocol questions, order support, or general inquiries — our team of biochemists and researchers is here to help.</p>
+  </div>
+</section>
+
+
+<!-- INFO CARDS -->
+<section class="info-section">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <div class="info-card-icon"><i data-lucide="mail" class="icon-lg"></i></div>
+        <div class="info-card-label">Email</div>
+        <div class="info-card-value">hello@alluviapeptides.com</div>
+        <div class="info-card-sub">We reply within 24 hours, Mon–Fri</div>
+      </div>
+      <div class="info-card reveal reveal-delay-1">
+        <div class="info-card-icon"><i data-lucide="phone" class="icon-lg"></i></div>
+        <div class="info-card-label">Phone</div>
+        <div class="info-card-value">+1 (800) 555-0198</div>
+        <div class="info-card-sub">Mon–Fri, 9am–5pm EST</div>
+      </div>
+      <div class="info-card reveal reveal-delay-2">
+        <div class="info-card-icon"><i data-lucide="message-circle" class="icon-lg"></i></div>
+        <div class="info-card-label">Live Chat</div>
+        <div class="info-card-value">Available on site</div>
+        <div class="info-card-sub">Real-time support during business hours</div>
+      </div>
+      <div class="info-card reveal reveal-delay-3">
+        <div class="info-card-icon"><i data-lucide="map-pin" class="icon-lg"></i></div>
+        <div class="info-card-label">Registered Office</div>
+        <div class="info-card-value">Miami, FL, USA</div>
+        <div class="info-card-sub">US-based operations and fulfilment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT FORM + SIDEBAR -->
+<section class="contact-section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Send a Message</p>
+      <h2 class="section-title">How Can We <em>Help?</em></h2>
+    </div>
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <div class="contact-form-wrap reveal">
+        <div id="formWrap">
+          <h3 class="form-title">Send Us a Message</h3>
+          <p class="form-subtitle">Fill in the form below and one of our team — usually a biochemist — will get back to you within one business day.</p>
+
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First Name</label>
+                <input class="form-input" type="text" id="firstName" placeholder="Jane" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input class="form-input" type="text" id="lastName" placeholder="Smith" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input class="form-input" type="email" id="email" placeholder="jane@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <select class="form-select" id="subject" required>
+                <option value="" disabled selected>Select a topic…</option>
+                <option>Protocol &amp; Dosing Advice</option>
+                <option>Order Status / Tracking</option>
+                <option>Product Information</option>
+                <option>Certificate of Analysis Request</option>
+                <option>Returns &amp; Refunds</option>
+                <option>Wholesale / B2B Enquiry</option>
+                <option>Research Collaboration</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-textarea" id="message" placeholder="Describe your question in as much detail as you'd like…" required></textarea>
+            </div>
+
+            <div class="form-group" style="flex-direction:row;align-items:flex-start;gap:10px;margin-top:4px">
+              <input type="checkbox" id="consent" style="width:16px;height:16px;margin-top:3px;accent-color:var(--teal);flex-shrink:0" required>
+              <label for="consent" style="font-size:13px;color:var(--text-mid);line-height:1.6;cursor:pointer">
+                I agree to Alluvia Peptides processing my data to respond to this enquiry in accordance with the <a href="#" style="color:var(--teal);text-decoration:none">Privacy Policy</a>.
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <i data-lucide="send" class="icon-sm"></i>
+              Send Message
+            </button>
+
+            <p class="form-note" style="margin-top:14px;justify-content:center">
+              <i data-lucide="lock" style="width:12px;height:12px"></i>
+              Your information is secure and will never be shared.
+            </p>
+          </form>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">
+            <i data-lucide="check" style="width:30px;height:30px;stroke-width:2.5"></i>
+          </div>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. A member of our team will get back to you within one business day — usually much sooner.</p>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="contact-sidebar">
+
+        <div class="sidebar-card reveal reveal-delay-1">
+          <div class="sidebar-card-title">
+            <i data-lucide="clock" style="width:18px;height:18px;color:var(--teal)"></i>
+            Response Times
+          </div>
+          <div class="response-list">
+            <div class="response-item">
+              <span class="response-type"><i data-lucide="mail" style="width:14px;height:14px;color:var(--teal)"></i>Email</span>
+              <span class="response-time">Within 24h</span>
+            </div>
+            <div class="response-item">
+              <span class="response-type"><i data-lucide="message-circle" style="width:14px;height:14px;color:var(--teal)"></i>Live Chat</span>
+              <span class="response-time">Under 5 min</span>
+            </div>
+            <div class="response-item">
+              <span class="response-type"><i data-lucide="phone" style="width:14px;height:14px;color:var(--teal)"></i>Phone</span>
+              <span class="response-time">Immediate</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card reveal reveal-delay-2">
+          <div class="sidebar-card-title">
+            <i data-lucide="calendar-clock" style="width:18px;height:18px;color:var(--teal)"></i>
+            Business Hours
+            <span class="live-status" style="margin-left:auto">
+              <span class="live-dot"></span>Online
+            </span>
+          </div>
+          <div class="hours-list">
+            <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">9:00 AM – 5:00 PM EST</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time hours-closed">Email only</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time hours-closed">Closed</span></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card reveal reveal-delay-3" style="background:var(--navy);border-color:transparent">
+          <div class="sidebar-card-title" style="color:var(--white)">
+            <i data-lucide="flask-conical" style="width:18px;height:18px;color:var(--teal)"></i>
+            <span style="color:var(--white)">Protocol Consultations</span>
+          </div>
+          <p style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:20px">Have complex questions about peptide stacks, dosing, reconstitution, or interactions? Our biochemists offer personalised consultations.</p>
+          <a href="#" style="display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:13px;font-weight:700;padding:11px 22px;border-radius:100px;text-decoration:none;transition:var(--transition)">
+            <i data-lucide="calendar-plus" style="width:14px;height:14px"></i>
+            Book a Consultation
+          </a>
+        </div>
+
+        <div class="sidebar-card reveal reveal-delay-4">
+          <div class="sidebar-card-title">
+            <i data-lucide="package" style="width:18px;height:18px;color:var(--teal)"></i>
+            Order Tracking
+          </div>
+          <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.6">Check the status of your order instantly — no login needed.</p>
+          <div style="display:flex;gap:8px">
+            <input class="form-input" type="text" placeholder="Order #ALV-XXXXX" style="flex:1;margin:0;padding:11px 14px;font-size:13px">
+            <button style="display:flex;align-items:center;gap:6px;background:var(--navy);color:var(--white);border:none;border-radius:var(--radius-sm);padding:11px 16px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition)" onmouseover="this.style.background='var(--teal)';this.style.color='var(--navy)'" onmouseout="this.style.background='var(--navy)';this.style.color='var(--white)'">
+              <i data-lucide="search" style="width:14px;height:14px"></i>Track
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <p class="section-label">Common Questions</p>
+      <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+      <p class="section-desc">Quick answers to the questions we hear most often.</p>
+    </div>
+    <div class="faq-grid">
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-q-text">How do I know your peptides are genuine and pure?</span>
+          <div class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px"></i></div>
+        </div>
+        <div class="faq-answer">
+          <p>Every Alluvia product comes with a third-party Certificate of Analysis (COA) from an ISO-accredited laboratory, including HPLC purity data, mass spectrometry confirmation, and lot number traceability. You can download the COA directly from each product page.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-1" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-q-text">Do you ship internationally?</span>
+          <div class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px"></i></div>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. We ship to most countries worldwide via cold-chain courier services. International orders include insulated packaging with phase-change cooling media. Please check local import regulations before ordering — peptides are legal for research purposes in most jurisdictions.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-2" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-q-text">How should I store my peptides?</span>
+          <div class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px"></i></div>
+        </div>
+        <div class="faq-answer">
+          <p>Lyophilised (freeze-dried) peptides should be stored in a freezer at -20°C in their sealed vials, away from light and moisture. Once reconstituted with bacteriostatic water, refrigerate at 2–8°C and use within 30 days. Never refreeze reconstituted peptide.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-3" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-q-text">What is your return and refund policy?</span>
+          <div class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px"></i></div>
+        </div>
+        <div class="faq-answer">
+          <p>Due to the nature of peptide products, we cannot accept returns on opened vials for safety reasons. However, if your product arrives damaged, incorrect, or if there is a documented quality issue, we will replace or refund at no cost. Contact us within 7 days of delivery.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-4" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-q-text">How do I reconstitute a lyophilised peptide?</span>
+          <div class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px"></i></div>
+        </div>
+        <div class="faq-answer">
+          <p>Use bacteriostatic water (BAC water) for reconstitution. Inject the BAC water gently along the side of the vial — do not inject directly onto the peptide powder. Swirl gently; never shake. Each product page includes a specific reconstitution guide with exact volumes for your desired concentration.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-5" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-q-text">Do you offer wholesale or B2B pricing?</span>
+          <div class="faq-icon"><i data-lucide="plus" style="width:14px;height:14px"></i></div>
+        </div>
+        <div class="faq-answer">
+          <p>Yes — we work with clinics, compounding pharmacies, research institutions, and resellers. Wholesale pricing, white-label options, and bulk COA documentation are all available. Contact us using the form above and select "Wholesale / B2B Enquiry" as your subject.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="container">
+    <div class="map-wrap reveal">
+      <div class="map-grid-lines"></div>
+      <div class="map-overlay">
+        <div class="map-pin-wrap">
+          <i data-lucide="map-pin" style="width:28px;height:28px"></i>
+        </div>
+        <p class="map-text">Alluvia Peptides — Miami, FL, United States</p>
+        <a href="#" style="display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:13px;font-weight:700;padding:10px 20px;border-radius:100px;text-decoration:none;margin-top:4px">
+          <i data-lucide="external-link" style="width:13px;height:13px"></i>
+          Open in Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <p class="section-label">Stay Informed</p>
+    <h2 class="newsletter-title">Science Updates &amp;<br><span class="gold">Exclusive Offers</span></h2>
+    <p class="newsletter-desc">Subscribe for new product launches, research-backed protocols, and first-access promotions — no spam.</p>
+    <form class="email-form" onsubmit="handleNL(event)">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit" id="nl-btn">
+        <i data-lucide="send" style="width:14px;height:14px"></i>
+        Subscribe
+      </button>
+    </form>
+    <p class="nl-note">
+      <i data-lucide="shield-check" style="width:12px;height:12px"></i>
+      No spam. Unsubscribe anytime.
+    </p>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="alluvia-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="alluvia-landing-v2.html" class="nav-logo">
+          <span class="nav-logo-word">Alluvia</span>
+          <span class="nav-logo-sub">Peptides</span>
+        </a>
+        <p class="footer-desc">Pharmaceutical-grade bioactive peptides for performance, longevity, and beauty — backed by science, delivered with integrity.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width:17px;height:17px"></i></a>
+          <a href="#" class="social-btn" aria-label="Twitter"><i data-lucide="twitter" style="width:17px;height:17px"></i></a>
+          <a href="#" class="social-btn" aria-label="Facebook"><i data-lucide="facebook" style="width:17px;height:17px"></i></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><i data-lucide="youtube" style="width:17px;height:17px"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Products</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Medical Peptides</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Skincare Peptides</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Sports &amp; Recovery</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Anti-Aging</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Research Peptides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Company</h3>
+        <ul class="footer-links">
+          <li><a href="alluvia-about.html"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>About Us</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Blog</a></li>
+          <li><a href="alluvia-contact.html"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Support</h3>
+        <ul class="footer-links">
+          <li><a href="#faq"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>FAQ</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Shipping Info</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Returns</a></li>
+          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>My Account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alluvia Peptides. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+// Nav
+var mNav=document.getElementById('mobileNav');
+document.getElementById('hamburger').onclick=function(){mNav.classList.add('open');document.body.style.overflow='hidden';};
+document.getElementById('mobileClose').onclick=closeMobile;
+function closeMobile(){mNav.classList.remove('open');document.body.style.overflow='';}
+
+// Reveal
+var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('reveal-done');ro.unobserve(x.target);}});},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal,.faq-item,.info-card').forEach(function(el){ro.observe(el);});
+
+// FAQ accordion
+function toggleFaq(el){
+  var isOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.classList.remove('open');
+    item.querySelector('.faq-answer').classList.remove('open');
+  });
+  lucide.createIcons();
+  if(!isOpen){
+    el.classList.add('open');
+    el.querySelector('.faq-answer').classList.add('open');
+  }
+}
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  btn.innerHTML='<i data-lucide="loader-2" style="width:16px;height:16px;animation:spin 1s linear infinite"></i> Sending…';
+  lucide.createIcons();
+  var style=document.createElement('style');
+  style.textContent='@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}';
+  document.head.appendChild(style);
+  setTimeout(function(){
+    document.getElementById('formWrap').style.display='none';
+    var s=document.getElementById('formSuccess');
+    s.style.display='block';
+    lucide.createIcons();
+  },1600);
+});
+
+// Newsletter
+function handleNL(e){
+  e.preventDefault();
+  var btn=document.getElementById('nl-btn');
+  btn.innerHTML='<i data-lucide="check" style="width:14px;height:14px"></i> Subscribed!';
+  lucide.createIcons();
+  e.target.querySelector('input').value='';
+  setTimeout(function(){btn.innerHTML='<i data-lucide="send" style="width:14px;height:14px"></i> Subscribe';lucide.createIcons();},3500);
+}
+</script>
+</body>
+</html>
