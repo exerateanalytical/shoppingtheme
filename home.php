@@ -8,10 +8,10 @@ add_action( 'wp_head', function() {
 ?>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;--teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;--coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;--mint:#78c9a2;--sky:#7fb8d4;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;--radius:12px}
+:root{--navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;--teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;--coral:#db627a;--purple:#8a60c1;--orange:#d4663c;--mint:#58b488;--sky:#6aa6c6;--pearl:#f5f0e7;--pearl-dark:#e8e0d2;--white:#fff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;--radius:12px}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
@@ -27,7 +27,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,26,39,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:24px;text-decoration:none}
 .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
@@ -44,9 +44,9 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 /* FEATURED */
 .featured-post{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);display:grid;grid-template-columns:1.1fr 1fr;margin-bottom:3rem;cursor:pointer;text-decoration:none;color:inherit}
 .featured-img{background:linear-gradient(135deg,var(--navy),var(--navy-soft));min-height:320px;display:flex;align-items:center;justify-content:center;position:relative}
-.featured-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,198,179,0.15),transparent 70%)}
+.featured-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(14,175,159,0.15),transparent 70%)}
 .featured-body{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
-.post-cat{display:inline-flex;align-items:center;gap:0.3rem;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.75rem;width:fit-content;background:rgba(0,198,179,0.1);padding:3px 10px;border-radius:50px}
+.post-cat{display:inline-flex;align-items:center;gap:0.3rem;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.75rem;width:fit-content;background:rgba(14,175,159,0.1);padding:3px 10px;border-radius:50px}
 .featured-body h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.2;margin-bottom:0.75rem}
 .featured-body p{font-size:15px;color:var(--text-mid);margin-bottom:1.25rem}
 .post-meta{display:flex;align-items:center;gap:1rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text-light)}
@@ -113,7 +113,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem}
 get_header( 'alluvia' );
 ?>
 <nav class="alluvia-nav" id="nav">
-  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
   <ul class="nav-links">
     <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
     <li><a href="<?php echo esc_url(home_url('/about/')); ?>#science">Science</a></li>
@@ -206,34 +206,34 @@ get_header( 'alluvia' );
   <!-- GRID -->
   <div class="blog-grid">
     <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-card">
-      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(232,117,138,0.12),rgba(232,117,138,0.04))"><i data-lucide="sparkles" width="48" height="48" style="color:var(--coral)"></i></div>
+      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(219,98,122,0.12),rgba(219,98,122,0.04))"><i data-lucide="sparkles" width="48" height="48" style="color:var(--coral)"></i></div>
       <div class="blog-card-body">
-        <span class="post-cat" style="color:#c0405a;background:rgba(232,117,138,0.1)"><i data-lucide="droplet" width="11" height="11"></i> Skincare</span>
+        <span class="post-cat" style="color:#c0405a;background:rgba(219,98,122,0.1)"><i data-lucide="droplet" width="11" height="11"></i> Skincare</span>
         <h3>GHK-Cu: The Copper Peptide Rewriting Skincare Science</h3>
         <p>How a single tripeptide-copper complex became the most researched ingredient in regenerative dermatology.</p>
         <div class="post-meta"><span><i data-lucide="calendar" width="13" height="13"></i> Jun 4</span><span><i data-lucide="clock" width="13" height="13"></i> 6 min</span></div>
       </div>
     </a>
     <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-card">
-      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(224,123,84,0.12),rgba(224,123,84,0.04))"><i data-lucide="dumbbell" width="48" height="48" style="color:var(--orange)"></i></div>
+      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(212,102,60,0.12),rgba(212,102,60,0.04))"><i data-lucide="dumbbell" width="48" height="48" style="color:var(--orange)"></i></div>
       <div class="blog-card-body">
-        <span class="post-cat" style="color:#a04020;background:rgba(224,123,84,0.1)"><i data-lucide="activity" width="11" height="11"></i> Recovery</span>
+        <span class="post-cat" style="color:#a04020;background:rgba(212,102,60,0.1)"><i data-lucide="activity" width="11" height="11"></i> Recovery</span>
         <h3>TB-500 vs BPC-157: Understanding the Recovery Stack</h3>
         <p>Two of the most popular recovery peptides — how their mechanisms differ and why researchers study them together.</p>
         <div class="post-meta"><span><i data-lucide="calendar" width="13" height="13"></i> May 28</span><span><i data-lucide="clock" width="13" height="13"></i> 7 min</span></div>
       </div>
     </a>
     <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-card">
-      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(200,169,110,0.12),rgba(200,169,110,0.04))"><i data-lucide="hourglass" width="48" height="48" style="color:var(--gold)"></i></div>
+      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(198,162,83,0.12),rgba(198,162,83,0.04))"><i data-lucide="hourglass" width="48" height="48" style="color:var(--gold)"></i></div>
       <div class="blog-card-body">
-        <span class="post-cat" style="color:#a07c3a;background:rgba(200,169,110,0.1)"><i data-lucide="zap" width="11" height="11"></i> Anti-Aging</span>
+        <span class="post-cat" style="color:#a07c3a;background:rgba(198,162,83,0.1)"><i data-lucide="zap" width="11" height="11"></i> Anti-Aging</span>
         <h3>Epithalon and Telomerase: The Longevity Frontier</h3>
         <p>Exploring the research behind the peptide linked to telomere maintenance and cellular aging.</p>
         <div class="post-meta"><span><i data-lucide="calendar" width="13" height="13"></i> May 21</span><span><i data-lucide="clock" width="13" height="13"></i> 8 min</span></div>
       </div>
     </a>
     <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-card">
-      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(0,198,179,0.12),rgba(0,198,179,0.04))"><i data-lucide="droplets" width="48" height="48" style="color:var(--teal)"></i></div>
+      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(14,175,159,0.12),rgba(14,175,159,0.04))"><i data-lucide="droplets" width="48" height="48" style="color:var(--teal)"></i></div>
       <div class="blog-card-body">
         <span class="post-cat"><i data-lucide="book-open" width="11" height="11"></i> Guides</span>
         <h3>Peptide Reconstitution: A Complete Lab Guide</h3>
@@ -242,18 +242,18 @@ get_header( 'alluvia' );
       </div>
     </a>
     <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-card">
-      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(155,114,207,0.12),rgba(155,114,207,0.04))"><i data-lucide="trending-down" width="48" height="48" style="color:var(--purple)"></i></div>
+      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(138,96,193,0.12),rgba(138,96,193,0.04))"><i data-lucide="trending-down" width="48" height="48" style="color:var(--purple)"></i></div>
       <div class="blog-card-body">
-        <span class="post-cat" style="color:#6b4a9c;background:rgba(155,114,207,0.1)"><i data-lucide="flask-conical" width="11" height="11"></i> Research</span>
+        <span class="post-cat" style="color:#6b4a9c;background:rgba(138,96,193,0.1)"><i data-lucide="flask-conical" width="11" height="11"></i> Research</span>
         <h3>GLP-1 Peptides: The Metabolic Research Revolution</h3>
         <p>From Semaglutide to AOD-9604 — a look at the peptides reshaping metabolic science.</p>
         <div class="post-meta"><span><i data-lucide="calendar" width="13" height="13"></i> May 9</span><span><i data-lucide="clock" width="13" height="13"></i> 10 min</span></div>
       </div>
     </a>
     <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="blog-card">
-      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(127,184,212,0.12),rgba(127,184,212,0.04))"><i data-lucide="shield-check" width="48" height="48" style="color:var(--sky)"></i></div>
+      <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(106,166,198,0.12),rgba(106,166,198,0.04))"><i data-lucide="shield-check" width="48" height="48" style="color:var(--sky)"></i></div>
       <div class="blog-card-body">
-        <span class="post-cat" style="color:#2d6e8a;background:rgba(127,184,212,0.1)"><i data-lucide="book-open" width="11" height="11"></i> Guides</span>
+        <span class="post-cat" style="color:#2d6e8a;background:rgba(106,166,198,0.1)"><i data-lucide="book-open" width="11" height="11"></i> Guides</span>
         <h3>How to Read a Certificate of Analysis (COA)</h3>
         <p>Understanding HPLC charts, mass spec data, and purity percentages so you can verify what you're buying.</p>
         <div class="post-meta"><span><i data-lucide="calendar" width="13" height="13"></i> May 2</span><span><i data-lucide="clock" width="13" height="13"></i> 6 min</span></div>
@@ -288,7 +288,7 @@ get_header( 'alluvia' );
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
         <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
         <div class="social-links">
           <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
@@ -325,6 +325,6 @@ get_header( 'alluvia' );
 <script>
 lucide.createIcons();
 document.querySelectorAll('.cat-pill').forEach(p=>p.addEventListener('click',function(){document.querySelectorAll('.cat-pill').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#00c6b3',color:'#0d1b2a',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 </script>
 <?php get_footer( 'alluvia' ); ?>

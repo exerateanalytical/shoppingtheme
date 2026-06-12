@@ -8,10 +8,10 @@ add_action( 'wp_head', function() {
 ?>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;--teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;--coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;--mint:#78c9a2;--sky:#7fb8d4;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;--radius:12px}
+:root{--navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;--teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;--coral:#db627a;--purple:#8a60c1;--orange:#d4663c;--mint:#58b488;--sky:#6aa6c6;--pearl:#f5f0e7;--pearl-dark:#e8e0d2;--white:#fff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;--radius:12px}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
@@ -27,7 +27,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,26,39,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:24px;text-decoration:none}
 .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
@@ -37,7 +37,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .post-hero-inner{max-width:800px;margin:0 auto}
 .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text-light);margin-bottom:1.25rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.post-cat-tag{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(0,198,179,0.12);color:var(--teal-dark);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:1rem}
+.post-cat-tag{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(14,175,159,0.12);color:var(--teal-dark);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:1rem}
 .post-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:1.25rem}
 .post-meta-bar{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 .author-row{display:flex;align-items:center;gap:0.75rem}
@@ -54,7 +54,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 /* ARTICLE */
 .article{}
 .article-img{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:var(--radius);height:340px;display:flex;align-items:center;justify-content:center;margin-bottom:2.5rem;position:relative;overflow:hidden}
-.article-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,198,179,0.12),transparent 70%)}
+.article-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(14,175,159,0.12),transparent 70%)}
 .article p{font-size:17px;color:var(--text-mid);line-height:1.9;margin-bottom:1.5rem}
 .article h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--text-dark);margin:2.5rem 0 1rem}
 .article h3{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--text-dark);margin:1.75rem 0 0.75rem}
@@ -62,13 +62,13 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .article ul li,.article ol li{font-size:16px;color:var(--text-mid);margin-bottom:0.5rem;line-height:1.7}
 .article a{color:var(--teal-dark);text-decoration:none}
 .article a:hover{text-decoration:underline}
-.pull-quote{border-left:4px solid var(--teal);background:rgba(0,198,179,0.05);padding:1.5rem 1.75rem;border-radius:0 var(--radius) var(--radius) 0;margin:2rem 0}
+.pull-quote{border-left:4px solid var(--teal);background:rgba(14,175,159,0.05);padding:1.5rem 1.75rem;border-radius:0 var(--radius) var(--radius) 0;margin:2rem 0}
 .pull-quote p{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;color:var(--navy);margin:0;line-height:1.6}
 .pull-quote cite{display:block;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text-light);margin-top:0.5rem;font-style:normal}
-.info-box{background:rgba(127,184,212,0.08);border:1px solid rgba(127,184,212,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
+.info-box{background:rgba(106,166,198,0.08);border:1px solid rgba(106,166,198,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
 .info-box h4{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--sky);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
 .info-box p{font-size:14px;margin-bottom:0;color:var(--text-mid)}
-.warn-box{background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
+.warn-box{background:rgba(198,162,83,0.07);border:1px solid rgba(198,162,83,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
 .warn-box h4{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
 .warn-box p{font-size:14px;margin-bottom:0;color:var(--text-mid)}
 
@@ -99,9 +99,9 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .sidebar-card h4 svg{color:var(--teal)}
 .toc-links{list-style:none;display:flex;flex-direction:column;gap:0.25rem}
 .toc-links a{display:block;font-size:13px;color:var(--text-mid);text-decoration:none;padding:0.35rem 0.5rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s}
-.toc-links a:hover,.toc-links a.active{color:var(--teal-dark);border-left-color:var(--teal);background:rgba(0,198,179,0.05)}
+.toc-links a:hover,.toc-links a.active{color:var(--teal-dark);border-left-color:var(--teal);background:rgba(14,175,159,0.05)}
 .sidebar-product{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;text-decoration:none;color:inherit;display:block;transition:all .2s;margin-bottom:0.75rem}
-.sidebar-product:hover{border-color:var(--teal);background:rgba(0,198,179,0.03)}
+.sidebar-product:hover{border-color:var(--teal);background:rgba(14,175,159,0.03)}
 .sidebar-product:last-child{margin-bottom:0}
 .sp-head{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem}
 .sp-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -152,7 +152,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem}
 get_header( 'alluvia' );
 ?>
 <nav class="alluvia-nav" id="nav">
-  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
   <ul class="nav-links">
     <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
     <li><a href="<?php echo esc_url(home_url('/about/')); ?>#science">Science</a></li>
@@ -299,11 +299,11 @@ get_header( 'alluvia' );
       <h2>Related Articles</h2>
       <div class="related-grid">
         <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="rel-card">
-          <div class="rel-img" style="background:linear-gradient(135deg,rgba(224,123,84,0.12),rgba(224,123,84,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
+          <div class="rel-img" style="background:linear-gradient(135deg,rgba(212,102,60,0.12),rgba(212,102,60,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
           <div class="rel-body"><h4>TB-500 vs BPC-157: Understanding the Recovery Stack</h4><div class="rel-meta"><span>May 28</span><span>·</span><span>7 min</span></div></div>
         </a>
         <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="rel-card">
-          <div class="rel-img" style="background:linear-gradient(135deg,rgba(0,198,179,0.12),rgba(0,198,179,0.04))"><i data-lucide="droplets" width="36" height="36" style="color:var(--teal)"></i></div>
+          <div class="rel-img" style="background:linear-gradient(135deg,rgba(14,175,159,0.12),rgba(14,175,159,0.04))"><i data-lucide="droplets" width="36" height="36" style="color:var(--teal)"></i></div>
           <div class="rel-body"><h4>Peptide Reconstitution: A Complete Lab Guide</h4><div class="rel-meta"><span>May 15</span><span>·</span><span>5 min</span></div></div>
         </a>
       </div>
@@ -329,14 +329,14 @@ get_header( 'alluvia' );
       <h4><i data-lucide="shopping-bag" width="14" height="14"></i> In This Article</h4>
       <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="sidebar-product">
         <div class="sp-head">
-          <div class="sp-icon" style="background:rgba(0,198,179,0.1)"><i data-lucide="activity" width="20" height="20" style="color:var(--teal)"></i></div>
+          <div class="sp-icon" style="background:rgba(14,175,159,0.1)"><i data-lucide="activity" width="20" height="20" style="color:var(--teal)"></i></div>
           <div><div class="sp-name">BPC-157 — 5 mg</div><div class="sp-price">$65.00 · ≥99% purity</div></div>
         </div>
         <button class="sp-btn">View Product</button>
       </a>
       <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="sidebar-product">
         <div class="sp-head">
-          <div class="sp-icon" style="background:rgba(224,123,84,0.1)"><i data-lucide="dumbbell" width="20" height="20" style="color:var(--orange)"></i></div>
+          <div class="sp-icon" style="background:rgba(212,102,60,0.1)"><i data-lucide="dumbbell" width="20" height="20" style="color:var(--orange)"></i></div>
           <div><div class="sp-name">TB-500 — 5 mg</div><div class="sp-price">$78.00 · ≥98.5% purity</div></div>
         </div>
         <button class="sp-btn">View Product</button>
@@ -356,7 +356,7 @@ get_header( 'alluvia' );
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
         <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal.</p>
         <div class="social-links">
           <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
@@ -389,7 +389,7 @@ get_header( 'alluvia' );
 </footer>
 <script>
 lucide.createIcons();
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#00c6b3',color:'#0d1b2a',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 window.addEventListener('scroll',()=>{const links=document.querySelectorAll('.toc-links a');links.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(sec&&window.scrollY>=sec.offsetTop-140)links.forEach(x=>x.classList.remove('active'))&&a.classList.add('active');});});
 document.querySelectorAll('.share-btn').forEach(b=>b.addEventListener('click',()=>showToast('Link copied!')));
 </script>

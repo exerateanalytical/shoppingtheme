@@ -11,15 +11,15 @@
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 :root{
-  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
-  --teal:#00c6b3;--teal-dark:#009e8e;--teal-glow:rgba(0,198,179,.18);
-  --gold:#c8a96e;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;
-  --text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;
+  --navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;
+  --teal:#0eaf9f;--teal-dark:#0a8174;--teal-glow:rgba(14,175,159,.18);
+  --gold:#c6a253;--pearl:#f5f0e7;--pearl-dark:#e8e0d2;--white:#fff;
+  --text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;
   --radius-sm:8px;--radius-md:16px;--radius-lg:28px;
-  --shadow-sm:0 2px 12px rgba(13,27,42,.08);
-  --shadow-md:0 8px 32px rgba(13,27,42,.14);
-  --shadow-lg:0 20px 60px rgba(13,27,42,.2);
-  --shadow-glow:0 0 40px rgba(0,198,179,.25);
+  --shadow-sm:0 2px 12px rgba(10,26,39,.08);
+  --shadow-md:0 8px 32px rgba(10,26,39,.14);
+  --shadow-lg:0 20px 60px rgba(10,26,39,.2);
+  --shadow-glow:0 0 40px rgba(14,175,159,.25);
   --transition:.45s cubic-bezier(.23,1,.32,1);
   --font-display:'Cormorant Garamond',Georgia,serif;
   --font-body:'Inter',system-ui,sans-serif;
@@ -35,7 +35,7 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .icon-xl{width:36px;height:36px;stroke-width:1.4;flex-shrink:0}
 
 /* NAV */
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,.97);backdrop-filter:blur(20px);padding:14px 0;box-shadow:0 2px 30px rgba(0,0,0,.2)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,26,39,.97);backdrop-filter:blur(20px);padding:14px 0;box-shadow:0 2px 30px rgba(0,0,0,.2)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
@@ -57,13 +57,13 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 
 /* HERO */
 .page-hero{position:relative;background:var(--navy);padding:160px 0 100px;overflow:hidden;text-align:center}
-.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,198,179,.08) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(200,169,110,.06) 0%,transparent 50%)}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(14,175,159,.08) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(198,162,83,.06) 0%,transparent 50%)}
 .page-hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;padding:0 40px}
 .breadcrumb{display:flex;align-items:center;gap:8px;justify-content:center;font-family:var(--font-ui);font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:28px}
 .breadcrumb a{color:rgba(255,255,255,.35);text-decoration:none;transition:color .25s}
 .breadcrumb a:hover{color:var(--teal)}
 .breadcrumb-sep{color:rgba(255,255,255,.2)}
-.page-hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(0,198,179,.1);border:1px solid rgba(0,198,179,.25);border-radius:100px;padding:7px 16px;margin-bottom:24px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
+.page-hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(14,175,159,.1);border:1px solid rgba(14,175,159,.25);border-radius:100px;padding:7px 16px;margin-bottom:24px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
 .page-hero h1{font-family:var(--font-display);font-size:clamp(40px,6vw,80px);font-weight:300;line-height:1.05;color:var(--white);margin-bottom:24px}
 .page-hero h1 em{font-style:italic;color:var(--teal)}
 .page-hero h1 .gold{font-style:italic;color:var(--gold)}
@@ -78,7 +78,7 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .section-desc{font-size:16px;font-weight:300;line-height:1.85;color:var(--text-mid)}
 .container{max-width:1280px;margin:0 auto;padding:0 40px}
 .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:14px;font-weight:700;letter-spacing:.04em;padding:14px 30px;border-radius:100px;text-decoration:none;transition:var(--transition);border:none;cursor:pointer}
-.btn-primary:hover{background:var(--teal-dark);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,198,179,.4)}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-3px);box-shadow:0 12px 40px rgba(14,175,159,.4)}
 .btn-outline{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--navy);font-family:var(--font-ui);font-size:14px;font-weight:600;padding:14px 30px;border-radius:100px;text-decoration:none;border:2px solid var(--navy);transition:var(--transition)}
 .btn-outline:hover{background:var(--navy);color:var(--white)}
 
@@ -97,10 +97,10 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .mv-card{padding:64px 56px;position:relative;overflow:hidden}
 .mv-card:first-child{background:var(--navy)}
 .mv-card:last-child{background:var(--pearl)}
-.mv-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(0,198,179,.06)}
+.mv-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(14,175,159,.06)}
 .mv-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;position:relative;z-index:1}
-.mv-card:first-child .mv-icon{background:rgba(0,198,179,.12);border:1px solid rgba(0,198,179,.2);color:var(--teal)}
-.mv-card:last-child .mv-icon{background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.2);color:var(--gold)}
+.mv-card:first-child .mv-icon{background:rgba(14,175,159,.12);border:1px solid rgba(14,175,159,.2);color:var(--teal)}
+.mv-card:last-child .mv-icon{background:rgba(198,162,83,.12);border:1px solid rgba(198,162,83,.2);color:var(--gold)}
 .mv-label{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
 .mv-card:first-child .mv-label{color:var(--teal)}
 .mv-card:last-child .mv-label{color:var(--gold)}
@@ -113,7 +113,7 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 
 /* STORY TIMELINE */
 .story-section{padding:100px 0;background:var(--pearl);position:relative;overflow:hidden}
-.story-section::before{content:'STORY';position:absolute;font-family:var(--font-display);font-size:clamp(80px,15vw,200px);font-weight:700;color:rgba(13,27,42,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
+.story-section::before{content:'STORY';position:absolute;font-family:var(--font-display);font-size:clamp(80px,15vw,200px);font-weight:700;color:rgba(10,26,39,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
 .story-header{text-align:center;max-width:640px;margin:0 auto 72px}
 .timeline{position:relative;max-width:900px;margin:0 auto}
 .timeline::before{content:'';position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--teal),var(--gold),var(--teal),transparent)}
@@ -130,13 +130,13 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .timeline-item:hover .timeline-dot{background:var(--teal);color:var(--navy);box-shadow:var(--shadow-glow)}
 .timeline-year{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--teal);text-align:center;white-space:nowrap}
 .timeline-card{background:var(--white);border-radius:var(--radius-md);padding:28px 32px;border:1px solid var(--pearl-dark);transition:var(--transition);display:inline-block;width:100%}
-.timeline-card:hover{border-color:rgba(0,198,179,.2);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.timeline-card:hover{border-color:rgba(14,175,159,.2);box-shadow:var(--shadow-md);transform:translateY(-4px)}
 .timeline-card-title{font-family:var(--font-ui);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
 .timeline-card-text{font-size:14px;color:var(--text-mid);line-height:1.7}
 
 /* VALUES */
 .values-section{padding:100px 0;background:var(--navy);position:relative;overflow:hidden}
-.values-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 100% 50%,rgba(0,198,179,.06) 0%,transparent 55%),radial-gradient(ellipse 40% 50% at 0% 30%,rgba(200,169,110,.04) 0%,transparent 50%);pointer-events:none}
+.values-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 100% 50%,rgba(14,175,159,.06) 0%,transparent 55%),radial-gradient(ellipse 40% 50% at 0% 30%,rgba(198,162,83,.04) 0%,transparent 50%);pointer-events:none}
 .values-header{text-align:center;margin-bottom:72px}
 .values-header .section-title{color:var(--white)}
 .values-header .section-desc{color:rgba(255,255,255,.5);margin:0 auto;max-width:560px}
@@ -158,11 +158,11 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .team-header .section-desc{margin:0 auto;max-width:560px}
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .team-card{background:var(--pearl);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--pearl-dark);transition:var(--transition)}
-.team-card:hover{border-color:rgba(0,198,179,.2);box-shadow:var(--shadow-md);transform:translateY(-6px)}
+.team-card:hover{border-color:rgba(14,175,159,.2);box-shadow:var(--shadow-md);transform:translateY(-6px)}
 .team-photo{aspect-ratio:1;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .team-photo-initials{font-family:var(--font-display);font-size:56px;font-weight:300;color:rgba(255,255,255,.15)}
-.team-photo-ring{position:absolute;width:120px;height:120px;border-radius:50%;border:1px solid rgba(0,198,179,.2);animation:spin-slow 12s linear infinite}
-.team-photo-ring-2{position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid rgba(200,169,110,.15);animation:spin-slow 8s linear infinite reverse}
+.team-photo-ring{position:absolute;width:120px;height:120px;border-radius:50%;border:1px solid rgba(14,175,159,.2);animation:spin-slow 12s linear infinite}
+.team-photo-ring-2{position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid rgba(198,162,83,.15);animation:spin-slow 8s linear infinite reverse}
 .team-info{padding:28px 24px}
 .team-name{font-family:var(--font-ui);font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
 .team-role{font-family:var(--font-ui);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
@@ -176,15 +176,15 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .commit-item:first-child{padding-top:0}
 .commit-item:last-child{border-bottom:none;padding-bottom:0}
 .commit-item:hover{padding-left:8px}
-.commit-icon{width:48px;height:48px;border-radius:12px;background:rgba(0,198,179,.08);border:1px solid rgba(0,198,179,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal);transition:var(--transition)}
+.commit-icon{width:48px;height:48px;border-radius:12px;background:rgba(14,175,159,.08);border:1px solid rgba(14,175,159,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal);transition:var(--transition)}
 .commit-item:hover .commit-icon{background:var(--teal);color:var(--navy);border-color:var(--teal)}
 .commit-text-title{font-family:var(--font-ui);font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px}
 .commit-text-desc{font-size:13px;color:var(--text-mid);line-height:1.7}
 .commit-visual{position:relative;border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .commit-visual-inner{display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;z-index:2}
-.commit-circle{width:160px;height:160px;border-radius:50%;border:2px solid rgba(0,198,179,.3);display:flex;align-items:center;justify-content:center;position:relative}
-.commit-circle::before{content:'';position:absolute;width:130px;height:130px;border-radius:50%;border:1px solid rgba(200,169,110,.2);animation:spin-slow 16s linear infinite}
-.commit-circle::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(0,198,179,.08)}
+.commit-circle{width:160px;height:160px;border-radius:50%;border:2px solid rgba(14,175,159,.3);display:flex;align-items:center;justify-content:center;position:relative}
+.commit-circle::before{content:'';position:absolute;width:130px;height:130px;border-radius:50%;border:1px solid rgba(198,162,83,.2);animation:spin-slow 16s linear infinite}
+.commit-circle::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(14,175,159,.08)}
 .commit-circle svg{position:relative;z-index:2;color:var(--teal)}
 .commit-visual-text{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .commit-badge{position:absolute;background:var(--teal);color:var(--navy);border-radius:12px;padding:14px 20px;font-family:var(--font-ui);font-size:12px;font-weight:700}
@@ -193,14 +193,14 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 
 /* CTA */
 .cta-section{padding:100px 0;background:var(--navy);position:relative;overflow:hidden;text-align:center}
-.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,198,179,.08) 0%,transparent 65%);pointer-events:none}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(14,175,159,.08) 0%,transparent 65%);pointer-events:none}
 .cta-inner{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:0 40px}
 .cta-section .section-label{justify-content:center}
 .cta-section .section-title{color:var(--white);font-size:clamp(32px,5vw,60px)}
 .cta-section .section-desc{color:rgba(255,255,255,.5);margin:0 auto 44px}
 .cta-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .btn-primary-light{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:14px;font-weight:700;padding:15px 32px;border-radius:100px;text-decoration:none;transition:var(--transition)}
-.btn-primary-light:hover{background:var(--teal-dark);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,198,179,.4)}
+.btn-primary-light:hover{background:var(--teal-dark);transform:translateY(-3px);box-shadow:0 12px 40px rgba(14,175,159,.4)}
 .btn-ghost-light{display:inline-flex;align-items:center;gap:10px;background:transparent;color:rgba(255,255,255,.75);font-family:var(--font-ui);font-size:14px;font-weight:500;padding:15px 28px;border-radius:100px;text-decoration:none;border:1px solid rgba(255,255,255,.2);transition:var(--transition)}
 .btn-ghost-light:hover{border-color:rgba(255,255,255,.5);color:var(--white)}
 
@@ -441,32 +441,32 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
       <p class="section-desc">Every decision at Alluvia — from supplier selection to dosage formulation — flows from these six principles.</p>
     </div>
     <div class="values-grid">
-      <div class="value-card reveal" style="--val-color:#00c6b3;">
+      <div class="value-card reveal" style="--val-color:#0eaf9f;">
         <div class="value-icon"><i data-lucide="shield-check" class="icon-lg"></i></div>
         <h3 class="value-title">Uncompromising Quality</h3>
         <p class="value-text">Every peptide is independently tested before it reaches you. If a batch fails our standards, it doesn't ship — full stop.</p>
       </div>
-      <div class="value-card reveal reveal-delay-1" style="--val-color:#c8a96e;">
+      <div class="value-card reveal reveal-delay-1" style="--val-color:#c6a253;">
         <div class="value-icon"><i data-lucide="eye" class="icon-lg"></i></div>
         <h3 class="value-title">Radical Transparency</h3>
         <p class="value-text">Every product page shows the full COA — purity percentage, lot number, and mass spec data. No proprietary blends, no hidden ingredients.</p>
       </div>
-      <div class="value-card reveal reveal-delay-2" style="--val-color:#7fb8d4;">
+      <div class="value-card reveal reveal-delay-2" style="--val-color:#6aa6c6;">
         <div class="value-icon"><i data-lucide="book-open" class="icon-lg"></i></div>
         <h3 class="value-title">Science-Led Decisions</h3>
         <p class="value-text">We only carry peptides with substantial peer-reviewed research behind them. If the evidence doesn't support a product, we don't sell it.</p>
       </div>
-      <div class="value-card reveal reveal-delay-3" style="--val-color:#e07b54;">
+      <div class="value-card reveal reveal-delay-3" style="--val-color:#d4663c;">
         <div class="value-icon"><i data-lucide="users" class="icon-lg"></i></div>
         <h3 class="value-title">Customer Education</h3>
         <p class="value-text">We publish protocols, dosage guides, and peer-reviewed references — because an informed customer is a safe and successful one.</p>
       </div>
-      <div class="value-card reveal reveal-delay-4" style="--val-color:#9b72cf;">
+      <div class="value-card reveal reveal-delay-4" style="--val-color:#8a60c1;">
         <div class="value-icon"><i data-lucide="leaf" class="icon-lg"></i></div>
         <h3 class="value-title">Responsible Sourcing</h3>
         <p class="value-text">Full supply chain traceability on every product — we know exactly where every peptide was synthesised, tested, and packaged.</p>
       </div>
-      <div class="value-card reveal reveal-delay-5" style="--val-color:#78c9a2;">
+      <div class="value-card reveal reveal-delay-5" style="--val-color:#58b488;">
         <div class="value-icon"><i data-lucide="heart-handshake" class="icon-lg"></i></div>
         <h3 class="value-title">Community First</h3>
         <p class="value-text">From forum support to personalised protocol advice from our team — we're here for every step of your peptide journey.</p>
@@ -596,7 +596,7 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="alluvia-landing-v2.html" class="nav-logo">
-          <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div>
+          <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div>
         </a>
         <p class="footer-desc">Pharmaceutical-grade bioactive peptides for performance, longevity, and beauty — backed by science, delivered with integrity.</p>
         <div class="footer-socials">

@@ -5,10 +5,10 @@
  */
 add_action( 'wp_head', function() {
     echo '<style>
-:root{--navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;--teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;--radius-sm:8px;--radius-md:16px;--radius-lg:28px;--shadow-sm:0 2px 12px rgba(13,27,42,.08);--shadow-md:0 8px 32px rgba(13,27,42,.14);--shadow-lg:0 20px 60px rgba(13,27,42,.2);--transition:.45s cubic-bezier(.23,1,.32,1);--font-display:\'Cormorant Garamond\',Georgia,serif;--font-body:\'Inter\',system-ui,sans-serif;--font-ui:\'Space Grotesk\',system-ui,sans-serif}
+:root{--navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;--teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;--pearl:#f5f0e7;--pearl-dark:#e8e0d2;--white:#fff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;--radius-sm:8px;--radius-md:16px;--radius-lg:28px;--shadow-sm:0 2px 12px rgba(10,26,39,.08);--shadow-md:0 8px 32px rgba(10,26,39,.14);--shadow-lg:0 20px 60px rgba(10,26,39,.2);--transition:.45s cubic-bezier(.23,1,.32,1);--font-display:\'Cormorant Garamond\',Georgia,serif;--font-body:\'Inter\',system-ui,sans-serif;--font-ui:\'Space Grotesk\',system-ui,sans-serif}
 *,*::before,*::after{box-sizing:border-box}
 body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;background:var(--pearl);margin:0}
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;background:rgba(13,27,42,.97);backdrop-filter:blur(20px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;background:rgba(10,26,39,.97);backdrop-filter:blur(20px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
@@ -46,13 +46,13 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .woocommerce ul.products li.product .price,.woocommerce .price{color:var(--teal);font-weight:600;font-size:18px}
 .woocommerce form .form-row label{font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block}
 .woocommerce form .form-row input.input-text,.woocommerce form .form-row select,.woocommerce form .form-row textarea{border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:12px 16px;font-size:15px;transition:border-color .25s;width:100%;font-family:var(--font-body)}
-.woocommerce form .form-row input.input-text:focus,.woocommerce form .form-row select:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px rgba(0,198,179,.12)}
+.woocommerce form .form-row input.input-text:focus,.woocommerce form .form-row select:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px rgba(14,175,159,.12)}
 .woocommerce table.shop_table{border-collapse:collapse;width:100%;background:#fff;border-radius:var(--radius-md);overflow:hidden}
 .woocommerce table.shop_table th{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);padding:16px;border-bottom:1px solid var(--pearl-dark);background:var(--pearl)}
 .woocommerce table.shop_table td{padding:16px;border-bottom:1px solid var(--pearl-dark);vertical-align:middle}
 .woocommerce .order-total .amount,.woocommerce .cart-subtotal .amount,.woocommerce .total .amount{color:var(--teal);font-weight:700}
-.woocommerce-message,.woocommerce-info{border-top:none;border-left:4px solid var(--teal);background:rgba(0,198,179,.07);padding:16px 20px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-family:var(--font-ui);font-size:14px}
-.woocommerce-error{border-left-color:#e8758a;background:rgba(232,117,138,.07)}
+.woocommerce-message,.woocommerce-info{border-top:none;border-left:4px solid var(--teal);background:rgba(14,175,159,.07);padding:16px 20px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-family:var(--font-ui);font-size:14px}
+.woocommerce-error{border-left-color:#db627a;background:rgba(219,98,122,.07)}
 .woocommerce .woocommerce-breadcrumb{font-family:var(--font-ui);font-size:12px;color:var(--text-light);margin-bottom:24px}
 .woocommerce-notices-wrapper .woocommerce-message a.button{padding:8px 18px;font-size:13px}
 /* FOOTER */
@@ -82,13 +82,13 @@ get_header( 'alluvia' );
   <div class="nav-inner">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
       <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/>
-        <circle cx="17" cy="10" r="2.2" fill="#00c6b3"/>
-        <circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/>
-        <circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/>
-        <line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>
-        <line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>
-        <line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>
+        <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/>
+        <circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/>
+        <circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/>
+        <circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/>
+        <line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
+        <line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
+        <line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
       </svg>
       <div class="logo-text">
         <span class="nav-logo-word">Alluvia</span>
@@ -142,13 +142,13 @@ get_header( 'alluvia' );
     <div>
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
         <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/>
-          <circle cx="17" cy="10" r="2.2" fill="#00c6b3"/>
-          <circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/>
-          <circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/>
-          <line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>
-          <line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>
-          <line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>
+          <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/>
+          <circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/>
+          <circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/>
+          <circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/>
+          <line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
+          <line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
+          <line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
         </svg>
         <div class="logo-text">
           <span class="nav-logo-word">Alluvia</span>

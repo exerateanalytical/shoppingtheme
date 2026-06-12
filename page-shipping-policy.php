@@ -9,19 +9,19 @@ add_action( 'wp_head', function() {
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
-  --teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;
-  --coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;
-  --mint:#78c9a2;--sky:#7fb8d4;
-  --pearl:#f4f2ee;--pearl-dark:#e8e4dc;
-  --white:#ffffff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;
+  --navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;
+  --teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;
+  --coral:#db627a;--purple:#8a60c1;--orange:#d4663c;
+  --mint:#58b488;--sky:#6aa6c6;
+  --pearl:#f5f0e7;--pearl-dark:#e8e0d2;
+  --white:#ffffff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;
   --radius:12px;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
 
 /* NAV */
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
@@ -37,7 +37,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,26,39,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:24px;text-decoration:none}
 .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
@@ -51,10 +51,10 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .page-hero p{color:rgba(255,255,255,0.55);font-size:15px}
 
 /* COLD CHAIN COMMITMENT */
-.cold-chain-block{background:linear-gradient(135deg,var(--navy-mid),var(--navy-soft));padding:3.5rem 2rem;border-bottom:1px solid rgba(0,198,179,0.15)}
+.cold-chain-block{background:linear-gradient(135deg,var(--navy-mid),var(--navy-soft));padding:3.5rem 2rem;border-bottom:1px solid rgba(14,175,159,0.15)}
 .cold-chain-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem}
-.cold-stat{text-align:center;padding:1.5rem;border-radius:var(--radius);background:rgba(255,255,255,0.04);border:1px solid rgba(0,198,179,0.12)}
-.cold-stat-icon{width:56px;height:56px;border-radius:50%;background:rgba(0,198,179,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:var(--teal)}
+.cold-stat{text-align:center;padding:1.5rem;border-radius:var(--radius);background:rgba(255,255,255,0.04);border:1px solid rgba(14,175,159,0.12)}
+.cold-stat-icon{width:56px;height:56px;border-radius:50%;background:rgba(14,175,159,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:var(--teal)}
 .cold-stat-num{font-family:'Cormorant Garamond',serif;font-size:35px;font-weight:700;color:#fff;line-height:1}
 .cold-stat-label{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-top:0.3rem}
 
@@ -81,13 +81,13 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .price-free{color:var(--mint)}
 .eta-cell{color:var(--text-mid)}
 .ship-badge-sm{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 7px;border-radius:50px;letter-spacing:0.06em}
-.badge-rec{background:rgba(127,184,212,0.15);color:#2d6e8a}
-.badge-fast{background:rgba(224,123,84,0.15);color:#a04020}
+.badge-rec{background:rgba(106,166,198,0.15);color:#2d6e8a}
+.badge-fast{background:rgba(212,102,60,0.15);color:#a04020}
 
 /* INFO CARD */
-.info-card{border-left:3px solid var(--teal);background:rgba(0,198,179,0.05);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1rem;font-size:14px;color:var(--text-mid)}
+.info-card{border-left:3px solid var(--teal);background:rgba(14,175,159,0.05);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1rem;font-size:14px;color:var(--text-mid)}
 .info-card strong{color:var(--text-dark)}
-.warn-card{border-left:3px solid var(--gold);background:rgba(200,169,110,0.07);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1rem;font-size:14px;color:var(--text-mid)}
+.warn-card{border-left:3px solid var(--gold);background:rgba(198,162,83,0.07);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1rem;font-size:14px;color:var(--text-mid)}
 
 /* LIST ITEMS */
 .check-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
@@ -152,7 +152,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem}
 get_header( 'alluvia' );
 ?>
 <nav class="alluvia-nav" id="nav">
-  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
   <ul class="nav-links">
     <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
     <li><a href="<?php echo esc_url(home_url('/about/')); ?>#science">Science</a></li>
@@ -218,7 +218,7 @@ get_header( 'alluvia' );
   <!-- DISPATCH -->
   <div class="shipping-section">
     <div class="section-header">
-      <div class="section-icon" style="background:rgba(0,198,179,0.1)"><i data-lucide="package" width="22" height="22" style="color:var(--teal)"></i></div>
+      <div class="section-icon" style="background:rgba(14,175,159,0.1)"><i data-lucide="package" width="22" height="22" style="color:var(--teal)"></i></div>
       <h2>Order Processing & Dispatch</h2>
     </div>
     <div class="info-card">
@@ -236,7 +236,7 @@ get_header( 'alluvia' );
   <!-- US DOMESTIC RATES -->
   <div class="shipping-section">
     <div class="section-header">
-      <div class="section-icon" style="background:rgba(127,184,212,0.1)"><i data-lucide="map" width="22" height="22" style="color:var(--sky)"></i></div>
+      <div class="section-icon" style="background:rgba(106,166,198,0.1)"><i data-lucide="map" width="22" height="22" style="color:var(--sky)"></i></div>
       <h2>US Domestic Shipping Rates</h2>
     </div>
     <div style="overflow-x:auto">
@@ -291,7 +291,7 @@ get_header( 'alluvia' );
   <!-- INTERNATIONAL -->
   <div class="shipping-section">
     <div class="section-header">
-      <div class="section-icon" style="background:rgba(155,114,207,0.1)"><i data-lucide="globe" width="22" height="22" style="color:var(--purple)"></i></div>
+      <div class="section-icon" style="background:rgba(138,96,193,0.1)"><i data-lucide="globe" width="22" height="22" style="color:var(--purple)"></i></div>
       <h2>International Shipping</h2>
     </div>
     <div style="overflow-x:auto">
@@ -346,22 +346,22 @@ get_header( 'alluvia' );
   <!-- PACKAGING -->
   <div class="shipping-section">
     <div class="section-header">
-      <div class="section-icon" style="background:rgba(120,201,162,0.1)"><i data-lucide="box" width="22" height="22" style="color:var(--mint)"></i></div>
+      <div class="section-icon" style="background:rgba(88,180,136,0.1)"><i data-lucide="box" width="22" height="22" style="color:var(--mint)"></i></div>
       <h2>Packaging Standards</h2>
     </div>
     <div class="pkg-grid">
       <div class="pkg-card">
-        <div class="pkg-card-icon" style="background:rgba(127,184,212,0.1)"><i data-lucide="thermometer-snowflake" width="22" height="22" style="color:var(--sky)"></i></div>
+        <div class="pkg-card-icon" style="background:rgba(106,166,198,0.1)"><i data-lucide="thermometer-snowflake" width="22" height="22" style="color:var(--sky)"></i></div>
         <h4>Insulated Liner</h4>
         <p>Foil-laminated foam insulation maintains internal temperature for 48+ hours</p>
       </div>
       <div class="pkg-card">
-        <div class="pkg-card-icon" style="background:rgba(0,198,179,0.1)"><i data-lucide="cloud-snow" width="22" height="22" style="color:var(--teal)"></i></div>
+        <div class="pkg-card-icon" style="background:rgba(14,175,159,0.1)"><i data-lucide="cloud-snow" width="22" height="22" style="color:var(--teal)"></i></div>
         <h4>Dry Ice / Ice Packs</h4>
         <p>Pharmaceutical-grade dry ice or gel packs calibrated to order size and transit time</p>
       </div>
       <div class="pkg-card">
-        <div class="pkg-card-icon" style="background:rgba(200,169,110,0.1)"><i data-lucide="shield" width="22" height="22" style="color:var(--gold)"></i></div>
+        <div class="pkg-card-icon" style="background:rgba(198,162,83,0.1)"><i data-lucide="shield" width="22" height="22" style="color:var(--gold)"></i></div>
         <h4>Tamper Evidence</h4>
         <p>Tamper-evident seals on all vials and outer packaging with lot number verification</p>
       </div>
@@ -377,7 +377,7 @@ get_header( 'alluvia' );
   <!-- FAQ -->
   <div class="shipping-section">
     <div class="section-header">
-      <div class="section-icon" style="background:rgba(232,117,138,0.1)"><i data-lucide="help-circle" width="22" height="22" style="color:var(--coral)"></i></div>
+      <div class="section-icon" style="background:rgba(219,98,122,0.1)"><i data-lucide="help-circle" width="22" height="22" style="color:var(--coral)"></i></div>
       <h2>Shipping FAQs</h2>
     </div>
     <div class="faq-item">
@@ -433,7 +433,7 @@ get_header( 'alluvia' );
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
         <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
         <div class="social-links">
           <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
