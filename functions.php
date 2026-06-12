@@ -595,6 +595,38 @@ function alluvia_product_coa_button() {
         . 'Download Certificate of Analysis (PDF)</a>';
 }
 
+// Certificate of Analysis product tab (preview image + download), by SKU.
+add_filter( 'woocommerce_product_tabs', 'alluvia_coa_product_tab' );
+function alluvia_coa_product_tab( $tabs ) {
+    global $product;
+    if ( $product instanceof WC_Product ) {
+        $paths = alluvia_coa_paths( $product->get_sku() );
+        if ( $paths['pdf'] ) {
+            $tabs['alluvia_coa'] = array(
+                'title'    => __( 'Certificate of Analysis', 'shopping' ),
+                'priority' => 25,
+                'callback' => 'alluvia_coa_product_tab_content',
+            );
+        }
+    }
+    return $tabs;
+}
+function alluvia_coa_product_tab_content() {
+    global $product;
+    $paths = alluvia_coa_paths( $product instanceof WC_Product ? $product->get_sku() : '' );
+    echo '<h2>Certificate of Analysis</h2>';
+    echo '<p>Every batch is released against Alluvia Peptides specifications with identity (ESI-MS), '
+        . 'RP-HPLC purity, water and acetate content verified. This material is supplied '
+        . '<strong>for laboratory research use only</strong>.</p>';
+    if ( $paths['img'] ) {
+        echo '<a href="' . esc_url( $paths['pdf'] ) . '" target="_blank" rel="noopener">'
+            . '<img src="' . esc_url( $paths['img'] ) . '" alt="Certificate of Analysis preview" '
+            . 'loading="lazy" style="max-width:520px;width:100%;height:auto;border:1px solid #e3e8ec;border-radius:12px;box-shadow:0 8px 32px rgba(13,27,42,.14);" /></a>';
+    }
+    echo '<p style="margin-top:18px;"><a class="button alt" href="' . esc_url( $paths['pdf'] ) . '" '
+        . 'target="_blank" rel="noopener">Download COA (PDF)</a></p>';
+}
+
 add_action( 'woocommerce_single_product_summary', 'alluvia_product_ruo_notice', 25 );
 function alluvia_product_ruo_notice() {
     echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid #c8a96e;border-left:4px solid #c8a96e;background:#fbf7ef;border-radius:8px;font-size:13px;line-height:1.5;color:#3a3320;">'

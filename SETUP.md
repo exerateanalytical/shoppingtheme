@@ -138,16 +138,25 @@ RP-HPLC + ESI-MS plots, a conforms conclusion with the Research-Use-Only
 statement, a QC signature and a verifiable document code.
 
 - The single product page shows a **Download Certificate of Analysis (PDF)**
-  button, matched by SKU (`alluvia_product_coa_button()` in `functions.php`).
+  button plus a **Certificate of Analysis** tab (preview image + download),
+  matched by SKU (`alluvia_product_coa_button()` / `alluvia_coa_product_tab()`).
 - The **COA Library** page (`page-coa.php`) lists every product that has a COA
   with a download link and live search / category filtering.
 
 Regenerate with:
 
 ```
-python3 generate_coa.py            # all products -> images/coa/<SKU>.jpg + .pdf
-python3 generate_coa.py sample     # a few sample COAs to /tmp/coa
+python3 generate_coa.py                       # all products -> images/coa/<SKU>.jpg + .pdf
+python3 generate_coa.py sample                # a few sample COAs to /tmp/coa
+python3 generate_coa.py --data lab.json      # populate with REAL lab results
 ```
+
+**Loading real lab data.** Pass `--data <file.json|file.csv>` to override the
+template placeholders with actual results per batch. Key each entry by product
+SKU (or lot); any omitted field falls back to the template value. Supported
+fields: `lot`, `purity`, `single_imp`, `water`, `acetate`, `peptide_content`,
+`mfg`, `retest`, `formula`, `mw`, `cas`, `tested_by` (credited on the
+chromatogram). See `coa-lab-data.example.json` for the format.
 
 > **Important — analytical values:** the generated figures (HPLC purity, MS,
 > Karl Fischer, etc.) are realistic but **deterministic placeholders**. A COA
