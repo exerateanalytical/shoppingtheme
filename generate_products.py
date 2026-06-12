@@ -233,6 +233,10 @@ def main():
                 row = by_name[full_name]
                 if category not in row["_cats"]:
                     row["_cats"].append(category)
+                # Promote to featured if it ranks in the top 6 of ANY category,
+                # not only the first category it happened to appear in.
+                if i <= 6:
+                    row["Is featured?"] = 1
                 continue
             row = {
                 "Type": "simple",

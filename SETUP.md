@@ -4,14 +4,21 @@
 
 1. Upload the `shoppingtheme` folder to `/wp-content/themes/`
 2. Install and activate the **Omega** parent theme first
-3. Activate the **Shopping** child theme
+3. Activate the **Alluvia Peptides** child theme
 4. Install and activate **WooCommerce**
+
+> **Pages auto-create on activation.** When the theme is activated it runs
+> `alluvia_create_pages_on_activation()` (in `functions.php`), which creates all
+> the pages below, assigns their templates, and sets the static front page + blog
+> page under Settings → Reading. The manual table below is a reference / fallback
+> if you ever need to recreate a page by hand. To re-run it, visit any admin URL
+> with `?alluvia_reset_pages=1` appended (admins only).
 
 ---
 
-## Required WordPress Pages to Create
+## Required WordPress Pages (auto-created — reference only)
 
-Go to **Pages → Add New** and create each page below.
+If creating manually: go to **Pages → Add New** and create each page below.
 Set the **Template** (right sidebar → Page Attributes → Template) as shown.
 
 | Page Title              | Slug                  | Template                          |
@@ -37,7 +44,23 @@ Go to **Settings → Reading**:
 ## WooCommerce Setup
 
 WooCommerce creates its own pages automatically (Shop, Cart, Checkout, My Account).
-The `woocommerce.php` wrapper applies the Alluvia nav and footer to all WooCommerce pages automatically.
+The `woocommerce.php` wrapper applies the Alluvia nav and footer to all WooCommerce
+pages automatically, so the store is **fully functional on WooCommerce's own
+templates** out of the box.
+
+### Bespoke commerce templates (pending staging integration)
+
+The theme also ships high-fidelity bespoke designs for the shop, product, cart,
+checkout and account pages (`page-shop.php`, `page-product.php`, `page-cart.php`,
+`page-checkout.php`, `page-account.php`). These are **design references** — they
+are not yet wired to WooCommerce's live cart/checkout, so do **not** assign them
+to live pages yet. The plan is to convert them into real WooCommerce template
+overrides (`archive-product.php`, `single-product.php`, and `cart` / `checkout` /
+`myaccount` overrides) driven by WooCommerce's authoritative cart and checkout
+flow. A custom AJAX cart engine (`alluvia_ajax_add_to_cart()` /
+`alluvia_ajax_update_cart()` in `functions.php`) is already in place to back the
+bespoke add-to-cart buttons and qty steppers. **This integration must be
+smoke-tested on a staging WordPress + WooCommerce install before go-live.**
 
 ---
 
@@ -90,13 +113,15 @@ automatically from the `Categories` column.
 
 ### Branded product images (auto-generated vials)
 
-Every product has a unique branded vial image in `images/products/<SKU>.jpg`
-(1080×1080). One universal bottle design is auto-filled per product — the label
-reads each product's name (auto-sized + wrapped), dose, ≥99% purity, category
-(accent colour) plus a COA seal, lot and storage line. On admin loads after the
-products are imported, the theme **auto-assigns each image as that product's
-featured image**, matched by SKU (`alluvia_assign_product_images()` in
-`functions.php`, batched to avoid timeouts). Regenerate with:
+Every product has a unique branded **vial** image in `images/products/<SKU>.jpg`
+plus a matching **carton** (`images/cartons/<SKU>.jpg`) and **group** shot
+(`images/groups/<SKU>.jpg`) — all 1080×1080. One universal design is auto-filled
+per product — the label reads each product's name (auto-sized + wrapped), dose,
+≥99% purity, category (accent colour) plus a COA seal, lot and storage line. On
+admin loads after the products are imported, the theme **auto-assigns the vial as
+the product's featured image and the carton + group shots as its gallery images**,
+matched by SKU (`alluvia_assign_product_images()` in `functions.php`, batched to
+avoid timeouts). Regenerate with:
 
 ```
 python3 generate_product_images.py          # all products
@@ -105,8 +130,8 @@ python3 generate_product_images.py sample   # quick test renders to /tmp
 
 ### Branded category images
 
-Eight on-brand category images live in `images/categories/` (1080×1080 PNG, with
-matching SVG sources). On the first admin page load after the categories exist,
+Nine on-brand category images live in `images/categories/` (1080×1080 PNG, with
+matching editable SVG sources). On the first admin page load after the categories exist,
 the theme **automatically assigns each image as its WooCommerce category
 thumbnail** (`alluvia_assign_category_images()` in `functions.php`) — no manual
 upload needed. To regenerate them, run:

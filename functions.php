@@ -65,6 +65,39 @@ if ( ! function_exists( 'alluvia_account_url' ) ) {
         return home_url( '/my-account/' );
     }
 }
+if ( ! function_exists( 'alluvia_cat_url' ) ) {
+    /**
+     * Safe product-category archive URL by slug. Falls back to the shop page
+     * if WooCommerce or the term isn't available yet.
+     */
+    function alluvia_cat_url( $slug ) {
+        if ( taxonomy_exists( 'product_cat' ) ) {
+            $link = get_term_link( $slug, 'product_cat' );
+            if ( ! is_wp_error( $link ) ) {
+                return $link;
+            }
+        }
+        return alluvia_shop_url();
+    }
+}
+/**
+ * Brand logo mark + wordmark used in nav and footer.
+ * Returns the inner markup for an <a class="nav-logo"> link.
+ */
+if ( ! function_exists( 'alluvia_logo_svg' ) ) {
+    function alluvia_logo_svg() {
+        return '<svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">'
+            . '<polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/>'
+            . '<circle cx="17" cy="10" r="2.2" fill="#00c6b3"/>'
+            . '<circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/>'
+            . '<circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/>'
+            . '<line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>'
+            . '<line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>'
+            . '<line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>'
+            . '</svg>'
+            . '<div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div>';
+    }
+}
 
 /* ═══════════════════════════════════════
    WIDGETS & INIT
@@ -140,9 +173,9 @@ function alluvia_handle_contact() {
         "Reply-To: {$name} <{$email}>",
     );
 
-    $body = "<p><strong>From:</strong> {$name} ({$email})</p>
-             <p><strong>Subject:</strong> {$subject}</p>
-             <p><strong>Message:</strong><br>" . nl2br( $message ) . "</p>";
+    $body = '<p><strong>From:</strong> ' . esc_html( $name ) . ' (' . esc_html( $email ) . ')</p>'
+          . '<p><strong>Subject:</strong> ' . esc_html( $subject ) . '</p>'
+          . '<p><strong>Message:</strong><br>' . nl2br( esc_html( $message ) ) . '</p>';
 
     $sent = wp_mail( $to, "Alluvia Contact: {$subject}", $body, $headers );
 
@@ -273,6 +306,64 @@ function alluvia_global_assets() {
         'ajax_url'      => admin_url( 'admin-ajax.php' ),
         'contact_nonce' => wp_create_nonce( 'alluvia_contact_nonce' ),
         'sub_nonce'     => wp_create_nonce( 'alluvia_sub_nonce' ),
+        'cart_nonce'    => wp_create_nonce( 'alluvia_cart_nonce' ),
+        'cart_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/cart/' ),
+    ) );
+}
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Custom AJAX cart engine
+   Backs the bespoke add-to-cart / qty-stepper / remove interactions on the
+   Alluvia commerce templates. Uses WooCommerce's own cart object and fragment
+   system so totals, taxes and sessions stay authoritative.
+═══════════════════════════════════════ */
+add_action( 'wp_ajax_alluvia_add_to_cart', 'alluvia_ajax_add_to_cart' );
+add_action( 'wp_ajax_nopriv_alluvia_add_to_cart', 'alluvia_ajax_add_to_cart' );
+function alluvia_ajax_add_to_cart() {
+    check_ajax_referer( 'alluvia_cart_nonce', 'nonce' );
+    if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+        wp_send_json_error( array( 'message' => 'Cart unavailable.' ) );
+    }
+    $product_id = absint( $_POST['product_id'] ?? 0 );
+    $quantity   = max( 1, absint( $_POST['quantity'] ?? 1 ) );
+    if ( ! $product_id || ! wc_get_product( $product_id ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid product.' ) );
+    }
+    $added = WC()->cart->add_to_cart( $product_id, $quantity );
+    if ( ! $added ) {
+        $notice = function_exists( 'wc_get_notices' ) ? wc_get_notices( 'error' ) : array();
+        $msg    = ! empty( $notice ) ? wp_strip_all_tags( $notice[0]['notice'] ) : 'Could not add to cart.';
+        if ( function_exists( 'wc_clear_notices' ) ) {
+            wc_clear_notices();
+        }
+        wp_send_json_error( array( 'message' => $msg ) );
+    }
+    wp_send_json_success( array(
+        'message' => 'Added to cart.',
+        'count'   => WC()->cart->get_cart_contents_count(),
+        'subtotal'=> WC()->cart->get_cart_subtotal(),
+    ) );
+}
+
+add_action( 'wp_ajax_alluvia_update_cart', 'alluvia_ajax_update_cart' );
+add_action( 'wp_ajax_nopriv_alluvia_update_cart', 'alluvia_ajax_update_cart' );
+function alluvia_ajax_update_cart() {
+    check_ajax_referer( 'alluvia_cart_nonce', 'nonce' );
+    if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+        wp_send_json_error( array( 'message' => 'Cart unavailable.' ) );
+    }
+    $key      = sanitize_text_field( $_POST['cart_item_key'] ?? '' );
+    $quantity = absint( $_POST['quantity'] ?? 0 );
+    if ( ! $key || ! isset( WC()->cart->get_cart()[ $key ] ) ) {
+        wp_send_json_error( array( 'message' => 'Item not found.' ) );
+    }
+    WC()->cart->set_quantity( $key, $quantity, true ); // 0 removes the line
+    WC()->cart->calculate_totals();
+    wp_send_json_success( array(
+        'count'    => WC()->cart->get_cart_contents_count(),
+        'subtotal' => WC()->cart->get_cart_subtotal(),
+        'total'    => WC()->cart->get_cart_total(),
+        'removed'  => 0 === $quantity,
     ) );
 }
 
