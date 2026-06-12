@@ -9,19 +9,19 @@ add_action( 'wp_head', function() {
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
-  --teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;
-  --coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;
-  --mint:#78c9a2;--sky:#7fb8d4;
-  --pearl:#f4f2ee;--pearl-dark:#e8e4dc;
-  --white:#ffffff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;
+  --navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;
+  --teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;
+  --coral:#db627a;--purple:#8a60c1;--orange:#d4663c;
+  --mint:#58b488;--sky:#6aa6c6;
+  --pearl:#f5f0e7;--pearl-dark:#e8e0d2;
+  --white:#ffffff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;
   --radius:12px;--radius-sm:8px;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
 
 /* NAV */
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
@@ -37,7 +37,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,26,39,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:500;text-decoration:none;letter-spacing:0.05em}
 .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
@@ -63,15 +63,15 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .cart-item:hover{background:var(--pearl)}
 .item-info{display:flex;align-items:center;gap:1rem}
 .item-thumb{width:60px;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.item-thumb.teal-bg{background:linear-gradient(135deg,rgba(0,198,179,0.15),rgba(0,198,179,0.05));border:1px solid rgba(0,198,179,0.2)}
-.item-thumb.coral-bg{background:linear-gradient(135deg,rgba(232,117,138,0.15),rgba(232,117,138,0.05));border:1px solid rgba(232,117,138,0.2)}
-.item-thumb.gold-bg{background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));border:1px solid rgba(200,169,110,0.2)}
+.item-thumb.teal-bg{background:linear-gradient(135deg,rgba(14,175,159,0.15),rgba(14,175,159,0.05));border:1px solid rgba(14,175,159,0.2)}
+.item-thumb.coral-bg{background:linear-gradient(135deg,rgba(219,98,122,0.15),rgba(219,98,122,0.05));border:1px solid rgba(219,98,122,0.2)}
+.item-thumb.gold-bg{background:linear-gradient(135deg,rgba(198,162,83,0.15),rgba(198,162,83,0.05));border:1px solid rgba(198,162,83,0.2)}
 .item-details{}
 .item-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:var(--text-dark)}
 .item-badge{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;padding:2px 8px;border-radius:50px;margin-top:3px}
-.badge-teal{background:rgba(0,198,179,0.12);color:var(--teal-dark)}
-.badge-coral{background:rgba(232,117,138,0.12);color:#c0405a}
-.badge-gold{background:rgba(200,169,110,0.12);color:#a07c3a}
+.badge-teal{background:rgba(14,175,159,0.12);color:var(--teal-dark)}
+.badge-coral{background:rgba(219,98,122,0.12);color:#c0405a}
+.badge-gold{background:rgba(198,162,83,0.12);color:#a07c3a}
 .item-meta{font-size:13px;color:var(--text-light);margin-top:2px}
 .item-price{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px}
 .qty-stepper{display:flex;align-items:center;gap:0;border:1px solid var(--pearl-dark);border-radius:8px;overflow:hidden;width:fit-content}
@@ -80,7 +80,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .qty-input{width:40px;height:32px;border:none;border-left:1px solid var(--pearl-dark);border-right:1px solid var(--pearl-dark);text-align:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:var(--text-dark);outline:none;background:#fff}
 .item-total{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--teal-dark)}
 .remove-btn{background:none;border:none;cursor:pointer;color:var(--text-light);display:flex;align-items:center;justify-content:center;border-radius:6px;width:32px;height:32px;transition:all .2s}
-.remove-btn:hover{background:rgba(232,117,138,0.1);color:var(--coral)}
+.remove-btn:hover{background:rgba(219,98,122,0.1);color:var(--coral)}
 
 /* CART ACTIONS */
 .cart-actions{display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;flex-wrap:wrap;gap:1rem}
@@ -94,7 +94,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .btn-update:hover{border-color:var(--teal);color:var(--teal)}
 
 /* DISCOUNT APPLIED */
-.discount-applied{display:flex;align-items:center;justify-content:space-between;background:rgba(0,198,179,0.08);border:1px solid rgba(0,198,179,0.25);border-radius:8px;padding:0.75rem 1rem;margin-top:1rem}
+.discount-applied{display:flex;align-items:center;justify-content:space-between;background:rgba(14,175,159,0.08);border:1px solid rgba(14,175,159,0.25);border-radius:8px;padding:0.75rem 1rem;margin-top:1rem}
 .discount-info{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;color:var(--teal-dark);font-weight:600}
 .discount-remove{background:none;border:none;cursor:pointer;color:var(--text-light);display:flex;align-items:center}
 .discount-remove:hover{color:var(--coral)}
@@ -119,7 +119,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .summary-total .label{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px}
 .summary-total .value{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--navy)}
 .btn-checkout{display:block;width:100%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;padding:1rem;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;margin-top:1.25rem;transition:all .3s;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.5rem}
-.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,198,179,0.4)}
+.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.4)}
 .summary-note{text-align:center;font-size:12px;color:var(--text-light);margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.3rem}
 .payment-icons{display:flex;justify-content:center;gap:0.5rem;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--pearl-dark)}
 .pay-icon{background:var(--pearl);border-radius:4px;padding:4px 8px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:var(--text-mid);letter-spacing:0.04em}
@@ -129,7 +129,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .pay-icon.paypal{color:#003087}
 
 /* SHIPPING ESTIMATE */
-.shipping-estimate{background:rgba(120,201,162,0.08);border:1px solid rgba(120,201,162,0.25);border-radius:8px;padding:1rem;margin-top:1rem}
+.shipping-estimate{background:rgba(88,180,136,0.08);border:1px solid rgba(88,180,136,0.25);border-radius:8px;padding:1rem;margin-top:1rem}
 .shipping-estimate h4{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.06em}
 .zip-row{display:flex;gap:0.5rem}
 .zip-input{flex:1;border:1px solid var(--pearl-dark);border-radius:6px;padding:0.5rem 0.75rem;font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none;background:#fff}
@@ -204,7 +204,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem}
 get_header( 'alluvia' );
 ?>
 <nav class="alluvia-nav" id="nav">
-  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
   <ul class="nav-links">
     <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
     <li><a href="<?php echo esc_url(home_url('/about/')); ?>#science">Science</a></li>
@@ -442,7 +442,7 @@ get_header( 'alluvia' );
   <h2><i data-lucide="heart" width="22" height="22" style="color:var(--coral)"></i> You May Also Like</h2>
   <div class="also-grid">
     <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(155,114,207,0.15),rgba(155,114,207,0.05))">
+      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(138,96,193,0.15),rgba(138,96,193,0.05))">
         <i data-lucide="trending-down" width="32" height="32" style="color:var(--purple)"></i>
       </div>
       <div class="also-body">
@@ -452,7 +452,7 @@ get_header( 'alluvia' );
       </div>
     </div>
     <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(224,123,84,0.15),rgba(224,123,84,0.05))">
+      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(212,102,60,0.15),rgba(212,102,60,0.05))">
         <i data-lucide="dumbbell" width="32" height="32" style="color:var(--orange)"></i>
       </div>
       <div class="also-body">
@@ -462,7 +462,7 @@ get_header( 'alluvia' );
       </div>
     </div>
     <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(120,201,162,0.15),rgba(120,201,162,0.05))">
+      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(88,180,136,0.15),rgba(88,180,136,0.05))">
         <i data-lucide="feather" width="32" height="32" style="color:var(--mint)"></i>
       </div>
       <div class="also-body">
@@ -472,7 +472,7 @@ get_header( 'alluvia' );
       </div>
     </div>
     <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(127,184,212,0.15),rgba(127,184,212,0.05))">
+      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(106,166,198,0.15),rgba(106,166,198,0.05))">
         <i data-lucide="dna" width="32" height="32" style="color:var(--sky)"></i>
       </div>
       <div class="also-body">
@@ -488,7 +488,7 @@ get_header( 'alluvia' );
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
         <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
         <div class="social-links">
           <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
@@ -631,7 +631,7 @@ function showToast(msg, err = false) {
   t.textContent = msg;
   Object.assign(t.style, {
     position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',
-    background: err ? '#c0405a' : '#00c6b3',color: err ? '#fff' : '#0d1b2a',
+    background: err ? '#c0405a' : '#0eaf9f',color: err ? '#fff' : '#0a1a27',
     padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",
     fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',
     boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'

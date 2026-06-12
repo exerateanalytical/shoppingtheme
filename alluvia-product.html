@@ -10,17 +10,17 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
-  --teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;
-  --coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;
-  --mint:#78c9a2;--sky:#7fb8d4;
-  --pearl:#f4f2ee;--pearl-dark:#e8e4dc;
-  --white:#ffffff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;
+  --navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;
+  --teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;
+  --coral:#db627a;--purple:#8a60c1;--orange:#d4663c;
+  --mint:#58b488;--sky:#6aa6c6;
+  --pearl:#f5f0e7;--pearl-dark:#e8e0d2;
+  --white:#ffffff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;
   --radius:12px;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
@@ -36,7 +36,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,26,39,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:24px;text-decoration:none}
 .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
@@ -51,13 +51,13 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 /* GALLERY */
 .gallery{}
 .gallery-main{background:#fff;border-radius:var(--radius);height:420px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative;overflow:hidden;border:1px solid var(--pearl-dark)}
-.gallery-main::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(0,198,179,0.08),transparent 70%)}
+.gallery-main::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(14,175,159,0.08),transparent 70%)}
 .gallery-main .vial-icon{position:relative;z-index:1}
 .gallery-badge{position:absolute;top:1rem;left:1rem;background:var(--teal);color:var(--navy);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.06em;padding:4px 12px;border-radius:50px;text-transform:uppercase;z-index:2}
 .gallery-thumbs{display:flex;gap:0.75rem;margin-top:1rem}
 .gallery-thumb{flex:1;background:#fff;border-radius:8px;height:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid transparent;transition:all .2s}
 .gallery-thumb.active{border-color:var(--teal)}
-.gallery-thumb:hover{border-color:rgba(0,198,179,0.4)}
+.gallery-thumb:hover{border-color:rgba(14,175,159,0.4)}
 
 /* PRODUCT INFO */
 .product-info{}
@@ -71,7 +71,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .prod-price-row{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.5rem}
 .prod-price{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--navy)}
 .prod-price-old{font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--text-light);text-decoration:line-through}
-.prod-save{background:rgba(232,117,138,0.12);color:#c0405a;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:50px}
+.prod-save{background:rgba(219,98,122,0.12);color:#c0405a;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:50px}
 
 /* SPEC GRID */
 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;padding:1.25rem;background:#fff;border-radius:var(--radius);border:1px solid var(--pearl-dark)}
@@ -87,15 +87,15 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .qty-btn:hover{background:var(--teal);color:#fff}
 .qty-input{width:50px;border:none;border-left:1px solid var(--pearl-dark);border-right:1px solid var(--pearl-dark);text-align:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;outline:none}
 .btn-add-cart{flex:1;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:all .3s}
-.btn-add-cart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,198,179,0.35)}
+.btn-add-cart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.35)}
 .btn-wishlist{width:52px;background:#fff;border:1px solid var(--pearl-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-mid);transition:all .2s}
 .btn-wishlist:hover{border-color:var(--coral);color:var(--coral)}
-.btn-wishlist.active{background:rgba(232,117,138,0.08);border-color:var(--coral);color:var(--coral)}
+.btn-wishlist.active{background:rgba(219,98,122,0.08);border-color:var(--coral);color:var(--coral)}
 .buy-now{display:block;width:100%;text-align:center;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:0.85rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.04em;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:1.25rem}
 .buy-now:hover{background:var(--teal-dark)}
 
 /* ASSURANCE */
-.assurance{display:flex;flex-direction:column;gap:0.6rem;padding:1.25rem;background:rgba(0,198,179,0.04);border:1px solid rgba(0,198,179,0.15);border-radius:var(--radius)}
+.assurance{display:flex;flex-direction:column;gap:0.6rem;padding:1.25rem;background:rgba(14,175,159,0.04);border:1px solid rgba(14,175,159,0.15);border-radius:var(--radius)}
 .assurance-item{display:flex;align-items:center;gap:0.6rem;font-size:14px;color:var(--text-mid)}
 .assurance-item svg{color:var(--teal);flex-shrink:0}
 
@@ -124,9 +124,9 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .specs-table td:last-child{color:var(--text-mid)}
 
 /* COA BLOCK */
-.coa-block{display:flex;align-items:center;justify-content:space-between;background:rgba(0,198,179,0.05);border:1px solid rgba(0,198,179,0.2);border-radius:10px;padding:1.25rem 1.5rem;flex-wrap:wrap;gap:1rem}
+.coa-block{display:flex;align-items:center;justify-content:space-between;background:rgba(14,175,159,0.05);border:1px solid rgba(14,175,159,0.2);border-radius:10px;padding:1.25rem 1.5rem;flex-wrap:wrap;gap:1rem}
 .coa-info{display:flex;align-items:center;gap:1rem}
-.coa-icon{width:48px;height:48px;border-radius:10px;background:rgba(0,198,179,0.12);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.coa-icon{width:48px;height:48px;border-radius:10px;background:rgba(14,175,159,0.12);display:flex;align-items:center;justify-content:center;color:var(--teal)}
 .coa-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
 .coa-sub{font-size:13px;color:var(--text-light)}
 .btn-coa{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.65rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-decoration:none}
@@ -204,7 +204,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem;mar
 <body>
 
 <nav class="alluvia-nav" id="nav">
-  <a href="alluvia-landing-v2.html" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+  <a href="alluvia-landing-v2.html" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
   <ul class="nav-links">
     <li><a href="alluvia-shop.html">Products</a></li>
     <li><a href="alluvia-about.html#science">Science</a></li>
@@ -341,7 +341,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem;mar
         <li><i data-lucide="refrigerator" width="16" height="16"></i>Once reconstituted, store at 2–8°C and use within 30 days</li>
         <li><i data-lucide="sun-dim" width="16" height="16"></i>Protect from light and repeated freeze-thaw cycles</li>
       </ul>
-      <div style="background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.25);border-radius:8px;padding:1rem 1.25rem;font-size:0.85rem;color:var(--text-mid);margin-top:1rem">
+      <div style="background:rgba(198,162,83,0.07);border:1px solid rgba(198,162,83,0.25);border-radius:8px;padding:1rem 1.25rem;font-size:0.85rem;color:var(--text-mid);margin-top:1rem">
         <strong>For research use only.</strong> This product is not intended for human or veterinary use. See our <a href="alluvia-terms.html" style="color:var(--teal-dark)">Terms & Conditions</a> for full disclaimer.
       </div>
     </div>
@@ -460,19 +460,19 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem;mar
   <h2>Frequently Bought Together</h2>
   <div class="related-grid">
     <a href="alluvia-product.html" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(224,123,84,0.12),rgba(224,123,84,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(212,102,60,0.12),rgba(212,102,60,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
       <div class="rel-body"><div class="rel-cat">Sports & Recovery</div><div class="rel-name">TB-500 — 5 mg</div><div class="rel-price">$78.00</div></div>
     </a>
     <a href="alluvia-product.html" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(232,117,138,0.12),rgba(232,117,138,0.04))"><i data-lucide="sparkles" width="36" height="36" style="color:var(--coral)"></i></div>
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(219,98,122,0.12),rgba(219,98,122,0.04))"><i data-lucide="sparkles" width="36" height="36" style="color:var(--coral)"></i></div>
       <div class="rel-body"><div class="rel-cat">Skincare</div><div class="rel-name">GHK-Cu — 200 mg</div><div class="rel-price">$52.00</div></div>
     </a>
     <a href="alluvia-product.html" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(200,169,110,0.12),rgba(200,169,110,0.04))"><i data-lucide="zap" width="36" height="36" style="color:var(--gold)"></i></div>
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(198,162,83,0.12),rgba(198,162,83,0.04))"><i data-lucide="zap" width="36" height="36" style="color:var(--gold)"></i></div>
       <div class="rel-body"><div class="rel-cat">Anti-Aging</div><div class="rel-name">Ipamorelin — 2 mg</div><div class="rel-price">$68.00</div></div>
     </a>
     <a href="alluvia-product.html" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(0,198,179,0.12),rgba(0,198,179,0.04))"><i data-lucide="layers" width="36" height="36" style="color:var(--teal)"></i></div>
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(14,175,159,0.12),rgba(14,175,159,0.04))"><i data-lucide="layers" width="36" height="36" style="color:var(--teal)"></i></div>
       <div class="rel-body"><div class="rel-cat">Stack</div><div class="rel-name">BPC-157 + TB-500</div><div class="rel-price">$119.00</div></div>
     </a>
   </div>
@@ -482,7 +482,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem;mar
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="alluvia-landing-v2.html" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+        <a href="alluvia-landing-v2.html" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
         <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
         <div class="social-links">
           <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
@@ -525,7 +525,7 @@ function changeQty(d){const i=document.getElementById('qty');i.value=Math.max(1,
 function showTab(id,btn){document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
 function toggleWish(){document.getElementById('wishBtn').classList.toggle('active');}
 document.querySelectorAll('.gallery-thumb').forEach(t=>t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#00c6b3',color:'#0d1b2a',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 </script>
 </body>
 </html>

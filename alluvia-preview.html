@@ -11,32 +11,32 @@
   <style>
 /* =============================================================
    Alluvia Peptides — Premium Landing Page
-   Palette: Navy #0d1b2a | Teal #00c6b3 | Gold #c8a96e | Pearl #f4f2ee
+   Palette: Navy #0a1a27 | Teal #0eaf9f | Gold #c6a253 | Pearl #f5f0e7
    ============================================================= */
 
 :root {
-  --navy:      #0d1b2a;
-  --navy-mid:  #162336;
-  --navy-soft: #1e3050;
-  --teal:      #00c6b3;
-  --teal-dark: #009e8e;
-  --teal-glow: rgba(0,198,179,0.18);
-  --gold:      #c8a96e;
+  --navy:      #0a1a27;
+  --navy-mid:  #15283b;
+  --navy-soft: #213f5d;
+  --teal:      #0eaf9f;
+  --teal-dark: #0a8174;
+  --teal-glow: rgba(14,175,159,0.18);
+  --gold:      #c6a253;
   --gold-light:#e4c98f;
-  --pearl:     #f4f2ee;
-  --pearl-dark:#e8e4dc;
+  --pearl:     #f5f0e7;
+  --pearl-dark:#e8e0d2;
   --white:     #ffffff;
-  --text-dark: #0d1b2a;
-  --text-mid:  #4a5568;
-  --text-light:#8899aa;
+  --text-dark: #0a1a27;
+  --text-mid:  #44515f;
+  --text-light:#8392a2;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 28px;
   --radius-xl: 48px;
-  --shadow-sm: 0 2px 12px rgba(13,27,42,0.08);
-  --shadow-md: 0 8px 32px rgba(13,27,42,0.14);
-  --shadow-lg: 0 20px 60px rgba(13,27,42,0.2);
-  --shadow-glow: 0 0 40px rgba(0,198,179,0.25);
+  --shadow-sm: 0 2px 12px rgba(10,26,39,0.08);
+  --shadow-md: 0 8px 32px rgba(10,26,39,0.14);
+  --shadow-lg: 0 20px 60px rgba(10,26,39,0.2);
+  --shadow-glow: 0 0 40px rgba(14,175,159,0.25);
   --transition: 0.45s cubic-bezier(0.23, 1, 0.32, 1);
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Inter', system-ui, sans-serif;
@@ -60,7 +60,7 @@ body {
   padding: 20px 0; transition: var(--transition);
 }
 .alluvia-nav.scrolled {
-  background: rgba(13,27,42,0.97);
+  background: rgba(10,26,39,0.97);
   backdrop-filter: blur(20px);
   padding: 12px 0;
   box-shadow: 0 2px 30px rgba(0,0,0,0.3);
@@ -76,7 +76,7 @@ body {
 .nav-links a { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); text-decoration: none; text-transform: uppercase; transition: color .25s; }
 .nav-links a:hover { color: var(--teal); }
 .nav-cta { color: var(--navy) !important; background: var(--teal); padding: 10px 24px; border-radius: 100px; font-weight: 600 !important; transition: var(--transition) !important; }
-.nav-cta:hover { background: var(--teal-dark) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,198,179,0.4); }
+.nav-cta:hover { background: var(--teal-dark) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(14,175,159,0.4); }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
 .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); }
 
@@ -89,9 +89,9 @@ body {
 .hero-gradient {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,198,179,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(200,169,110,0.08) 0%, transparent 50%),
-    linear-gradient(135deg, #0d1b2a 0%, #162336 50%, #0d1b2a 100%);
+    radial-gradient(ellipse 70% 60% at 80% 50%, rgba(14,175,159,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(198,162,83,0.08) 0%, transparent 50%),
+    linear-gradient(135deg, #0a1a27 0%, #15283b 50%, #0a1a27 100%);
 }
 .hero-inner {
   position: relative; z-index: 2; max-width: 1280px; margin: 0 auto;
@@ -100,7 +100,7 @@ body {
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(0,198,179,0.1); border: 1px solid rgba(0,198,179,0.3);
+  background: rgba(14,175,159,0.1); border: 1px solid rgba(14,175,159,0.3);
   border-radius: 100px; padding: 8px 18px; margin-bottom: 28px;
   opacity: 0; transform: translateY(20px);
   animation: fadeUp 0.8s 0.2s ease forwards;
@@ -129,7 +129,7 @@ body {
   padding: 16px 36px; border-radius: 100px; text-decoration: none;
   transition: var(--transition); border: none; cursor: pointer;
 }
-.btn-primary:hover { background: var(--teal-dark); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,198,179,0.45); }
+.btn-primary:hover { background: var(--teal-dark); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(14,175,159,0.45); }
 .btn-primary svg { transition: transform 0.3s ease; }
 .btn-primary:hover svg { transform: translateX(4px); }
 .btn-ghost {
@@ -156,9 +156,9 @@ body {
   animation: fadeRight 1s 0.6s ease forwards;
 }
 .hero-molecule { position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
-.molecule-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(0,198,179,0.15); animation: spin-slow 20s linear infinite; }
+.molecule-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(14,175,159,0.15); animation: spin-slow 20s linear infinite; }
 .molecule-ring:nth-child(1) { width: 90%; height: 90%; animation-duration: 30s; }
-.molecule-ring:nth-child(2) { width: 70%; height: 70%; animation-duration: 22s; animation-direction: reverse; border-color: rgba(200,169,110,0.15); }
+.molecule-ring:nth-child(2) { width: 70%; height: 70%; animation-duration: 22s; animation-direction: reverse; border-color: rgba(198,162,83,0.15); }
 .molecule-ring:nth-child(3) { width: 50%; height: 50%; animation-duration: 16s; }
 .molecule-ring::before {
   content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
@@ -168,22 +168,22 @@ body {
 .molecule-core {
   position: relative; z-index: 2; width: 180px; height: 180px; border-radius: 50%;
   background: linear-gradient(135deg, var(--navy-soft), var(--navy-mid));
-  border: 1px solid rgba(0,198,179,0.3);
+  border: 1px solid rgba(14,175,159,0.3);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  box-shadow: 0 0 60px rgba(0,198,179,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow: 0 0 60px rgba(14,175,159,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 .molecule-core-icon { font-size: 48px; margin-bottom: 8px; }
 .molecule-core-label { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); }
 .hero-floating-cards { position: absolute; inset: 0; pointer-events: none; }
 .hero-card-float {
   position: absolute; background: rgba(22,35,54,0.9); backdrop-filter: blur(12px);
-  border: 1px solid rgba(0,198,179,0.2); border-radius: 14px; padding: 14px 18px;
+  border: 1px solid rgba(14,175,159,0.2); border-radius: 14px; padding: 14px 18px;
   display: flex; align-items: center; gap: 12px; animation: float-card 4s ease-in-out infinite;
 }
 .hero-card-float:nth-child(1) { top: 8%; right: 5%; animation-delay: 0s; }
 .hero-card-float:nth-child(2) { bottom: 18%; left: 0%; animation-delay: 1.5s; }
 .hero-card-float:nth-child(3) { top: 55%; right: 2%; animation-delay: 0.8s; }
-.float-card-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(0,198,179,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.float-card-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(14,175,159,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; }
 .float-card-title { font-family: var(--font-ui); font-size: 12px; font-weight: 600; color: var(--white); white-space: nowrap; }
 .float-card-sub { font-size: 10px; color: rgba(255,255,255,0.45); white-space: nowrap; }
 
@@ -206,7 +206,7 @@ body {
 
 /* ── ABOUT ── */
 .about-section { padding: 120px 0; background: var(--pearl); position: relative; overflow: hidden; }
-.about-section::before { content: 'ALLUVIA'; position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 700; color: rgba(13,27,42,0.025); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; user-select: none; }
+.about-section::before { content: 'ALLUVIA'; position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 700; color: rgba(10,26,39,0.025); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; user-select: none; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
 .about-image-wrap { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); }
 .about-image-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
@@ -226,7 +226,7 @@ body {
 
 /* ── CATEGORIES ── */
 .categories-section { padding: 120px 0; background: var(--navy); position: relative; overflow: hidden; }
-.categories-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse 60% 50% at 0% 50%, rgba(0,198,179,0.06) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 100% 30%, rgba(200,169,110,0.05) 0%, transparent 50%); pointer-events: none; }
+.categories-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse 60% 50% at 0% 50%, rgba(14,175,159,0.06) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 100% 30%, rgba(198,162,83,0.05) 0%, transparent 50%); pointer-events: none; }
 .categories-header { text-align: center; margin-bottom: 72px; }
 .categories-header .section-title { color: var(--white); }
 .categories-header .section-desc { color: rgba(255,255,255,0.55); margin: 0 auto; }
@@ -253,16 +253,16 @@ body {
 .process-step { display: flex; gap: 24px; position: relative; padding-bottom: 36px; }
 .process-step:last-child { padding-bottom: 0; }
 .process-step-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-.process-step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: var(--teal); font-family: var(--font-ui); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(0,198,179,0.3); transition: var(--transition); flex-shrink: 0; }
+.process-step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: var(--teal); font-family: var(--font-ui); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(14,175,159,0.3); transition: var(--transition); flex-shrink: 0; }
 .process-step:hover .process-step-num { background: var(--teal); color: var(--navy); border-color: var(--teal); box-shadow: var(--shadow-glow); }
-.process-step-connector { flex: 1; width: 1px; background: linear-gradient(to bottom, rgba(0,198,179,0.3), transparent); margin: 6px 0; min-height: 24px; }
+.process-step-connector { flex: 1; width: 1px; background: linear-gradient(to bottom, rgba(14,175,159,0.3), transparent); margin: 6px 0; min-height: 24px; }
 .process-step:last-child .process-step-connector { display: none; }
 .process-step-content { padding-top: 8px; }
 .process-step-title { font-family: var(--font-ui); font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
 .process-step-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
 .science-certs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 80px; }
 .cert-card { background: var(--white); border-radius: var(--radius-md); padding: 28px 24px; border: 1px solid var(--pearl-dark); transition: var(--transition); display: flex; flex-direction: column; gap: 12px; }
-.cert-card:hover { border-color: var(--teal); box-shadow: 0 8px 32px rgba(0,198,179,0.1); transform: translateY(-4px); }
+.cert-card:hover { border-color: var(--teal); box-shadow: 0 8px 32px rgba(14,175,159,0.1); transform: translateY(-4px); }
 .cert-icon { font-size: 32px; }
 .cert-title { font-family: var(--font-ui); font-size: 14px; font-weight: 700; color: var(--navy); }
 .cert-text { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
@@ -283,7 +283,7 @@ body {
 .testimonials-header .section-desc { margin: 0 auto; }
 .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .testi-card { background: var(--pearl); border-radius: var(--radius-md); padding: 40px 36px; border: 1px solid var(--pearl-dark); display: flex; flex-direction: column; gap: 24px; transition: var(--transition); }
-.testi-card:hover { border-color: rgba(0,198,179,0.2); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.testi-card:hover { border-color: rgba(14,175,159,0.2); box-shadow: var(--shadow-md); transform: translateY(-4px); }
 .testi-stars { display: flex; gap: 4px; color: var(--gold); font-size: 16px; }
 .testi-quote { font-family: var(--font-display); font-size: 19px; font-weight: 300; font-style: italic; line-height: 1.65; color: var(--navy); flex: 1; }
 .testi-quote::before { content: '\201C'; color: var(--teal); font-size: 28px; line-height: 0; vertical-align: -8px; margin-right: 3px; }
@@ -291,17 +291,17 @@ body {
 .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--navy)); display: flex; align-items: center; justify-content: center; font-family: var(--font-ui); font-size: 16px; font-weight: 700; color: var(--white); flex-shrink: 0; }
 .testi-name { font-family: var(--font-ui); font-size: 14px; font-weight: 600; color: var(--navy); }
 .testi-meta { font-size: 12px; color: var(--text-light); margin-top: 2px; }
-.testi-product { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); background: rgba(0,198,179,0.08); border-radius: 100px; padding: 4px 10px; margin-left: auto; }
+.testi-product { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); background: rgba(14,175,159,0.08); border-radius: 100px; padding: 4px 10px; margin-left: auto; }
 
 /* ── CTA ── */
 .cta-section { padding: 120px 0; background: var(--navy); position: relative; overflow: hidden; text-align: center; }
-.cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0,198,179,0.1) 0%, transparent 65%); pointer-events: none; }
+.cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(14,175,159,0.1) 0%, transparent 65%); pointer-events: none; }
 .cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; padding: 0 40px; }
 .cta-section .section-label { justify-content: center; }
 .cta-section .section-title { color: var(--white); font-size: clamp(40px,5vw,68px); }
 .cta-section .section-desc { color: rgba(255,255,255,0.55); margin: 0 auto 48px; }
 .email-form { display: flex; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 6px 6px 6px 24px; width: 100%; max-width: 460px; margin: 0 auto; transition: border-color .3s; }
-.email-form:focus-within { border-color: rgba(0,198,179,0.5); }
+.email-form:focus-within { border-color: rgba(14,175,159,0.5); }
 .email-form input { flex: 1; background: transparent; border: none; color: var(--white); font-family: var(--font-body); font-size: 14px; padding: 10px 0; outline: none; min-width: 0; }
 .email-form input::placeholder { color: rgba(255,255,255,0.35); }
 .email-form button { background: var(--teal); color: var(--navy); border: none; border-radius: 100px; padding: 12px 24px; font-family: var(--font-ui); font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition); white-space: nowrap; }
@@ -561,7 +561,7 @@ body {
     </div>
     <div class="categories-grid">
 
-      <article class="cat-card reveal" style="--cat-color:#00c6b3;">
+      <article class="cat-card reveal" style="--cat-color:#0eaf9f;">
         <div class="cat-number">01</div>
         <div class="cat-icon-wrap">💊</div>
         <h3 class="cat-name">Medical Peptides</h3>
@@ -569,7 +569,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-1" style="--cat-color:#c8a96e;">
+      <article class="cat-card reveal reveal-delay-1" style="--cat-color:#c6a253;">
         <div class="cat-number">02</div>
         <div class="cat-icon-wrap">✨</div>
         <h3 class="cat-name">Skincare Peptides</h3>
@@ -577,7 +577,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-2" style="--cat-color:#7fb8d4;">
+      <article class="cat-card reveal reveal-delay-2" style="--cat-color:#6aa6c6;">
         <div class="cat-number">03</div>
         <div class="cat-icon-wrap">🦴</div>
         <h3 class="cat-name">Collagen Peptides</h3>
@@ -585,7 +585,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-3" style="--cat-color:#e07b54;">
+      <article class="cat-card reveal reveal-delay-3" style="--cat-color:#d4663c;">
         <div class="cat-number">04</div>
         <div class="cat-icon-wrap">⚡</div>
         <h3 class="cat-name">Sports & Recovery</h3>
@@ -593,7 +593,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-4" style="--cat-color:#9b72cf;">
+      <article class="cat-card reveal reveal-delay-4" style="--cat-color:#8a60c1;">
         <div class="cat-number">05</div>
         <div class="cat-icon-wrap">🔥</div>
         <h3 class="cat-name">Weight-Loss & Metabolic</h3>
@@ -601,7 +601,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-5" style="--cat-color:#c8a96e;">
+      <article class="cat-card reveal reveal-delay-5" style="--cat-color:#c6a253;">
         <div class="cat-number">06</div>
         <div class="cat-icon-wrap">⏳</div>
         <h3 class="cat-name">Hormone & Anti-Aging</h3>
@@ -609,7 +609,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-6" style="--cat-color:#78c9a2;">
+      <article class="cat-card reveal reveal-delay-6" style="--cat-color:#58b488;">
         <div class="cat-number">07</div>
         <div class="cat-icon-wrap">🌱</div>
         <h3 class="cat-name">Hair Growth Peptides</h3>
@@ -617,7 +617,7 @@ body {
         <a href="#" class="cat-arrow">Shop Category <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
-      <article class="cat-card reveal reveal-delay-7" style="--cat-color:#00c6b3;">
+      <article class="cat-card reveal reveal-delay-7" style="--cat-color:#0eaf9f;">
         <div class="cat-number">08</div>
         <div class="cat-icon-wrap">🔬</div>
         <h3 class="cat-name">Research Peptides</h3>
@@ -854,7 +854,7 @@ body {
     this.r=Math.random()*1.5+0.3;
     this.vx=(Math.random()-.5)*.35; this.vy=(Math.random()-.5)*.35;
     this.alpha=Math.random()*.5+.1;
-    this.color=Math.random()>.6?'#00c6b3':'#c8a96e';
+    this.color=Math.random()>.6?'#0eaf9f':'#c6a253';
   };
   Particle.prototype.update=function(){
     this.x+=this.vx; this.y+=this.vy;
@@ -868,7 +868,7 @@ body {
       for(var b=a+1;b<particles.length;b++){
         var dx=particles[a].x-particles[b].x, dy=particles[a].y-particles[b].y;
         var dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<110){ ctx.beginPath(); ctx.strokeStyle='rgba(0,198,179,'+(0.08*(1-dist/110))+')'; ctx.lineWidth=.6; ctx.moveTo(particles[a].x,particles[a].y); ctx.lineTo(particles[b].x,particles[b].y); ctx.stroke(); }
+        if(dist<110){ ctx.beginPath(); ctx.strokeStyle='rgba(14,175,159,'+(0.08*(1-dist/110))+')'; ctx.lineWidth=.6; ctx.moveTo(particles[a].x,particles[a].y); ctx.lineTo(particles[b].x,particles[b].y); ctx.stroke(); }
       }
     }
     particles.forEach(function(p){ p.update(); ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=p.color; ctx.globalAlpha=p.alpha; ctx.fill(); ctx.globalAlpha=1; });
