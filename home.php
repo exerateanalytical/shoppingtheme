@@ -148,6 +148,45 @@ get_header( 'alluvia' );
     <button class="cat-pill">Guides</button>
   </div>
 
+  <?php if ( have_posts() ) : $a_idx = 0; ?>
+  <?php while ( have_posts() ) : the_post();
+    $b_cats = get_the_category();
+    $b_cat  = ( $b_cats && ! is_wp_error( $b_cats ) ) ? $b_cats[0]->name : 'Research';
+    $b_read = max( 1, (int) round( str_word_count( wp_strip_all_tags( get_the_content() ) ) / 200 ) );
+    if ( 0 === $a_idx ) : ?>
+      <a href="<?php the_permalink(); ?>" class="featured-post">
+        <div class="featured-img"><?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'large' ); } else { ?><i data-lucide="microscope" width="90" height="90" style="color:var(--teal);position:relative;z-index:1"></i><?php } ?></div>
+        <div class="featured-body">
+          <span class="post-cat"><i data-lucide="flask-conical" width="11" height="11"></i> <?php echo esc_html( $b_cat ); ?> · Featured</span>
+          <h2><?php the_title(); ?></h2>
+          <p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 36 ) ); ?></p>
+          <div class="post-meta">
+            <span><i data-lucide="user" width="13" height="13"></i> <?php the_author(); ?></span>
+            <span><i data-lucide="calendar" width="13" height="13"></i> <?php echo esc_html( get_the_date() ); ?></span>
+            <span><i data-lucide="clock" width="13" height="13"></i> <?php echo (int) $b_read; ?> min read</span>
+          </div>
+          <span class="read-tag">Read Article <i data-lucide="arrow-right" width="15" height="15"></i></span>
+        </div>
+      </a>
+      <div class="blog-grid">
+    <?php else : ?>
+      <a href="<?php the_permalink(); ?>" class="blog-card">
+        <div class="blog-card-img"><?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'medium_large' ); } else { ?><i data-lucide="flask-conical" width="48" height="48" style="color:var(--teal)"></i><?php } ?></div>
+        <div class="blog-card-body">
+          <span class="post-cat"><i data-lucide="book-open" width="11" height="11"></i> <?php echo esc_html( $b_cat ); ?></span>
+          <h3><?php the_title(); ?></h3>
+          <p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 22 ) ); ?></p>
+          <div class="post-meta"><span><i data-lucide="calendar" width="13" height="13"></i> <?php echo esc_html( get_the_date( 'M j' ) ); ?></span><span><i data-lucide="clock" width="13" height="13"></i> <?php echo (int) $b_read; ?> min</span></div>
+        </div>
+      </a>
+    <?php endif; $a_idx++; endwhile; ?>
+    </div><!-- /.blog-grid (always opened on the featured iteration) -->
+    <div class="pagination"><?php echo paginate_links( array( 'mid_size' => 2, 'prev_text' => '‹', 'next_text' => '›' ) ); ?></div>
+  <?php else : ?>
+    <p style="text-align:center;padding:80px 20px;color:var(--text-light);font-family:var(--font-ui)">No articles published yet — check back soon.</p>
+  <?php endif; ?>
+
+  <?php if ( false ) : // legacy demo articles retained for design reference, not rendered ?>
   <!-- FEATURED -->
   <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="featured-post">
     <div class="featured-img"><i data-lucide="microscope" width="90" height="90" style="color:var(--teal);position:relative;z-index:1"></i></div>
@@ -229,15 +268,19 @@ get_header( 'alluvia' );
     <button class="page-btn">3</button>
     <button class="page-btn"><i data-lucide="chevron-right" width="16" height="16"></i></button>
   </div>
+  <?php endif; // end legacy demo articles ?>
 
   <!-- NEWSLETTER -->
   <div class="newsletter">
     <h2>Stay Ahead of the Research</h2>
     <p>Join 12,000+ researchers receiving our monthly digest of peptide science and protocol updates.</p>
-    <div class="newsletter-form">
-      <input type="email" placeholder="your@email.com">
-      <button onclick="showToast('Subscribed! Check your inbox.')">Subscribe</button>
-    </div>
+    <form class="newsletter-form" onsubmit="alluviaBlogSub(event)">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <script>
+    function alluviaBlogSub(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]'),cfg=window.alluviaAjax||{};b.textContent='…';fetch(cfg.ajax_url||'/wp-admin/admin-ajax.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({action:'alluvia_subscribe',nonce:cfg.sub_nonce||'',email:i.value})}).then(function(r){return r.json();}).then(function(res){var msg=(res&&res.data&&res.data.message)||'Subscribed!';if(typeof showToast==='function')showToast(msg);if(res&&res.success)i.value='';b.textContent='Subscribe';}).catch(function(){b.textContent='Subscribe';});}
+    </script>
   </div>
 </div>
 

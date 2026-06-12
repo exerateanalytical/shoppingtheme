@@ -171,20 +171,28 @@ get_header( 'alluvia' );
   <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a><a href="<?php echo esc_url(alluvia_cart_url()); ?>">Cart</a>
 </div>
 
+<?php while ( have_posts() ) : the_post();
+  $a_cats    = get_the_category();
+  $a_catname = ( $a_cats && ! is_wp_error( $a_cats ) ) ? $a_cats[0]->name : 'Research';
+  $a_author  = get_the_author();
+  $a_parts   = preg_split( '/\s+/', trim( $a_author ) );
+  $a_init    = strtoupper( mb_substr( $a_parts[0], 0, 1 ) . ( isset( $a_parts[1] ) ? mb_substr( $a_parts[1], 0, 1 ) : '' ) );
+  $a_read    = max( 1, (int) round( str_word_count( wp_strip_all_tags( get_the_content() ) ) / 200 ) );
+  $a_bio     = get_the_author_meta( 'description' );
+?>
 <div class="post-hero">
   <div class="post-hero-inner">
-    <div class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Home</a><i data-lucide="chevron-right" width="14" height="14"></i><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a><i data-lucide="chevron-right" width="14" height="14"></i><span>BPC-157</span></div>
-    <span class="post-cat-tag"><i data-lucide="flask-conical" width="11" height="11"></i> Research</span>
-    <h1>BPC-157 and the Science of Tissue Repair: What the Research Actually Says</h1>
+    <div class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Home</a><i data-lucide="chevron-right" width="14" height="14"></i><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a><i data-lucide="chevron-right" width="14" height="14"></i><span><?php the_title(); ?></span></div>
+    <span class="post-cat-tag"><i data-lucide="flask-conical" width="11" height="11"></i> <?php echo esc_html( $a_catname ); ?></span>
+    <h1><?php the_title(); ?></h1>
     <div class="post-meta-bar">
       <div class="author-row">
-        <div class="author-avatar">EV</div>
-        <div><div class="author-name">Dr. Elena Voss</div><div class="author-title">MSc Biochemistry · Research Editor</div></div>
+        <div class="author-avatar"><?php echo esc_html( $a_init ); ?></div>
+        <div><div class="author-name"><?php echo esc_html( $a_author ); ?></div><div class="author-title"><?php echo esc_html( $a_bio ? $a_bio : 'Research Editor' ); ?></div></div>
       </div>
       <div class="meta-divider"></div>
-      <span class="meta-item"><i data-lucide="calendar" width="14" height="14"></i> June 8, 2025</span>
-      <span class="meta-item"><i data-lucide="clock" width="14" height="14"></i> 9 min read</span>
-      <span class="meta-item"><i data-lucide="eye" width="14" height="14"></i> 4,812 views</span>
+      <span class="meta-item"><i data-lucide="calendar" width="14" height="14"></i> <?php echo esc_html( get_the_date() ); ?></span>
+      <span class="meta-item"><i data-lucide="clock" width="14" height="14"></i> <?php echo (int) $a_read; ?> min read</span>
     </div>
   </div>
 </div>
@@ -192,6 +200,13 @@ get_header( 'alluvia' );
 <div class="post-layout">
   <!-- ARTICLE -->
   <div class="article">
+    <?php if ( has_post_thumbnail() ) : ?>
+      <div class="article-img"><?php the_post_thumbnail( 'large' ); ?></div>
+    <?php endif; ?>
+
+    <div class="post-prose"><?php the_content(); ?></div>
+
+    <?php if ( false ) : // legacy demo copy retained for design reference, not rendered ?>
     <div class="article-img">
       <i data-lucide="microscope" width="80" height="80" style="color:var(--teal);position:relative;z-index:1"></i>
     </div>
@@ -254,13 +269,23 @@ get_header( 'alluvia' );
     <p>BPC-157's research profile is genuinely compelling — a consistent pattern of findings across multiple tissue types and animal models, with plausible mechanistic explanations. The challenge for the field is translating this preclinical evidence into controlled human trials. Until that work is done, BPC-157 remains a highly promising research compound rather than a validated therapeutic.</p>
     <p>For researchers seeking high-purity BPC-157 for in vitro or in vivo animal studies, Alluvia Peptides' offering is HPLC-verified at ≥99% purity with full COA documentation.</p>
 
+    <?php endif; // end legacy demo copy ?>
+
     <div class="post-footer-bar">
       <div class="tags">
-        <span class="tag">BPC-157</span>
-        <span class="tag">Tissue Repair</span>
-        <span class="tag">Angiogenesis</span>
-        <span class="tag">Medical Peptides</span>
-        <span class="tag">Research</span>
+        <?php
+        $a_tags = get_the_tags();
+        if ( $a_tags && ! is_wp_error( $a_tags ) ) {
+            foreach ( $a_tags as $a_tag ) {
+                echo '<span class="tag">' . esc_html( $a_tag->name ) . '</span>';
+            }
+        } else {
+            $a_cl = get_the_category();
+            if ( $a_cl && ! is_wp_error( $a_cl ) ) {
+                echo '<span class="tag">' . esc_html( $a_cl[0]->name ) . '</span>';
+            }
+        }
+        ?>
       </div>
       <div class="share-row">
         <span class="share-label">Share</span>
@@ -284,6 +309,8 @@ get_header( 'alluvia' );
       </div>
     </div>
   </div>
+
+  <?php endwhile; ?>
 
   <!-- SIDEBAR -->
   <aside class="post-sidebar">
