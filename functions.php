@@ -277,6 +277,65 @@ function alluvia_global_assets() {
 }
 
 /* ═══════════════════════════════════════
+   WOOCOMMERCE: Auto-assign branded category images
+   Sideloads the brand category images in /images/categories/ and sets them as
+   the WooCommerce product-category thumbnails. Runs in admin until all eight
+   categories have an image, then flags itself complete.
+═══════════════════════════════════════ */
+add_action( 'admin_init', 'alluvia_assign_category_images' );
+function alluvia_assign_category_images() {
+    if ( get_option( 'alluvia_cat_images_done' ) ) {
+        return;
+    }
+    if ( ! taxonomy_exists( 'product_cat' ) ) {
+        return; // WooCommerce not active yet
+    }
+
+    $slugs = array(
+        'medical-peptides', 'skincare-peptides', 'collagen-peptides', 'sports-recovery',
+        'weight-loss-metabolic', 'hormone-anti-aging', 'hair-growth-peptides', 'research-peptides',
+    );
+    $dir = trailingslashit( get_template_directory() ) . 'images/categories/';
+
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    $assigned = 0;
+    foreach ( $slugs as $slug ) {
+        $term = get_term_by( 'slug', $slug, 'product_cat' );
+        if ( ! $term ) {
+            continue; // category not imported yet
+        }
+        if ( get_term_meta( $term->term_id, 'thumbnail_id', true ) ) {
+            $assigned++;
+            continue; // already has an image
+        }
+        $file = $dir . $slug . '.png';
+        if ( ! file_exists( $file ) ) {
+            continue;
+        }
+        $upload = wp_upload_bits( $slug . '.png', null, file_get_contents( $file ) );
+        if ( ! empty( $upload['error'] ) ) {
+            continue;
+        }
+        $attach_id = wp_insert_attachment( array(
+            'post_mime_type' => 'image/png',
+            'post_title'     => $term->name . ' category image',
+            'post_status'    => 'inherit',
+        ), $upload['file'] );
+        if ( is_wp_error( $attach_id ) || ! $attach_id ) {
+            continue;
+        }
+        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $upload['file'] ) );
+        update_term_meta( $term->term_id, 'thumbnail_id', $attach_id );
+        $assigned++;
+    }
+
+    if ( $assigned >= count( $slugs ) ) {
+        update_option( 'alluvia_cat_images_done', 1 );
+    }
+}
+
+/* ═══════════════════════════════════════
    WOOCOMMERCE: Cart fragments (AJAX cart count)
 ═══════════════════════════════════════ */
 add_filter( 'woocommerce_add_to_cart_fragments', 'alluvia_cart_fragment' );

@@ -86,6 +86,18 @@ automatically from the `Categories` column.
   `functions.php`), so prices, availability and the product FAQ are eligible for
   Google rich results and AI answer engines — no plugin required.
 
+### Branded category images
+
+Eight on-brand category images live in `images/categories/` (1080×1080 PNG, with
+matching SVG sources). On the first admin page load after the categories exist,
+the theme **automatically assigns each image as its WooCommerce category
+thumbnail** (`alluvia_assign_category_images()` in `functions.php`) — no manual
+upload needed. To regenerate them, run:
+
+```
+python3 generate_category_images.py
+```
+
 To regenerate or edit the catalogue, update `catalogue_data.py` (the curated
 per-peptide dataset) and run:
 
