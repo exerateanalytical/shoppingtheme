@@ -107,6 +107,52 @@ get_header( 'alluvia' );
   </div>
 
   <div class="coa-grid" id="coaGrid">
+    <?php
+    $coa_items = function_exists( 'wc_get_products' )
+        ? wc_get_products( array( 'status' => 'publish', 'limit' => -1, 'orderby' => 'title', 'order' => 'ASC' ) )
+        : array();
+    $coa_map = array(
+        'Medical Peptides' => 'medical', 'Skincare Peptides' => 'skincare',
+        'Sports & Recovery' => 'sports', 'Hormone & Anti-Aging' => 'antiaging',
+        'Weight-Loss & Metabolic' => 'metabolic', 'Research Peptides' => 'research',
+        'Collagen Peptides' => 'collagen', 'Hair Growth Peptides' => 'hair',
+        'Lab Supplies & Accessories' => 'lab',
+    );
+    $coa_rendered = 0;
+    foreach ( $coa_items as $cp ) {
+        if ( ! is_a( $cp, 'WC_Product' ) ) {
+            continue;
+        }
+        $sku = $cp->get_sku();
+        $pdf = function_exists( 'alluvia_coa_url' ) ? alluvia_coa_url( $sku ) : '';
+        if ( ! $pdf ) {
+            continue;
+        }
+        $cats   = wp_get_post_terms( $cp->get_id(), 'product_cat', array( 'fields' => 'names' ) );
+        $cname  = ( ! is_wp_error( $cats ) && $cats ) ? $cats[0] : '';
+        $slug   = isset( $coa_map[ $cname ] ) ? $coa_map[ $cname ] : 'all';
+        $purity = $cp->get_attribute( 'Purity' );
+        $purity = $purity ? $purity : '≥99%';
+        $coa_rendered++;
+        ?>
+        <div class="coa-card" data-cat="<?php echo esc_attr( $slug ); ?>">
+          <div class="coa-card-header">
+            <div class="coa-icon-wrap" style="background:rgba(0,198,179,0.1)"><i data-lucide="file-check" width="24" height="24" style="color:var(--teal)"></i></div>
+            <span class="coa-badge badge-verified"><i data-lucide="check-circle" width="10" height="10"></i> On File</span>
+          </div>
+          <div class="coa-name"><?php echo esc_html( $cp->get_name() ); ?></div>
+          <div class="coa-lot">SKU <?php echo esc_html( $sku ); ?><?php echo $cname ? ' · ' . esc_html( $cname ) : ''; ?></div>
+          <div class="coa-stats">
+            <div class="coa-stat"><div class="coa-stat-val"><?php echo esc_html( $purity ); ?></div><div class="coa-stat-lbl">HPLC Purity</div></div>
+            <div class="coa-stat"><div class="coa-stat-val">PDF</div><div class="coa-stat-lbl">Full Report</div></div>
+          </div>
+          <div class="coa-meta"><i data-lucide="shield-check" width="13" height="13"></i> Alluvia Analytical Services</div>
+          <a href="<?php echo esc_url( $pdf ); ?>" target="_blank" rel="noopener" class="btn-coa"><i data-lucide="download" width="14" height="14"></i> Download COA (PDF)</a>
+        </div>
+        <?php
+    }
+    ?>
+    <?php if ( 0 === $coa_rendered ) : ?>
     <!-- BPC-157 -->
     <div class="coa-card" data-cat="medical">
       <div class="coa-card-header">
@@ -197,6 +243,7 @@ get_header( 'alluvia' );
       <div class="coa-meta"><i data-lucide="calendar" width="13" height="13"></i> Tested March 2025 · Janoshik Analytical</div>
       <a href="#" class="btn-coa" onclick="showToast('COA download would open here.')"><i data-lucide="download" width="14" height="14"></i> Download COA (PDF)</a>
     </div>
+    <?php endif; // end static design fallback when no real COAs are available ?>
   </div>
 </div>
 

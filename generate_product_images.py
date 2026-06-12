@@ -461,7 +461,11 @@ def render_svg_composited(svg, path, accent, quality=90):
 # Catalogue iteration
 # ---------------------------------------------------------------------------
 def make_lot(sku):
-    return f"ALV·{abs(hash(sku)) % 1000000:06d}"
+    # Deterministic, reproducible lot derived from the SKU (hashlib, not the
+    # process-randomised hash()), so vial labels and COAs always agree.
+    import hashlib
+    n = int(hashlib.sha256(sku.encode()).hexdigest(), 16) % 1000000
+    return f"ALV·{n:06d}"
 
 
 def distinct_products():
