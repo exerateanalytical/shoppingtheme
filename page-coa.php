@@ -131,8 +131,8 @@ get_header( 'alluvia' );
         $cats   = wp_get_post_terms( $cp->get_id(), 'product_cat', array( 'fields' => 'names' ) );
         $cname  = ( ! is_wp_error( $cats ) && $cats ) ? $cats[0] : '';
         $slug   = isset( $coa_map[ $cname ] ) ? $coa_map[ $cname ] : 'all';
-        $purity = $cp->get_attribute( 'Purity' );
-        $purity = $purity ? $purity : '≥99%';
+        $pval   = function_exists( 'alluvia_coa_purity' ) ? alluvia_coa_purity( $sku ) : null;
+        $purity = ( null !== $pval ) ? number_format( $pval, 1 ) . '%' : ( $cp->get_attribute( 'Purity' ) ?: '≥99%' );
         $coa_rendered++;
         ?>
         <div class="coa-card" data-cat="<?php echo esc_attr( $slug ); ?>">

@@ -83,6 +83,19 @@ def synth(lot, name):
                 acetate=acetate, peptide_content=peptide_content)
 
 
+def final_results(p):
+    """Final analytical values for a product: deterministic template figures,
+    overridden by any real lab data supplied for this SKU/lot."""
+    r = synth(p["lot"], p["name"])
+    for k in ("purity", "single_imp", "water", "acetate", "peptide_content"):
+        if p.get(k) not in (None, ""):
+            try:
+                r[k] = float(p[k])
+            except (TypeError, ValueError):
+                pass
+    return r
+
+
 def hplc_path(x0, y0, w, h, peaks, n=260):
     base = y0 + h
     pts = []
@@ -124,13 +137,7 @@ def build_coa_svg(p):
     for k in ("seq", "one", "formula", "mw", "cas"):
         if p.get(k):
             ref[k] = p[k]
-    r = synth(lot, name)
-    for k in ("purity", "single_imp", "water", "acetate", "peptide_content"):
-        if p.get(k) not in (None, ""):
-            try:
-                r[k] = float(p[k])
-            except (TypeError, ValueError):
-                pass
+    r = final_results(p)
     tested_by = p.get("tested_by", "")
     doc_no = "COA-" + hashlib.sha256((sku + lot).encode()).hexdigest()[:8].upper()
     one = ref["one"]
@@ -389,17 +396,39 @@ def render_coa_files(p, stem):
                      output_width=W, output_height=H)
 
 
+def _argval(args, flag):
+    if flag in args:
+        i = args.index(flag)
+        if i + 1 < len(args):
+            return args[i + 1]
+    return None
+
+
 def main():
     args = sys.argv[1:]
     sample = "sample" in args
-    data_path = None
-    if "--data" in args:
-        i = args.index("--data")
-        if i + 1 < len(args):
-            data_path = args[i + 1]
-    lab = load_lab_data(data_path) if data_path else {}
+    lab = load_lab_data(_argval(args, "--data")) if "--data" in args else {}
 
     prods = distinct_products()
+
+    # --emit-data <path>: write the full, editable purity/results dataset for
+    # every product (template values merged with any --data overrides), so real
+    # lab numbers can be dropped straight in and re-fed via --data.
+    emit_path = _argval(args, "--emit-data")
+    if emit_path:
+        out = {}
+        for prod in prods:
+            p = prod_to_coa(prod, lab)
+            r = final_results(p)
+            out[prod["sku"]] = dict(
+                name=prod["name"], lot=p["lot"], purity=r["purity"],
+                single_imp=r["single_imp"], water=r["water"], acetate=r["acetate"],
+                peptide_content=r["peptide_content"], mfg=p["mfg"], retest=p["retest"],
+                tested_by=p.get("tested_by", ""),
+            )
+        json.dump(out, open(emit_path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+        print(f"wrote purity/results dataset for {len(out)} products -> {emit_path}")
+        return
 
     if sample:
         os.makedirs("/tmp/coa", exist_ok=True)
@@ -409,13 +438,23 @@ def main():
         return
 
     os.makedirs(COA_DIR, exist_ok=True)
-    real = 0
+    manifest, real = {}, 0
     for i, prod in enumerate(prods, 1):
+        p = prod_to_coa(prod, lab)
         if lab and (prod["sku"] in lab or prod["lot"] in lab):
             real += 1
-        render_coa_files(prod_to_coa(prod, lab), os.path.join(COA_DIR, prod["sku"]))
+        r = final_results(p)
+        manifest[prod["sku"]] = dict(
+            name=prod["name"], lot=p["lot"], purity=r["purity"],
+            mw=REF.get(prod["name"], {}).get("mw", ""), mfg=p["mfg"],
+            tested_by=p.get("tested_by", "") or "Alluvia Analytical Services",
+        )
+        render_coa_files(p, os.path.join(COA_DIR, prod["sku"]))
         if i % 40 == 0:
             print(f"  {i}/{len(prods)}")
+    # theme-readable manifest (purity etc. per SKU) for the COA library + product pages
+    json.dump(manifest, open(os.path.join(COA_DIR, "index.json"), "w", encoding="utf-8"),
+              ensure_ascii=False)
     print(f"COA generated for {len(prods)} products ({real} with real lab data) -> {COA_DIR}")
 
 

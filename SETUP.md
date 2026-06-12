@@ -149,7 +149,15 @@ Regenerate with:
 python3 generate_coa.py                       # all products -> images/coa/<SKU>.jpg + .pdf
 python3 generate_coa.py sample                # a few sample COAs to /tmp/coa
 python3 generate_coa.py --data lab.json      # populate with REAL lab results
+python3 generate_coa.py --emit-data out.json # write the full per-product dataset to edit
 ```
+
+The repo ships `coa-lab-data.json` — the full purity/results dataset for all
+products (RP-HPLC purity, single impurity, water, acetate, net peptide content,
+lot, dates). Generation also writes `images/coa/index.json`, a manifest the
+theme reads to show each product's **HPLC purity** on the COA Library cards and
+the product-page COA tab. To go live with real numbers, edit `coa-lab-data.json`
+(or supply a lab CSV) and run `python3 generate_coa.py --data coa-lab-data.json`.
 
 **Loading real lab data.** Pass `--data <file.json|file.csv>` to override the
 template placeholders with actual results per batch. Key each entry by product
