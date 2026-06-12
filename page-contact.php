@@ -1453,9 +1453,41 @@ get_header( 'alluvia' );
 
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      contactFormWrap.style.display = 'none';
-      formSuccess.classList.add('visible');
-      lucide.createIcons();
+      var btn = contactForm.querySelector('.btn-submit');
+      var fn = (document.getElementById('firstName').value || '').trim();
+      var ln = (document.getElementById('lastName').value || '').trim();
+      var email = (document.getElementById('emailAddr').value || '').trim();
+      var subjSel = document.getElementById('subject');
+      var subject = (subjSel && subjSel.options[subjSel.selectedIndex]) ? subjSel.options[subjSel.selectedIndex].text : '';
+      var message = (document.getElementById('message').value || '').trim();
+      if (!fn || !email || !message) { alert('Please enter your name, email and message.'); return; }
+      var cfg = window.alluviaAjax || {};
+      var orig = btn.innerHTML;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      fetch(cfg.ajax_url || '/wp-admin/admin-ajax.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          action: 'alluvia_contact',
+          nonce: cfg.contact_nonce || '',
+          name: (fn + ' ' + ln).trim(),
+          email: email,
+          subject: subject || 'Contact Form Submission',
+          message: message
+        })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (res && res.success) {
+          contactFormWrap.style.display = 'none';
+          formSuccess.classList.add('visible');
+          lucide.createIcons();
+        } else {
+          btn.disabled = false; btn.innerHTML = orig; lucide.createIcons();
+          alert((res && res.data && res.data.message) || 'Could not send. Please email us directly.');
+        }
+      }).catch(function () {
+        btn.disabled = false; btn.innerHTML = orig; lucide.createIcons();
+        alert('Network error. Please email us directly.');
+      });
     });
 
     // ---- FAQ Accordion ----
