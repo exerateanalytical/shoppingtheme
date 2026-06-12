@@ -184,6 +184,81 @@ function alluvia_seo_meta() {
         echo '<meta property="og:site_name" content="Alluvia Peptides">' . "\n";
         echo '<link rel="canonical" href="' . esc_url( home_url( '/' ) ) . '">' . "\n";
         echo '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Alluvia Peptides","url":"' . esc_url( home_url( '/' ) ) . '","description":"Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, and longevity."}</script>' . "\n";
+    } elseif ( function_exists( 'is_product' ) && is_product() ) {
+        alluvia_product_schema();
+    }
+}
+
+/* ═══════════════════════════════════════
+   PRODUCT SEO: Product + FAQPage JSON-LD
+   Emits structured data on single product pages so search engines and
+   AI answer engines (GEO) can surface price, availability and the FAQ.
+   Yoast (if installed) handles the meta tags via the imported Meta: columns;
+   we only add the rich structured data here.
+═══════════════════════════════════════ */
+function alluvia_product_schema() {
+    global $product;
+    if ( ! $product instanceof WC_Product ) {
+        $product = wc_get_product( get_the_ID() );
+    }
+    if ( ! $product ) {
+        return;
+    }
+
+    $name        = wp_strip_all_tags( $product->get_name() );
+    $description  = wp_strip_all_tags( $product->get_short_description() ?: $product->get_description() );
+    $description  = trim( preg_replace( '/\s+/', ' ', $description ) );
+    $sku         = $product->get_sku();
+    $price       = $product->get_price();
+    $url         = get_permalink( $product->get_id() );
+    $availability = $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock';
+
+    // --- Product schema ---
+    $schema = array(
+        '@context'    => 'https://schema.org/',
+        '@type'       => 'Product',
+        'name'        => $name,
+        'description' => $description,
+        'sku'         => $sku,
+        'brand'       => array( '@type' => 'Brand', 'name' => 'Alluvia Peptides' ),
+        'offers'      => array(
+            '@type'         => 'Offer',
+            'url'           => $url,
+            'priceCurrency' => get_woocommerce_currency(),
+            'price'         => $price,
+            'availability'  => $availability,
+            'seller'        => array( '@type' => 'Organization', 'name' => 'Alluvia Peptides' ),
+        ),
+    );
+    echo '<script type="application/ld+json">' . wp_json_encode( $schema ) . '</script>' . "\n";
+
+    // --- FAQPage schema (parsed from the <h4>Q</h4><p>A</p> blocks in the body) ---
+    if ( preg_match_all( '/<h4[^>]*>(.*?)<\/h4>\s*<p[^>]*>(.*?)<\/p>/is', $product->get_description(), $m, PREG_SET_ORDER ) ) {
+        $faqs = array();
+        foreach ( $m as $pair ) {
+            $faqs[] = array(
+                '@type'          => 'Question',
+                'name'           => wp_strip_all_tags( $pair[1] ),
+                'acceptedAnswer' => array(
+                    '@type' => 'Answer',
+                    'text'  => wp_strip_all_tags( $pair[2] ),
+                ),
+            );
+        }
+        if ( $faqs ) {
+            $faq_schema = array(
+                '@context'   => 'https://schema.org',
+                '@type'      => 'FAQPage',
+                'mainEntity' => $faqs,
+            );
+            echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema ) . '</script>' . "\n";
+        }
+    }
+
+    // --- Fallback meta description when Yoast is not active ---
+    if ( ! defined( 'WPSEO_VERSION' ) && $description ) {
+        echo '<meta name="description" content="' . esc_attr( wp_html_excerpt( $description, 155, '…' ) ) . '">' . "\n";
+        echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
     }
 }
 
@@ -199,6 +274,189 @@ function alluvia_global_assets() {
         'contact_nonce' => wp_create_nonce( 'alluvia_contact_nonce' ),
         'sub_nonce'     => wp_create_nonce( 'alluvia_sub_nonce' ),
     ) );
+}
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Auto-assign branded category images
+   Sideloads the brand category images in /images/categories/ and sets them as
+   the WooCommerce product-category thumbnails. Runs in admin until all eight
+   categories have an image, then flags itself complete.
+═══════════════════════════════════════ */
+add_action( 'admin_init', 'alluvia_assign_category_images' );
+function alluvia_assign_category_images() {
+    if ( get_option( 'alluvia_cat_images_done' ) ) {
+        return;
+    }
+    if ( ! taxonomy_exists( 'product_cat' ) ) {
+        return; // WooCommerce not active yet
+    }
+
+    $slugs = array(
+        'medical-peptides', 'skincare-peptides', 'collagen-peptides', 'sports-recovery',
+        'weight-loss-metabolic', 'hormone-anti-aging', 'hair-growth-peptides', 'research-peptides',
+        'lab-supplies-accessories',
+    );
+    $dir = trailingslashit( get_template_directory() ) . 'images/categories/';
+
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    $assigned = 0;
+    foreach ( $slugs as $slug ) {
+        $term = get_term_by( 'slug', $slug, 'product_cat' );
+        if ( ! $term ) {
+            continue; // category not imported yet
+        }
+        if ( get_term_meta( $term->term_id, 'thumbnail_id', true ) ) {
+            $assigned++;
+            continue; // already has an image
+        }
+        $file = $dir . $slug . '.png';
+        if ( ! file_exists( $file ) ) {
+            continue;
+        }
+        $upload = wp_upload_bits( $slug . '.png', null, file_get_contents( $file ) );
+        if ( ! empty( $upload['error'] ) ) {
+            continue;
+        }
+        $attach_id = wp_insert_attachment( array(
+            'post_mime_type' => 'image/png',
+            'post_title'     => $term->name . ' category image',
+            'post_status'    => 'inherit',
+        ), $upload['file'] );
+        if ( is_wp_error( $attach_id ) || ! $attach_id ) {
+            continue;
+        }
+        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $upload['file'] ) );
+        update_term_meta( $term->term_id, 'thumbnail_id', $attach_id );
+        $assigned++;
+    }
+
+    if ( $assigned >= count( $slugs ) ) {
+        update_option( 'alluvia_cat_images_done', 1 );
+    }
+}
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Auto-assign branded vial images to products
+   Matches images/products/<SKU>.jpg to each product by SKU and sets it as the
+   featured image. Processes in batches across admin loads to avoid timeouts,
+   then flags itself complete.
+═══════════════════════════════════════ */
+add_action( 'admin_init', 'alluvia_assign_product_images' );
+function alluvia_assign_product_images() {
+    if ( get_option( 'alluvia_product_images_done' ) ) {
+        return;
+    }
+    if ( ! function_exists( 'wc_get_product_id_by_sku' ) ) {
+        return; // WooCommerce not active yet
+    }
+
+    $base  = trailingslashit( get_template_directory() );
+    $dir   = $base . 'images/products/';
+    $cdir  = $base . 'images/cartons/';
+    $gdir  = $base . 'images/groups/';
+    $files = glob( $dir . 'AV-*.jpg' );
+    if ( empty( $files ) ) {
+        return;
+    }
+
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    // Import a file as an attachment for $product_id, returning the new ID (0 on failure).
+    $import = function ( $path, $filename, $product_id ) {
+        $upload = wp_upload_bits( $filename, null, file_get_contents( $path ) );
+        if ( ! empty( $upload['error'] ) ) {
+            return 0;
+        }
+        $attach_id = wp_insert_attachment( array(
+            'post_mime_type' => 'image/jpeg',
+            'post_title'     => get_the_title( $product_id ),
+            'post_status'    => 'inherit',
+        ), $upload['file'], $product_id );
+        if ( is_wp_error( $attach_id ) || ! $attach_id ) {
+            return 0;
+        }
+        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $upload['file'] ) );
+        return $attach_id;
+    };
+
+    $batch = 40;       // per admin page load
+    $done  = 0;
+    $pending = 0;
+    foreach ( $files as $file ) {
+        $sku = basename( $file, '.jpg' );
+        $product_id = wc_get_product_id_by_sku( $sku );
+        if ( ! $product_id ) {
+            continue; // product not imported yet
+        }
+        if ( get_post_thumbnail_id( $product_id ) ) {
+            continue; // already has an image
+        }
+        $pending++;
+        if ( $done >= $batch ) {
+            continue; // leave the rest for the next load
+        }
+
+        // Featured image: the vial shot.
+        $attach_id = $import( $file, $sku . '.jpg', $product_id );
+        if ( ! $attach_id ) {
+            continue;
+        }
+        set_post_thumbnail( $product_id, $attach_id );
+
+        // Gallery: carton + vial-and-carton group shot, when present.
+        $gallery = array();
+        foreach ( array( $cdir => '-carton', $gdir => '-group' ) as $gpath => $suffix ) {
+            $gfile = $gpath . $sku . '.jpg';
+            if ( file_exists( $gfile ) ) {
+                $gid = $import( $gfile, $sku . $suffix . '.jpg', $product_id );
+                if ( $gid ) {
+                    $gallery[] = $gid;
+                }
+            }
+        }
+        if ( ! empty( $gallery ) ) {
+            update_post_meta( $product_id, '_product_image_gallery', implode( ',', $gallery ) );
+        }
+        $done++;
+    }
+
+    // Nothing left waiting for an image -> we are finished.
+    if ( $pending <= $done ) {
+        update_option( 'alluvia_product_images_done', 1 );
+    }
+}
+
+/* ═══════════════════════════════════════
+   COMPLIANCE: Research-Use-Only disclaimers
+   A prominent notice on every single-product page, plus a site-wide footer
+   disclaimer on all front-end pages. All products are supplied strictly as
+   research-grade material — not for human or animal consumption.
+═══════════════════════════════════════ */
+
+// Prominent notice directly under the product title/price on product pages.
+add_action( 'woocommerce_single_product_summary', 'alluvia_product_ruo_notice', 25 );
+function alluvia_product_ruo_notice() {
+    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid #c8a96e;border-left:4px solid #c8a96e;background:#fbf7ef;border-radius:8px;font-size:13px;line-height:1.5;color:#3a3320;">'
+        . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:#0d1b2a;margin-bottom:4px;">For Research Use Only</strong>'
+        . 'This product is supplied strictly for laboratory and in-vitro research by qualified researchers. '
+        . 'It is <strong>not for human or animal consumption</strong> and is not a drug, food, cosmetic or dietary supplement.'
+        . '</div>';
+}
+
+// Site-wide footer disclaimer on every front-end page.
+add_action( 'wp_footer', 'alluvia_footer_disclaimer', 5 );
+function alluvia_footer_disclaimer() {
+    if ( is_admin() ) {
+        return;
+    }
+    echo '<div class="alluvia-footer-disclaimer" style="background:#0d1b2a;color:#aeb9c4;font-size:12px;line-height:1.6;text-align:center;padding:18px 20px;border-top:2px solid #c8a96e;">'
+        . '<div style="max-width:960px;margin:0 auto;">'
+        . '<strong style="color:#fff;">Research Use Only &mdash; Not for Human Consumption.</strong> '
+        . 'All products supplied by Alluvia Peptides are sold strictly as research-grade chemicals for in-vitro and laboratory research purposes only. '
+        . 'They are not intended to diagnose, treat, cure or prevent any disease, and are not for human or veterinary use. '
+        . 'By purchasing you confirm you are a qualified researcher or institution and accept full responsibility for safe, lawful handling.'
+        . '</div></div>';
 }
 
 /* ═══════════════════════════════════════
