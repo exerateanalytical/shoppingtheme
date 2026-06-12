@@ -65,6 +65,24 @@ if ( ! function_exists( 'alluvia_account_url' ) ) {
         return home_url( '/my-account/' );
     }
 }
+/**
+ * Brand logo mark + wordmark used in nav and footer.
+ * Returns the inner markup for an <a class="nav-logo"> link.
+ */
+if ( ! function_exists( 'alluvia_logo_svg' ) ) {
+    function alluvia_logo_svg() {
+        return '<svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">'
+            . '<polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/>'
+            . '<circle cx="17" cy="10" r="2.2" fill="#00c6b3"/>'
+            . '<circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/>'
+            . '<circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/>'
+            . '<line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>'
+            . '<line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>'
+            . '<line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/>'
+            . '</svg>'
+            . '<div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div>';
+    }
+}
 
 /* ═══════════════════════════════════════
    WIDGETS & INIT
@@ -140,9 +158,9 @@ function alluvia_handle_contact() {
         "Reply-To: {$name} <{$email}>",
     );
 
-    $body = "<p><strong>From:</strong> {$name} ({$email})</p>
-             <p><strong>Subject:</strong> {$subject}</p>
-             <p><strong>Message:</strong><br>" . nl2br( $message ) . "</p>";
+    $body = '<p><strong>From:</strong> ' . esc_html( $name ) . ' (' . esc_html( $email ) . ')</p>'
+          . '<p><strong>Subject:</strong> ' . esc_html( $subject ) . '</p>'
+          . '<p><strong>Message:</strong><br>' . nl2br( esc_html( $message ) ) . '</p>';
 
     $sent = wp_mail( $to, "Alluvia Contact: {$subject}", $body, $headers );
 
