@@ -351,13 +351,34 @@ function alluvia_assign_product_images() {
         return; // WooCommerce not active yet
     }
 
-    $dir = trailingslashit( get_template_directory() ) . 'images/products/';
+    $base  = trailingslashit( get_template_directory() );
+    $dir   = $base . 'images/products/';
+    $cdir  = $base . 'images/cartons/';
+    $gdir  = $base . 'images/groups/';
     $files = glob( $dir . 'AV-*.jpg' );
     if ( empty( $files ) ) {
         return;
     }
 
     require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    // Import a file as an attachment for $product_id, returning the new ID (0 on failure).
+    $import = function ( $path, $filename, $product_id ) {
+        $upload = wp_upload_bits( $filename, null, file_get_contents( $path ) );
+        if ( ! empty( $upload['error'] ) ) {
+            return 0;
+        }
+        $attach_id = wp_insert_attachment( array(
+            'post_mime_type' => 'image/jpeg',
+            'post_title'     => get_the_title( $product_id ),
+            'post_status'    => 'inherit',
+        ), $upload['file'], $product_id );
+        if ( is_wp_error( $attach_id ) || ! $attach_id ) {
+            return 0;
+        }
+        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $upload['file'] ) );
+        return $attach_id;
+    };
 
     $batch = 40;       // per admin page load
     $done  = 0;
@@ -376,20 +397,27 @@ function alluvia_assign_product_images() {
             continue; // leave the rest for the next load
         }
 
-        $upload = wp_upload_bits( $sku . '.jpg', null, file_get_contents( $file ) );
-        if ( ! empty( $upload['error'] ) ) {
+        // Featured image: the vial shot.
+        $attach_id = $import( $file, $sku . '.jpg', $product_id );
+        if ( ! $attach_id ) {
             continue;
         }
-        $attach_id = wp_insert_attachment( array(
-            'post_mime_type' => 'image/jpeg',
-            'post_title'     => get_the_title( $product_id ),
-            'post_status'    => 'inherit',
-        ), $upload['file'], $product_id );
-        if ( is_wp_error( $attach_id ) || ! $attach_id ) {
-            continue;
-        }
-        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $upload['file'] ) );
         set_post_thumbnail( $product_id, $attach_id );
+
+        // Gallery: carton + vial-and-carton group shot, when present.
+        $gallery = array();
+        foreach ( array( $cdir => '-carton', $gdir => '-group' ) as $gpath => $suffix ) {
+            $gfile = $gpath . $sku . '.jpg';
+            if ( file_exists( $gfile ) ) {
+                $gid = $import( $gfile, $sku . $suffix . '.jpg', $product_id );
+                if ( $gid ) {
+                    $gallery[] = $gid;
+                }
+            }
+        }
+        if ( ! empty( $gallery ) ) {
+            update_post_meta( $product_id, '_product_image_gallery', implode( ',', $gallery ) );
+        }
         $done++;
     }
 
