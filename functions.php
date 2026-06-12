@@ -306,6 +306,64 @@ function alluvia_global_assets() {
         'ajax_url'      => admin_url( 'admin-ajax.php' ),
         'contact_nonce' => wp_create_nonce( 'alluvia_contact_nonce' ),
         'sub_nonce'     => wp_create_nonce( 'alluvia_sub_nonce' ),
+        'cart_nonce'    => wp_create_nonce( 'alluvia_cart_nonce' ),
+        'cart_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/cart/' ),
+    ) );
+}
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Custom AJAX cart engine
+   Backs the bespoke add-to-cart / qty-stepper / remove interactions on the
+   Alluvia commerce templates. Uses WooCommerce's own cart object and fragment
+   system so totals, taxes and sessions stay authoritative.
+═══════════════════════════════════════ */
+add_action( 'wp_ajax_alluvia_add_to_cart', 'alluvia_ajax_add_to_cart' );
+add_action( 'wp_ajax_nopriv_alluvia_add_to_cart', 'alluvia_ajax_add_to_cart' );
+function alluvia_ajax_add_to_cart() {
+    check_ajax_referer( 'alluvia_cart_nonce', 'nonce' );
+    if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+        wp_send_json_error( array( 'message' => 'Cart unavailable.' ) );
+    }
+    $product_id = absint( $_POST['product_id'] ?? 0 );
+    $quantity   = max( 1, absint( $_POST['quantity'] ?? 1 ) );
+    if ( ! $product_id || ! wc_get_product( $product_id ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid product.' ) );
+    }
+    $added = WC()->cart->add_to_cart( $product_id, $quantity );
+    if ( ! $added ) {
+        $notice = function_exists( 'wc_get_notices' ) ? wc_get_notices( 'error' ) : array();
+        $msg    = ! empty( $notice ) ? wp_strip_all_tags( $notice[0]['notice'] ) : 'Could not add to cart.';
+        if ( function_exists( 'wc_clear_notices' ) ) {
+            wc_clear_notices();
+        }
+        wp_send_json_error( array( 'message' => $msg ) );
+    }
+    wp_send_json_success( array(
+        'message' => 'Added to cart.',
+        'count'   => WC()->cart->get_cart_contents_count(),
+        'subtotal'=> WC()->cart->get_cart_subtotal(),
+    ) );
+}
+
+add_action( 'wp_ajax_alluvia_update_cart', 'alluvia_ajax_update_cart' );
+add_action( 'wp_ajax_nopriv_alluvia_update_cart', 'alluvia_ajax_update_cart' );
+function alluvia_ajax_update_cart() {
+    check_ajax_referer( 'alluvia_cart_nonce', 'nonce' );
+    if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+        wp_send_json_error( array( 'message' => 'Cart unavailable.' ) );
+    }
+    $key      = sanitize_text_field( $_POST['cart_item_key'] ?? '' );
+    $quantity = absint( $_POST['quantity'] ?? 0 );
+    if ( ! $key || ! isset( WC()->cart->get_cart()[ $key ] ) ) {
+        wp_send_json_error( array( 'message' => 'Item not found.' ) );
+    }
+    WC()->cart->set_quantity( $key, $quantity, true ); // 0 removes the line
+    WC()->cart->calculate_totals();
+    wp_send_json_success( array(
+        'count'    => WC()->cart->get_cart_contents_count(),
+        'subtotal' => WC()->cart->get_cart_subtotal(),
+        'total'    => WC()->cart->get_cart_total(),
+        'removed'  => 0 === $quantity,
     ) );
 }
 
