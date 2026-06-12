@@ -131,6 +131,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem}
 .footer-legal a:hover{color:var(--teal)}
 
 @media(max-width:1000px){.post-layout{grid-template-columns:1fr}.post-sidebar{position:static}.related-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.post-layout{grid-template-columns:1fr}.post-sidebar{display:none}.nav-links{display:none}.nav-hamburger{display:flex}}
 @media(max-width:640px){.nav-links{display:none}.nav-hamburger{display:flex}.post-meta-bar{gap:1rem}.meta-divider{display:none}.related-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
 </style>
 <?php

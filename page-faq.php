@@ -55,7 +55,22 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
 .footer-inner{max-width:1200px;margin:0 auto}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)}
 .footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}.footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none}.footer-legal a:hover{color:var(--teal)}
-@media(max-width:640px){.nav-links{display:none}.nav-hamburger{display:flex}}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .nav-right .nav-cart-btn span:not(.cart-count){display:none}
+}
+@media(max-width:640px){
+  .nav-hamburger{display:flex}
+  .faq-wrap{padding:2.5rem 1.25rem 4rem}
+  .page-hero{padding:5rem 1.25rem 2.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .footer-legal{gap:1rem}
+  .help-actions{flex-direction:column;align-items:center}
+}
+@media(max-width:400px){
+  .page-hero h1{font-size:clamp(28px,8vw,40px)}
+}
 </style>
 <?php
 }, 20 );

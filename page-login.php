@@ -58,7 +58,18 @@ html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(-
 .strength-fill{height:100%;border-radius:4px;width:0;transition:width .3s,background .3s}
 .strength-label{font-size:0.7rem;color:var(--text-light);margin-top:0.25rem;font-family:'Space Grotesk',sans-serif}
 @media(max-width:800px){.login-wrap{grid-template-columns:1fr}.login-left{display:none}}
-</style>
+@media(max-width:900px){
+  .login-grid,.register-panel,.login-panel{grid-template-columns:1fr}
+  .login-panel-right{display:none}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+}
+@media(max-width:640px){
+  .nav-hamburger{display:flex}
+  .login-wrap,.register-wrap{padding:2rem 1.25rem}
+  .form-actions{flex-direction:column}
+  .btn-full{width:100%}
+}</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );

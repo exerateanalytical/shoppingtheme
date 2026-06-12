@@ -45,6 +45,7 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
 .footer-inner{max-width:1200px;margin:0 auto}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)}
 .footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}.footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none}.footer-legal a:hover{color:var(--teal)}
+@media(max-width:900px){.nav-links{display:none}.nav-hamburger{display:flex}}
 @media(max-width:640px){.nav-links{display:none}.nav-hamburger{display:flex}}
 </style>
 <?php
