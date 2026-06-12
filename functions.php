@@ -309,7 +309,33 @@ function alluvia_global_assets() {
         'cart_nonce'    => wp_create_nonce( 'alluvia_cart_nonce' ),
         'cart_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/cart/' ),
     ) );
+
+    // Brand commerce styling + quantity-stepper enhancement on WooCommerce pages.
+    $is_woo = ( function_exists( 'is_woocommerce' ) && is_woocommerce() )
+        || ( function_exists( 'is_cart' ) && is_cart() )
+        || ( function_exists( 'is_checkout' ) && is_checkout() )
+        || ( function_exists( 'is_account_page' ) && is_account_page() );
+    if ( $is_woo ) {
+        $base = get_stylesheet_directory_uri();
+        $ver  = wp_get_theme()->get( 'Version' );
+        wp_enqueue_style( 'alluvia-commerce', $base . '/assets/css/alluvia-commerce.css', array(), $ver );
+        wp_enqueue_script( 'alluvia-commerce', $base . '/assets/js/alluvia-commerce.js', array(), $ver, true );
+    }
 }
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Loop card hooks
+   Our woocommerce/content-product.php renders its own product link and add-to-cart
+   button inside a branded card, so remove WooCommerce's default link-wrap and
+   duplicate add-to-cart callbacks to avoid double output. Set a clean per-page count.
+═══════════════════════════════════════ */
+add_action( 'init', 'alluvia_woo_loop_hooks' );
+function alluvia_woo_loop_hooks() {
+    remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+}
+add_filter( 'loop_shop_per_page', function () { return 24; }, 20 );
 
 /* ═══════════════════════════════════════
    WOOCOMMERCE: Custom AJAX cart engine
