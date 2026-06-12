@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alluvia — Category Icon Set</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
+  --teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;
+  --coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;
+  --mint:#78c9a2;--sky:#7fb8d4;--pearl:#f4f2ee;--white:#fff;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-ui:'Space Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--navy);font-family:var(--font-ui);color:var(--white);padding:60px 40px;min-height:100vh}
+h1{font-family:var(--font-display);font-size:48px;font-weight:300;color:var(--white);margin-bottom:8px}
+h1 em{color:var(--teal);font-style:italic}
+.subtitle{font-size:14px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:60px}
+
+/* ICON GRID */
+.icon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1100px;margin:0 auto}
+
+.icon-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:36px 28px 28px;
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  cursor:default;
+  position:relative;overflow:hidden;
+}
+.icon-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--cat-color),transparent 60%);
+  opacity:0;transition:opacity .45s;
+}
+.icon-card:hover::before{opacity:.08}
+.icon-card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+
+.icon-wrap{
+  width:80px;height:80px;border-radius:18px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  color:rgba(255,255,255,.8);
+  position:relative;z-index:1;
+  flex-shrink:0;
+}
+.icon-card:hover .icon-wrap{
+  background:var(--cat-color);
+  border-color:var(--cat-color);
+  color:var(--navy);
+  box-shadow:0 0 30px rgba(255,255,255,.15);
+  transform:scale(1.08) rotate(-4deg);
+}
+.icon-wrap svg{width:44px;height:44px}
+
+.cat-num{
+  position:absolute;top:16px;right:20px;
+  font-family:var(--font-display);font-size:52px;font-weight:600;
+  color:rgba(255,255,255,.04);line-height:1;user-select:none;
+  transition:color .4s;z-index:0;
+}
+.icon-card:hover .cat-num{color:rgba(255,255,255,.07)}
+.cat-label{font-size:13px;font-weight:700;color:var(--white);text-align:center;line-height:1.3;position:relative;z-index:1}
+.cat-sub{font-size:11px;font-weight:400;color:rgba(255,255,255,.35);text-align:center;line-height:1.55;position:relative;z-index:1;letter-spacing:.02em}
+.cat-peptides{font-size:10px;color:var(--cat-color);font-weight:600;letter-spacing:.1em;text-transform:uppercase;position:relative;z-index:1;margin-top:4px}
+
+/* SIZES SHOWCASE */
+.sizes-section{margin-top:80px;max-width:1100px;margin-left:auto;margin-right:auto}
+.sizes-section h2{font-family:var(--font-display);font-size:28px;font-weight:300;margin-bottom:32px;color:var(--white)}
+.sizes-row{display:flex;align-items:center;gap:32px;flex-wrap:wrap;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px 32px}
+.size-demo{display:flex;flex-direction:column;align-items:center;gap:10px}
+.size-demo svg{color:var(--teal)}
+.size-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase}
+
+/* DARK + LIGHT compare */
+.compare-section{margin-top:60px;max-width:1100px;margin-left:auto;margin-right:auto}
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.compare-panel{border-radius:16px;padding:40px 32px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.compare-panel.dark{background:var(--navy-mid);border:1px solid rgba(255,255,255,.08)}
+.compare-panel.light{background:var(--pearl);border:1px solid #e0ddd6}
+.compare-panel.light .icon-swatch{color:#0d1b2a}
+.icon-swatch{width:52px;height:52px;display:flex;align-items:center;justify-content:center}
+.icon-swatch svg{width:36px;height:36px}
+
+@media(max-width:900px){.icon-grid{grid-template-columns:repeat(2,1fr)}.compare-row{grid-template-columns:1fr}}
+@media(max-width:500px){.icon-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1>Alluvia <em>Category</em> Icons</h1>
+<p class="subtitle">8 custom SVG icons · pharmaceutical-grade brand identity</p>
+
+<div class="icon-grid">
+
+  <!-- 01 Medical Peptides -->
+  <div class="icon-card" style="--cat-color:#00c6b3">
+    <span class="cat-num">01</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Cross arms -->
+        <rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/>
+        <rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/>
+        <!-- Peptide nodes at each arm tip -->
+        <circle cx="32" cy="11.5" r="4" fill="currentColor"/>
+        <circle cx="32" cy="52.5" r="4" fill="currentColor"/>
+        <circle cx="11.5" cy="32" r="4" fill="currentColor"/>
+        <circle cx="52.5" cy="32" r="4" fill="currentColor"/>
+        <!-- Center glow + node -->
+        <circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity="0.15"/>
+        <circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="cat-label">Medical Peptides</div>
+    <div class="cat-sub">Therapeutic healing &amp; immune modulation</div>
+    <div class="cat-peptides">BPC-157 · TB-500</div>
+  </div>
+
+  <!-- 02 Skincare Peptides -->
+  <div class="icon-card" style="--cat-color:#c8a96e">
+    <span class="cat-num">02</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Skin layers (three curved waves) -->
+        <path d="M 8 20 C 18 14 26 26 40 20 C 48 16 54 20 56 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M 8 32 C 18 26 26 38 40 32 C 48 28 54 32 56 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".75"/>
+        <path d="M 8 44 C 18 38 26 50 40 44 C 48 40 54 44 56 44" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".5"/>
+        <!-- Peptide molecule descending through layers -->
+        <circle cx="30" cy="12" r="4" fill="currentColor"/>
+        <line x1="30" y1="16" x2="30" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="30" cy="23" r="3" fill="currentColor" fill-opacity=".7"/>
+        <line x1="30" y1="26" x2="30" y2="32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="30" cy="35" r="2.5" fill="currentColor" fill-opacity=".5"/>
+        <line x1="30" y1="37.5" x2="30" y2="43" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2.5 2"/>
+        <circle cx="30" cy="46" r="2" fill="currentColor" fill-opacity=".3"/>
+      </svg>
+    </div>
+    <div class="cat-label">Skincare Peptides</div>
+    <div class="cat-sub">Collagen synthesis &amp; cellular repair</div>
+    <div class="cat-peptides">GHK-Cu · Matrixyl 3000</div>
+  </div>
+
+  <!-- 03 Collagen Peptides -->
+  <div class="icon-card" style="--cat-color:#7fb8d4">
+    <span class="cat-num">03</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Triple helix: three interweaving S-curves -->
+        <!-- Strand 1 (full opacity) -->
+        <path d="M 28 6 C 28 14 44 14 44 22 C 44 30 28 30 28 38 C 28 46 44 46 44 54 C 44 60 36 62 32 58" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Strand 2 (mid) -->
+        <path d="M 36 10 C 36 18 20 18 20 26 C 20 34 36 34 36 42 C 36 50 20 50 20 58" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".65"/>
+        <!-- Strand 3 (subtle) -->
+        <path d="M 32 8 C 32 16 46 20 44 28 C 42 36 26 36 26 44 C 26 52 40 52 38 58" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".35"/>
+        <!-- Binding nodes at helix crossings -->
+        <circle cx="36" cy="22" r="3" fill="currentColor"/>
+        <circle cx="28" cy="38" r="2.5" fill="currentColor" fill-opacity=".7"/>
+        <circle cx="36" cy="46" r="2" fill="currentColor" fill-opacity=".5"/>
+      </svg>
+    </div>
+    <div class="cat-label">Collagen Peptides</div>
+    <div class="cat-sub">Joint integrity &amp; connective tissue</div>
+    <div class="cat-peptides">Hydrolysed Collagen</div>
+  </div>
+
+  <!-- 04 Sports & Recovery -->
+  <div class="icon-card" style="--cat-color:#e07b54">
+    <span class="cat-num">04</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hexagon (strength/structure) -->
+        <polygon points="32,5 54,18 54,43 32,56 10,43 10,18" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07"/>
+        <!-- Lightning bolt (energy/performance) -->
+        <path d="M 37 14 L 26 34 L 33 34 L 27 50 L 42 28 L 35 28 Z" fill="currentColor" stroke="none"/>
+        <!-- Peptide nodes at 3 hexagon vertices -->
+        <circle cx="32" cy="5" r="3" fill="currentColor"/>
+        <circle cx="54" cy="18" r="3" fill="currentColor" fill-opacity=".5"/>
+        <circle cx="10" cy="43" r="3" fill="currentColor" fill-opacity=".5"/>
+      </svg>
+    </div>
+    <div class="cat-label">Sports &amp; Recovery</div>
+    <div class="cat-sub">Muscle repair &amp; performance</div>
+    <div class="cat-peptides">BPC-157 · TB-500 Stack</div>
+  </div>
+
+  <!-- 05 Weight-Loss & Metabolic -->
+  <div class="icon-card" style="--cat-color:#9b72cf">
+    <span class="cat-num">05</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Metabolic cycle arrow (circular) -->
+        <path d="M 32 10 A 22 22 0 1 1 54 32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Arrow tip -->
+        <path d="M 47 22 L 54 32 L 44 34" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Center molecular ring (3-atom cluster = metabolism) -->
+        <circle cx="32" cy="32" r="8" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.08"/>
+        <circle cx="32" cy="26" r="3" fill="currentColor"/>
+        <circle cx="37.2" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/>
+        <circle cx="26.8" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/>
+        <line x1="32" y1="29" x2="35.5" y2="32.5" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="32" y1="29" x2="28.5" y2="32.5" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="35" y1="34.5" x2="29" y2="34.5" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="cat-label">Weight-Loss &amp; Metabolic</div>
+    <div class="cat-sub">Fat oxidation &amp; insulin sensitivity</div>
+    <div class="cat-peptides">Semaglutide · AOD-9604</div>
+  </div>
+
+  <!-- 06 Hormone & Anti-Aging -->
+  <div class="icon-card" style="--cat-color:#c8a96e">
+    <span class="cat-num">06</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hourglass silhouette -->
+        <path d="M 14 8 L 50 8 L 34 30 L 50 56 L 14 56 L 30 30 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07" stroke-linejoin="round"/>
+        <!-- Sand pinch node -->
+        <circle cx="32" cy="31" r="3.5" fill="currentColor"/>
+        <!-- DNA rungs in upper chamber -->
+        <path d="M 23 15 Q 32 19 41 15" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M 21 22 Q 32 26 43 22" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".7"/>
+        <!-- DNA rungs in lower chamber -->
+        <path d="M 21 40 Q 32 44 43 40" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".7"/>
+        <path d="M 23 48 Q 32 52 41 48" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="cat-label">Hormone &amp; Anti-Aging</div>
+    <div class="cat-sub">GH secretion &amp; cellular regeneration</div>
+    <div class="cat-peptides">Epithalon · CJC-1295 · Ipamorelin</div>
+  </div>
+
+  <!-- 07 Hair Growth Peptides -->
+  <div class="icon-card" style="--cat-color:#78c9a2">
+    <span class="cat-num">07</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Follicle bulb base -->
+        <ellipse cx="32" cy="54" rx="16" ry="7" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+        <!-- Root attachment node -->
+        <circle cx="32" cy="54" r="3" fill="currentColor" fill-opacity=".5"/>
+        <!-- Left strand (subtle) -->
+        <path d="M 22 54 C 22 46 15 38 19 26 C 21 18 25 14 24 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/>
+        <!-- Centre strand (primary) -->
+        <path d="M 32 54 C 32 44 25 36 28 24 C 30 15 33 10 32 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Right strand (subtle) -->
+        <path d="M 42 54 C 42 46 49 38 45 26 C 43 18 39 14 40 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/>
+        <!-- Peptide activation nodes on centre strand -->
+        <circle cx="30" cy="34" r="3" fill="currentColor"/>
+        <circle cx="31" cy="20" r="2.5" fill="currentColor" fill-opacity=".7"/>
+        <circle cx="32" cy="10" r="2" fill="currentColor" fill-opacity=".5"/>
+      </svg>
+    </div>
+    <div class="cat-label">Hair Growth Peptides</div>
+    <div class="cat-sub">Anagen phase extension &amp; follicle activation</div>
+    <div class="cat-peptides">PTD-DBM</div>
+  </div>
+
+  <!-- 08 Research Peptides -->
+  <div class="icon-card" style="--cat-color:#00c6b3">
+    <span class="cat-num">08</span>
+    <div class="icon-wrap">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Erlenmeyer flask body -->
+        <path d="M 24 8 L 24 25 L 10 48 C 8 53 12 57 17 57 L 47 57 C 52 57 56 53 54 48 L 40 25 L 40 8 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07"/>
+        <!-- Flask top rim -->
+        <line x1="20" y1="8" x2="44" y2="8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Molecular chain in flask bottom -->
+        <circle cx="25" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/>
+        <line x1="28.5" y1="47" x2="35.5" y2="47" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="39" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/>
+        <!-- Rising discovery molecules -->
+        <circle cx="28" cy="38" r="2.5" fill="currentColor" fill-opacity=".75"/>
+        <line x1="30" y1="36.5" x2="34" y2="31" stroke="currentColor" stroke-width="1.5" stroke-opacity=".5"/>
+        <circle cx="36" cy="29" r="3" fill="currentColor"/>
+        <line x1="35" y1="26.5" x2="31" y2="20" stroke="currentColor" stroke-width="1.5" stroke-opacity=".4"/>
+        <circle cx="30" cy="17" r="2" fill="currentColor" fill-opacity=".5"/>
+      </svg>
+    </div>
+    <div class="cat-label">Research Peptides</div>
+    <div class="cat-sub">High-purity standards with full COA</div>
+    <div class="cat-peptides">Selank · Epithalon · Custom</div>
+  </div>
+
+</div>
+
+
+<!-- SIZE SHOWCASE -->
+<div class="sizes-section">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:32px">Icon at multiple sizes</h2>
+  <div class="sizes-row">
+    <!-- Medical at 16 / 24 / 36 / 52 / 72 -->
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="16" height="16" style="color:var(--teal)">
+        <rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity=".15"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+      </svg>
+      <span class="size-label">16px</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="24" height="24" style="color:var(--teal)">
+        <rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity=".15"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+      </svg>
+      <span class="size-label">24px</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--teal)">
+        <rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity=".15"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+      </svg>
+      <span class="size-label">36px</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="52" height="52" style="color:var(--teal)">
+        <rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity=".15"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+      </svg>
+      <span class="size-label">52px</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="72" height="72" style="color:var(--teal)">
+        <rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity=".15"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+      </svg>
+      <span class="size-label">72px</span>
+    </div>
+    <div style="border-left:1px solid rgba(255,255,255,.08);margin:0 8px;height:80px"></div>
+    <!-- All 8 at 36px -->
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--teal)"><rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/></svg>
+      <span class="size-label">Med</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--gold)"><path d="M 8 20 C 18 14 26 26 40 20 C 48 16 54 20 56 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M 8 32 C 18 26 26 38 40 32 C 48 28 54 32 56 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".7"/><path d="M 8 44 C 18 38 26 50 40 44 C 48 40 54 44 56 44" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".5"/><circle cx="30" cy="12" r="4" fill="currentColor"/><circle cx="30" cy="23" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="30" cy="35" r="2.5" fill="currentColor" fill-opacity=".5"/></svg>
+      <span class="size-label">Skin</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--sky)"><path d="M 28 6 C 28 14 44 14 44 22 C 44 30 28 30 28 38 C 28 46 44 46 44 54" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 36 10 C 36 18 20 18 20 26 C 20 34 36 34 36 42 C 36 50 20 50 20 58" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".65"/><path d="M 32 8 C 32 16 46 20 44 28 C 42 36 26 36 26 44 C 26 52 40 52 38 58" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".35"/><circle cx="36" cy="22" r="3" fill="currentColor"/></svg>
+      <span class="size-label">Col</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--orange)"><polygon points="32,5 54,18 54,43 32,56 10,43 10,18" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07"/><path d="M 37 14 L 26 34 L 33 34 L 27 50 L 42 28 L 35 28 Z" fill="currentColor"/></svg>
+      <span class="size-label">Sport</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--purple)"><path d="M 32 10 A 22 22 0 1 1 54 32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 47 22 L 54 32 L 44 34" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="26" r="3" fill="currentColor"/><circle cx="37.2" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="26.8" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/></svg>
+      <span class="size-label">Meta</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--gold)"><path d="M 14 8 L 50 8 L 34 30 L 50 56 L 14 56 L 30 30 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07" stroke-linejoin="round"/><circle cx="32" cy="31" r="3.5" fill="currentColor"/><path d="M 23 15 Q 32 19 41 15" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M 21 22 Q 32 26 43 22" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".7"/><path d="M 23 48 Q 32 52 41 48" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      <span class="size-label">Anti-A</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--mint)"><ellipse cx="32" cy="54" rx="16" ry="7" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/><path d="M 32 54 C 32 44 25 36 28 24 C 30 15 33 10 32 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 22 54 C 22 46 15 38 19 26 C 21 18 25 14 24 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><path d="M 42 54 C 42 46 49 38 45 26 C 43 18 39 14 40 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><circle cx="30" cy="34" r="3" fill="currentColor"/></svg>
+      <span class="size-label">Hair</span>
+    </div>
+    <div class="size-demo">
+      <svg viewBox="0 0 64 64" fill="none" width="36" height="36" style="color:var(--teal)"><path d="M 24 8 L 24 25 L 10 48 C 8 53 12 57 17 57 L 47 57 C 52 57 56 53 54 48 L 40 25 L 40 8 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07"/><line x1="20" y1="8" x2="44" y2="8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="25" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="39" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="36" cy="29" r="3" fill="currentColor"/></svg>
+      <span class="size-label">Res</span>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHT BG COMPARE -->
+<div class="compare-section">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:24px">On light backgrounds</h2>
+  <div class="compare-row">
+    <div class="compare-panel dark">
+      <div class="icon-swatch" style="color:var(--teal)"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:var(--gold)"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 8 20 C 18 14 26 26 40 20 C 48 16 54 20 56 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M 8 32 C 18 26 26 38 40 32 C 48 28 54 32 56 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".7"/><path d="M 8 44 C 18 38 26 50 40 44 C 48 40 54 44 56 44" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".5"/><circle cx="30" cy="12" r="4" fill="currentColor"/><circle cx="30" cy="23" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="30" cy="35" r="2.5" fill="currentColor" fill-opacity=".5"/></svg></div>
+      <div class="icon-swatch" style="color:#7fb8d4"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 28 6 C 28 14 44 14 44 22 C 44 30 28 30 28 38 C 28 46 44 46 44 54" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 36 10 C 36 18 20 18 20 26 C 20 34 36 34 36 42 C 36 50 20 50 20 58" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".65"/><circle cx="36" cy="22" r="3" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#e07b54"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><polygon points="32,5 54,18 54,43 32,56 10,43 10,18" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.15"/><path d="M 37 14 L 26 34 L 33 34 L 27 50 L 42 28 L 35 28 Z" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#9b72cf"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 32 10 A 22 22 0 1 1 54 32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 47 22 L 54 32 L 44 34" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="26" r="3" fill="currentColor"/><circle cx="37.2" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="26.8" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/></svg></div>
+      <div class="icon-swatch" style="color:#c8a96e"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 14 8 L 50 8 L 34 30 L 50 56 L 14 56 L 30 30 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.12" stroke-linejoin="round"/><circle cx="32" cy="31" r="3.5" fill="currentColor"/><path d="M 23 15 Q 32 19 41 15" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M 23 48 Q 32 52 41 48" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="icon-swatch" style="color:#78c9a2"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><ellipse cx="32" cy="54" rx="16" ry="7" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/><path d="M 32 54 C 32 44 25 36 28 24 C 30 15 33 10 32 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 22 54 C 22 46 15 38 19 26 C 21 18 25 14 24 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><path d="M 42 54 C 42 46 49 38 45 26 C 43 18 39 14 40 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><circle cx="30" cy="34" r="3" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#00c6b3"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 24 8 L 24 25 L 10 48 C 8 53 12 57 17 57 L 47 57 C 52 57 56 53 54 48 L 40 25 L 40 8 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/><line x1="20" y1="8" x2="44" y2="8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="25" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="39" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="36" cy="29" r="3" fill="currentColor"/></svg></div>
+      <span style="font-size:12px;color:rgba(255,255,255,.3);margin-left:8px">Dark background</span>
+    </div>
+    <div class="compare-panel light">
+      <div class="icon-swatch" style="color:#00a899"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#9e7c3e"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 8 20 C 18 14 26 26 40 20 C 48 16 54 20 56 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M 8 32 C 18 26 26 38 40 32 C 48 28 54 32 56 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".7"/><path d="M 8 44 C 18 38 26 50 40 44 C 48 40 54 44 56 44" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".5"/><circle cx="30" cy="12" r="4" fill="currentColor"/><circle cx="30" cy="23" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="30" cy="35" r="2.5" fill="currentColor" fill-opacity=".5"/></svg></div>
+      <div class="icon-swatch" style="color:#4a90b0"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 28 6 C 28 14 44 14 44 22 C 44 30 28 30 28 38 C 28 46 44 46 44 54" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 36 10 C 36 18 20 18 20 26 C 20 34 36 34 36 42 C 36 50 20 50 20 58" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".65"/><circle cx="36" cy="22" r="3" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#c05e35"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><polygon points="32,5 54,18 54,43 32,56 10,43 10,18" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/><path d="M 37 14 L 26 34 L 33 34 L 27 50 L 42 28 L 35 28 Z" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#7a52af"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 32 10 A 22 22 0 1 1 54 32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 47 22 L 54 32 L 44 34" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="26" r="3" fill="currentColor"/><circle cx="37.2" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="26.8" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/></svg></div>
+      <div class="icon-swatch" style="color:#9e7c3e"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 14 8 L 50 8 L 34 30 L 50 56 L 14 56 L 30 30 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.08" stroke-linejoin="round"/><circle cx="32" cy="31" r="3.5" fill="currentColor"/><path d="M 23 15 Q 32 19 41 15" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M 23 48 Q 32 52 41 48" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="icon-swatch" style="color:#3a9a6e"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><ellipse cx="32" cy="54" rx="16" ry="7" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/><path d="M 32 54 C 32 44 25 36 28 24 C 30 15 33 10 32 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 22 54 C 22 46 15 38 19 26 C 21 18 25 14 24 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><path d="M 42 54 C 42 46 49 38 45 26 C 43 18 39 14 40 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><circle cx="30" cy="34" r="3" fill="currentColor"/></svg></div>
+      <div class="icon-swatch" style="color:#009e8e"><svg viewBox="0 0 64 64" fill="none" width="36" height="36"><path d="M 24 8 L 24 25 L 10 48 C 8 53 12 57 17 57 L 47 57 C 52 57 56 53 54 48 L 40 25 L 40 8 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.08"/><line x1="20" y1="8" x2="44" y2="8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="25" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="39" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="36" cy="29" r="3" fill="currentColor"/></svg></div>
+      <span style="font-size:12px;color:#999;margin-left:8px">Light background</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
