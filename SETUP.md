@@ -58,8 +58,10 @@ To connect a Mailchimp list, replace the `alluvia_handle_subscribe()` function b
 
 ## Product Catalogue Import
 
-The store ships with a ready-to-import catalogue of **400 peptide products —
-50 best-sellers in each of the 8 categories** — in `alluvia-products.csv`.
+The store ships with a ready-to-import catalogue in `alluvia-products.csv`:
+**50 best-sellers in each of the 8 peptide categories**, plus emerging
+compounds and a **Lab Supplies & Accessories** category (bacteriostatic water,
+sterile vials, reconstitution kits).
 
 To import:
 
@@ -69,9 +71,9 @@ To import:
 4. Leave column mapping on **auto** — the headers match WooCommerce exactly.
 5. Click **Run the importer**.
 
-This creates **294 distinct products** with their categories, SEO/GEO-optimised
-descriptions, AUD prices, ≥99% purity attribute and stock. Every category still
-lists 50 products — peptides that belong in more than one category (e.g. BPC-157,
+This creates **321 distinct products** across 9 categories with SEO/GEO-optimised
+descriptions, AUD prices, ≥99% purity attribute and stock. Each of the 8 peptide
+categories lists 50+ products — peptides that belong in more than one category (e.g. BPC-157,
 GHK-Cu) are assigned to **multiple categories as a single product** rather than
 cloned, which avoids duplicate-content SEO penalties. Categories are created
 automatically from the `Categories` column.

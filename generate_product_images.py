@@ -45,6 +45,7 @@ ACCENTS = {
     "Hormone & Anti-Aging": GOLD,
     "Hair Growth Peptides": "#5bb98c",
     "Research Peptides": TEAL,
+    "Lab Supplies & Accessories": "#5b7186",
 }
 
 SIZE = 1080
@@ -88,8 +89,23 @@ def fit_name(name, max_w, max_lines=3, band_h=120):
     return 20, wrap(name, 20, max_w, max_lines)
 
 
-def build_vial_svg(name, dose, purity, accent, category="", lot="ALV·000000"):
+def build_vial_svg(name, dose, purity, accent, category="", lot="ALV·000000",
+                   kind="peptide"):
     cx = SIZE / 2
+    # property line + fill differ by kind so liquids/supplies read correctly
+    if kind == "supply":
+        prop_line = "STERILE · LABORATORY GRADE"
+        fill_path = ('<path d="M 414 872 L 666 872 L 666 700 Q 600 690 540 698 '
+                     'Q 480 706 414 696 Z" fill="#deeef6" fill-opacity="0.85" '
+                     'stroke="#bfe0ec" stroke-width="1.5"/>')
+    elif kind == "compound":
+        prop_line = f"{purity} PURITY · RESEARCH GRADE"
+        fill_path = ('<path d="M 414 872 L 666 872 L 666 818 Q 600 806 540 814 '
+                     'Q 480 822 414 812 Z" fill="#fbfaf6" stroke="#e7e2d4" stroke-width="1.5"/>')
+    else:
+        prop_line = f"{purity} PURITY · LYOPHILISED"
+        fill_path = ('<path d="M 414 872 L 666 872 L 666 818 Q 600 806 540 814 '
+                     'Q 480 822 414 812 Z" fill="#fbfaf6" stroke="#e7e2d4" stroke-width="1.5"/>')
     label_x0, label_x1 = 403, 677          # taller pharma-style label
     label_y0, label_h = 392, 404
     inner_w = (label_x1 - label_x0) - 50
@@ -147,9 +163,8 @@ def build_vial_svg(name, dose, purity, accent, category="", lot="ALV·000000"):
   <!-- glass body -->
   <path d="M 392 372 Q 392 352 412 348 L 480 338 Q 480 318 484 314 L 596 314 Q 600 318 600 338 L 668 348 Q 688 352 688 372 L 688 856 Q 688 884 660 884 L 420 884 Q 392 884 392 856 Z"
         fill="url(#glass)" stroke="#b3c1cb" stroke-width="2.5"/>
-  <!-- lyophilised cake -->
-  <path d="M 414 872 L 666 872 L 666 818 Q 600 806 540 814 Q 480 822 414 812 Z"
-        fill="#fbfaf6" stroke="#e7e2d4" stroke-width="1.5"/>
+  <!-- contents (lyophilised cake / research powder / sterile liquid) -->
+  {fill_path}
   <!-- glass highlights -->
   <rect x="410" y="372" width="20" height="470" rx="10" fill="#ffffff" opacity="0.6"/>
   <rect x="650" y="380" width="9"  height="450" rx="5"  fill="#ffffff" opacity="0.32"/>
@@ -199,7 +214,7 @@ def build_vial_svg(name, dose, purity, accent, category="", lot="ALV·000000"):
 
   <!-- dose hero -->
   <text x="{cx}" y="648" font-family="DejaVu Sans" font-size="{dose_fs}" font-weight="bold" fill="{accent}" text-anchor="middle">{esc(dose)}</text>
-  <text x="{cx}" y="674" font-family="DejaVu Sans" font-size="14" fill="{INK}" text-anchor="middle" letter-spacing="2">{esc(purity)} PURITY · LYOPHILISED</text>
+  <text x="{cx}" y="674" font-family="DejaVu Sans" font-size="14" fill="{INK}" text-anchor="middle" letter-spacing="2">{esc(prop_line)}</text>
 
   <line x1="430" y1="696" x2="650" y2="696" stroke="#e9edf0" stroke-width="1.2"/>
   <!-- lot / net row -->
@@ -234,6 +249,7 @@ def distinct_products():
                 "category": category,
                 "accent": ACCENTS.get(category, TEAL),
                 "lot": make_lot(sku),
+                "kind": p.get("kind", "peptide"),
             }
             order.append(key)
     return [seen[k] for k in order]
@@ -248,7 +264,8 @@ def svg_to_jpg(svg, path, quality=88):
 
 def render(prod, path):
     svg = build_vial_svg(prod["name"], prod["dose"], "≥99%", prod["accent"],
-                         category=prod["category"], lot=prod["lot"])
+                         category=prod["category"], lot=prod["lot"],
+                         kind=prod.get("kind", "peptide"))
     svg_to_jpg(svg, path)
 
 

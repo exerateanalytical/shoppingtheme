@@ -575,6 +575,14 @@ get_header( 'alluvia' );
         <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
+      <article class="cat-card reveal" style="--cat-color:#5b7186;">
+        <div class="cat-number">09</div>
+        <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><rect x="24" y="16" width="16" height="40" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><rect x="26" y="9" width="12" height="8" rx="2" fill="currentColor"/><line x1="24" y1="40" x2="40" y2="40" stroke="currentColor" stroke-width="2" stroke-opacity="0.6"/><line x1="24" y1="47" x2="40" y2="47" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"/><path d="M 50 14 C 50 14 46 20 46 23.5 A 4 4 0 1 0 54 23.5 C 54 20 50 14 50 14 Z" fill="currentColor" fill-opacity="0.75"/></svg></div>
+        <h3 class="cat-name">Lab Supplies &amp; Accessories</h3>
+        <p class="cat-desc">Bacteriostatic water, sterile vials and reconstitution kits — the lab consumables every peptide research workflow depends on.</p>
+        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+      </article>
+
     </div>
   </div>
 </section>

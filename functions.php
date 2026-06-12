@@ -294,6 +294,7 @@ function alluvia_assign_category_images() {
     $slugs = array(
         'medical-peptides', 'skincare-peptides', 'collagen-peptides', 'sports-recovery',
         'weight-loss-metabolic', 'hormone-anti-aging', 'hair-growth-peptides', 'research-peptides',
+        'lab-supplies-accessories',
     );
     $dir = trailingslashit( get_template_directory() ) . 'images/categories/';
 
