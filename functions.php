@@ -1,6 +1,6 @@
 <?php
 /**
- * Alluvia Peptides — Shopping Child Theme Functions
+ * Alluvia Peptides — Theme Functions (standalone)
  *
  * @package Shopping
  */
@@ -9,19 +9,19 @@
    THEME SETUP
 ═══════════════════════════════════════ */
 function shopping_theme_setup() {
-    add_theme_support( 'omega-footer-widgets', 3 );
-    add_theme_support( 'plugin-activation' );
     add_theme_support( 'woocommerce' );
     add_theme_support( 'wc-product-gallery-zoom' );
     add_theme_support( 'wc-product-gallery-lightbox' );
     add_theme_support( 'wc-product-gallery-slider' );
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
-    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
 
-    // Remove Omega's default header/nav hooks (Alluvia has its own)
-    remove_action( 'omega_before_header', 'omega_get_primary_menu' );
-    remove_action( 'omega_after_header',  'omega_get_primary_menu' );
+    register_nav_menus( array(
+        'primary' => __( 'Primary Menu', 'shopping' ),
+        'footer'  => __( 'Footer Menu', 'shopping' ),
+    ) );
 
     add_action( 'init', 'shopping_init', 1 );
     add_action( 'widgets_init', 'shopping_widgets_init', 15 );
@@ -128,27 +128,11 @@ function shopping_init() {
 }
 
 /* ═══════════════════════════════════════
-   HIDE OMEGA HEADER on Alluvia pages
+   FRONT-END: hide the admin bar
+   The Alluvia nav is position:fixed at the top, so the WP admin bar would
+   overlap it. Hidden on the front end only (the dashboard is unaffected).
 ═══════════════════════════════════════ */
-function alluvia_maybe_hide_omega_header() {
-    // When Alluvia's custom header is used, suppress Omega's visual output
-    add_action( 'omega_header', '__return_false', 1 );
-    add_action( 'omega_before_header', '__return_false', 1 );
-}
-// We hook this on any page using get_header('alluvia') by detecting the template
-add_action( 'template_redirect', function() {
-    $tpl = get_page_template_slug();
-    $front = is_front_page();
-    $woo   = is_woocommerce();
-    $blog  = is_home() || is_single();
-
-    if ( $front || $woo || $blog || $tpl ) {
-        // These pages use header-alluvia.php — hide the Omega visual header
-        add_filter( 'show_admin_bar', '__return_false' );
-        // The actual Omega header suppression is handled because we call
-        // get_header('alluvia') which loads header-alluvia.php instead of header.php
-    }
-} );
+add_filter( 'show_admin_bar', '__return_false' );
 
 /* ═══════════════════════════════════════
    CONTACT FORM HANDLER
@@ -704,56 +688,20 @@ function alluvia_woo_styles( $styles ) {
 remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 
 /* ═══════════════════════════════════════
-   PLUGIN ACTIVATION (TGM)
+   ADMIN NOTICE: recommend WooCommerce
+   (Replaces the deprecated TGMPA dependency — no parent framework required.)
 ═══════════════════════════════════════ */
-add_action( 'tgmpa_register', 'shopping_register_plugins' );
-function shopping_register_plugins() {
-    $plugins = array(
-        array(
-            'name'     => 'WooCommerce',
-            'slug'     => 'woocommerce',
-            'required' => false,
-        ),
-        array(
-            'name'     => 'Contact Form 7',
-            'slug'     => 'contact-form-7',
-            'required' => false,
-        ),
-    );
-
-    $config = array(
-        'default_path'     => '',
-        'parent_menu_slug' => 'themes.php',
-        'parent_url_slug'  => 'themes.php',
-        'menu'             => 'install-required-plugins',
-        'has_notices'      => true,
-        'is_automatic'     => false,
-        'message'          => '',
-        'strings'          => array(
-            'page_title'                      => __( 'Install Required Plugins', 'shopping' ),
-            'menu_title'                      => __( 'Install Plugins', 'shopping' ),
-            'installing'                      => __( 'Installing Plugin: %s', 'shopping' ),
-            'oops'                            => __( 'Something went wrong with the plugin API.', 'shopping' ),
-            'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ),
-            'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ),
-            'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin.', 'Sorry, but you do not have the correct permissions to install the %s plugins.' ),
-            'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ),
-            'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ),
-            'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin.', 'Sorry, but you do not have the correct permissions to activate the %s plugins.' ),
-            'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated: %1$s.', 'The following plugins need to be updated: %1$s.' ),
-            'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin.', 'Sorry, but you do not have the correct permissions to update the %s plugins.' ),
-            'install_link'                    => _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
-            'activate_link'                   => _n_noop( 'Activate installed plugin', 'Activate installed plugins' ),
-            'return'                          => __( 'Return to Required Plugins Installer', 'shopping' ),
-            'plugin_activated'                => __( 'Plugin activated successfully.', 'shopping' ),
-            'complete'                        => __( 'All plugins installed and activated successfully. %s', 'shopping' ),
-            'nag_type'                        => 'updated',
-        ),
-    );
-
-    if ( function_exists( 'tgmpa' ) ) {
-        tgmpa( $plugins, $config );
+add_action( 'admin_notices', 'alluvia_recommend_woocommerce' );
+function alluvia_recommend_woocommerce() {
+    if ( class_exists( 'WooCommerce' ) || ! current_user_can( 'install_plugins' ) ) {
+        return;
     }
+    $url = wp_nonce_url(
+        self_admin_url( 'update.php?action=install-plugin&plugin=woocommerce' ),
+        'install-plugin_woocommerce'
+    );
+    echo '<div class="notice notice-info is-dismissible"><p><strong>Alluvia Peptides</strong> needs <strong>WooCommerce</strong> for the shop, cart, checkout and account pages. '
+        . '<a href="' . esc_url( $url ) . '">Install WooCommerce now</a>.</p></div>';
 }
 
 /* ═══════════════════════════════════════
