@@ -399,6 +399,38 @@ function alluvia_assign_product_images() {
 }
 
 /* ═══════════════════════════════════════
+   COMPLIANCE: Research-Use-Only disclaimers
+   A prominent notice on every single-product page, plus a site-wide footer
+   disclaimer on all front-end pages. All products are supplied strictly as
+   research-grade material — not for human or animal consumption.
+═══════════════════════════════════════ */
+
+// Prominent notice directly under the product title/price on product pages.
+add_action( 'woocommerce_single_product_summary', 'alluvia_product_ruo_notice', 25 );
+function alluvia_product_ruo_notice() {
+    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid #c8a96e;border-left:4px solid #c8a96e;background:#fbf7ef;border-radius:8px;font-size:13px;line-height:1.5;color:#3a3320;">'
+        . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:#0d1b2a;margin-bottom:4px;">For Research Use Only</strong>'
+        . 'This product is supplied strictly for laboratory and in-vitro research by qualified researchers. '
+        . 'It is <strong>not for human or animal consumption</strong> and is not a drug, food, cosmetic or dietary supplement.'
+        . '</div>';
+}
+
+// Site-wide footer disclaimer on every front-end page.
+add_action( 'wp_footer', 'alluvia_footer_disclaimer', 5 );
+function alluvia_footer_disclaimer() {
+    if ( is_admin() ) {
+        return;
+    }
+    echo '<div class="alluvia-footer-disclaimer" style="background:#0d1b2a;color:#aeb9c4;font-size:12px;line-height:1.6;text-align:center;padding:18px 20px;border-top:2px solid #c8a96e;">'
+        . '<div style="max-width:960px;margin:0 auto;">'
+        . '<strong style="color:#fff;">Research Use Only &mdash; Not for Human Consumption.</strong> '
+        . 'All products supplied by Alluvia Peptides are sold strictly as research-grade chemicals for in-vitro and laboratory research purposes only. '
+        . 'They are not intended to diagnose, treat, cure or prevent any disease, and are not for human or veterinary use. '
+        . 'By purchasing you confirm you are a qualified researcher or institution and accept full responsibility for safe, lawful handling.'
+        . '</div></div>';
+}
+
+/* ═══════════════════════════════════════
    WOOCOMMERCE: Cart fragments (AJAX cart count)
 ═══════════════════════════════════════ */
 add_filter( 'woocommerce_add_to_cart_fragments', 'alluvia_cart_fragment' );

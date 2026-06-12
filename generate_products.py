@@ -37,86 +37,112 @@ def esc(text: str) -> str:
     return html.escape(str(text), quote=False)
 
 
+# ---------------------------------------------------------------------------
+# Research-use copy.  Every product is presented strictly as a research-grade
+# reference compound — NOT a consumer product. Benefit data is reframed as
+# "areas of research interest" and a prominent Research-Use-Only disclaimer is
+# included. This is the industry-standard, lower-risk framing for peptides.
+# ---------------------------------------------------------------------------
+
+RUO_SHORT = "For laboratory research use only. Not for human consumption."
+
+
 def build_short_description(p: dict) -> str:
-    """Excerpt on shop/category cards. Benefit-led, keyword-rich, AU-targeted."""
+    """Excerpt on shop/category cards. Research-grade, compliant, keyword-rich."""
     return (
-        f"{p['name']} {p['dose']} for {p['summary']}. "
-        f"Buy {p['name']} online in {COUNTRY} from {BRAND} — third-party "
-        f"tested for ≥99% purity with a Certificate of Analysis and fast, "
-        f"discreet nationwide shipping."
+        f"{p['name']} {p['dose']} is a research-grade peptide supplied at ≥99% "
+        f"purity for laboratory research use only. {BRAND} provides a Certificate "
+        f"of Analysis with every batch. Not for human consumption."
     )
 
 
 def build_meta_title(p: dict) -> str:
     """SEO <title> — keep close to ~60 chars where possible."""
-    base = f"Buy {p['name']} {p['dose']} Online Australia | {BRAND}"
+    base = f"{p['name']} {p['dose']} | Research Peptide | {BRAND}"
     if len(base) <= 60:
         return base
-    return f"{p['name']} {p['dose']} Australia | {BRAND}"
+    return f"{p['name']} {p['dose']} | Research Peptide"
 
 
 def build_meta_description(p: dict) -> str:
-    """SEO meta description — ~150 chars, benefit-led, AU + purity hooks."""
+    """SEO meta description — ~150 chars, research-grade, purity + COA + AU."""
     desc = (
-        f"Buy {p['name']} {p['dose']} in Australia for {p['summary']}. "
-        f"≥99% purity, Certificate of Analysis, fast discreet shipping from {BRAND}."
+        f"{p['name']} {p['dose']} research peptide — ≥99% purity with a COA from "
+        f"{BRAND} {COUNTRY}. For laboratory research use only; not for human consumption."
     )
     return desc[:157].rsplit(" ", 1)[0] if len(desc) > 158 else desc
 
 
 def build_faqs(p: dict) -> list:
-    """Two to three peptide-specific Q&As — structured for GEO / AI answers."""
+    """Research-oriented Q&As — structured for GEO / AI answers."""
     name = p["name"]
     return [
         (
-            f"What is {name} used for?",
-            f"{name} is best known for {p['summary']}. {p['how_it_works'].capitalize()}.",
+            f"What is {name}?",
+            f"{name} is {p['what_it_is']}. In the laboratory it is studied in "
+            f"research relating to {p['summary']}. In research models, {name} "
+            f"{p['how_it_works']}.",
         ),
         (
-            f"How do I store {name}?",
-            f"Store lyophilised {name} in the freezer away from light. Once "
-            f"reconstituted with bacteriostatic water, keep it refrigerated at "
-            f"2–8°C and use within 3–4 weeks for best results.",
+            f"Is {name} for human use?",
+            f"No. {name} is supplied strictly as a research chemical for in-vitro "
+            f"and laboratory study. It is not a medicine, supplement, cosmetic or "
+            f"food, and is not for human or animal consumption.",
         ),
         (
-            f"Is {name} available in Australia?",
-            f"Yes. {BRAND} ships {name} {p['dose']} Australia-wide from local "
-            f"stock — Sydney, Melbourne, Brisbane, Perth and Adelaide — with "
-            f"every batch backed by a Certificate of Analysis.",
+            f"How should {name} be stored and handled?",
+            f"Store lyophilised {name} frozen and away from light. After "
+            f"reconstitution with bacteriostatic water, keep refrigerated at "
+            f"2–8°C and handle using appropriate laboratory safety practices.",
+        ),
+        (
+            f"Does {name} ship within Australia?",
+            f"Yes. {BRAND} dispatches {name} {p['dose']} Australia-wide, with a "
+            f"Certificate of Analysis confirming ≥99% purity for every batch.",
         ),
     ]
 
 
 def build_full_description(p: dict, category: str) -> str:
-    """Authentic, SEO/GEO-optimised HTML body — unique per peptide."""
+    """Research-grade, SEO/GEO-optimised HTML body — unique per peptide."""
     name = p["name"]
-    benefits = "".join(f"    <li>{esc(b)}</li>\n" for b in p["benefits"])
+    research_areas = "".join(f"    <li>{esc(b)}</li>\n" for b in p["benefits"])
 
     faq_blocks = ""
     for q, a in build_faqs(p):
         faq_blocks += f"  <h4>{esc(q)}</h4>\n  <p>{esc(a)}</p>\n"
 
-    return f"""<h2>{esc(name)} {esc(p['dose'])} — {esc(p['summary'][:1].upper() + p['summary'][1:])}</h2>
-<p><strong>{esc(name)}</strong> is {esc(p['what_it_is'])}. It has become one of
-the most in-demand compounds in the {esc(category.lower())} category among
-{esc(p['audience'])} across {COUNTRY}, valued for {esc(p['summary'])}.</p>
+    return f"""<h2>{esc(name)} {esc(p['dose'])} — Research-Grade Peptide (≥99% Purity)</h2>
+<p><strong>{esc(name)}</strong> is {esc(p['what_it_is'])}. It is supplied by
+{esc(BRAND)} as a high-purity reference compound for laboratory and research
+applications, and is studied in research relating to {esc(p['summary'])}.</p>
 
-<h3>How {esc(name)} Works</h3>
-<p>{esc(name)} {esc(p['how_it_works'])}. {esc(BRAND)} supplies every vial at
-≥99% purity, verified by independent HPLC and mass-spectrometry testing so you
-know exactly what you are getting.</p>
+<h3>Mechanism of Action in Research</h3>
+<p>In published and preclinical research, {esc(name)} {esc(p['how_it_works'])}.
+{esc(BRAND)} supplies every vial at ≥99% purity, verified by independent HPLC
+and mass-spectrometry testing so researchers know exactly what they are working
+with.</p>
 
-<h3>Key Benefits of {esc(name)}</h3>
+<h3>Areas of Research Interest</h3>
+<p>{esc(name)} has been investigated by researchers in connection with:</p>
 <ul>
-{benefits}</ul>
+{research_areas}</ul>
 
-<h3>Why Buy {esc(name)} from {esc(BRAND)} in {COUNTRY}?</h3>
+<h3>Research-Grade Quality from {esc(BRAND)} ({COUNTRY})</h3>
 <ul>
     <li>≥99% purity — independently lab-tested with a downloadable Certificate of Analysis</li>
-    <li>Australian-based dispatch with fast, discreet, tracked shipping</li>
+    <li>Australian-based dispatch with fast, tracked shipping</li>
     <li>Cold-chain handling and lyophilised stability for full potency on arrival</li>
     <li>Responsive local support and secure checkout</li>
 </ul>
+
+<h3>Important — Research Use Only</h3>
+<p><strong>{esc(name)} is sold for laboratory and research use only.</strong> It
+is intended exclusively for in-vitro experimentation and scientific study by
+qualified researchers. It is <strong>not for human or animal consumption</strong>
+and is not a drug, food, cosmetic or dietary supplement. By purchasing, you
+confirm you are a qualified researcher or institution and accept full
+responsibility for safe, lawful handling and disposal.</p>
 
 <h3>Frequently Asked Questions</h3>
 {faq_blocks}"""

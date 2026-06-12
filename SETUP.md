@@ -121,8 +121,20 @@ python3 generate_products.py
 ```
 
 This rewrites `alluvia-products.csv`. Each product's copy is built from real
-per-peptide facts (what it is, how it works, its specific benefits) so every
-description is unique and benefit-led — no generic templated write-ups.
+per-peptide facts (what it is, how it works, areas of research interest) so
+every description is unique — no generic templated write-ups.
+
+### Compliance — Research Use Only
+
+All product copy uses **research-use-only framing**: every description presents
+the compound as a research-grade reference material, reframes properties as
+"areas of research interest", and includes a prominent **Research Use Only —
+Not for Human Consumption** disclaimer. In addition, the theme shows a
+research-use notice on every single-product page and a site-wide disclaimer in
+the footer (`alluvia_product_ruo_notice()` / `alluvia_footer_disclaimer()` in
+`functions.php`), and each vial label carries the same notice. This is the
+industry-standard, lower-risk framing for peptide retail. It is not legal
+advice — have a suitably qualified advisor review before going live.
 
 ---
 

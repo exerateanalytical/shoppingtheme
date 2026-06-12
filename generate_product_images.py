@@ -205,8 +205,9 @@ def build_vial_svg(name, dose, purity, accent, category="", lot="ALV·000000"):
   <!-- lot / net row -->
   <text x="436" y="718" font-family="DejaVu Sans" font-size="11" fill="{SUB}" letter-spacing="0.5">LOT {esc(lot)}</text>
   <text x="644" y="718" font-family="DejaVu Sans" font-size="11" fill="{SUB}" text-anchor="end" letter-spacing="0.5">NET 1 VIAL</text>
-  <text x="{cx}" y="740" font-family="DejaVu Sans" font-size="10.5" fill="{SUB}" text-anchor="middle" letter-spacing="2">STORE AT -20°C · KEEP DRY</text>
-  <text x="{cx}" y="764" font-family="DejaVu Sans" font-size="10" fill="{accent}" text-anchor="middle" letter-spacing="2">ALLUVIAPEPTIDES.COM.AU · AUSTRALIA</text>
+  <text x="{cx}" y="735" font-family="DejaVu Sans" font-size="11" font-weight="bold" fill="{accent}" text-anchor="middle" letter-spacing="2">RESEARCH USE ONLY</text>
+  <text x="{cx}" y="751" font-family="DejaVu Sans" font-size="9" fill="{SUB}" text-anchor="middle" letter-spacing="1.5">NOT FOR HUMAN CONSUMPTION</text>
+  <text x="{cx}" y="768" font-family="DejaVu Sans" font-size="9" fill="{SUB}" text-anchor="middle" letter-spacing="1">STORE -20°C · ALLUVIAPEPTIDES.COM.AU</text>
 </svg>"""
 
 
