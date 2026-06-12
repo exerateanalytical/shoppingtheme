@@ -456,7 +456,7 @@ get_header( 'alluvia' );
         <ul>
           <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
           <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact Us</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/coa-library/' ) ); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -464,8 +464,8 @@ get_header( 'alluvia' );
         <ul>
           <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms & Conditions</a></li>
           <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Shipping Policy</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
         </ul>
       </div>
     </div>
@@ -473,9 +473,9 @@ get_header( 'alluvia' );
       <span>© 2025 Alluvia Peptides. All rights reserved.</span>
       <div class="footer-legal">
         <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a>
-        <a href="#">Privacy</a>
+        <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy</a>
         <a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a>
-        <a href="#">Disclaimer</a>
+        <a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>">Disclaimer</a>
       </div>
     </div>
   </div>

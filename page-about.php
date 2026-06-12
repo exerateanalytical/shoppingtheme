@@ -286,7 +286,7 @@ get_header( 'alluvia' );
       <li><a href="<?php echo esc_url(home_url('/about/')); ?>" class="active">About</a></li>
       <li><a href="<?php echo esc_url(home_url('/')); ?>#testimonials">Reviews</a></li>
       <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-      <li><a href="#" class="nav-cta">Shop Now</a></li>
+      <li><a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="nav-cta">Shop Now</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -300,7 +300,7 @@ get_header( 'alluvia' );
   <a href="<?php echo esc_url(home_url('/about/')); ?>"                 onclick="closeMobile()" style="color:var(--teal)">About</a>
   <a href="<?php echo esc_url(home_url('/')); ?>#testimonials" onclick="closeMobile()">Reviews</a>
   <a href="<?php echo esc_url(home_url('/contact/')); ?>"               onclick="closeMobile()">Contact</a>
-  <a href="#"                                  onclick="closeMobile()">Shop Now</a>
+  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>"                                  onclick="closeMobile()">Shop Now</a>
 </div>
 
 
@@ -606,38 +606,38 @@ get_header( 'alluvia' );
       <div>
         <h3 class="footer-col-title">Products</h3>
         <ul class="footer-links">
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Medical Peptides</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Skincare Peptides</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Collagen Peptides</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Sports &amp; Recovery</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Hormone &amp; Anti-Aging</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'medical-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Medical Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'skincare-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Skincare Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'collagen-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Collagen Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'sports-recovery' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Sports &amp; Recovery</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'hormone-anti-aging' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Hormone &amp; Anti-Aging</a></li>
         </ul>
       </div>
       <div>
         <h3 class="footer-col-title">Company</h3>
         <ul class="footer-links">
           <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>About Us</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Our Science</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Blog</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/about/#science' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Our Science</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Blog</a></li>
           <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Contact</a></li>
         </ul>
       </div>
       <div>
         <h3 class="footer-col-title">Support</h3>
         <ul class="footer-links">
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>FAQ</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Shipping Info</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Returns</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>My Account</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>FAQ</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/shipping-policy/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Shipping Info</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/shipping-policy/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Returns</a></li>
+          <li><a href="<?php echo esc_url( alluvia_account_url() ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>My Account</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Alluvia Peptides. All rights reserved.</p>
       <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Disclaimer</a>
+        <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
+        <a href="<?php echo esc_url( home_url( '/terms-conditions/' ) ); ?>">Terms of Service</a>
+        <a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>">Disclaimer</a>
       </div>
     </div>
   </div>
