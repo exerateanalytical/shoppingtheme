@@ -308,6 +308,14 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
   .container{padding:0 24px}
 }
 @media(max-width:640px){
+  /* Mobile font scaling */
+  .page-hero h1,.hero-title,.post-hero-title{font-size:clamp(32px,9vw,48px)!important}
+  .section-title{font-size:clamp(26px,7vw,38px)!important}
+  .product-title,.featured-title{font-size:clamp(26px,7vw,36px)!important}
+  .section-desc,.post-lead,.featured-body,p{font-size:15px;line-height:1.75}
+  .hero-desc{font-size:17px}
+  .btn-primary,.btn-ghost,.btn-help{font-size:14px}
+
   .categories-grid{grid-template-columns:1fr}
   .hiw-steps{grid-template-columns:1fr;gap:40px}
   .hiw-icon-ring{width:88px;height:88px}

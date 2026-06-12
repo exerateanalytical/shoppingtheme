@@ -142,9 +142,23 @@
 .footer-bottom-links a:hover{color:rgba(255,255,255,.55)}
 @media(max-width:1100px){.shop-main{grid-template-columns:220px 1fr}.products-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
 @media(max-width:900px){.shop-main{grid-template-columns:1fr;padding:32px 24px 80px}.shop-sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:16px}.nav-links{display:none}.nav-hamburger{display:flex}.nav-inner{padding:0 24px}}
-@media(max-width:640px){.shop-sidebar{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr 1fr}.shop-hero-inner{padding:0 24px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.footer-bottom,.footer-grid{padding-left:24px;padding-right:24px}}
+@media(max-width:640px){
+  /* Mobile font scaling */
+  .page-hero h1,.hero-title,.post-hero-title{font-size:clamp(32px,9vw,48px)!important}
+  .section-title{font-size:clamp(26px,7vw,38px)!important}
+  .product-title,.featured-title{font-size:clamp(26px,7vw,36px)!important}
+  .section-desc,.post-lead,.featured-body,p{font-size:15px;line-height:1.75}
+  .hero-desc{font-size:17px}
+  .btn-primary,.btn-ghost,.btn-help{font-size:14px}
+.shop-sidebar{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr 1fr}.shop-hero-inner{padding:0 24px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.footer-bottom,.footer-grid{padding-left:24px;padding-right:24px}}
 @media(max-width:420px){.products-grid{grid-template-columns:1fr}}
-</style>
+
+@media(max-width:400px){
+  .hero-title,.page-hero h1{font-size:30px!important}
+  .section-title{font-size:24px!important}
+  .hero-actions,.cta-actions{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-ghost{justify-content:center}
+}</style>
 </head>
 <body>
 <nav class="alluvia-nav">
