@@ -1022,6 +1022,14 @@ add_action( 'wp_head', function() {
     }
 
     @media (max-width: 640px) {
+  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
+  .section-title{font-size:clamp(28px,7vw,42px)!important}
+  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
+  .product-title{font-size:clamp(28px,7vw,38px)!important}
+  .section-desc,.post-lead,.featured-body{font-size:16px}
+  body,p,.article p{font-size:15px;line-height:1.75}
+  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
+
       nav { padding: 0 20px; }
       .page-hero { padding: 120px 20px 60px; }
       .info-cards-section { padding: 52px 20px; }

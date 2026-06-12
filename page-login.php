@@ -17,46 +17,46 @@ html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(-
 .login-left::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,198,179,0.12),transparent 70%);pointer-events:none}
 .login-left::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,110,0.08),transparent 70%);pointer-events:none}
 .left-logo{display:flex;flex-direction:column;line-height:1;text-decoration:none;margin-bottom:auto}
-.left-logo span:first-child{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#fff}
-.left-logo span:last-child{font-family:'Space Grotesk',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.3em;color:var(--teal);text-transform:uppercase}
+.left-logo span:first-child{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#fff}
+.left-logo span:last-child{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.3em;color:var(--teal);text-transform:uppercase}
 .left-content{position:relative;z-index:1;margin-top:auto;padding-bottom:2rem}
-.left-content h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:#fff;line-height:1.15;margin-bottom:1rem}
-.left-content p{color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;margin-bottom:2rem}
+.left-content h2{font-family:'Cormorant Garamond',serif;font-size:45px;font-weight:600;color:#fff;line-height:1.15;margin-bottom:1rem}
+.left-content p{color:rgba(255,255,255,0.5);font-size:15px;line-height:1.7;margin-bottom:2rem}
 .left-benefits{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
-.left-benefits li{display:flex;align-items:center;gap:0.6rem;font-family:'Space Grotesk',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.65)}
+.left-benefits li{display:flex;align-items:center;gap:0.6rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:rgba(255,255,255,0.65)}
 .left-benefits li svg{color:var(--teal);flex-shrink:0}
 /* RIGHT PANEL */
 .login-right{background:var(--pearl);display:flex;align-items:center;justify-content:center;padding:3rem 2rem}
 .auth-card{width:100%;max-width:440px}
 /* TABS */
 .auth-tabs{display:flex;background:#fff;border-radius:10px;padding:4px;margin-bottom:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
-.auth-tab{flex:1;background:none;border:none;border-radius:7px;padding:0.7rem;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--text-light)}
+.auth-tab{flex:1;background:none;border:none;border-radius:7px;padding:0.7rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--text-light)}
 .auth-tab.active{background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 .auth-panel{display:none}.auth-panel.active{display:block}
-.auth-panel h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;margin-bottom:0.35rem}
-.auth-panel p{font-size:0.88rem;color:var(--text-light);margin-bottom:1.75rem}
+.auth-panel h2{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:600;margin-bottom:0.35rem}
+.auth-panel p{font-size:14px;color:var(--text-light);margin-bottom:1.75rem}
 .form-group{margin-bottom:1.1rem}
-.form-group label{display:block;font-family:'Space Grotesk',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.35rem}
+.form-group label{display:block;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.35rem}
 .input-wrap{position:relative}
 .input-wrap svg{position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
-.input-wrap input{width:100%;border:1px solid var(--pearl-dark);border-radius:10px;padding:0.8rem 0.9rem 0.8rem 2.6rem;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
+.input-wrap input{width:100%;border:1px solid var(--pearl-dark);border-radius:10px;padding:0.8rem 0.9rem 0.8rem 2.6rem;font-family:'Inter',sans-serif;font-size:15px;color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
 .input-wrap input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,198,179,0.1)}
-.forgot-link{float:right;font-family:'Space Grotesk',sans-serif;font-size:0.75rem;color:var(--teal-dark);text-decoration:none}
+.forgot-link{float:right;font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--teal-dark);text-decoration:none}
 .forgot-link:hover{text-decoration:underline}
-.btn-auth{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;padding:0.9rem;font-family:'Space Grotesk',sans-serif;font-size:0.92rem;font-weight:700;letter-spacing:0.04em;cursor:pointer;margin-top:1.25rem;transition:all .3s}
+.btn-auth{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;padding:0.9rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.04em;cursor:pointer;margin-top:1.25rem;transition:all .3s}
 .btn-auth:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,198,179,0.35)}
 .divider{display:flex;align-items:center;gap:0.75rem;margin:1.25rem 0}
-.divider span{font-family:'Space Grotesk',sans-serif;font-size:0.72rem;color:var(--text-light);white-space:nowrap}
+.divider span{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text-light);white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--pearl-dark)}
 .social-auth{display:flex;gap:0.75rem}
-.btn-social{flex:1;display:flex;align-items:center;justify-content:center;gap:0.5rem;border:1px solid var(--pearl-dark);border-radius:10px;padding:0.7rem;background:#fff;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
+.btn-social{flex:1;display:flex;align-items:center;justify-content:center;gap:0.5rem;border:1px solid var(--pearl-dark);border-radius:10px;padding:0.7rem;background:#fff;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
 .btn-social:hover{border-color:var(--teal);color:var(--teal-dark)}
-.terms-note{font-size:0.75rem;color:var(--text-light);text-align:center;margin-top:1rem;line-height:1.5}
+.terms-note{font-size:12px;color:var(--text-light);text-align:center;margin-top:1rem;line-height:1.5}
 .terms-note a{color:var(--teal-dark);text-decoration:none}
 /* PASSWORD STRENGTH */
 .strength-bar{height:4px;border-radius:4px;background:var(--pearl-dark);margin-top:0.4rem;overflow:hidden;transition:all .3s}
 .strength-fill{height:100%;border-radius:4px;width:0;transition:width .3s,background .3s}
-.strength-label{font-size:0.7rem;color:var(--text-light);margin-top:0.25rem;font-family:'Space Grotesk',sans-serif}
+.strength-label{font-size:11px;color:var(--text-light);margin-top:0.25rem;font-family:'Space Grotesk',sans-serif}
 @media(max-width:800px){.login-wrap{grid-template-columns:1fr}.login-left{display:none}}
 @media(max-width:900px){
   .login-grid,.register-panel,.login-panel{grid-template-columns:1fr}
@@ -65,6 +65,14 @@ html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(-
   .nav-hamburger{display:flex}
 }
 @media(max-width:640px){
+  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
+  .section-title{font-size:clamp(28px,7vw,42px)!important}
+  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
+  .product-title{font-size:clamp(28px,7vw,38px)!important}
+  .section-desc,.post-lead,.featured-body{font-size:16px}
+  body,p,.article p{font-size:15px;line-height:1.75}
+  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
+
   .nav-hamburger{display:flex}
   .login-wrap,.register-wrap{padding:2rem 1.25rem}
   .form-actions{flex-direction:column}

@@ -14,10 +14,10 @@ add_action( 'wp_head', function() {
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
-.nav-logo-word{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--white);letter-spacing:.05em}
+.nav-logo-word{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--white);letter-spacing:.05em}
 .nav-logo-sub{font-family:var(--font-ui);font-size:9px;font-weight:500;letter-spacing:.35em;color:var(--teal);text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{font-family:var(--font-ui);font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.7);text-decoration:none;text-transform:uppercase;transition:color .25s}
+.nav-links a{font-family:var(--font-ui);font-size:13pxpx;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.7);text-decoration:none;text-transform:uppercase;transition:color .25s}
 .nav-links a:hover,.nav-links a.active{color:var(--teal)}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-cart-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:8px 16px;color:rgba(255,255,255,.8);text-decoration:none;font-family:var(--font-ui);font-size:12px;font-weight:600;transition:var(--transition);position:relative}
@@ -141,9 +141,22 @@ add_action( 'wp_head', function() {
 .footer-bottom-links a:hover{color:rgba(255,255,255,.55)}
 @media(max-width:1100px){.shop-main{grid-template-columns:220px 1fr}.products-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
 @media(max-width:900px){.shop-main{grid-template-columns:1fr;padding:32px 24px 80px}.shop-sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:16px}.nav-links{display:none}.nav-hamburger{display:flex}.nav-inner{padding:0 24px}}
-@media(max-width:640px){.shop-sidebar{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr 1fr}.shop-hero-inner{padding:0 24px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.footer-bottom,.footer-grid{padding-left:24px;padding-right:24px}}
+@media(max-width:640px){
+  .page-hero h1,.hero-title{font-size:clamp(36px,5vw,64px)}
+  .section-title{font-size:clamp(28px,7vw,42px)!important}
+  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
+  .product-title{font-size:clamp(28px,7vw,38px)!important}
+  .section-desc,.post-lead,.featured-body{font-size:16px}
+  body,p,.article p{font-size:15px;line-height:1.75}
+  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
+.shop-sidebar{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr 1fr}.shop-hero-inner{padding:0 24px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.footer-bottom,.footer-grid{padding-left:24px;padding-right:24px}}
 @media(max-width:420px){.products-grid{grid-template-columns:1fr}}
-</style>
+
+@media(max-width:400px){
+  .page-hero h1,.hero-title{font-size:32px!important}
+  .section-title{font-size:26px!important}
+  .btn-primary,.btn-ghost,.btn-help{font-size:14px;padding:13px 22px}
+}</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );

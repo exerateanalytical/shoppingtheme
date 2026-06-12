@@ -37,7 +37,7 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
 .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
 .logo-mark{width:34px;height:34px;flex-shrink:0}
 .logo-text{display:flex;flex-direction:column;line-height:1}
-.nav-logo-word{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--white);letter-spacing:.05em}
+.nav-logo-word{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--white);letter-spacing:.05em}
 .nav-logo-sub{font-family:var(--font-ui);font-size:9px;font-weight:500;letter-spacing:.35em;color:var(--teal);text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{font-family:var(--font-ui);font-size:13px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.7);text-decoration:none;text-transform:uppercase;transition:color .25s}
@@ -244,6 +244,14 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
   .container{padding:0 24px}
 }
 @media(max-width:640px){
+  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
+  .section-title{font-size:clamp(28px,7vw,42px)!important}
+  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
+  .product-title{font-size:clamp(28px,7vw,38px)!important}
+  .section-desc,.post-lead,.featured-body{font-size:16px}
+  body,p,.article p{font-size:15px;line-height:1.75}
+  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
+
   .page-hero{padding:120px 0 60px}
   .page-hero-inner{padding:0 24px}
   .team-grid{grid-template-columns:1fr}
@@ -255,7 +263,12 @@ body{font-family:var(--font-body);color:var(--text-dark);overflow-x:hidden;backg
   .cta-actions{flex-direction:column;align-items:stretch}
   .btn-primary-light,.btn-ghost-light{justify-content:center}
 }
-</style>
+
+@media(max-width:400px){
+  .page-hero h1,.hero-title{font-size:32px!important}
+  .section-title{font-size:26px!important}
+  .btn-primary,.btn-ghost,.btn-help{font-size:14px;padding:13px 22px}
+}</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );

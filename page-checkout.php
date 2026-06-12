@@ -27,26 +27,26 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .logo-text{display:flex;flex-direction:column;line-height:1}
 
 
-.nav-secure{display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.5)}
+.nav-secure{display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:rgba(255,255,255,0.5)}
 .nav-secure svg{color:var(--teal)}
 
 /* HERO STRIP */
 .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);padding:6rem 2rem 2.5rem;margin-top:72px}
 .page-hero-inner{max-width:1100px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.78rem;color:var(--text-light);margin-bottom:1rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text-light);margin-bottom:1rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;color:#fff}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,60px);font-weight:600;color:#fff}
 
 /* PROGRESS STEPS */
 .progress-wrap{max-width:1100px;margin:0 auto;padding:2rem 2rem 0}
 .progress-steps{display:flex;align-items:center;gap:0;background:#fff;border-radius:var(--radius);padding:1.25rem 2rem;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:2rem}
 .step{display:flex;align-items:center;gap:0.75rem;flex:1;position:relative}
 .step:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:100%;height:2px;background:var(--pearl-dark);z-index:0;left:60px}
-.step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;flex-shrink:0;z-index:1;position:relative;transition:all .3s}
+.step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;flex-shrink:0;z-index:1;position:relative;transition:all .3s}
 .step-circle.done{background:var(--teal);color:var(--navy)}
 .step-circle.active{background:var(--navy);color:#fff;box-shadow:0 0 0 4px rgba(0,198,179,0.2)}
 .step-circle.pending{background:var(--pearl-dark);color:var(--text-light)}
-.step-label{font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em}
+.step-label{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em}
 .step-label.done{color:var(--teal-dark)}
 .step-label.active{color:var(--navy)}
 .step-label.pending{color:var(--text-light)}
@@ -57,7 +57,7 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 /* FORMS */
 .checkout-panel{background:#fff;border-radius:var(--radius);box-shadow:0 2px 16px rgba(0,0,0,0.06);overflow:hidden}
 .panel-header{background:var(--navy);padding:1.25rem 1.75rem;display:flex;align-items:center;gap:0.75rem}
-.panel-header h2{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
+.panel-header h2{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#fff}
 .panel-header svg{color:var(--teal)}
 .panel-body{padding:1.75rem}
 
@@ -69,8 +69,8 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
 .form-row.full{grid-template-columns:1fr}
 .form-group{display:flex;flex-direction:column;gap:0.35rem}
-.form-group label{font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid)}
-.form-group input,.form-group select{border:1px solid var(--pearl-dark);border-radius:8px;padding:0.7rem 1rem;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
+.form-group label{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid)}
+.form-group input,.form-group select{border:1px solid var(--pearl-dark);border-radius:8px;padding:0.7rem 1rem;font-family:'Inter',sans-serif;font-size:15px;color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
 .form-group input:focus,.form-group select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,198,179,0.1)}
 .form-group input::placeholder{color:var(--text-light)}
 
@@ -81,23 +81,23 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .ship-opt.selected{border-color:var(--teal);background:rgba(0,198,179,0.05)}
 .ship-opt input[type=radio]{accent-color:var(--teal);width:18px;height:18px;flex-shrink:0}
 .ship-info{flex:1}
-.ship-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem}
-.ship-desc{font-size:0.8rem;color:var(--text-light);margin-top:2px}
+.ship-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px}
+.ship-desc{font-size:13px;color:var(--text-light);margin-top:2px}
 .ship-price{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--teal-dark)}
-.ship-badge{font-family:'Space Grotesk',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:50px;text-transform:uppercase}
+.ship-badge{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:50px;text-transform:uppercase}
 .badge-free{background:rgba(120,201,162,0.15);color:#2d8a5f}
 .badge-cold{background:rgba(127,184,212,0.15);color:#2d6e8a}
 
 /* PAYMENT SECTION */
 .payment-methods{display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.pay-method{border:2px solid var(--pearl-dark);border-radius:8px;padding:0.6rem 1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid)}
+.pay-method{border:2px solid var(--pearl-dark);border-radius:8px;padding:0.6rem 1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text-mid)}
 .pay-method:hover{border-color:var(--teal)}
 .pay-method.active{border-color:var(--teal);color:var(--teal-dark);background:rgba(0,198,179,0.05)}
 .card-form{}
 .card-number-wrap{position:relative}
 .card-icons{position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);display:flex;gap:0.25rem}
-.c-icon{font-family:'Space Grotesk',sans-serif;font-size:0.6rem;font-weight:700;padding:2px 5px;border-radius:3px;background:var(--pearl);color:var(--text-mid)}
-.secure-note{display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--text-light);margin-top:1rem}
+.c-icon{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 5px;border-radius:3px;background:var(--pearl);color:var(--text-mid)}
+.secure-note{display:flex;align-items:center;gap:0.4rem;font-size:13px;color:var(--text-light);margin-top:1rem}
 .secure-note svg{color:var(--teal)}
 
 /* REVIEW ORDER */
@@ -105,39 +105,39 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .review-item{display:flex;align-items:center;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--pearl)}
 .review-item:last-child{border-bottom:none}
 .review-thumb{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.review-item-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.85rem}
-.review-item-qty{font-size:0.78rem;color:var(--text-light)}
-.review-item-price{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem}
+.review-item-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px}
+.review-item-qty{font-size:13px;color:var(--text-light)}
+.review-item-price{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
 
 /* NAV BUTTONS */
 .form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--pearl)}
-.btn-back{background:transparent;border:1px solid var(--pearl-dark);color:var(--text-mid);border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all .2s}
+.btn-back{background:transparent;border:1px solid var(--pearl-dark);color:var(--text-mid);border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all .2s}
 .btn-back:hover{border-color:var(--teal);color:var(--teal)}
-.btn-next{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:8px;padding:0.75rem 2rem;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s}
+.btn-next{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:8px;padding:0.75rem 2rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s}
 .btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,198,179,0.35)}
-.btn-place{background:linear-gradient(135deg,var(--gold),#a07c3a);color:#fff;border:none;border-radius:8px;padding:0.75rem 2rem;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s;text-transform:uppercase}
+.btn-place{background:linear-gradient(135deg,var(--gold),#a07c3a);color:#fff;border:none;border-radius:8px;padding:0.75rem 2rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s;text-transform:uppercase}
 .btn-place:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,110,0.4)}
 
 /* ORDER SIDEBAR */
 .order-sidebar{background:#fff;border-radius:var(--radius);box-shadow:0 4px 24px rgba(0,0,0,0.08);position:sticky;top:90px}
 .sidebar-header{background:var(--navy);padding:1.25rem 1.5rem;border-radius:var(--radius) var(--radius) 0 0}
-.sidebar-header h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#fff}
+.sidebar-header h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#fff}
 .sidebar-body{padding:1.5rem}
 .sidebar-items{}
-.s-item{display:flex;justify-content:space-between;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid var(--pearl);font-size:0.85rem}
+.s-item{display:flex;justify-content:space-between;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid var(--pearl);font-size:14px}
 .s-item:last-child{border-bottom:none}
 .s-item-name{color:var(--text-dark);font-weight:500}
-.s-item-qty{color:var(--text-light);font-size:0.78rem}
+.s-item-qty{color:var(--text-light);font-size:13px}
 .s-item-price{font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;margin-left:0.5rem}
 .s-divider{border:none;border-top:1px solid var(--pearl-dark);margin:1rem 0}
-.s-row{display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:0.6rem}
+.s-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:0.6rem}
 .s-row .lbl{color:var(--text-mid)}
 .s-row .val{font-family:'Space Grotesk',sans-serif;font-weight:600}
 .s-total{display:flex;justify-content:space-between;padding-top:0.75rem}
 .s-total .lbl{font-family:'Space Grotesk',sans-serif;font-weight:700}
-.s-total .val{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700}
+.s-total .val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700}
 .sidebar-trust{padding:1.25rem 1.5rem;border-top:1px solid var(--pearl);display:flex;flex-direction:column;gap:0.6rem}
-.s-trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-mid)}
+.s-trust-item{display:flex;align-items:center;gap:0.5rem;font-size:13px;color:var(--text-mid)}
 .s-trust-item svg{color:var(--teal);flex-shrink:0}
 
 /* SUCCESS OVERLAY */
@@ -146,17 +146,17 @@ body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dar
 .success-card{background:#fff;border-radius:16px;padding:3rem;max-width:480px;width:90%;text-align:center;animation:popIn .4s ease}
 @keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
 .success-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,rgba(0,198,179,0.2),rgba(0,198,179,0.05));border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:var(--teal)}
-.success-card h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;margin-bottom:0.75rem}
-.success-card p{color:var(--text-mid);margin-bottom:0.5rem;font-size:0.9rem}
-.success-order{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--teal-dark);font-size:1rem;margin:0.5rem 0 1.5rem}
+.success-card h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:0.75rem}
+.success-card p{color:var(--text-mid);margin-bottom:0.5rem;font-size:15px}
+.success-order{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--teal-dark);font-size:16px;margin:0.5rem 0 1.5rem}
 .success-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-track{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
-.btn-continue{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
+.btn-track{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
+.btn-continue{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
 
 /* FOOTER */
 footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
 .footer-inner{max-width:1200px;margin:0 auto}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:13px;color:rgba(255,255,255,0.35)}
 .footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}
 .footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none;transition:color .2s}
 .footer-legal a:hover{color:var(--teal)}
@@ -168,11 +168,24 @@ footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
   .form-row{grid-template-columns:1fr}
 }
 @media(max-width:640px){
+  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
+  .section-title{font-size:clamp(28px,7vw,42px)!important}
+  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
+  .product-title{font-size:clamp(28px,7vw,38px)!important}
+  .section-desc,.post-lead,.featured-body{font-size:16px}
+  body,p,.article p{font-size:15px;line-height:1.75}
+  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
+
   .progress-steps{padding:1rem;gap:0.5rem}
   .step-label{display:none}
   .step:not(:last-child)::after{left:48px}
 }
-</style>
+
+@media(max-width:400px){
+  .page-hero h1,.hero-title{font-size:32px!important}
+  .section-title{font-size:26px!important}
+  .btn-primary,.btn-ghost,.btn-help{font-size:14px;padding:13px 22px}
+}</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );
@@ -290,7 +303,7 @@ get_header( 'alluvia' );
           </div>
         </div>
 
-        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-top:1.5rem;margin-bottom:0.5rem">Shipping Method</h3>
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-top:1.5rem;margin-bottom:0.5rem">Shipping Method</h3>
         <div class="shipping-options">
           <label class="ship-opt selected">
             <input type="radio" name="shipping" value="standard" checked onchange="selectShipping(this)">
@@ -375,12 +388,12 @@ get_header( 'alluvia' );
 
         <div id="paypalForm" style="display:none;text-align:center;padding:2rem 0">
           <i data-lucide="wallet" width="48" height="48" style="color:#003087;margin-bottom:1rem"></i>
-          <p style="color:var(--text-mid);font-size:0.9rem">You will be redirected to PayPal to complete your purchase securely.</p>
+          <p style="color:var(--text-mid);font-size:14px">You will be redirected to PayPal to complete your purchase securely.</p>
         </div>
 
         <div id="cryptoForm" style="display:none;text-align:center;padding:2rem 0">
           <i data-lucide="bitcoin" width="48" height="48" style="color:var(--gold);margin-bottom:1rem"></i>
-          <p style="color:var(--text-mid);font-size:0.9rem">Accepted: BTC, ETH, USDC. A wallet address will be provided after order review.</p>
+          <p style="color:var(--text-mid);font-size:14px">Accepted: BTC, ETH, USDC. A wallet address will be provided after order review.</p>
         </div>
 
         <div class="form-nav">
@@ -391,7 +404,7 @@ get_header( 'alluvia' );
 
       <!-- STEP 3: REVIEW -->
       <div class="tab-content" id="tab3">
-        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Order Items</h3>
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Order Items</h3>
         <div class="review-items">
           <div class="review-item">
             <div class="review-thumb" style="background:rgba(0,198,179,0.1)"><i data-lucide="activity" width="22" height="22" style="color:var(--teal)"></i></div>
@@ -420,17 +433,17 @@ get_header( 'alluvia' );
         </div>
 
         <div style="background:var(--pearl);border-radius:8px;padding:1rem;margin-bottom:1rem">
-          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;color:var(--text-mid)">Shipping To</h4>
-          <p style="font-size:0.88rem;color:var(--text-dark)">Alexandra Chen · 123 Wellness Avenue, Los Angeles, CA 90001, US</p>
-          <p style="font-size:0.78rem;color:var(--teal-dark);margin-top:0.25rem;display:flex;align-items:center;gap:0.3rem"><i data-lucide="thermometer-snowflake" width="13" height="13"></i> Cold-Chain Overnight</p>
+          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;color:var(--text-mid)">Shipping To</h4>
+          <p style="font-size:14px;color:var(--text-dark)">Alexandra Chen · 123 Wellness Avenue, Los Angeles, CA 90001, US</p>
+          <p style="font-size:12px;color:var(--teal-dark);margin-top:0.25rem;display:flex;align-items:center;gap:0.3rem"><i data-lucide="thermometer-snowflake" width="13" height="13"></i> Cold-Chain Overnight</p>
         </div>
 
         <div style="background:var(--pearl);border-radius:8px;padding:1rem">
-          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;color:var(--text-mid)">Payment</h4>
-          <p style="font-size:0.88rem;color:var(--text-dark);display:flex;align-items:center;gap:0.4rem"><i data-lucide="credit-card" width="15" height="15" style="color:var(--teal)"></i> Visa ending in ••••3456</p>
+          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;color:var(--text-mid)">Payment</h4>
+          <p style="font-size:14px;color:var(--text-dark);display:flex;align-items:center;gap:0.4rem"><i data-lucide="credit-card" width="15" height="15" style="color:var(--teal)"></i> Visa ending in ••••3456</p>
         </div>
 
-        <div style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(0,198,179,0.06);border:1px solid rgba(0,198,179,0.2);border-radius:8px;font-size:0.8rem;color:var(--text-mid)">
+        <div style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(0,198,179,0.06);border:1px solid rgba(0,198,179,0.2);border-radius:8px;font-size:13px;color:var(--text-mid)">
           <i data-lucide="info" width="13" height="13" style="color:var(--teal);vertical-align:middle;margin-right:4px"></i>
           All peptides are sold strictly for research purposes. By placing this order you confirm you are 18+ and agree to our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>" style="color:var(--teal-dark)">Terms & Conditions</a>.
         </div>
@@ -491,7 +504,7 @@ get_header( 'alluvia' );
     <h2>Order Confirmed!</h2>
     <p>Thank you for your order. A confirmation has been sent to your email.</p>
     <div class="success-order">Order #ALV-2025-04872</div>
-    <p style="font-size:0.82rem;color:var(--text-light)">Estimated delivery: 1–2 business days via Cold-Chain Overnight</p>
+    <p style="font-size:13px;color:var(--text-light)">Estimated delivery: 1–2 business days via Cold-Chain Overnight</p>
     <div class="success-actions">
       <a href="<?php echo esc_url(alluvia_account_url()); ?>" class="btn-track"><i data-lucide="package" width="15" height="15"></i> Track Order</a>
       <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="btn-continue"><i data-lucide="shopping-bag" width="15" height="15"></i> Continue Shopping</a>
