@@ -1,0 +1,142 @@
+<?php
+/**
+ * Template Name: Alluvia – FAQ
+ *
+ * @package Shopping
+ */
+add_action( 'wp_head', function() {
+?>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;--teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;--coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;--mint:#78c9a2;--sky:#7fb8d4;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;--radius:12px}
+html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
+.logo-mark{width:34px;height:34px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+
+
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;text-decoration:none}
+.cart-count{background:var(--navy);color:var(--teal);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700}
+.nav-account-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;text-decoration:none;transition:all .2s}.nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}.mobile-menu.open{display:flex}.mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;text-decoration:none}
+.mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
+.page-hero{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:6rem 2rem 3rem;margin-top:72px;text-align:center}
+.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.78rem;color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:600;color:#fff;margin-bottom:0.5rem}
+.page-hero p{color:rgba(255,255,255,0.55);font-size:0.95rem;max-width:520px;margin:0 auto}
+.faq-wrap{max-width:820px;margin:0 auto;padding:3.5rem 2rem 5rem}
+.faq-search{display:flex;align-items:center;gap:0.75rem;background:#fff;border:1px solid var(--pearl-dark);border-radius:var(--radius);padding:0.75rem 1.25rem;margin-bottom:2.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.faq-search svg{color:var(--text-light);flex-shrink:0}
+.faq-search input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--text-dark);flex:1;background:transparent}.faq-search input::placeholder{color:var(--text-light)}
+.faq-section{margin-bottom:2.5rem}
+.faq-section-title{display:flex;align-items:center;gap:0.75rem;font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
+.faq-section-title svg{color:var(--teal)}
+.faq-item{background:#fff;border-radius:var(--radius);margin-bottom:0.75rem;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.05)}
+.faq-q{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.92rem;transition:background .2s;user-select:none;gap:1rem}
+.faq-q:hover{background:var(--pearl)}
+.faq-q .chevron{transition:transform .3s;color:var(--teal);flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.faq-a.open{max-height:500px;padding:0 1.5rem 1.25rem}
+.faq-a p{font-size:0.9rem;color:var(--text-mid);line-height:1.8}
+.faq-a a{color:var(--teal-dark);text-decoration:none}.faq-a a:hover{text-decoration:underline}
+.still-help{background:var(--navy);border-radius:var(--radius);padding:2.5rem;text-align:center;margin-top:3rem}
+.still-help h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:#fff;margin-bottom:0.5rem}
+.still-help p{color:rgba(255,255,255,0.55);margin-bottom:1.5rem;font-size:0.9rem}
+.help-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-help{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-help.primary{background:var(--teal);color:var(--navy)}.btn-help.primary:hover{background:#fff}
+.btn-help.outline{background:transparent;border:1px solid rgba(255,255,255,0.25);color:#fff}.btn-help.outline:hover{border-color:var(--teal);color:var(--teal)}
+footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}.footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none}.footer-legal a:hover{color:var(--teal)}
+@media(max-width:640px){.nav-links{display:none}.nav-hamburger{display:flex}}
+</style>
+<?php
+}, 20 );
+get_header( 'alluvia' );
+?>
+<nav class="alluvia-nav"><a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+<ul class="nav-links"><li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li><li><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li><li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li><li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li></ul>
+<div class="nav-right"><a href="<?php echo esc_url(alluvia_cart_url()); ?>" class="nav-cart-btn"><i data-lucide="shopping-bag" width="16" height="16"></i> Cart <span class="cart-count">4</span></a><a href="<?php echo esc_url(alluvia_account_url()); ?>" class="nav-account-btn"><i data-lucide="user" width="18" height="18"></i></a><button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')"><span></span><span></span><span></span></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open')"><i data-lucide="x" width="28" height="28"></i></button><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Home</a><i data-lucide="chevron-right" width="14" height="14"></i><span>FAQ</span></div>
+  <h1>Frequently Asked Questions</h1>
+  <p>Everything you need to know about our peptides, ordering, storage, and shipping.</p>
+</div>
+
+<div class="faq-wrap">
+  <div class="faq-search"><i data-lucide="search" width="18" height="18"></i><input type="text" placeholder="Search questions…" oninput="filterFAQ(this.value)"></div>
+
+  <div class="faq-section" id="section-products">
+    <div class="faq-section-title"><i data-lucide="flask-conical" width="16" height="16"></i> Products & Quality</div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What purity level are your peptides?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>All Alluvia Peptides products are tested to a minimum purity of ≥98% by HPLC (High-Performance Liquid Chromatography). Most products, including BPC-157 and GHK-Cu, consistently test at ≥99%. The specific purity for each lot is documented on the Certificate of Analysis (COA), which is available in our <a href="<?php echo esc_url(home_url('/coa-library/')); ?>">COA Library</a> and included with every order.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What does lyophilized mean?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>Lyophilized means freeze-dried. The peptide is dissolved in water, frozen, and then the water is removed under vacuum — leaving a dry powder or "cake." Lyophilized peptides are far more stable than liquid solutions, typically maintaining potency for 24+ months when stored at −20°C. The process avoids thermal degradation that can occur during conventional drying.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are your products tested by third-party labs?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>Yes. All batches are independently tested by accredited third-party analytical laboratories including Janoshik Analytical and Peptide Sciences' partner labs. Testing includes HPLC purity analysis, mass spectrometry identity confirmation, and endotoxin screening. We do not rely solely on manufacturer certificates — every lot is independently verified before it reaches our inventory.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is a COA and how do I read it?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>A COA (Certificate of Analysis) is a document issued by the testing laboratory confirming the identity, purity, and quality of a compound. Key fields to check: the HPLC purity percentage (should match or exceed the stated minimum), the retention time (confirms correct compound identity), and the molecular weight confirmed by mass spectrometry. Our <a href="<?php echo esc_url(home_url('/blog/')); ?>">blog guide on reading a COA</a> walks through this in detail.</p></div></div>
+  </div>
+
+  <div class="faq-section" id="section-reconstitution">
+    <div class="faq-section-title"><i data-lucide="droplets" width="16" height="16"></i> Reconstitution & Storage</div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I reconstitute a lyophilized peptide vial?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>For research purposes, reconstitute with sterile bacteriostatic water (0.9% benzyl alcohol). Use a sterile syringe to inject the water slowly against the inner wall of the vial — do not spray directly onto the lyophilized cake. Gently swirl or roll the vial to dissolve; do not vortex or shake, as this can degrade the peptide. Once dissolved, the solution should be clear. Store reconstituted peptide at 2–8°C and use within 30 days.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long can I store peptides before and after reconstitution?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p><strong>Lyophilized (dry):</strong> Store at −20°C, protected from light and moisture. Shelf life is typically 24–36 months. At 2–8°C (refrigerator), lyophilized peptides are generally stable for 6–12 months.<br><br><strong>Reconstituted (liquid):</strong> Store at 2–8°C and use within 30 days. Minimize freeze-thaw cycles — each cycle degrades the peptide. If you need to store for longer, aliquot into single-use portions before freezing.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">My vial arrived warm — is it still viable?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>Lyophilized peptides are significantly more heat-tolerant than liquid formulations. Brief ambient-temperature exposure during standard shipping is generally not problematic for lyophilized material. However, if you selected Cold-Chain shipping and your order arrived warm (temperature indicator card out of range), please contact us within 24 hours with a photo and we will reship at no charge.</p></div></div>
+  </div>
+
+  <div class="faq-section" id="section-ordering">
+    <div class="faq-section-title"><i data-lucide="shopping-cart" width="16" height="16"></i> Ordering & Payments</div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Who can purchase from Alluvia Peptides?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>Our products are sold exclusively for in vitro and laboratory research purposes. Purchasers must be at least 18 years of age and must be qualified researchers, licensed professionals, or institutional buyers with legitimate research applications. By placing an order you confirm you meet these criteria and agree to our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms & Conditions</a>.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>We accept Visa, Mastercard, and American Express via our SSL-encrypted payment gateway, PayPal, and cryptocurrency (BTC, ETH, USDC). All card transactions are processed by PCI-DSS compliant processors — we do not store full card details on our servers.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I cancel or modify my order?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>Orders can be cancelled or modified within 1 hour of placement by contacting <a href="mailto:support@alluviapeptides.com">support@alluviapeptides.com</a>. Once an order enters the dispatch queue, modifications may not be possible. Please double-check your order details before completing checkout.</p></div></div>
+  </div>
+
+  <div class="faq-section" id="section-shipping">
+    <div class="faq-section-title"><i data-lucide="truck" width="16" height="16"></i> Shipping & Delivery</div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I need cold-chain shipping?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>We strongly recommend cold-chain shipping for all orders. While lyophilized peptides can tolerate brief ambient exposure, cold-chain shipping ($24.99) guarantees 2–8°C from our facility to your door using insulated packaging, pharmaceutical-grade ice packs, and a temperature indicator card. For reconstituted or solution-form products, cold-chain is mandatory. See our full <a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping Policy</a>.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you ship internationally?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>Yes, we ship to most countries via FedEx International and DHL Express. International customers are responsible for verifying that importation of research peptides is legal in their jurisdiction and for any applicable customs duties. We ship DDP (Delivered Duty Paid) for Canada and UK; all other regions are DAP. See our <a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping Policy</a> for rates and estimated times.</p></div></div>
+  </div>
+
+  <div class="faq-section" id="section-legal">
+    <div class="faq-section-title"><i data-lucide="shield" width="16" height="16"></i> Legal & Compliance</div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are peptides legal to purchase?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>In the United States, research peptides are not scheduled substances and are legal to purchase and possess for legitimate research purposes. They are not approved as drugs or dietary supplements. Regulations vary by country — it is the customer's responsibility to verify compliance with local laws. We do not sell to jurisdictions where such products are prohibited.</p></div></div>
+
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I use your peptides for human or animal use?<i data-lucide="chevron-down" width="18" height="18" class="chevron"></i></div><div class="faq-a"><p>No. All products are sold strictly for in vitro and laboratory research purposes. They are not approved by the FDA for human or veterinary use, have not been evaluated in clinical trials, and must not be administered to humans or animals. Any such use is a violation of our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms & Conditions</a> and may be illegal.</p></div></div>
+  </div>
+
+  <div class="still-help">
+    <h2>Still Have Questions?</h2>
+    <p>Our research support team is available Monday–Friday, 9 AM–6 PM EST.</p>
+    <div class="help-actions">
+      <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn-help primary"><i data-lucide="mail" width="16" height="16"></i> Contact Us</a>
+      <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="btn-help outline"><i data-lucide="book-open" width="16" height="16"></i> Read the Blog</a>
+    </div>
+  </div>
+</div>
+
+<footer><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Alluvia Peptides. All rights reserved.</span><div class="footer-legal"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a></div></div></div></footer>
+<script>
+lucide.createIcons();
+function toggleFaq(el){const a=el.nextElementSibling;a.classList.toggle('open');el.querySelector('.chevron').style.transform=a.classList.contains('open')?'rotate(180deg)':'';}
+function filterFAQ(q){const term=q.toLowerCase();document.querySelectorAll('.faq-item').forEach(item=>{const text=item.textContent.toLowerCase();item.style.display=text.includes(term)?'':'none';});}
+</script>
+<?php get_footer( 'alluvia' ); ?>

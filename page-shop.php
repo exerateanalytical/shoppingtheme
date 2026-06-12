@@ -1,0 +1,438 @@
+<?php
+/**
+ * Template Name: Alluvia – Shop
+ *
+ * @package Shopping
+ */
+add_action( 'wp_head', function() {
+?>
+<style>
+:root{--navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;--teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;--coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;--mint:#78c9a2;--sky:#7fb8d4;--pearl:#f4f2ee;--pearl-dark:#e8e4dc;--white:#fff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;--radius-sm:8px;--radius-md:16px;--radius-lg:24px;--shadow-sm:0 2px 12px rgba(13,27,42,.08);--shadow-md:0 8px 32px rgba(13,27,42,.14);--shadow-lg:0 20px 60px rgba(13,27,42,.2);--transition:.4s cubic-bezier(.23,1,.32,1);--font-display:'Cormorant Garamond',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;--font-ui:'Space Grotesk',system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font-body);color:var(--text-dark);background:var(--pearl);overflow-x:hidden}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,.97);backdrop-filter:blur(20px);padding:14px 0;box-shadow:0 2px 24px rgba(0,0,0,.25)}
+.nav-inner{max-width:1340px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
+.logo-mark{width:34px;height:34px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.nav-logo-word{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--white);letter-spacing:.05em}
+.nav-logo-sub{font-family:var(--font-ui);font-size:9px;font-weight:500;letter-spacing:.35em;color:var(--teal);text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-family:var(--font-ui);font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.7);text-decoration:none;text-transform:uppercase;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-cart-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:8px 16px;color:rgba(255,255,255,.8);text-decoration:none;font-family:var(--font-ui);font-size:12px;font-weight:600;transition:var(--transition);position:relative}
+.nav-cart-btn:hover{background:rgba(0,198,179,.15);border-color:rgba(0,198,179,.3);color:var(--teal)}
+.cart-count{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--teal);color:var(--navy);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--font-ui)}
+.nav-cta{background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:12px;font-weight:700;padding:9px 20px;border-radius:100px;text-decoration:none;transition:var(--transition);white-space:nowrap}
+.nav-cta:hover{background:var(--teal-dark)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px}
+.mobile-overlay{position:fixed;inset:0;z-index:999;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-overlay.open{opacity:1;pointer-events:all}
+.mobile-overlay a{font-family:var(--font-display);font-size:38px;font-weight:300;color:var(--white);text-decoration:none;transition:color .2s}
+.mobile-overlay a:hover{color:var(--teal)}
+.mobile-close{position:absolute;top:20px;right:24px;background:none;border:none;color:var(--white);cursor:pointer;padding:8px;display:flex}
+/* PAGE HERO */
+.shop-hero{background:var(--navy);padding:120px 0 60px;position:relative;overflow:hidden}
+.shop-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(0,198,179,.07) 0%,transparent 60%)}
+.shop-hero-inner{max-width:1340px;margin:0 auto;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;position:relative;z-index:2}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:16px}
+.breadcrumb a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}.breadcrumb a:hover{color:var(--teal)}
+.shop-hero h1{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:12px}
+.shop-hero h1 em{font-style:italic;color:var(--teal)}
+.shop-hero-desc{font-size:16px;color:rgba(255,255,255,.5);font-weight:300;max-width:480px;line-height:1.7}
+.hero-cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.hero-cat-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid rgba(255,255,255,.1);font-family:var(--font-ui);font-size:11px;font-weight:600;color:rgba(255,255,255,.5);cursor:pointer;transition:var(--transition);text-decoration:none}
+.hero-cat-pill:hover,.hero-cat-pill.active{border-color:var(--teal);color:var(--teal);background:rgba(0,198,179,.08)}
+/* MAIN LAYOUT */
+.shop-main{max-width:1340px;margin:0 auto;padding:48px 40px 100px;display:grid;grid-template-columns:260px 1fr;gap:40px}
+/* SIDEBAR */
+.shop-sidebar{display:flex;flex-direction:column;gap:24px;position:sticky;top:80px;align-self:start}
+.sidebar-block{background:var(--white);border-radius:var(--radius-md);padding:24px;border:1px solid var(--pearl-dark)}
+.sidebar-block-title{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.sidebar-block-title svg{color:var(--teal)}
+.search-wrap{display:flex;align-items:center;gap:10px;background:var(--pearl);border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:10px 14px;transition:border-color .2s}
+.search-wrap:focus-within{border-color:var(--teal)}
+.search-wrap svg{color:var(--text-light);flex-shrink:0}
+.search-wrap input{background:none;border:none;outline:none;font-family:var(--font-body);font-size:14px;color:var(--text-dark);width:100%}
+.search-wrap input::placeholder{color:var(--text-light)}
+.cat-filter-list{display:flex;flex-direction:column;gap:2px}
+.cat-filter-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background .2s;user-select:none}
+.cat-filter-item:hover{background:var(--pearl)}
+.cat-filter-item.active{background:rgba(0,198,179,.08);color:var(--teal)}
+.cat-filter-left{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:inherit}
+.cat-filter-left svg{width:16px;height:16px}
+.cat-filter-item.active .cat-filter-left{color:var(--teal)}
+.cat-count{font-family:var(--font-ui);font-size:11px;font-weight:600;background:var(--pearl-dark);border-radius:100px;padding:2px 8px;color:var(--text-light)}
+.cat-filter-item.active .cat-count{background:rgba(0,198,179,.15);color:var(--teal)}
+.price-range{display:flex;flex-direction:column;gap:12px}
+.price-row{display:flex;gap:10px}
+.price-input{background:var(--pearl);border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;color:var(--text-dark);width:100%;outline:none;transition:border-color .2s}
+.price-input:focus{border-color:var(--teal)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0}
+.toggle-label{font-size:14px;color:var(--text-mid)}
+.toggle-switch{width:40px;height:22px;background:var(--pearl-dark);border-radius:100px;position:relative;cursor:pointer;transition:background .3s;flex-shrink:0}
+.toggle-switch.on{background:var(--teal)}
+.toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--white);transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.toggle-switch.on::after{transform:translateX(18px)}
+.reset-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px;border-radius:var(--radius-sm);background:none;border:1.5px solid var(--pearl-dark);font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--text-mid);cursor:pointer;transition:var(--transition)}
+.reset-btn:hover{border-color:var(--navy);color:var(--navy)}
+/* PRODUCTS AREA */
+.shop-content{}
+.shop-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.results-count{font-size:14px;color:var(--text-mid)}
+.results-count strong{color:var(--navy)}
+.toolbar-right{display:flex;align-items:center;gap:12px}
+.sort-select{background:var(--white);border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:9px 36px 9px 14px;font-family:var(--font-ui);font-size:13px;font-weight:500;color:var(--text-dark);outline:none;cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238899aa' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;transition:border-color .2s}
+.sort-select:focus{border-color:var(--teal)}
+.view-toggle{display:flex;border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);overflow:hidden}
+.view-btn{padding:8px 12px;background:none;border:none;cursor:pointer;color:var(--text-light);transition:var(--transition);display:flex;align-items:center}
+.view-btn.active{background:var(--navy);color:var(--white)}
+/* PRODUCT GRID */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.product-card{background:var(--white);border-radius:var(--radius-md);border:1px solid var(--pearl-dark);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column}
+.product-card:hover{border-color:rgba(0,198,179,.25);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.product-img{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-img svg{opacity:.25;color:var(--white)}
+.product-img-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 30% 40%,var(--teal) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--gold) 0%,transparent 40%)}
+.product-badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.badge-cat{background:rgba(13,27,42,.7);color:var(--white);backdrop-filter:blur(8px)}
+.badge-bestseller{background:var(--gold);color:var(--navy)}
+.badge-new{background:var(--teal);color:var(--navy)}
+.badge-low{background:var(--coral);color:var(--white)}
+.product-wish{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(13,27,42,.6);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);transition:var(--transition)}
+.product-wish:hover{background:var(--coral);color:var(--white)}
+.product-info{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product-category{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.product-name{font-family:var(--font-ui);font-size:15px;font-weight:700;color:var(--navy);line-height:1.3}
+.product-sub{font-size:12px;color:var(--text-light);font-weight:400;margin-top:-4px}
+.product-rating{display:flex;align-items:center;gap:6px}
+.stars{display:flex;gap:2px;color:var(--gold)}
+.stars svg{width:12px;height:12px;fill:var(--gold);stroke:none}
+.rating-num{font-family:var(--font-ui);font-size:12px;font-weight:600;color:var(--text-mid)}
+.rating-count{font-size:11px;color:var(--text-light)}
+.product-desc{font-size:13px;color:var(--text-mid);line-height:1.6;flex:1}
+.product-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--pearl-dark)}
+.product-price{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--navy)}
+.add-cart-btn{display:flex;align-items:center;gap:7px;background:var(--teal);color:var(--navy);border:none;border-radius:100px;padding:9px 18px;font-family:var(--font-ui);font-size:12px;font-weight:700;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.add-cart-btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,198,179,.35)}
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:48px}
+.page-btn{width:40px;height:40px;border-radius:var(--radius-sm);border:1.5px solid var(--pearl-dark);background:var(--white);font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--text-mid);cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center}
+.page-btn:hover{border-color:var(--teal);color:var(--teal)}
+.page-btn.active{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.page-btn.arrow{background:none}
+/* FOOTER */
+.alluvia-footer{background:#060e17;padding:80px 0 0}
+.footer-grid{max-width:1340px;margin:0 auto;padding:0 40px 60px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-brand{display:flex;flex-direction:column;gap:18px}
+.footer-desc{font-size:14px;line-height:1.8;color:rgba(255,255,255,.4);max-width:280px}
+.footer-socials{display:flex;gap:10px}
+.social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:var(--transition);color:rgba(255,255,255,.5)}
+.social-btn:hover{background:var(--teal);border-color:var(--teal);color:var(--navy);transform:translateY(-2px)}
+.footer-col-title{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0;padding:0}
+.footer-links a{font-size:14px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:5px}
+.footer-links a:hover{color:var(--teal)}
+.footer-bottom{max-width:1340px;margin:0 auto;padding:22px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.25);flex-wrap:wrap;gap:10px}
+.footer-bottom-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-bottom-links a{color:rgba(255,255,255,.25);text-decoration:none;font-size:13px;transition:color .2s}
+.footer-bottom-links a:hover{color:rgba(255,255,255,.55)}
+@media(max-width:1100px){.shop-main{grid-template-columns:220px 1fr}.products-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
+@media(max-width:900px){.shop-main{grid-template-columns:1fr;padding:32px 24px 80px}.shop-sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:16px}.nav-links{display:none}.nav-hamburger{display:flex}.nav-inner{padding:0 24px}}
+@media(max-width:640px){.shop-sidebar{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr 1fr}.shop-hero-inner{padding:0 24px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.footer-bottom,.footer-grid{padding-left:24px;padding-right:24px}}
+@media(max-width:420px){.products-grid{grid-template-columns:1fr}}
+</style>
+<?php
+}, 20 );
+get_header( 'alluvia' );
+?>
+<nav class="alluvia-nav">
+  <div class="nav-inner">
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+    <ul class="nav-links">
+      <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="active">Products</a></li>
+      <li><a href="<?php echo esc_url(home_url('/')); ?>#science">Science</a></li>
+      <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
+      <li><a href="<?php echo esc_url(home_url('/')); ?>#testimonials">Reviews</a></li>
+      <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="<?php echo esc_url(alluvia_cart_url()); ?>" class="nav-cart-btn"><i data-lucide="shopping-cart" style="width:15px;height:15px"></i> Cart <span class="cart-count">3</span></a>
+      <a href="<?php echo esc_url(alluvia_account_url()); ?>" class="nav-cart-btn" style="padding:8px 12px"><i data-lucide="user" style="width:15px;height:15px"></i></a>
+    </div>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobileNav">
+  <button class="mobile-close" id="mobileClose"><i data-lucide="x" style="width:26px;height:26px;color:white"></i></button>
+  <a href="<?php echo esc_url(alluvia_shop_url()); ?>" onclick="closeMobile()">Products</a>
+  <a href="<?php echo esc_url(home_url('/about/')); ?>" onclick="closeMobile()">About</a>
+  <a href="<?php echo esc_url(home_url('/contact/')); ?>" onclick="closeMobile()">Contact</a>
+  <a href="<?php echo esc_url(alluvia_cart_url()); ?>" onclick="closeMobile()">Cart (3)</a>
+  <a href="<?php echo esc_url(alluvia_account_url()); ?>" onclick="closeMobile()">My Account</a>
+</div>
+
+<section class="shop-hero">
+  <div class="shop-hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Home</a><i data-lucide="chevron-right" style="width:11px;height:11px"></i><span>Shop</span></div>
+      <h1>Our <em>Peptide</em> Collection</h1>
+      <p class="shop-hero-desc">50+ pharmaceutical-grade peptides, each independently tested and COA-documented. Find your stack below.</p>
+      <div class="hero-cats">
+        <a href="#" class="hero-cat-pill active"><i data-lucide="layers" style="width:12px;height:12px"></i>All</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="heart-pulse" style="width:12px;height:12px"></i>Medical</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="sparkles" style="width:12px;height:12px"></i>Skincare</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="bone" style="width:12px;height:12px"></i>Collagen</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="zap" style="width:12px;height:12px"></i>Sports</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="flame" style="width:12px;height:12px"></i>Weight-Loss</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="timer" style="width:12px;height:12px"></i>Anti-Aging</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="sprout" style="width:12px;height:12px"></i>Hair</a>
+        <a href="#" class="hero-cat-pill"><i data-lucide="test-tube-2" style="width:12px;height:12px"></i>Research</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="shop-main">
+  <!-- SIDEBAR -->
+  <aside class="shop-sidebar">
+    <div class="sidebar-block">
+      <div class="search-wrap"><i data-lucide="search" style="width:15px;height:15px"></i><input type="text" placeholder="Search peptides…"></div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-block-title"><i data-lucide="filter" style="width:14px;height:14px"></i>Categories</div>
+      <div class="cat-filter-list">
+        <div class="cat-filter-item active" onclick="filterCat(this,'All')"><div class="cat-filter-left"><i data-lucide="layers"></i>All Peptides</div><span class="cat-count">50</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Medical')"><div class="cat-filter-left"><i data-lucide="heart-pulse"></i>Medical</div><span class="cat-count">12</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Skincare')"><div class="cat-filter-left"><i data-lucide="sparkles"></i>Skincare</div><span class="cat-count">8</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Collagen')"><div class="cat-filter-left"><i data-lucide="bone"></i>Collagen</div><span class="cat-count">6</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Sports')"><div class="cat-filter-left"><i data-lucide="zap"></i>Sports &amp; Recovery</div><span class="cat-count">9</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Weight')"><div class="cat-filter-left"><i data-lucide="flame"></i>Weight-Loss</div><span class="cat-count">5</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Hormone')"><div class="cat-filter-left"><i data-lucide="timer"></i>Hormone &amp; Anti-Aging</div><span class="cat-count">7</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Hair')"><div class="cat-filter-left"><i data-lucide="sprout"></i>Hair Growth</div><span class="cat-count">5</span></div>
+        <div class="cat-filter-item" onclick="filterCat(this,'Research')"><div class="cat-filter-left"><i data-lucide="test-tube-2"></i>Research</div><span class="cat-count">8</span></div>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-block-title"><i data-lucide="dollar-sign" style="width:14px;height:14px"></i>Price Range</div>
+      <div class="price-range">
+        <div class="price-row">
+          <input class="price-input" type="number" placeholder="Min $" value="0">
+          <input class="price-input" type="number" placeholder="Max $" value="200">
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-block-title"><i data-lucide="sliders-horizontal" style="width:14px;height:14px"></i>Availability</div>
+      <div class="toggle-row"><span class="toggle-label">In Stock Only</span><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="toggle-row" style="margin-top:10px"><span class="toggle-label">Best Sellers</span><div class="toggle-switch" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+    <button class="reset-btn"><i data-lucide="rotate-ccw" style="width:14px;height:14px"></i>Reset Filters</button>
+  </aside>
+
+  <!-- PRODUCTS -->
+  <div class="shop-content">
+    <div class="shop-toolbar">
+      <p class="results-count">Showing <strong>12</strong> of <strong>50</strong> peptides</p>
+      <div class="toolbar-right">
+        <select class="sort-select">
+          <option>Best Selling</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest First</option>
+          <option>Top Rated</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn active"><i data-lucide="grid-2x2" style="width:15px;height:15px"></i></button>
+          <button class="view-btn"><i data-lucide="list" style="width:15px;height:15px"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- BPC-157 -->
+      <div class="product-card">
+        <div class="product-img" style="--c:var(--teal)">
+          <div class="product-img-bg"></div>
+          <i data-lucide="heart-pulse" style="width:56px;height:56px;opacity:.2;color:var(--teal)"></i>
+          <div class="product-badges"><span class="badge badge-cat">Medical</span><span class="badge badge-bestseller">Best Seller</span></div>
+          <button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Medical Peptides</div>
+          <div class="product-name">BPC-157 <span class="product-sub">Body Protection Compound · 5mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.9</span><span class="rating-count">(284 reviews)</span></div>
+          <p class="product-desc">Gold standard for tissue repair, gut healing, and tendon/ligament recovery. Stable sequence derived from human gastric juice.</p>
+          <div class="product-footer"><span class="product-price">$65.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- TB-500 -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 30% 40%,var(--coral) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--teal) 0%,transparent 40%)"></div><i data-lucide="activity" style="width:56px;height:56px;opacity:.2;color:var(--coral)"></i><div class="product-badges"><span class="badge badge-cat">Medical</span><span class="badge badge-bestseller">Best Seller</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category">Medical Peptides</div>
+          <div class="product-name">TB-500 <span class="product-sub">Thymosin Beta-4 · 5mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.8</span><span class="rating-count">(197 reviews)</span></div>
+          <p class="product-desc">Systemic tissue repair and injury recovery. Promotes cell migration, angiogenesis, and anti-inflammatory response.</p>
+          <div class="product-footer"><span class="product-price">$78.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- GHK-Cu -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 30% 40%,var(--coral) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--gold) 0%,transparent 40%)"></div><i data-lucide="sparkles" style="width:56px;height:56px;opacity:.2;color:var(--coral)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(232,117,138,.7)">Skincare</span><span class="badge badge-bestseller">Best Seller</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--coral)">Skincare Peptides</div>
+          <div class="product-name">GHK-Cu Peptide <span class="product-sub">Copper Peptide Complex · 50mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.9</span><span class="rating-count">(312 reviews)</span></div>
+          <p class="product-desc">Tripeptide copper complex stimulating collagen production, wound healing, and skin renewal at the dermal matrix level.</p>
+          <div class="product-footer"><span class="product-price">$52.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- Matrixyl 3000 -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 40% 30%,var(--gold) 0%,transparent 45%),radial-gradient(circle at 60% 70%,var(--coral) 0%,transparent 40%)"></div><i data-lucide="layers" style="width:56px;height:56px;opacity:.2;color:var(--gold)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(232,117,138,.7)">Skincare</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--coral)">Skincare Peptides</div>
+          <div class="product-name">Matrixyl 3000 <span class="product-sub">Palmitoyl Tripeptide-1 + Tetrapeptide-7 · 100mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.7</span><span class="rating-count">(148 reviews)</span></div>
+          <p class="product-desc">Dual-peptide matrikine complex clinically shown to reduce the depth of deep wrinkles by up to 45% in 2 months.</p>
+          <div class="product-footer"><span class="product-price">$45.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- CJC-1295 -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 30% 40%,var(--gold) 0%,transparent 40%),radial-gradient(circle at 70% 60%,var(--purple) 0%,transparent 40%)"></div><i data-lucide="timer" style="width:56px;height:56px;opacity:.2;color:var(--gold)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(155,114,207,.7)">Hormone</span><span class="badge badge-bestseller">Best Seller</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--purple)">Hormone &amp; Anti-Aging</div>
+          <div class="product-name">CJC-1295 (No DAC) <span class="product-sub">Growth Hormone Releasing Hormone · 2mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.8</span><span class="rating-count">(221 reviews)</span></div>
+          <p class="product-desc">GHRH analogue amplifying natural GH pulse amplitude. Short half-life preserves pulsatile secretion pattern.</p>
+          <div class="product-footer"><span class="product-price">$72.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- Ipamorelin -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 35% 35%,var(--purple) 0%,transparent 40%),radial-gradient(circle at 65% 65%,var(--teal) 0%,transparent 40%)"></div><i data-lucide="moon" style="width:56px;height:56px;opacity:.2;color:var(--purple)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(155,114,207,.7)">Hormone</span><span class="badge badge-bestseller">Best Seller</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--purple)">Hormone &amp; Anti-Aging</div>
+          <div class="product-name">Ipamorelin <span class="product-sub">Selective GH Secretagogue · 2mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.9</span><span class="rating-count">(276 reviews)</span></div>
+          <p class="product-desc">Clean, selective GH release with minimal cortisol or prolactin elevation. Ideal for recovery, sleep quality, and body composition.</p>
+          <div class="product-footer"><span class="product-price">$68.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- AOD-9604 -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 30% 40%,var(--purple) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--orange) 0%,transparent 40%)"></div><i data-lucide="flame" style="width:56px;height:56px;opacity:.2;color:var(--orange)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(155,114,207,.7)">Weight-Loss</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--orange)">Weight-Loss &amp; Metabolic</div>
+          <div class="product-name">AOD-9604 <span class="product-sub">Anti-Obesity Domain Fragment · 2mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.7</span><span class="rating-count">(163 reviews)</span></div>
+          <p class="product-desc">C-terminal fragment of GH with fat-burning activity but no IGF-1 or blood sugar elevation. Targets adipose tissue directly.</p>
+          <div class="product-footer"><span class="product-price">$58.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- Semaglutide -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 40% 30%,var(--orange) 0%,transparent 40%),radial-gradient(circle at 60% 70%,var(--purple) 0%,transparent 40%)"></div><i data-lucide="trending-down" style="width:56px;height:56px;opacity:.2;color:var(--orange)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(224,123,84,.7)">Weight-Loss</span><span class="badge badge-new">New</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--orange)">Weight-Loss &amp; Metabolic</div>
+          <div class="product-name">Semaglutide <span class="product-sub">GLP-1 Receptor Agonist · 5mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.8</span><span class="rating-count">(94 reviews)</span></div>
+          <p class="product-desc">Potent GLP-1 agonist for metabolic regulation, appetite control, and sustained weight management. Research-grade purity.</p>
+          <div class="product-footer"><span class="product-price">$185.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- BPC-157 + TB-500 Stack -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg"></div><i data-lucide="package-2" style="width:56px;height:56px;opacity:.2;color:var(--teal)"></i><div class="product-badges"><span class="badge badge-cat">Stack</span><span class="badge badge-bestseller">Best Seller</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category">Peptide Stacks</div>
+          <div class="product-name">BPC-157 + TB-500 Stack <span class="product-sub">Recovery &amp; Repair Bundle · 5mg each</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.9</span><span class="rating-count">(341 reviews)</span></div>
+          <p class="product-desc">The most popular recovery stack. Synergistic tissue repair, inflammation reduction, and angiogenesis. Save 15% vs individual.</p>
+          <div class="product-footer"><span class="product-price" style="color:var(--teal)">$119.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- PTD-DBM -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 30% 40%,var(--mint) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--teal) 0%,transparent 40%)"></div><i data-lucide="sprout" style="width:56px;height:56px;opacity:.2;color:var(--mint)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(120,201,162,.7);color:#0d1b2a">Hair Growth</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--mint)">Hair Growth Peptides</div>
+          <div class="product-name">PTD-DBM <span class="product-sub">Wnt Pathway Activator · 50mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.6</span><span class="rating-count">(89 reviews)</span></div>
+          <p class="product-desc">Activates Wnt/β-catenin signalling pathway to stimulate hair follicle cycling and extend the anagen growth phase.</p>
+          <div class="product-footer"><span class="product-price">$55.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- Epithalon -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 35% 35%,var(--sky) 0%,transparent 40%),radial-gradient(circle at 65% 65%,var(--teal) 0%,transparent 40%)"></div><i data-lucide="test-tube-2" style="width:56px;height:56px;opacity:.2;color:var(--sky)"></i><div class="product-badges"><span class="badge badge-cat" style="background:rgba(127,184,212,.7)">Research</span><span class="badge badge-new">New Batch</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category" style="color:var(--sky)">Research Peptides</div>
+          <div class="product-name">Epithalon <span class="product-sub">Telomerase Activator Tetrapeptide · 10mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.9</span><span class="rating-count">(127 reviews)</span></div>
+          <p class="product-desc">Pineal gland tetrapeptide activating telomerase — the longevity enzyme. One of the most researched epigenetic regulators.</p>
+          <div class="product-footer"><span class="product-price">$95.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+      <!-- Selank -->
+      <div class="product-card">
+        <div class="product-img"><div class="product-img-bg" style="background-image:radial-gradient(circle at 30% 40%,var(--purple) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--sky) 0%,transparent 40%)"></div><i data-lucide="brain" style="width:56px;height:56px;opacity:.2;color:var(--purple)"></i><div class="product-badges"><span class="badge badge-cat">Medical</span></div><button class="product-wish"><i data-lucide="heart" style="width:14px;height:14px"></i></button></div>
+        <div class="product-info">
+          <div class="product-category">Medical Peptides</div>
+          <div class="product-name">Selank <span class="product-sub">Anxiolytic Nootropic Heptapeptide · 5mg</span></div>
+          <div class="product-rating"><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span class="rating-num">4.7</span><span class="rating-count">(104 reviews)</span></div>
+          <p class="product-desc">Russian-developed anxiolytic modulating GABA-A receptors and BDNF expression. Cognitive-enhancing with anxiolytic and immunomodulatory effects.</p>
+          <div class="product-footer"><span class="product-price">$75.00</span><button class="add-cart-btn" onclick="addToCart(this)"><i data-lucide="shopping-cart" style="width:13px;height:13px"></i>Add to Cart</button></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pagination">
+      <button class="page-btn arrow"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <span style="color:var(--text-light);font-size:14px;padding:0 4px">…</span>
+      <button class="page-btn">8</button>
+      <button class="page-btn arrow"><i data-lucide="chevron-right" style="width:16px;height:16px"></i></button>
+    </div>
+  </div>
+</div>
+
+<footer class="alluvia-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo" style="margin-bottom:4px"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a><p class="footer-desc">Pharmaceutical-grade bioactive peptides — backed by science, delivered with integrity.</p><div class="footer-socials"><a href="#" class="social-btn"><i data-lucide="instagram" style="width:16px;height:16px"></i></a><a href="#" class="social-btn"><i data-lucide="twitter" style="width:16px;height:16px"></i></a><a href="#" class="social-btn"><i data-lucide="facebook" style="width:16px;height:16px"></i></a><a href="#" class="social-btn"><i data-lucide="youtube" style="width:16px;height:16px"></i></a></div></div>
+    <div><h3 class="footer-col-title">Products</h3><ul class="footer-links"><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Medical Peptides</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Skincare Peptides</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Sports &amp; Recovery</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Anti-Aging</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Research Peptides</a></li></ul></div>
+    <div><h3 class="footer-col-title">Company</h3><ul class="footer-links"><li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>About Us</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Blog</a></li><li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Contact</a></li><li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Shipping</a></li></ul></div>
+    <div><h3 class="footer-col-title">Legal</h3><ul class="footer-links"><li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Terms &amp; Conditions</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Privacy Policy</a></li><li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Shipping Policy</a></li><li><a href="#"><i data-lucide="chevron-right" style="width:12px;height:12px;color:var(--teal)"></i>Disclaimer</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 Alluvia Peptides. All rights reserved.</p><div class="footer-bottom-links"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="#">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="#">Disclaimer</a></div></div>
+</footer>
+
+<script>
+lucide.createIcons();
+var mNav=document.getElementById('mobileNav');
+document.getElementById('hamburger').onclick=function(){mNav.classList.add('open');document.body.style.overflow='hidden';};
+document.getElementById('mobileClose').onclick=closeMobile;
+function closeMobile(){mNav.classList.remove('open');document.body.style.overflow='';}
+function filterCat(el,cat){document.querySelectorAll('.cat-filter-item').forEach(function(i){i.classList.remove('active');});el.classList.add('active');}
+function addToCart(btn){var orig=btn.innerHTML;btn.innerHTML='<i data-lucide="check" style="width:13px;height:13px"></i> Added!';btn.style.background='var(--navy)';lucide.createIcons();setTimeout(function(){btn.innerHTML=orig;btn.style.background='';lucide.createIcons();},2000);}
+</script>
+<?php get_footer( 'alluvia' ); ?>

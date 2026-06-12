@@ -1,214 +1,284 @@
 <?php
 /**
- * Omega functions and definitions
+ * Alluvia Peptides — Shopping Child Theme Functions
  *
- * @package Omega
+ * @package Shopping
  */
 
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which runs
- * before the init hook. The init hook is too late for some features, such as indicating
- * support post thumbnails.
- */
+/* ═══════════════════════════════════════
+   THEME SETUP
+═══════════════════════════════════════ */
 function shopping_theme_setup() {
+    add_theme_support( 'omega-footer-widgets', 3 );
+    add_theme_support( 'plugin-activation' );
+    add_theme_support( 'woocommerce' );
+    add_theme_support( 'wc-product-gallery-zoom' );
+    add_theme_support( 'wc-product-gallery-lightbox' );
+    add_theme_support( 'wc-product-gallery-slider' );
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
-	add_theme_support( 'omega-footer-widgets', 3 );
+    // Remove Omega's default header/nav hooks (Alluvia has its own)
+    remove_action( 'omega_before_header', 'omega_get_primary_menu' );
+    remove_action( 'omega_after_header',  'omega_get_primary_menu' );
 
-	add_action ('omega_header', 'shopping_header_right');
-	
-	add_theme_support( 'plugin-activation' );
-	add_theme_support( 'woocommerce' );
+    add_action( 'init', 'shopping_init', 1 );
+    add_action( 'widgets_init', 'shopping_widgets_init', 15 );
+}
+add_action( 'after_setup_theme', 'shopping_theme_setup', 11 );
 
-	remove_action( 'omega_before_header', 'omega_get_primary_menu' );	
-	add_action( 'omega_after_header', 'omega_get_primary_menu' );
-
-	add_action('init', 'shopping_init', 1);
-
-	add_action( 'widgets_init', 'shopping_widgets_init', 15 );
+/* ═══════════════════════════════════════
+   HELPER: URL FUNCTIONS
+   Used by all Alluvia templates.
+═══════════════════════════════════════ */
+if ( ! function_exists( 'alluvia_shop_url' ) ) {
+    function alluvia_shop_url() {
+        if ( function_exists( 'wc_get_page_permalink' ) ) {
+            return wc_get_page_permalink( 'shop' );
+        }
+        return home_url( '/shop/' );
+    }
+}
+if ( ! function_exists( 'alluvia_cart_url' ) ) {
+    function alluvia_cart_url() {
+        if ( function_exists( 'wc_get_cart_url' ) ) {
+            return wc_get_cart_url();
+        }
+        return home_url( '/cart/' );
+    }
+}
+if ( ! function_exists( 'alluvia_checkout_url' ) ) {
+    function alluvia_checkout_url() {
+        if ( function_exists( 'wc_get_checkout_url' ) ) {
+            return wc_get_checkout_url();
+        }
+        return home_url( '/checkout/' );
+    }
+}
+if ( ! function_exists( 'alluvia_account_url' ) ) {
+    function alluvia_account_url() {
+        $page_id = get_option( 'woocommerce_myaccount_page_id' );
+        if ( $page_id ) {
+            return get_permalink( $page_id );
+        }
+        return home_url( '/my-account/' );
+    }
 }
 
-add_action( 'after_setup_theme', 'shopping_theme_setup', 11  );
-
-function shopping_header_right() {
-	?>	
-
-	<aside class="header-right widget-area sidebar">
-		
-		<?php 
-		if ( is_active_sidebar( 'header-right' ) ) {
-			dynamic_sidebar( 'header-right' ); 
-		} else {
-			?>
-			<section class="widget widget_search widget-widget_search">
-
-	    		<div class="widget-wrap">
-					<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			
-						<input type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'omega' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" title="<?php _ex( 'Search for:', 'label', 'omega' ); ?>">
-						
-					</form>
-				</div>
-			</section>
-		<?php
-		}
-		?>
-
-  	</aside><!-- .sidebar -->
-
-	<?php
-}
-
-/**
- * Register widgetized area and update sidebar with default widgets
- */
+/* ═══════════════════════════════════════
+   WIDGETS & INIT
+═══════════════════════════════════════ */
 function shopping_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Header Right', 'unique' ),
-		'id'            => 'header-right',
-		'before_widget' => '<section id="%1$s" class="widget %2$s"><div class="widget-wrap">',
-		'after_widget'  => '</div></section>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
+    register_sidebar( array(
+        'name'          => __( 'Header Right', 'shopping' ),
+        'id'            => 'header-right',
+        'before_widget' => '<section id="%1$s" class="widget %2$s"><div class="widget-wrap">',
+        'after_widget'  => '</div></section>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    register_sidebar( array(
+        'name'          => __( 'Blog Sidebar', 'shopping' ),
+        'id'            => 'blog-sidebar',
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
 }
 
 function shopping_init() {
-	if ( ! is_admin() ) {
-		wp_enqueue_script( 'tinynav', get_stylesheet_directory_uri() . '/js/tinynav.js', array( 'jquery' ) );
-	}
+    if ( ! is_admin() ) {
+        wp_enqueue_script( 'tinynav', get_stylesheet_directory_uri() . '/js/tinynav.js', array( 'jquery' ) );
+    }
 }
 
-/* ── Alluvia Landing Page Assets ── */
-function alluvia_landing_assets() {
-	if ( ! is_front_page() ) return;
-
-	wp_enqueue_style(
-		'alluvia-landing',
-		get_stylesheet_directory_uri() . '/assets/css/alluvia-landing.css',
-		array(),
-		'1.0.0'
-	);
-
-	wp_enqueue_script(
-		'alluvia-landing',
-		get_stylesheet_directory_uri() . '/assets/js/alluvia-landing.js',
-		array(),
-		'1.0.0',
-		true
-	);
+/* ═══════════════════════════════════════
+   HIDE OMEGA HEADER on Alluvia pages
+═══════════════════════════════════════ */
+function alluvia_maybe_hide_omega_header() {
+    // When Alluvia's custom header is used, suppress Omega's visual output
+    add_action( 'omega_header', '__return_false', 1 );
+    add_action( 'omega_before_header', '__return_false', 1 );
 }
-add_action( 'wp_enqueue_scripts', 'alluvia_landing_assets' );
+// We hook this on any page using get_header('alluvia') by detecting the template
+add_action( 'template_redirect', function() {
+    $tpl = get_page_template_slug();
+    $front = is_front_page();
+    $woo   = is_woocommerce();
+    $blog  = is_home() || is_single();
 
-/* ── Alluvia SEO Meta Tags ── */
+    if ( $front || $woo || $blog || $tpl ) {
+        // These pages use header-alluvia.php — hide the Omega visual header
+        add_filter( 'show_admin_bar', '__return_false' );
+        // The actual Omega header suppression is handled because we call
+        // get_header('alluvia') which loads header-alluvia.php instead of header.php
+    }
+} );
+
+/* ═══════════════════════════════════════
+   CONTACT FORM HANDLER
+═══════════════════════════════════════ */
+add_action( 'wp_ajax_alluvia_contact', 'alluvia_handle_contact' );
+add_action( 'wp_ajax_nopriv_alluvia_contact', 'alluvia_handle_contact' );
+function alluvia_handle_contact() {
+    check_ajax_referer( 'alluvia_contact_nonce', 'nonce' );
+
+    $name    = sanitize_text_field( $_POST['name'] ?? '' );
+    $email   = sanitize_email( $_POST['email'] ?? '' );
+    $subject = sanitize_text_field( $_POST['subject'] ?? 'Contact Form Submission' );
+    $message = sanitize_textarea_field( $_POST['message'] ?? '' );
+
+    if ( ! $name || ! is_email( $email ) || ! $message ) {
+        wp_send_json_error( array( 'message' => 'Please fill in all required fields.' ) );
+    }
+
+    $to      = get_option( 'admin_email' );
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        "Reply-To: {$name} <{$email}>",
+    );
+
+    $body = "<p><strong>From:</strong> {$name} ({$email})</p>
+             <p><strong>Subject:</strong> {$subject}</p>
+             <p><strong>Message:</strong><br>" . nl2br( $message ) . "</p>";
+
+    $sent = wp_mail( $to, "Alluvia Contact: {$subject}", $body, $headers );
+
+    if ( $sent ) {
+        wp_send_json_success( array( 'message' => 'Message sent. We\'ll be in touch within 24 hours.' ) );
+    } else {
+        wp_send_json_error( array( 'message' => 'Failed to send. Please email us directly.' ) );
+    }
+}
+
+/* ═══════════════════════════════════════
+   NEWSLETTER / EMAIL SUBSCRIBE
+═══════════════════════════════════════ */
+add_action( 'wp_ajax_alluvia_subscribe', 'alluvia_handle_subscribe' );
+add_action( 'wp_ajax_nopriv_alluvia_subscribe', 'alluvia_handle_subscribe' );
+function alluvia_handle_subscribe() {
+    check_ajax_referer( 'alluvia_sub_nonce', 'nonce' );
+    $email = sanitize_email( $_POST['email'] ?? '' );
+    if ( ! is_email( $email ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid email address.' ) );
+    }
+    // Log to options (replace with Mailchimp/ActiveCampaign API call in production)
+    $subs   = get_option( 'alluvia_subscribers', array() );
+    $subs[] = array( 'email' => $email, 'date' => current_time( 'mysql' ) );
+    update_option( 'alluvia_subscribers', array_unique( array_column( $subs, 'email' ) ) );
+    wp_send_json_success( array( 'message' => 'Welcome! You\'re on the list.' ) );
+}
+
+/* ═══════════════════════════════════════
+   SEO META TAGS (all Alluvia pages)
+═══════════════════════════════════════ */
+add_action( 'wp_head', 'alluvia_seo_meta', 1 );
 function alluvia_seo_meta() {
-	if ( ! is_front_page() ) return;
-	?>
-<meta name="description" content="Alluvia Peptides — Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. COA on every batch.">
-<meta name="keywords" content="peptides, bioactive peptides, skincare peptides, collagen peptides, BPC-157, TB-500, Ipamorelin, hair growth peptides, anti-aging peptides, sports peptides, research peptides">
-<meta name="robots" content="index, follow">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alluvia Peptides — Premium Bioactive Peptides">
-<meta property="og:description" content="Pharmaceutical-grade peptides for peak performance and longevity. HPLC tested. COA guaranteed.">
-<meta property="og:url" content="<?php echo esc_url( home_url( '/' ) ); ?>">
-<meta property="og:site_name" content="Alluvia Peptides">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Alluvia Peptides — Premium Bioactive Peptides">
-<meta name="twitter:description" content="Pharmaceutical-grade peptides for peak performance and longevity.">
-<link rel="canonical" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Alluvia Peptides",
-  "url": "<?php echo esc_url( home_url( '/' ) ); ?>",
-  "description": "Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, and longevity.",
-  "sameAs": []
+    if ( is_front_page() ) {
+        echo '<meta name="description" content="Alluvia Peptides — Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. COA on every batch.">' . "\n";
+        echo '<meta property="og:type" content="website">' . "\n";
+        echo '<meta property="og:title" content="Alluvia Peptides — Premium Bioactive Peptides">' . "\n";
+        echo '<meta property="og:url" content="' . esc_url( home_url( '/' ) ) . '">' . "\n";
+        echo '<meta property="og:site_name" content="Alluvia Peptides">' . "\n";
+        echo '<link rel="canonical" href="' . esc_url( home_url( '/' ) ) . '">' . "\n";
+        echo '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Alluvia Peptides","url":"' . esc_url( home_url( '/' ) ) . '","description":"Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, and longevity."}</script>' . "\n";
+    }
 }
-</script>
-	<?php
-}
-add_action( 'wp_head', 'alluvia_seo_meta' );
 
-/* ── Hide default theme header/footer on front page ── */
-function alluvia_landing_body_class( $classes ) {
-	if ( is_front_page() ) {
-		$classes[] = 'alluvia-front-page';
-	}
-	return $classes;
+/* ═══════════════════════════════════════
+   ENQUEUE SCRIPTS & STYLES
+   Global Lucide CDN + per-template assets
+═══════════════════════════════════════ */
+add_action( 'wp_enqueue_scripts', 'alluvia_global_assets' );
+function alluvia_global_assets() {
+    // Lucide icons CDN — loaded via header-alluvia.php inline, but also here as fallback
+    wp_localize_script( 'jquery', 'alluviaAjax', array(
+        'ajax_url'      => admin_url( 'admin-ajax.php' ),
+        'contact_nonce' => wp_create_nonce( 'alluvia_contact_nonce' ),
+        'sub_nonce'     => wp_create_nonce( 'alluvia_sub_nonce' ),
+    ) );
 }
-add_filter( 'body_class', 'alluvia_landing_body_class' );
 
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Cart fragments (AJAX cart count)
+═══════════════════════════════════════ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'alluvia_cart_fragment' );
+function alluvia_cart_fragment( $fragments ) {
+    if ( function_exists( 'WC' ) && WC()->cart ) {
+        $fragments['.cart-count'] = '<span class="cart-count">' . WC()->cart->get_cart_contents_count() . '</span>';
+    }
+    return $fragments;
+}
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Disable default styles (we use ours)
+═══════════════════════════════════════ */
+add_filter( 'woocommerce_enqueue_styles', 'alluvia_woo_styles' );
+function alluvia_woo_styles( $styles ) {
+    // Keep WooCommerce's core styles but let our CSS override visual styles
+    // Uncomment the lines below to fully disable specific WC stylesheets:
+    // unset( $styles['woocommerce-general'] );
+    // unset( $styles['woocommerce-layout'] );
+    // unset( $styles['woocommerce-smallscreen'] );
+    return $styles;
+}
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE: Remove sidebar from pages
+═══════════════════════════════════════ */
+remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+
+/* ═══════════════════════════════════════
+   PLUGIN ACTIVATION (TGM)
+═══════════════════════════════════════ */
 add_action( 'tgmpa_register', 'shopping_register_plugins' );
-/**
- * Register the required plugins for this theme.
- *
- * In this example, we register two plugins - one included with the TGMPA library
- * and one from the .org repo.
- *
- * The variable passed to tgmpa_register_plugins() should be an array of plugin
- * arrays.
- *
- * This function is hooked into tgmpa_init, which is fired within the
- * TGM_Plugin_Activation class constructor.
- */
 function shopping_register_plugins() {
+    $plugins = array(
+        array(
+            'name'     => 'WooCommerce',
+            'slug'     => 'woocommerce',
+            'required' => false,
+        ),
+        array(
+            'name'     => 'Contact Form 7',
+            'slug'     => 'contact-form-7',
+            'required' => false,
+        ),
+    );
 
-	/**
-	 * Array of plugin arrays. Required keys are name and slug.
-	 * If the source is NOT from the .org repo, then source is also required.
-	 */
-	$plugins = array(
+    $config = array(
+        'default_path'     => '',
+        'parent_menu_slug' => 'themes.php',
+        'parent_url_slug'  => 'themes.php',
+        'menu'             => 'install-required-plugins',
+        'has_notices'      => true,
+        'is_automatic'     => false,
+        'message'          => '',
+        'strings'          => array(
+            'page_title'                      => __( 'Install Required Plugins', 'shopping' ),
+            'menu_title'                      => __( 'Install Plugins', 'shopping' ),
+            'installing'                      => __( 'Installing Plugin: %s', 'shopping' ),
+            'oops'                            => __( 'Something went wrong with the plugin API.', 'shopping' ),
+            'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ),
+            'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ),
+            'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin.', 'Sorry, but you do not have the correct permissions to install the %s plugins.' ),
+            'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ),
+            'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ),
+            'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin.', 'Sorry, but you do not have the correct permissions to activate the %s plugins.' ),
+            'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated: %1$s.', 'The following plugins need to be updated: %1$s.' ),
+            'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin.', 'Sorry, but you do not have the correct permissions to update the %s plugins.' ),
+            'install_link'                    => _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
+            'activate_link'                   => _n_noop( 'Activate installed plugin', 'Activate installed plugins' ),
+            'return'                          => __( 'Return to Required Plugins Installer', 'shopping' ),
+            'plugin_activated'                => __( 'Plugin activated successfully.', 'shopping' ),
+            'complete'                        => __( 'All plugins installed and activated successfully. %s', 'shopping' ),
+            'nag_type'                        => 'updated',
+        ),
+    );
 
-		// This is an example of how to include a plugin from the WordPress Plugin Repository
-		array(
-			'name' 		=> 'WooCommerce',
-			'slug' 		=> 'woocommerce',
-			'required' 	=> false,
-		),
-
-	);
-
-	/**
-	 * Array of configuration settings. Amend each line as needed.
-	 * If you want the default strings to be available under your own theme domain,
-	 * leave the strings uncommented.
-	 * Some of the strings are added into a sprintf, so see the comments at the
-	 * end of each line for what each argument will be.
-	 */
-	$config = array(
-		'default_path' 		=> '',                         	// Default absolute path to pre-packaged plugins
-		'parent_menu_slug' 	=> 'themes.php', 				// Default parent menu slug
-		'parent_url_slug' 	=> 'themes.php', 				// Default parent URL slug
-		'menu'         		=> 'install-required-plugins', 	// Menu slug
-		'has_notices'      	=> true,                       	// Show admin notices or not
-		'is_automatic'    	=> false,					   	// Automatically activate plugins after installation or not
-		'message' 			=> '',							// Message to output right before the plugins table
-		'strings'      		=> array(
-			'page_title'                       			=> __( 'Install Required Plugins', 'shopping' ),
-			'menu_title'                       			=> __( 'Install Plugins', 'shopping' ),
-			'installing'                       			=> __( 'Installing Plugin: %s', 'shopping' ), // %1$s = plugin name
-			'oops'                             			=> __( 'Something went wrong with the plugin API.', 'shopping' ),
-			'notice_can_install_required'     			=> _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ), // %1$s = plugin name(s)
-			'notice_can_install_recommended'			=> _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_install'  					=> _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s)
-			'notice_can_activate_required'    			=> _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
-			'notice_can_activate_recommended'			=> _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_activate' 					=> _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s)
-			'notice_ask_to_update' 						=> _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_update' 						=> _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s)
-			'install_link' 					  			=> _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
-			'activate_link' 				  			=> _n_noop( 'Activate installed plugin', 'Activate installed plugins' ),
-			'return'                           			=> __( 'Return to Required Plugins Installer', 'shopping' ),
-			'plugin_activated'                 			=> __( 'Plugin activated successfully.', 'shopping' ),
-			'complete' 									=> __( 'All plugins installed and activated successfully. %s', 'shopping' ), // %1$s = dashboard link
-			'nag_type'									=> 'updated' // Determines admin notice type - can only be 'updated' or 'error'
-		)
-	);
-
-	if (function_exists('tgmpa')) {
-		tgmpa( $plugins, $config );
-	}
-
+    if ( function_exists( 'tgmpa' ) ) {
+        tgmpa( $plugins, $config );
+    }
 }

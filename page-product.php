@@ -1,0 +1,516 @@
+<?php
+/**
+ * Template Name: Alluvia – Product
+ *
+ * @package Shopping
+ */
+add_action( 'wp_head', function() {
+?>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0d1b2a;--navy-mid:#162336;--navy-soft:#1e3050;
+  --teal:#00c6b3;--teal-dark:#009e8e;--gold:#c8a96e;
+  --coral:#e8758a;--purple:#9b72cf;--orange:#e07b54;
+  --mint:#78c9a2;--sky:#7fb8d4;
+  --pearl:#f4f2ee;--pearl-dark:#e8e4dc;
+  --white:#ffffff;--text-dark:#0d1b2a;--text-mid:#4a5568;--text-light:#8899aa;
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
+.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,198,179,0.15)}
+.nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
+.logo-mark{width:34px;height:34px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+
+
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none}
+.cart-count{background:var(--navy);color:var(--teal);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700}
+.nav-account-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;text-decoration:none;transition:all .2s}
+.nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;text-decoration:none}
+.mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
+
+.product-wrap{max-width:1200px;margin:0 auto;padding:6.5rem 2rem 2rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.78rem;color:var(--text-light);margin-bottom:1.5rem}
+.breadcrumb a{color:var(--teal-dark);text-decoration:none}
+
+/* PRODUCT MAIN */
+.product-main{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+
+/* GALLERY */
+.gallery{}
+.gallery-main{background:#fff;border-radius:var(--radius);height:420px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative;overflow:hidden;border:1px solid var(--pearl-dark)}
+.gallery-main::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(0,198,179,0.08),transparent 70%)}
+.gallery-main .vial-icon{position:relative;z-index:1}
+.gallery-badge{position:absolute;top:1rem;left:1rem;background:var(--teal);color:var(--navy);font-family:'Space Grotesk',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.06em;padding:4px 12px;border-radius:50px;text-transform:uppercase;z-index:2}
+.gallery-thumbs{display:flex;gap:0.75rem;margin-top:1rem}
+.gallery-thumb{flex:1;background:#fff;border-radius:8px;height:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.gallery-thumb.active{border-color:var(--teal)}
+.gallery-thumb:hover{border-color:rgba(0,198,179,0.4)}
+
+/* PRODUCT INFO */
+.product-info{}
+.prod-cat{font-family:'Space Grotesk',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.5rem}
+.product-info h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;line-height:1.1;margin-bottom:0.5rem}
+.prod-subtitle{font-size:0.95rem;color:var(--text-mid);margin-bottom:1rem}
+.prod-rating{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem}
+.stars{display:flex;gap:2px;color:var(--gold)}
+.rating-text{font-family:'Space Grotesk',sans-serif;font-size:0.82rem;color:var(--text-mid)}
+.rating-text a{color:var(--teal-dark);text-decoration:none}
+.prod-price-row{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.5rem}
+.prod-price{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--navy)}
+.prod-price-old{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;color:var(--text-light);text-decoration:line-through}
+.prod-save{background:rgba(232,117,138,0.12);color:#c0405a;font-family:'Space Grotesk',sans-serif;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:50px}
+
+/* SPEC GRID */
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;padding:1.25rem;background:#fff;border-radius:var(--radius);border:1px solid var(--pearl-dark)}
+.spec-item{display:flex;align-items:center;gap:0.6rem}
+.spec-item svg{color:var(--teal);flex-shrink:0}
+.spec-label{font-size:0.72rem;color:var(--text-light);font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:0.04em}
+.spec-value{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.85rem}
+
+/* PURCHASE */
+.purchase-row{display:flex;gap:1rem;align-items:stretch;margin-bottom:1rem}
+.qty-stepper{display:flex;align-items:center;border:1px solid var(--pearl-dark);border-radius:10px;overflow:hidden;background:#fff}
+.qty-btn{background:#fff;border:none;width:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-mid);transition:all .2s}
+.qty-btn:hover{background:var(--teal);color:#fff}
+.qty-input{width:50px;border:none;border-left:1px solid var(--pearl-dark);border-right:1px solid var(--pearl-dark);text-align:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;outline:none}
+.btn-add-cart{flex:1;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:all .3s}
+.btn-add-cart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,198,179,0.35)}
+.btn-wishlist{width:52px;background:#fff;border:1px solid var(--pearl-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-mid);transition:all .2s}
+.btn-wishlist:hover{border-color:var(--coral);color:var(--coral)}
+.btn-wishlist.active{background:rgba(232,117,138,0.08);border-color:var(--coral);color:var(--coral)}
+.buy-now{display:block;width:100%;text-align:center;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:0.85rem;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:0.04em;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:1.25rem}
+.buy-now:hover{background:var(--teal-dark)}
+
+/* ASSURANCE */
+.assurance{display:flex;flex-direction:column;gap:0.6rem;padding:1.25rem;background:rgba(0,198,179,0.04);border:1px solid rgba(0,198,179,0.15);border-radius:var(--radius)}
+.assurance-item{display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--text-mid)}
+.assurance-item svg{color:var(--teal);flex-shrink:0}
+
+/* TABS */
+.product-tabs{max-width:1200px;margin:3.5rem auto 0;padding:0 2rem}
+.tab-nav{display:flex;gap:0.5rem;border-bottom:2px solid var(--pearl-dark);margin-bottom:2rem;overflow-x:auto}
+.tab-btn{background:none;border:none;padding:1rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.88rem;font-weight:600;color:var(--text-light);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s}
+.tab-btn:hover{color:var(--teal-dark)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--teal)}
+.tab-pane{display:none;animation:fade .3s}
+.tab-pane.active{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.tab-content-card{background:#fff;border-radius:var(--radius);padding:2.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
+.tab-content-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:1rem}
+.tab-content-card h4{font-family:'Space Grotesk',sans-serif;font-size:0.92rem;font-weight:700;margin:1.5rem 0 0.5rem}
+.tab-content-card p{font-size:0.92rem;color:var(--text-mid);line-height:1.8;margin-bottom:1rem}
+.research-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem}
+.research-list li{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.9rem;color:var(--text-mid)}
+.research-list li svg{color:var(--teal);flex-shrink:0;margin-top:3px}
+
+/* SPECS TABLE */
+.specs-table{width:100%;border-collapse:collapse;font-size:0.9rem}
+.specs-table td{padding:0.85rem 1rem;border-bottom:1px solid var(--pearl)}
+.specs-table tr:last-child td{border-bottom:none}
+.specs-table td:first-child{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--text-dark);width:40%}
+.specs-table td:last-child{color:var(--text-mid)}
+
+/* COA BLOCK */
+.coa-block{display:flex;align-items:center;justify-content:space-between;background:rgba(0,198,179,0.05);border:1px solid rgba(0,198,179,0.2);border-radius:10px;padding:1.25rem 1.5rem;flex-wrap:wrap;gap:1rem}
+.coa-info{display:flex;align-items:center;gap:1rem}
+.coa-icon{width:48px;height:48px;border-radius:10px;background:rgba(0,198,179,0.12);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.coa-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.92rem}
+.coa-sub{font-size:0.8rem;color:var(--text-light)}
+.btn-coa{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.65rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-decoration:none}
+.btn-coa:hover{background:var(--teal-dark)}
+
+/* REVIEWS */
+.review-summary{display:flex;gap:2.5rem;align-items:center;margin-bottom:2rem;flex-wrap:wrap}
+.review-score{text-align:center}
+.review-score .big{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;line-height:1}
+.review-bars{flex:1;min-width:240px}
+.review-bar-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;font-size:0.8rem}
+.review-bar-row .lbl{font-family:'Space Grotesk',sans-serif;color:var(--text-mid);width:40px}
+.review-bar-track{flex:1;height:8px;background:var(--pearl);border-radius:8px;overflow:hidden}
+.review-bar-fill{height:100%;background:var(--gold);border-radius:8px}
+.review-card{border-bottom:1px solid var(--pearl);padding:1.25rem 0}
+.review-card:last-child{border-bottom:none}
+.review-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem}
+.reviewer{display:flex;align-items:center;gap:0.75rem}
+.reviewer-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--navy);font-size:0.85rem}
+.reviewer-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.88rem}
+.reviewer-meta{font-size:0.75rem;color:var(--text-light);display:flex;align-items:center;gap:0.3rem}
+.verified-tag{color:var(--mint);display:inline-flex;align-items:center;gap:0.2rem;font-weight:600}
+.review-body{font-size:0.9rem;color:var(--text-mid);line-height:1.7}
+
+/* RELATED */
+.related{max-width:1200px;margin:4rem auto;padding:0 2rem}
+.related h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;margin-bottom:1.5rem}
+.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.rel-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.12)}
+.rel-thumb{height:110px;display:flex;align-items:center;justify-content:center}
+.rel-body{padding:1rem}
+.rel-cat{font-family:'Space Grotesk',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-light)}
+.rel-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.88rem;margin:0.25rem 0}
+.rel-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;color:var(--teal-dark)}
+
+footer{background:#060e17;color:rgba(255,255,255,0.7);padding:5rem 2rem 2rem;margin-top:2rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{font-size:0.88rem;line-height:1.7;color:rgba(255,255,255,0.5);margin:1rem 0 1.5rem}
+.footer-logo{display:flex;flex-direction:column;line-height:1}
+.footer-logo span:first-child{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#fff}
+.footer-logo span:last-child{font-family:'Space Grotesk',sans-serif;font-size:0.5rem;font-weight:600;letter-spacing:0.3em;color:var(--teal);text-transform:uppercase}
+.social-links{display:flex;gap:0.75rem}
+.social-link{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);transition:all .2s;text-decoration:none}
+.social-link:hover{background:var(--teal);border-color:var(--teal);color:var(--navy)}
+.footer-col h4{font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fff;margin-bottom:1.25rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:0.6rem}
+.footer-col ul li a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.85rem;transition:color .2s;display:flex;align-items:center;gap:0.3rem}
+.footer-col ul li a:hover{color:var(--teal)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none}
+.footer-legal a:hover{color:var(--teal)}
+
+@media(max-width:900px){.product-main{grid-template-columns:1fr;gap:2rem}.related-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.nav-links{display:none}.nav-hamburger{display:flex}.spec-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.gallery-main{height:300px}}
+</style>
+<?php
+}, 20 );
+get_header( 'alluvia' );
+?>
+<nav class="alluvia-nav" id="nav">
+  <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+  <ul class="nav-links">
+    <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
+    <li><a href="<?php echo esc_url(home_url('/about/')); ?>#science">Science</a></li>
+    <li><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+    <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
+    <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="<?php echo esc_url(alluvia_cart_url()); ?>" class="nav-cart-btn"><i data-lucide="shopping-bag" width="16" height="16"></i> Cart <span class="cart-count">4</span></a>
+    <a href="<?php echo esc_url(alluvia_account_url()); ?>" class="nav-account-btn"><i data-lucide="user" width="18" height="18"></i></a>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open')"><i data-lucide="x" width="28" height="28"></i></button>
+  <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a>
+  <a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a>
+  <a href="<?php echo esc_url(home_url('/about/')); ?>">About</a>
+  <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
+  <a href="<?php echo esc_url(alluvia_cart_url()); ?>">Cart</a>
+</div>
+
+<div class="product-wrap">
+  <div class="breadcrumb">
+    <a href="<?php echo esc_url(home_url('/')); ?>">Home</a>
+    <i data-lucide="chevron-right" width="14" height="14"></i>
+    <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Shop</a>
+    <i data-lucide="chevron-right" width="14" height="14"></i>
+    <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Medical Peptides</a>
+    <i data-lucide="chevron-right" width="14" height="14"></i>
+    <span>BPC-157</span>
+  </div>
+
+  <div class="product-main">
+    <!-- GALLERY -->
+    <div class="gallery">
+      <div class="gallery-main">
+        <span class="gallery-badge">Best Seller</span>
+        <i class="vial-icon" data-lucide="activity" width="120" height="120" style="color:var(--teal)"></i>
+      </div>
+      <div class="gallery-thumbs">
+        <div class="gallery-thumb active"><i data-lucide="activity" width="32" height="32" style="color:var(--teal)"></i></div>
+        <div class="gallery-thumb"><i data-lucide="flask-conical" width="32" height="32" style="color:var(--teal-dark)"></i></div>
+        <div class="gallery-thumb"><i data-lucide="file-text" width="32" height="32" style="color:var(--gold)"></i></div>
+        <div class="gallery-thumb"><i data-lucide="microscope" width="32" height="32" style="color:var(--sky)"></i></div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="product-info">
+      <div class="prod-cat">Medical Peptide · Tissue Repair</div>
+      <h1>BPC-157</h1>
+      <p class="prod-subtitle">Body Protection Compound-157 · 5 mg Lyophilized Vial</p>
+      <div class="prod-rating">
+        <span class="stars">
+          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
+          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
+          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
+          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
+          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
+        </span>
+        <span class="rating-text">4.9 · <a href="#reviews">214 verified reviews</a></span>
+      </div>
+      <div class="prod-price-row">
+        <span class="prod-price">$65.00</span>
+        <span class="prod-price-old">$80.00</span>
+        <span class="prod-save">Save 19%</span>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec-item"><i data-lucide="beaker" width="18" height="18"></i><div><div class="spec-label">Purity</div><div class="spec-value">≥99% (HPLC)</div></div></div>
+        <div class="spec-item"><i data-lucide="package" width="18" height="18"></i><div><div class="spec-label">Quantity</div><div class="spec-value">5 mg / vial</div></div></div>
+        <div class="spec-item"><i data-lucide="snowflake" width="18" height="18"></i><div><div class="spec-label">Form</div><div class="spec-value">Lyophilized powder</div></div></div>
+        <div class="spec-item"><i data-lucide="check-circle" width="18" height="18"></i><div><div class="spec-label">Stock</div><div class="spec-value" style="color:var(--mint)">In Stock</div></div></div>
+      </div>
+
+      <div class="purchase-row">
+        <div class="qty-stepper">
+          <button class="qty-btn" onclick="changeQty(-1)"><i data-lucide="minus" width="14" height="14"></i></button>
+          <input class="qty-input" id="qty" type="number" value="1" min="1" max="99">
+          <button class="qty-btn" onclick="changeQty(1)"><i data-lucide="plus" width="14" height="14"></i></button>
+        </div>
+        <button class="btn-add-cart" onclick="showToast('Added to cart!')"><i data-lucide="shopping-cart" width="18" height="18"></i> Add to Cart</button>
+        <button class="btn-wishlist" id="wishBtn" onclick="toggleWish()"><i data-lucide="heart" width="20" height="20"></i></button>
+      </div>
+      <a href="<?php echo esc_url(alluvia_checkout_url()); ?>" class="buy-now">Buy Now — Express Checkout</a>
+
+      <div class="assurance">
+        <div class="assurance-item"><i data-lucide="award" width="16" height="16"></i> Third-party HPLC tested — COA included with every order</div>
+        <div class="assurance-item"><i data-lucide="thermometer-snowflake" width="16" height="16"></i> Cold-chain shipping available to preserve bioactivity</div>
+        <div class="assurance-item"><i data-lucide="truck" width="16" height="16"></i> Same-day dispatch on orders before 1 PM EST</div>
+        <div class="assurance-item"><i data-lucide="shield-check" width="16" height="16"></i> Discreet packaging · Integrity guarantee</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="product-tabs">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('desc',this)">Description</button>
+    <button class="tab-btn" onclick="showTab('research',this)">Research</button>
+    <button class="tab-btn" onclick="showTab('specs',this)">Specifications</button>
+    <button class="tab-btn" onclick="showTab('coa',this)">COA</button>
+    <button class="tab-btn" onclick="showTab('reviews',this)">Reviews (214)</button>
+  </div>
+
+  <div class="tab-pane active" id="tab-desc">
+    <div class="tab-content-card">
+      <h3>About BPC-157</h3>
+      <p>BPC-157 (Body Protection Compound-157) is a synthetic pentadecapeptide composed of 15 amino acids, derived from a partial sequence of a body protection compound discovered in human gastric juice. It has become one of the most widely studied peptides in regenerative research due to its observed effects on tissue repair, angiogenesis, and cytoprotection.</p>
+      <p>In laboratory and animal-model research, BPC-157 has been investigated for its role in accelerating the healing of tendon, ligament, muscle, and connective tissue, as well as its protective effects on the gastrointestinal lining. Researchers have noted its apparent stability in gastric acid — a property uncommon among peptides.</p>
+      <h4>Primary Research Areas</h4>
+      <ul class="research-list">
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Tendon-to-bone and ligament healing models</li>
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Gastrointestinal mucosal protection and ulcer research</li>
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Angiogenesis and vascular repair pathways (VEGFR2)</li>
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Nitric oxide system modulation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="tab-research">
+    <div class="tab-content-card">
+      <h3>Research Background</h3>
+      <p>BPC-157 has been the subject of numerous peer-reviewed studies, predominantly in rodent models. Its proposed mechanism of action centers on the upregulation of growth factors and the promotion of angiogenesis via the VEGFR2-Akt-eNOS signaling pathway.</p>
+      <h4>Mechanism of Action (Proposed)</h4>
+      <p>Studies suggest BPC-157 interacts with the nitric oxide (NO) system, modulates dopaminergic and serotonergic systems, and upregulates expression of growth hormone receptors in fibroblasts — a pathway that may explain its observed effects on tendon fibroblast proliferation.</p>
+      <h4>Storage & Reconstitution</h4>
+      <ul class="research-list">
+        <li><i data-lucide="snowflake" width="16" height="16"></i>Store lyophilized vial at −20°C; stable for 24+ months</li>
+        <li><i data-lucide="droplet" width="16" height="16"></i>Reconstitute with bacteriostatic water for research handling</li>
+        <li><i data-lucide="refrigerator" width="16" height="16"></i>Once reconstituted, store at 2–8°C and use within 30 days</li>
+        <li><i data-lucide="sun-dim" width="16" height="16"></i>Protect from light and repeated freeze-thaw cycles</li>
+      </ul>
+      <div style="background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.25);border-radius:8px;padding:1rem 1.25rem;font-size:0.85rem;color:var(--text-mid);margin-top:1rem">
+        <strong>For research use only.</strong> This product is not intended for human or veterinary use. See our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>" style="color:var(--teal-dark)">Terms & Conditions</a> for full disclaimer.
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="tab-specs">
+    <div class="tab-content-card">
+      <h3>Technical Specifications</h3>
+      <table class="specs-table">
+        <tr><td>Product Name</td><td>BPC-157 (Body Protection Compound-157)</td></tr>
+        <tr><td>CAS Number</td><td>137525-51-0</td></tr>
+        <tr><td>Molecular Formula</td><td>C₆₂H₉₈N₁₆O₂₂</td></tr>
+        <tr><td>Molecular Weight</td><td>1419.53 g/mol</td></tr>
+        <tr><td>Sequence</td><td>Gly-Glu-Pro-Pro-Pro-Gly-Lys-Pro-Ala-Asp-Asp-Ala-Gly-Leu-Val</td></tr>
+        <tr><td>Purity</td><td>≥99% by HPLC</td></tr>
+        <tr><td>Form</td><td>Lyophilized white powder</td></tr>
+        <tr><td>Quantity</td><td>5 mg per vial</td></tr>
+        <tr><td>Storage</td><td>−20°C, protect from light</td></tr>
+        <tr><td>Solubility</td><td>Soluble in water, bacteriostatic water</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="tab-coa">
+    <div class="tab-content-card">
+      <h3>Certificate of Analysis</h3>
+      <p>Every batch of BPC-157 is independently tested by third-party laboratories for identity, purity, and mass confirmation. The COA for your specific lot number is included in your order confirmation email and available in our COA library.</p>
+      <div class="coa-block">
+        <div class="coa-info">
+          <div class="coa-icon"><i data-lucide="file-check" width="24" height="24"></i></div>
+          <div>
+            <div class="coa-title">Lot #BPC157-2504-A · HPLC + MS Verified</div>
+            <div class="coa-sub">Purity: 99.2% · Tested: April 2025 · Janoshik Analytical</div>
+          </div>
+        </div>
+        <a href="<?php echo esc_url(home_url('/coa-library/')); ?>" class="btn-coa"><i data-lucide="download" width="15" height="15"></i> View COA Library</a>
+      </div>
+      <ul class="research-list" style="margin-top:1.5rem">
+        <li><i data-lucide="check-circle" width="16" height="16"></i>HPLC purity analysis (≥99%)</li>
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Mass spectrometry identity confirmation</li>
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Endotoxin and sterility screening</li>
+        <li><i data-lucide="check-circle" width="16" height="16"></i>Independent third-party verification</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="tab-reviews">
+    <div class="tab-content-card" id="reviews">
+      <h3>Customer Reviews</h3>
+      <div class="review-summary">
+        <div class="review-score">
+          <div class="big">4.9</div>
+          <span class="stars" style="justify-content:center">
+            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
+            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
+            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
+            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
+            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
+          </span>
+          <div style="font-size:0.78rem;color:var(--text-light);margin-top:0.4rem">214 reviews</div>
+        </div>
+        <div class="review-bars">
+          <div class="review-bar-row"><span class="lbl">5 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:92%"></div></div><span>92%</span></div>
+          <div class="review-bar-row"><span class="lbl">4 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:6%"></div></div><span>6%</span></div>
+          <div class="review-bar-row"><span class="lbl">3 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span>1%</span></div>
+          <div class="review-bar-row"><span class="lbl">2 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span>1%</span></div>
+          <div class="review-bar-row"><span class="lbl">1 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:0%"></div></div><span>0%</span></div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-head">
+          <div class="reviewer">
+            <div class="reviewer-avatar">DM</div>
+            <div>
+              <div class="reviewer-name">Dr. Michael R.</div>
+              <div class="reviewer-meta"><span class="verified-tag"><i data-lucide="badge-check" width="12" height="12"></i> Verified Buyer</span> · May 2025</div>
+            </div>
+          </div>
+          <span class="stars"><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i></span>
+        </div>
+        <p class="review-body">Consistent purity across multiple orders. The COA matched my own independent HPLC verification within margin. Cold-chain packaging arrived perfectly intact with the temperature card still in range. This is now my standard supplier for tissue-repair research.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-head">
+          <div class="reviewer">
+            <div class="reviewer-avatar">SK</div>
+            <div>
+              <div class="reviewer-name">Sarah K.</div>
+              <div class="reviewer-meta"><span class="verified-tag"><i data-lucide="badge-check" width="12" height="12"></i> Verified Buyer</span> · April 2025</div>
+            </div>
+          </div>
+          <span class="stars"><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i></span>
+        </div>
+        <p class="review-body">Fast dispatch and excellent reconstitution clarity — no cloudiness, fully soluble. The lyophilized cake was intact and properly sealed under nitrogen. Documentation was thorough. Highly recommend for any serious lab.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-head">
+          <div class="reviewer">
+            <div class="reviewer-avatar">JT</div>
+            <div>
+              <div class="reviewer-name">James T.</div>
+              <div class="reviewer-meta"><span class="verified-tag"><i data-lucide="badge-check" width="12" height="12"></i> Verified Buyer</span> · March 2025</div>
+            </div>
+          </div>
+          <span class="stars"><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14"></i></span>
+        </div>
+        <p class="review-body">Reliable quality and the loyalty points are a nice touch. Took one star off only because express shipping was a day later than estimated, but the product itself is top-tier. Will order again.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="related">
+  <h2>Frequently Bought Together</h2>
+  <div class="related-grid">
+    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(224,123,84,0.12),rgba(224,123,84,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
+      <div class="rel-body"><div class="rel-cat">Sports & Recovery</div><div class="rel-name">TB-500 — 5 mg</div><div class="rel-price">$78.00</div></div>
+    </a>
+    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(232,117,138,0.12),rgba(232,117,138,0.04))"><i data-lucide="sparkles" width="36" height="36" style="color:var(--coral)"></i></div>
+      <div class="rel-body"><div class="rel-cat">Skincare</div><div class="rel-name">GHK-Cu — 200 mg</div><div class="rel-price">$52.00</div></div>
+    </a>
+    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(200,169,110,0.12),rgba(200,169,110,0.04))"><i data-lucide="zap" width="36" height="36" style="color:var(--gold)"></i></div>
+      <div class="rel-body"><div class="rel-cat">Anti-Aging</div><div class="rel-name">Ipamorelin — 2 mg</div><div class="rel-price">$68.00</div></div>
+    </a>
+    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
+      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(0,198,179,0.12),rgba(0,198,179,0.04))"><i data-lucide="layers" width="36" height="36" style="color:var(--teal)"></i></div>
+      <div class="rel-body"><div class="rel-cat">Stack</div><div class="rel-name">BPC-157 + TB-500</div><div class="rel-price">$119.00</div></div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#00c6b3"/><circle cx="10.5" cy="21" r="2.2" fill="#00c6b3"/><circle cx="23.5" cy="21" r="2.2" fill="#00c6b3"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#00c6b3" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
+        <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
+        <div class="social-links">
+          <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
+          <a class="social-link" href="#"><i data-lucide="twitter" width="16" height="16"></i></a>
+          <a class="social-link" href="#"><i data-lucide="facebook" width="16" height="16"></i></a>
+          <a class="social-link" href="#"><i data-lucide="youtube" width="16" height="16"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Products</h4><ul>
+        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Medical Peptides</a></li>
+        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Skincare Peptides</a></li>
+        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Sports & Recovery</a></li>
+        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Anti-Aging</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
+        <li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Blog</a></li>
+        <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact Us</a></li>
+        <li><a href="<?php echo esc_url(home_url('/coa-library/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms & Conditions</a></li>
+        <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Shipping Policy</a></li>
+        <li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
+        <li><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+function changeQty(d){const i=document.getElementById('qty');i.value=Math.max(1,(parseInt(i.value)||1)+d);}
+function showTab(id,btn){document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+function toggleWish(){document.getElementById('wishBtn').classList.toggle('active');}
+document.querySelectorAll('.gallery-thumb').forEach(t=>t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#00c6b3',color:'#0d1b2a',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+</script>
+<?php get_footer( 'alluvia' ); ?>
