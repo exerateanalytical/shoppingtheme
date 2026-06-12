@@ -19,6 +19,8 @@ import io
 import os
 import re
 import sys
+import csv
+import json
 import math
 import hashlib
 import datetime
@@ -116,9 +118,20 @@ def build_coa_svg(p):
     lot = p.get("lot", "ALV-000000")
     mfg = p.get("mfg", "2026-05-01")
     retest = p.get("retest", "2028-05-01")
-    ref = REF.get(name, dict(seq="Sequence available on request", one="—",
-                             formula="—", mw="—", cas="—"))
+    ref = dict(REF.get(name, dict(seq="Sequence available on request", one="—",
+                                  formula="—", mw="—", cas="—")))
+    # real lab data (when supplied via --data) overrides identity + analytics
+    for k in ("seq", "one", "formula", "mw", "cas"):
+        if p.get(k):
+            ref[k] = p[k]
     r = synth(lot, name)
+    for k in ("purity", "single_imp", "water", "acetate", "peptide_content"):
+        if p.get(k) not in (None, ""):
+            try:
+                r[k] = float(p[k])
+            except (TypeError, ValueError):
+                pass
+    tested_by = p.get("tested_by", "")
     doc_no = "COA-" + hashlib.sha256((sku + lot).encode()).hexdigest()[:8].upper()
     one = ref["one"]
     has_one = one not in ("—", "-", "")
@@ -205,8 +218,10 @@ def build_coa_svg(p):
     for gi in range(1, 6):
         gxl = cx0 + cw * gi / 6
         grid += f'<line x1="{gxl:.0f}" y1="{cyy}" x2="{gxl:.0f}" y2="{cyy+ch}" stroke="#f0f3f5" stroke-width="1"/>'
+    cap = (f"{esc(tested_by)} &#183; C18 &#183; 220 nm" if tested_by
+           else "Column C18 &#183; 220 nm &#183; 1.0 mL/min")
     hplc = (f'<text x="{cx0}" y="{cyy-14}" font-family="DejaVu Sans" font-size="12" fill="{NAVY}" font-weight="bold" letter-spacing="1">RP-HPLC CHROMATOGRAM</text>'
-            f'<text x="{cx0+cw}" y="{cyy-14}" font-family="DejaVu Sans" font-size="10" fill="{SUB}" text-anchor="end">Column C18 · 220 nm · 1.0 mL/min</text>'
+            f'<text x="{cx0+cw}" y="{cyy-14}" font-family="DejaVu Sans" font-size="10" fill="{SUB}" text-anchor="end">{cap}</text>'
             f'<rect x="{cx0}" y="{cyy}" width="{cw}" height="{ch}" fill="#fcfdfd" stroke="{LINE}"/>'
             + grid +
             f'<path d="{chrom}" fill="none" stroke="{TEAL_DK}" stroke-width="1.8"/>'
@@ -330,10 +345,40 @@ def coa_dates(sku):
     return mfg.isoformat(), retest.isoformat()
 
 
-def prod_to_coa(prod):
+def load_lab_data(path):
+    """Load real per-lot lab results keyed by SKU. Accepts JSON ({sku:{...}} or a
+    list of row dicts) or CSV (a header row including an 'sku' column)."""
+    if not path or not os.path.exists(path):
+        print("  ! lab-data file not found:", path)
+        return {}
+    data = {}
+    if path.lower().endswith(".json"):
+        raw = json.load(open(path, encoding="utf-8"))
+        if isinstance(raw, dict):
+            data = {str(k): v for k, v in raw.items()}
+        elif isinstance(raw, list):
+            for row in raw:
+                key = row.get("sku") or row.get("SKU")
+                if key:
+                    data[str(key)] = row
+    elif path.lower().endswith(".csv"):
+        with open(path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                key = row.get("sku") or row.get("SKU")
+                if key:
+                    data[str(key)] = row
+    print(f"  loaded real lab data for {len(data)} lot(s) from {path}")
+    return data
+
+
+def prod_to_coa(prod, lab=None):
     mfg, retest = coa_dates(prod["sku"])
-    return dict(name=prod["name"], dose=norm_dose(prod["dose"]), sku=prod["sku"],
-                lot=prod["lot"], mfg=mfg, retest=retest)
+    p = dict(name=prod["name"], dose=norm_dose(prod["dose"]), sku=prod["sku"],
+             lot=prod["lot"], mfg=mfg, retest=retest)
+    if lab:
+        override = lab.get(prod["sku"]) or lab.get(prod["lot"]) or {}
+        p.update({k: v for k, v in override.items() if v not in (None, "")})
+    return p
 
 
 def render_coa_files(p, stem):
@@ -345,22 +390,33 @@ def render_coa_files(p, stem):
 
 
 def main():
-    sample = len(sys.argv) > 1 and sys.argv[1] == "sample"
+    args = sys.argv[1:]
+    sample = "sample" in args
+    data_path = None
+    if "--data" in args:
+        i = args.index("--data")
+        if i + 1 < len(args):
+            data_path = args[i + 1]
+    lab = load_lab_data(data_path) if data_path else {}
+
     prods = distinct_products()
 
     if sample:
         os.makedirs("/tmp/coa", exist_ok=True)
         for prod in prods[:4]:
-            render_coa_files(prod_to_coa(prod), f"/tmp/coa/{prod['sku']}")
+            render_coa_files(prod_to_coa(prod, lab), f"/tmp/coa/{prod['sku']}")
             print("  ✓", prod["sku"], prod["name"])
         return
 
     os.makedirs(COA_DIR, exist_ok=True)
+    real = 0
     for i, prod in enumerate(prods, 1):
-        render_coa_files(prod_to_coa(prod), os.path.join(COA_DIR, prod["sku"]))
+        if lab and (prod["sku"] in lab or prod["lot"] in lab):
+            real += 1
+        render_coa_files(prod_to_coa(prod, lab), os.path.join(COA_DIR, prod["sku"]))
         if i % 40 == 0:
             print(f"  {i}/{len(prods)}")
-    print("COA generated for", len(prods), "products ->", COA_DIR)
+    print(f"COA generated for {len(prods)} products ({real} with real lab data) -> {COA_DIR}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,28 @@
+{
+  "_comment": "Real per-lot lab results for the COA generator. Key by product SKU (or by lot number). Any field you omit falls back to the deterministic template value. Run:  python3 generate_coa.py --data coa-lab-data.example.json   (a CSV with the same column names also works).",
+
+  "AV-SPT-001": {
+    "lot": "ALV-240517",
+    "purity": 99.4,
+    "single_imp": 0.21,
+    "water": 4.8,
+    "acetate": 7.2,
+    "peptide_content": 86.1,
+    "mfg": "2026-03-12",
+    "retest": "2028-03-12",
+    "formula": "C62H98N16O22",
+    "mw": "1419.55",
+    "cas": "137525-51-0",
+    "tested_by": "Janoshik Analytical"
+  },
+
+  "AV-SKN-003": {
+    "lot": "ALV-240602",
+    "purity": 99.1,
+    "single_imp": 0.34,
+    "water": 3.9,
+    "acetate": 8.5,
+    "peptide_content": 88.0,
+    "tested_by": "Janoshik Analytical"
+  }
+}
