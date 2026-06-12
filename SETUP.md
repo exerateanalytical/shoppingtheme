@@ -56,6 +56,36 @@ To connect a Mailchimp list, replace the `alluvia_handle_subscribe()` function b
 
 ---
 
+## Product Catalogue Import
+
+The store ships with a ready-to-import catalogue of **400 peptide products —
+50 best-sellers in each of the 8 categories** — in `alluvia-products.csv`.
+
+To import:
+
+1. Install and activate **WooCommerce** (see above).
+2. Go to **Products → All Products → Import** (top of the screen).
+3. Choose `alluvia-products.csv` and click **Continue**.
+4. Leave column mapping on **auto** — the headers match WooCommerce exactly.
+5. Click **Run the importer**.
+
+This creates all 400 products with their categories, SEO/GEO-optimised
+descriptions, AUD prices, ≥99% purity attribute and stock. Categories are
+created automatically from the `Categories` column.
+
+To regenerate or edit the catalogue, update `catalogue_data.py` (the curated
+per-peptide dataset) and run:
+
+```
+python3 generate_products.py
+```
+
+This rewrites `alluvia-products.csv`. Each product's copy is built from real
+per-peptide facts (what it is, how it works, its specific benefits) so every
+description is unique and benefit-led — no generic templated write-ups.
+
+---
+
 ## Notes
 
 - All page designs are self-contained in their PHP template files
