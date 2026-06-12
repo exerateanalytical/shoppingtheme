@@ -69,9 +69,22 @@ To import:
 4. Leave column mapping on **auto** — the headers match WooCommerce exactly.
 5. Click **Run the importer**.
 
-This creates all 400 products with their categories, SEO/GEO-optimised
-descriptions, AUD prices, ≥99% purity attribute and stock. Categories are
-created automatically from the `Categories` column.
+This creates **294 distinct products** with their categories, SEO/GEO-optimised
+descriptions, AUD prices, ≥99% purity attribute and stock. Every category still
+lists 50 products — peptides that belong in more than one category (e.g. BPC-157,
+GHK-Cu) are assigned to **multiple categories as a single product** rather than
+cloned, which avoids duplicate-content SEO penalties. Categories are created
+automatically from the `Categories` column.
+
+### SEO meta & structured data
+
+- The CSV includes `Meta: _yoast_wpseo_title`, `_yoast_wpseo_metadesc` and
+  `_yoast_wpseo_focuskw` columns. If **Yoast SEO** is installed, these populate
+  each product's SEO title, meta description and focus keyword on import.
+- The theme automatically outputs **Product** and **FAQPage** JSON-LD structured
+  data on every single-product page (see `alluvia_product_schema()` in
+  `functions.php`), so prices, availability and the product FAQ are eligible for
+  Google rich results and AI answer engines — no plugin required.
 
 To regenerate or edit the catalogue, update `catalogue_data.py` (the curated
 per-peptide dataset) and run:

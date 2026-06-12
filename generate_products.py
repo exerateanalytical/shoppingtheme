@@ -47,6 +47,23 @@ def build_short_description(p: dict) -> str:
     )
 
 
+def build_meta_title(p: dict) -> str:
+    """SEO <title> — keep close to ~60 chars where possible."""
+    base = f"Buy {p['name']} {p['dose']} Online Australia | {BRAND}"
+    if len(base) <= 60:
+        return base
+    return f"{p['name']} {p['dose']} Australia | {BRAND}"
+
+
+def build_meta_description(p: dict) -> str:
+    """SEO meta description — ~150 chars, benefit-led, AU + purity hooks."""
+    desc = (
+        f"Buy {p['name']} {p['dose']} in Australia for {p['summary']}. "
+        f"≥99% purity, Certificate of Analysis, fast discreet shipping from {BRAND}."
+    )
+    return desc[:157].rsplit(" ", 1)[0] if len(desc) > 158 else desc
+
+
 def build_faqs(p: dict) -> list:
     """Two to three peptide-specific Q&As — structured for GEO / AI answers."""
     name = p["name"]
@@ -111,20 +128,31 @@ HEADERS = [
     "Stock", "Backorders allowed?", "Sold individually?", "Regular price",
     "Sale price", "Categories", "Tags", "Weight (g)", "Attribute 1 name",
     "Attribute 1 value(s)", "Attribute 1 visible", "Attribute 1 global",
+    "Meta: _yoast_wpseo_title", "Meta: _yoast_wpseo_metadesc",
+    "Meta: _yoast_wpseo_focuskw",
 ]
 
 
 def main():
-    rows = []
+    # First pass: build one row per (category, product). The same peptide can
+    # appear in several categories — we collapse those into a single product
+    # assigned to multiple categories (avoids duplicate-content / clone SKUs
+    # while every category page still lists 50 products).
+    by_name = {}          # full_name -> row (first occurrence wins for copy)
+    order = []            # preserve first-seen order
     for category, cat in CATEGORIES.items():
         code = cat["code"]
         for i, p in enumerate(cat["products"], start=1):
-            sku = f"AV-{code}-{str(i).zfill(3)}"
             full_name = f"{p['name']} {p['dose']}"
-            tags = f"{p['name']}, {category}, peptides Australia, buy {p['name']}"
-            rows.append({
+            if full_name in by_name:
+                # Duplicate peptide — just add this category to the canonical row.
+                row = by_name[full_name]
+                if category not in row["_cats"]:
+                    row["_cats"].append(category)
+                continue
+            row = {
                 "Type": "simple",
-                "SKU": sku,
+                "SKU": f"AV-{code}-{str(i).zfill(3)}",
                 "Name": full_name,
                 "Published": 1,
                 "Is featured?": 1 if i <= 6 else 0,
@@ -139,14 +167,29 @@ def main():
                 "Sold individually?": 0,
                 "Regular price": p["price"],
                 "Sale price": p.get("sale", ""),
-                "Categories": category,
-                "Tags": tags,
                 "Weight (g)": 25,
                 "Attribute 1 name": "Purity",
                 "Attribute 1 value(s)": "≥99%",
                 "Attribute 1 visible": 1,
                 "Attribute 1 global": 1,
-            })
+                "Meta: _yoast_wpseo_title": build_meta_title(p),
+                "Meta: _yoast_wpseo_metadesc": build_meta_description(p),
+                "Meta: _yoast_wpseo_focuskw": p["name"],
+                "_cats": [category],
+                "_pname": p["name"],
+            }
+            by_name[full_name] = row
+            order.append(full_name)
+
+    # Finalise: turn the category list into the WooCommerce Categories + Tags.
+    rows = []
+    for name in order:
+        row = by_name[name]
+        cats = row.pop("_cats")
+        pname = row.pop("_pname")
+        row["Categories"] = ", ".join(cats)
+        row["Tags"] = f"{pname}, peptides Australia, buy {pname}, " + ", ".join(cats)
+        rows.append(row)
 
     out = "/home/user/shoppingtheme/alluvia-products.csv"
     with open(out, "w", newline="", encoding="utf-8") as f:
@@ -154,9 +197,13 @@ def main():
         w.writeheader()
         w.writerows(rows)
 
-    per_cat = Counter(r["Categories"] for r in rows)
+    # Report: distinct products + members per category (counting multi-cat).
+    per_cat = Counter()
+    for r in rows:
+        for c in r["Categories"].split(", "):
+            per_cat[c] += 1
     print(f"CSV generated: {out}")
-    print(f"Total products: {len(rows)}")
+    print(f"Distinct products: {len(rows)}")
     for c, n in sorted(per_cat.items()):
         print(f"  {n:3d}  {c}")
 
