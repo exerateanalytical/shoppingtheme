@@ -65,6 +65,21 @@ if ( ! function_exists( 'alluvia_account_url' ) ) {
         return home_url( '/my-account/' );
     }
 }
+if ( ! function_exists( 'alluvia_cat_url' ) ) {
+    /**
+     * Safe product-category archive URL by slug. Falls back to the shop page
+     * if WooCommerce or the term isn't available yet.
+     */
+    function alluvia_cat_url( $slug ) {
+        if ( taxonomy_exists( 'product_cat' ) ) {
+            $link = get_term_link( $slug, 'product_cat' );
+            if ( ! is_wp_error( $link ) ) {
+                return $link;
+            }
+        }
+        return alluvia_shop_url();
+    }
+}
 /**
  * Brand logo mark + wordmark used in nav and footer.
  * Returns the inner markup for an <a class="nav-logo"> link.

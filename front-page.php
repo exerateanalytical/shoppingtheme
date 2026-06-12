@@ -1,6 +1,6 @@
 <?php
 /**
- * /* Front Page — no Template Name needed */
+ * Front Page — no Template Name needed.
  *
  * @package Shopping
  */
@@ -330,7 +330,7 @@ get_header( 'alluvia' );
 <!-- NAV -->
 <nav class="alluvia-nav" id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
       <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/>
         <circle cx="17" cy="10" r="2.2" fill="#00c6b3"/>
@@ -351,7 +351,7 @@ get_header( 'alluvia' );
       <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
       <li><a href="#testimonials">Reviews</a></li>
       <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-      <li><a href="#" class="nav-cta">Shop Now</a></li>
+      <li><a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="nav-cta">Shop Now</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -368,7 +368,7 @@ get_header( 'alluvia' );
   <a href="<?php echo esc_url(home_url('/about/')); ?>"   onclick="closeMobile()">About</a>
   <a href="#testimonials"        onclick="closeMobile()">Reviews</a>
   <a href="<?php echo esc_url(home_url('/contact/')); ?>" onclick="closeMobile()">Contact</a>
-  <a href="#"                    onclick="closeMobile()" style="color:var(--teal)">Shop Now</a>
+  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" onclick="closeMobile()" style="color:var(--teal)">Shop Now</a>
 </div>
 
 
@@ -516,7 +516,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><rect x="26" y="8" width="12" height="48" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="48" height="12" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="11.5" r="4" fill="currentColor"/><circle cx="32" cy="52.5" r="4" fill="currentColor"/><circle cx="11.5" cy="32" r="4" fill="currentColor"/><circle cx="52.5" cy="32" r="4" fill="currentColor"/><circle cx="32" cy="32" r="7" fill="currentColor" fill-opacity="0.15"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/></svg></div>
         <h3 class="cat-name">Medical Peptides</h3>
         <p class="cat-desc">Therapeutic-grade peptides designed for healing, immune modulation, and systemic recovery under clinical guidance.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'medical-peptides' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-1" style="--cat-color:#c8a96e;">
@@ -524,7 +524,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M 8 20 C 18 14 26 26 40 20 C 48 16 54 20 56 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M 8 32 C 18 26 26 38 40 32 C 48 28 54 32 56 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".75"/><path d="M 8 44 C 18 38 26 50 40 44 C 48 40 54 44 56 44" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity=".5"/><circle cx="30" cy="12" r="4" fill="currentColor"/><line x1="30" y1="16" x2="30" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="30" cy="23" r="3" fill="currentColor" fill-opacity=".7"/><line x1="30" y1="26" x2="30" y2="32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="30" cy="35" r="2.5" fill="currentColor" fill-opacity=".5"/><line x1="30" y1="37.5" x2="30" y2="43" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2.5 2"/><circle cx="30" cy="46" r="2" fill="currentColor" fill-opacity=".3"/></svg></div>
         <h3 class="cat-name">Skincare Peptides</h3>
         <p class="cat-desc">Signal peptides that stimulate collagen synthesis, reduce fine lines, and restore youthful skin architecture at the cellular level.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'skincare-peptides' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-2" style="--cat-color:#7fb8d4;">
@@ -532,7 +532,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M 28 6 C 28 14 44 14 44 22 C 44 30 28 30 28 38 C 28 46 44 46 44 54 C 44 60 36 62 32 58" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 36 10 C 36 18 20 18 20 26 C 20 34 36 34 36 42 C 36 50 20 50 20 58" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".65"/><path d="M 32 8 C 32 16 46 20 44 28 C 42 36 26 36 26 44 C 26 52 40 52 38 58" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".35"/><circle cx="36" cy="22" r="3" fill="currentColor"/><circle cx="28" cy="38" r="2.5" fill="currentColor" fill-opacity=".7"/><circle cx="36" cy="46" r="2" fill="currentColor" fill-opacity=".5"/></svg></div>
         <h3 class="cat-name">Collagen Peptides</h3>
         <p class="cat-desc">Hydrolysed collagen fractions that support joint integrity, connective tissue health, and skin density from within.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'collagen-peptides' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-3" style="--cat-color:#e07b54;">
@@ -540,7 +540,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><polygon points="32,5 54,18 54,43 32,56 10,43 10,18" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07"/><path d="M 37 14 L 26 34 L 33 34 L 27 50 L 42 28 L 35 28 Z" fill="currentColor" stroke="none"/><circle cx="32" cy="5" r="3" fill="currentColor"/><circle cx="54" cy="18" r="3" fill="currentColor" fill-opacity=".5"/><circle cx="10" cy="43" r="3" fill="currentColor" fill-opacity=".5"/></svg></div>
         <h3 class="cat-name">Sports &amp; Recovery</h3>
         <p class="cat-desc">Performance peptides that accelerate muscle repair, reduce DOMS, and enhance endurance for serious athletes.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'sports-recovery' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-4" style="--cat-color:#9b72cf;">
@@ -548,7 +548,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M 32 10 A 22 22 0 1 1 54 32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 47 22 L 54 32 L 44 34" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="8" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.08"/><circle cx="32" cy="26" r="3" fill="currentColor"/><circle cx="37.2" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/><circle cx="26.8" cy="34.5" r="3" fill="currentColor" fill-opacity=".7"/><line x1="32" y1="29" x2="35.5" y2="32.5" stroke="currentColor" stroke-width="1.5"/><line x1="32" y1="29" x2="28.5" y2="32.5" stroke="currentColor" stroke-width="1.5"/><line x1="35" y1="34.5" x2="29" y2="34.5" stroke="currentColor" stroke-width="1.5"/></svg></div>
         <h3 class="cat-name">Weight-Loss &amp; Metabolic</h3>
         <p class="cat-desc">Metabolic peptides that modulate appetite, enhance fat oxidation, and improve insulin sensitivity for body recomposition.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'weight-loss-metabolic' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-5" style="--cat-color:#c8a96e;">
@@ -556,7 +556,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M 14 8 L 50 8 L 34 30 L 50 56 L 14 56 L 30 30 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07" stroke-linejoin="round"/><circle cx="32" cy="31" r="3.5" fill="currentColor"/><path d="M 23 15 Q 32 19 41 15" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M 21 22 Q 32 26 43 22" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".7"/><path d="M 21 40 Q 32 44 43 40" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".7"/><path d="M 23 48 Q 32 52 41 48" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div>
         <h3 class="cat-name">Hormone &amp; Anti-Aging</h3>
         <p class="cat-desc">Longevity peptides that support GH secretion, regulate cortisol, and activate cellular regeneration pathways for graceful ageing.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'hormone-anti-aging' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-6" style="--cat-color:#78c9a2;">
@@ -564,7 +564,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><ellipse cx="32" cy="54" rx="16" ry="7" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/><circle cx="32" cy="54" r="3" fill="currentColor" fill-opacity=".5"/><path d="M 22 54 C 22 46 15 38 19 26 C 21 18 25 14 24 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><path d="M 32 54 C 32 44 25 36 28 24 C 30 15 33 10 32 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M 42 54 C 42 46 49 38 45 26 C 43 18 39 14 40 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".5"/><circle cx="30" cy="34" r="3" fill="currentColor"/><circle cx="31" cy="20" r="2.5" fill="currentColor" fill-opacity=".7"/><circle cx="32" cy="10" r="2" fill="currentColor" fill-opacity=".5"/></svg></div>
         <h3 class="cat-name">Hair Growth Peptides</h3>
         <p class="cat-desc">Follicle-activating peptides that extend the anagen phase, reduce miniaturisation, and restore visible hair density.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'hair-growth-peptides' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal reveal-delay-7" style="--cat-color:#00c6b3;">
@@ -572,7 +572,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path d="M 24 8 L 24 25 L 10 48 C 8 53 12 57 17 57 L 47 57 C 52 57 56 53 54 48 L 40 25 L 40 8 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.07"/><line x1="20" y1="8" x2="44" y2="8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="25" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><line x1="28.5" y1="47" x2="35.5" y2="47" stroke="currentColor" stroke-width="1.8"/><circle cx="39" cy="47" r="3.5" fill="currentColor" fill-opacity=".6"/><circle cx="28" cy="38" r="2.5" fill="currentColor" fill-opacity=".75"/><line x1="30" y1="36.5" x2="34" y2="31" stroke="currentColor" stroke-width="1.5" stroke-opacity=".5"/><circle cx="36" cy="29" r="3" fill="currentColor"/><line x1="35" y1="26.5" x2="31" y2="20" stroke="currentColor" stroke-width="1.5" stroke-opacity=".4"/><circle cx="30" cy="17" r="2" fill="currentColor" fill-opacity=".5"/></svg></div>
         <h3 class="cat-name">Research Peptides</h3>
         <p class="cat-desc">High-purity peptide standards for in-vitro and laboratory research, supplied with full analytical documentation.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'research-peptides' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
       <article class="cat-card reveal" style="--cat-color:#5b7186;">
@@ -580,7 +580,7 @@ get_header( 'alluvia' );
         <div class="cat-icon-wrap"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><rect x="24" y="16" width="16" height="40" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><rect x="26" y="9" width="12" height="8" rx="2" fill="currentColor"/><line x1="24" y1="40" x2="40" y2="40" stroke="currentColor" stroke-width="2" stroke-opacity="0.6"/><line x1="24" y1="47" x2="40" y2="47" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"/><path d="M 50 14 C 50 14 46 20 46 23.5 A 4 4 0 1 0 54 23.5 C 54 20 50 14 50 14 Z" fill="currentColor" fill-opacity="0.75"/></svg></div>
         <h3 class="cat-name">Lab Supplies &amp; Accessories</h3>
         <p class="cat-desc">Bacteriostatic water, sterile vials and reconstitution kits — the lab consumables every peptide research workflow depends on.</p>
-        <a href="#" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+        <a href="<?php echo esc_url( alluvia_cat_url( 'lab-supplies-accessories' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
     </div>
@@ -791,7 +791,7 @@ get_header( 'alluvia' );
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#" class="nav-logo">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
           <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#00c6b3" stroke-width="1.6" fill="none" opacity="0.9"/>
             <circle cx="17" cy="10" r="2.2" fill="#00c6b3"/>
@@ -817,14 +817,14 @@ get_header( 'alluvia' );
       <div>
         <h3 class="footer-col-title">Products</h3>
         <ul class="footer-links">
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Medical Peptides</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Skincare Peptides</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Collagen Peptides</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Sports &amp; Recovery</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Weight-Loss &amp; Metabolic</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Hormone &amp; Anti-Aging</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Hair Growth</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Research Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'medical-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Medical Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'skincare-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Skincare Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'collagen-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Collagen Peptides</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'sports-recovery' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Sports &amp; Recovery</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'weight-loss-metabolic' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Weight-Loss &amp; Metabolic</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'hormone-anti-aging' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Hormone &amp; Anti-Aging</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'hair-growth-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Hair Growth</a></li>
+          <li><a href="<?php echo esc_url( alluvia_cat_url( 'research-peptides' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Research Peptides</a></li>
         </ul>
       </div>
       <div>
@@ -832,26 +832,26 @@ get_header( 'alluvia' );
         <ul class="footer-links">
           <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>About Us</a></li>
           <li><a href="#science"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Our Science</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Blog</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Blog</a></li>
           <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Contact</a></li>
         </ul>
       </div>
       <div>
         <h3 class="footer-col-title">Support</h3>
         <ul class="footer-links">
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>FAQ</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Shipping Info</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Returns</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>My Account</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>FAQ</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/shipping-policy/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Shipping Info</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/shipping-policy/' ) ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>Returns</a></li>
+          <li><a href="<?php echo esc_url( alluvia_account_url() ); ?>"><i data-lucide="chevron-right" style="width:13px;height:13px;color:var(--teal)"></i>My Account</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Alluvia Peptides. All rights reserved.</p>
       <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Disclaimer</a>
+        <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
+        <a href="<?php echo esc_url( home_url( '/terms-conditions/' ) ); ?>">Terms of Service</a>
+        <a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>">Disclaimer</a>
       </div>
     </div>
   </div>
@@ -916,7 +916,7 @@ var co=new IntersectionObserver(function(entries){entries.forEach(function(e){if
 document.querySelectorAll('[data-count]').forEach(function(el){co.observe(el);});
 
 // Form
-function handleSub(e){e.preventDefault();var b=document.getElementById('sub-btn');b.innerHTML='<i data-lucide="check" style="width:14px;height:14px"></i> Subscribed!';lucide.createIcons();e.target.querySelector('input').value='';setTimeout(function(){b.innerHTML='<i data-lucide="send" style="width:14px;height:14px"></i> Join Now';lucide.createIcons();},3500);}
+function handleSub(e){e.preventDefault();var b=document.getElementById('sub-btn');var input=e.target.querySelector('input[type=email]');var reset=function(){b.innerHTML='<i data-lucide="send" style="width:14px;height:14px"></i> Join Now';lucide.createIcons();};var cfg=window.alluviaAjax||{};var body=new URLSearchParams({action:'alluvia_subscribe',nonce:cfg.sub_nonce||'',email:input.value});fetch(cfg.ajax_url||'/wp-admin/admin-ajax.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body}).then(function(r){return r.json();}).then(function(res){var msg=(res&&res.data&&res.data.message)||'Subscribed!';b.innerHTML='<i data-lucide="check" style="width:14px;height:14px"></i> '+msg;lucide.createIcons();if(res&&res.success){input.value='';}setTimeout(reset,3500);}).catch(function(){reset();});}
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
