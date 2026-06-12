@@ -336,6 +336,69 @@ function alluvia_assign_category_images() {
 }
 
 /* ═══════════════════════════════════════
+   WOOCOMMERCE: Auto-assign branded vial images to products
+   Matches images/products/<SKU>.jpg to each product by SKU and sets it as the
+   featured image. Processes in batches across admin loads to avoid timeouts,
+   then flags itself complete.
+═══════════════════════════════════════ */
+add_action( 'admin_init', 'alluvia_assign_product_images' );
+function alluvia_assign_product_images() {
+    if ( get_option( 'alluvia_product_images_done' ) ) {
+        return;
+    }
+    if ( ! function_exists( 'wc_get_product_id_by_sku' ) ) {
+        return; // WooCommerce not active yet
+    }
+
+    $dir = trailingslashit( get_template_directory() ) . 'images/products/';
+    $files = glob( $dir . 'AV-*.jpg' );
+    if ( empty( $files ) ) {
+        return;
+    }
+
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    $batch = 40;       // per admin page load
+    $done  = 0;
+    $pending = 0;
+    foreach ( $files as $file ) {
+        $sku = basename( $file, '.jpg' );
+        $product_id = wc_get_product_id_by_sku( $sku );
+        if ( ! $product_id ) {
+            continue; // product not imported yet
+        }
+        if ( get_post_thumbnail_id( $product_id ) ) {
+            continue; // already has an image
+        }
+        $pending++;
+        if ( $done >= $batch ) {
+            continue; // leave the rest for the next load
+        }
+
+        $upload = wp_upload_bits( $sku . '.jpg', null, file_get_contents( $file ) );
+        if ( ! empty( $upload['error'] ) ) {
+            continue;
+        }
+        $attach_id = wp_insert_attachment( array(
+            'post_mime_type' => 'image/jpeg',
+            'post_title'     => get_the_title( $product_id ),
+            'post_status'    => 'inherit',
+        ), $upload['file'], $product_id );
+        if ( is_wp_error( $attach_id ) || ! $attach_id ) {
+            continue;
+        }
+        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $upload['file'] ) );
+        set_post_thumbnail( $product_id, $attach_id );
+        $done++;
+    }
+
+    // Nothing left waiting for an image -> we are finished.
+    if ( $pending <= $done ) {
+        update_option( 'alluvia_product_images_done', 1 );
+    }
+}
+
+/* ═══════════════════════════════════════
    WOOCOMMERCE: Cart fragments (AJAX cart count)
 ═══════════════════════════════════════ */
 add_filter( 'woocommerce_add_to_cart_fragments', 'alluvia_cart_fragment' );

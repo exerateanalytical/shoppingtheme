@@ -86,6 +86,21 @@ automatically from the `Categories` column.
   `functions.php`), so prices, availability and the product FAQ are eligible for
   Google rich results and AI answer engines — no plugin required.
 
+### Branded product images (auto-generated vials)
+
+Every product has a unique branded vial image in `images/products/<SKU>.jpg`
+(1080×1080). One universal bottle design is auto-filled per product — the label
+reads each product's name (auto-sized + wrapped), dose, ≥99% purity, category
+(accent colour) plus a COA seal, lot and storage line. On admin loads after the
+products are imported, the theme **auto-assigns each image as that product's
+featured image**, matched by SKU (`alluvia_assign_product_images()` in
+`functions.php`, batched to avoid timeouts). Regenerate with:
+
+```
+python3 generate_product_images.py          # all products
+python3 generate_product_images.py sample   # quick test renders to /tmp
+```
+
 ### Branded category images
 
 Eight on-brand category images live in `images/categories/` (1080×1080 PNG, with
