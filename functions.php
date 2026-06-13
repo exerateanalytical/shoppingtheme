@@ -891,3 +891,23 @@ add_action( 'init', function() {
         flush_rewrite_rules();
     }
 }, 20 );
+
+/* ═══════════════════════════════════════
+   MY ACCOUNT: ensure /my-account/ always routes to WooCommerce.
+   Fixes conflict when a blog post has slug 'my-account'.
+═══════════════════════════════════════ */
+add_action( 'template_redirect', function() {
+    if ( ! function_exists( 'WC' ) ) return;
+    if ( is_account_page() ) return; // WC already owns it
+
+    $request = isset( $_SERVER['REQUEST_URI'] ) ? parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) : '';
+    if ( $request && preg_match( '#^/my-account(/|$)#', $request ) ) {
+        $account_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'myaccount' ) : home_url( '/my-account/' );
+        if ( $account_url && trailingslashit( $account_url ) !== trailingslashit( home_url( $request ) ) ) {
+            wp_redirect( $account_url, 301 );
+            exit;
+        }
+    }
+} );
+
+add_action( 'after_switch_theme', 'flush_rewrite_rules' );
