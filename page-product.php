@@ -274,61 +274,81 @@ get_header( 'alluvia' );
 
   <div class="tab-pane" id="tab-research">
     <div class="tab-content-card">
-      <h3>Research Background</h3>
-      <p>BPC-157 has been the subject of numerous peer-reviewed studies, predominantly in rodent models. Its proposed mechanism of action centers on the upregulation of growth factors and the promotion of angiogenesis via the VEGFR2-Akt-eNOS signaling pathway.</p>
-      <h4>Mechanism of Action (Proposed)</h4>
-      <p>Studies suggest BPC-157 interacts with the nitric oxide (NO) system, modulates dopaminergic and serotonergic systems, and upregulates expression of growth hormone receptors in fibroblasts — a pathway that may explain its observed effects on tendon fibroblast proliferation.</p>
-      <h4>Storage & Reconstitution</h4>
-      <ul class="research-list">
-        <li><i data-lucide="snowflake" width="16" height="16"></i>Store lyophilized vial at −20°C; stable for 24+ months</li>
-        <li><i data-lucide="droplet" width="16" height="16"></i>Reconstitute with bacteriostatic water for research handling</li>
-        <li><i data-lucide="refrigerator" width="16" height="16"></i>Once reconstituted, store at 2–8°C and use within 30 days</li>
-        <li><i data-lucide="sun-dim" width="16" height="16"></i>Protect from light and repeated freeze-thaw cycles</li>
-      </ul>
-      <div style="background:rgba(198,162,83,0.07);border:1px solid rgba(198,162,83,0.25);border-radius:8px;padding:1rem 1.25rem;font-size:0.85rem;color:var(--text-mid);margin-top:1rem">
-        <strong>For research use only.</strong> This product is not intended for human or veterinary use. See our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>" style="color:var(--teal-dark)">Terms & Conditions</a> for full disclaimer.
-      </div>
+      <?php
+$research_content = get_post_meta(get_the_ID(), '_research_notes', true);
+if ($research_content) {
+    echo wp_kses_post(wpautop($research_content));
+} else {
+    echo '<p style="color:var(--text-light)">Research notes not available for this product.</p>';
+}
+?>
     </div>
   </div>
 
   <div class="tab-pane" id="tab-specs">
     <div class="tab-content-card">
-      <h3>Technical Specifications</h3>
-      <table class="specs-table">
-        <tr><td>Product Name</td><td>BPC-157 (Body Protection Compound-157)</td></tr>
-        <tr><td>CAS Number</td><td>137525-51-0</td></tr>
-        <tr><td>Molecular Formula</td><td>C₆₂H₉₈N₁₆O₂₂</td></tr>
-        <tr><td>Molecular Weight</td><td>1419.53 g/mol</td></tr>
-        <tr><td>Sequence</td><td>Gly-Glu-Pro-Pro-Pro-Gly-Lys-Pro-Ala-Asp-Asp-Ala-Gly-Leu-Val</td></tr>
-        <tr><td>Purity</td><td>≥99% by HPLC</td></tr>
-        <tr><td>Form</td><td>Lyophilized white powder</td></tr>
-        <tr><td>Quantity</td><td>5 mg per vial</td></tr>
-        <tr><td>Storage</td><td>−20°C, protect from light</td></tr>
-        <tr><td>Solubility</td><td>Soluble in water, bacteriostatic water</td></tr>
-      </table>
+      <?php
+$attributes = $product ? $product->get_attributes() : [];
+$spec_meta = [
+    'cas_number'         => get_post_meta(get_the_ID(), '_cas_number', true),
+    'molecular_formula'  => get_post_meta(get_the_ID(), '_molecular_formula', true),
+    'molecular_weight'   => get_post_meta(get_the_ID(), '_molecular_weight', true),
+    'sequence'           => get_post_meta(get_the_ID(), '_amino_acid_sequence', true),
+    'purity'             => $product ? $product->get_attribute('purity') : '',
+    'form'               => $product ? $product->get_attribute('form') : '',
+    'storage'            => $product ? $product->get_attribute('storage') : '',
+];
+$spec_meta = array_filter($spec_meta);
+
+$label_map = [
+    'cas_number'        => 'CAS Number',
+    'molecular_formula' => 'Molecular Formula',
+    'molecular_weight'  => 'Molecular Weight',
+    'sequence'          => 'Amino Acid Sequence',
+    'purity'            => 'Purity',
+    'form'              => 'Form',
+    'storage'           => 'Storage',
+];
+
+if (!empty($spec_meta)) : ?>
+  <dl class="spec-dl" style="display:grid;grid-template-columns:auto 1fr;gap:8px 24px">
+    <?php foreach ($spec_meta as $key => $val) : ?>
+      <dt style="font-weight:600;color:var(--text-mid);white-space:nowrap"><?php echo esc_html($label_map[$key] ?? $key); ?></dt>
+      <dd style="margin:0;color:var(--text-dark)"><?php echo esc_html($val); ?></dd>
+    <?php endforeach; ?>
+  </dl>
+<?php else : ?>
+  <p style="color:var(--text-light)">Technical specifications not available for this product.</p>
+<?php endif; ?>
     </div>
   </div>
 
   <div class="tab-pane" id="tab-coa">
     <div class="tab-content-card">
-      <h3>Certificate of Analysis</h3>
-      <p>Every batch of BPC-157 is independently tested by third-party laboratories for identity, purity, and mass confirmation. The COA for your specific lot number is included in your order confirmation email and available in our COA library.</p>
-      <div class="coa-block">
-        <div class="coa-info">
-          <div class="coa-icon"><i data-lucide="file-check" width="24" height="24"></i></div>
-          <div>
-            <div class="coa-title">Lot #BPC157-2504-A · HPLC + MS Verified</div>
-            <div class="coa-sub">Purity: 99.2% · Tested: April 2025 · Janoshik Analytical</div>
-          </div>
-        </div>
-        <a href="<?php echo esc_url(home_url('/coa-library/')); ?>" class="btn-coa"><i data-lucide="download" width="15" height="15"></i> View COA Library</a>
-      </div>
-      <ul class="research-list" style="margin-top:1.5rem">
-        <li><i data-lucide="check-circle" width="16" height="16"></i>HPLC purity analysis (≥99%)</li>
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Mass spectrometry identity confirmation</li>
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Endotoxin and sterility screening</li>
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Independent third-party verification</li>
-      </ul>
+      <?php
+$coa_url = get_post_meta(get_the_ID(), '_coa_pdf_url', true);
+$lot_number = get_post_meta(get_the_ID(), '_lot_number', true);
+$test_date  = get_post_meta(get_the_ID(), '_coa_test_date', true);
+$test_lab   = get_post_meta(get_the_ID(), '_coa_lab', true);
+
+if ($coa_url || $lot_number) : ?>
+  <?php if ($lot_number) : ?>
+    <p><strong>Lot Number:</strong> <?php echo esc_html($lot_number); ?></p>
+  <?php endif; ?>
+  <?php if ($test_date) : ?>
+    <p><strong>Test Date:</strong> <?php echo esc_html($test_date); ?></p>
+  <?php endif; ?>
+  <?php if ($test_lab) : ?>
+    <p><strong>Testing Laboratory:</strong> <?php echo esc_html($test_lab); ?></p>
+  <?php endif; ?>
+  <?php if ($coa_url) : ?>
+    <a href="<?php echo esc_url($coa_url); ?>" target="_blank" rel="noopener" class="btn-add-cart" style="display:inline-flex;gap:8px;align-items:center;margin-top:16px">
+      <i data-lucide="file-text" width="18" height="18"></i> Download COA (PDF)
+    </a>
+  <?php endif; ?>
+<?php else : ?>
+  <p style="color:var(--text-light)">Certificate of Analysis not yet available for this product. Contact us for lab documentation.</p>
+<?php endif; ?>
     </div>
   </div>
 
