@@ -51,6 +51,15 @@
   --radius-lg: 28px;
   --radius-xl: 48px;
 
+  /* Radius alias — used by cart, checkout, product inline styles */
+  --radius:      12px;
+
+  /* Extended palette — used by product badges and card accents */
+  --purple:      #8a60c1;
+  --orange:      #d4663c;
+  --mint:        #58b488;
+  --sky:         #6aa6c6;
+
   /* Shadows */
   --shadow-sm:   0 2px 12px rgba(10,26,39,0.08);
   --shadow-md:   0 8px 32px rgba(10,26,39,0.14);
