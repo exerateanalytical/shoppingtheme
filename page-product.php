@@ -35,7 +35,7 @@ add_action( 'wp_head', function() {
 
 /* GALLERY */
 .gallery{}
-.gallery-main{background:#fff;border-radius:var(--radius);height:420px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative;overflow:hidden;border:1px solid var(--pearl-dark)}
+.gallery-main{background:#fff;border-radius:var(--radius);height:480px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative;overflow:hidden;border:1px solid var(--pearl-dark)}
 .gallery-main::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(14,175,159,0.08),transparent 70%)}
 .gallery-main .vial-icon{position:relative;z-index:1}
 .gallery-badge{position:absolute;top:1rem;left:1rem;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.06em;padding:4px 12px;border-radius:50px;text-transform:uppercase;z-index:2}
@@ -150,7 +150,7 @@ add_action( 'wp_head', function() {
 
 @media(max-width:1024px){.product-main{gap:2rem}}
 @media(max-width:900px){.product-main{grid-template-columns:1fr;gap:2rem}.related-grid{grid-template-columns:repeat(2,1fr)}.product-tabs{padding:0 1rem}.related{padding:0 1rem}}
-@media(max-width:640px){.product-wrap{padding:4.5rem 1rem 2rem}.spec-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr 1fr}.gallery-main{height:280px}.purchase-row{flex-wrap:wrap}.btn-add-cart{flex:1;min-width:200px}.tab-btn{padding:.75rem 1rem;font-size:13px}}
+@media(max-width:640px){.product-wrap{padding:4.5rem 1rem 2rem}.spec-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr 1fr}.gallery-main{height:320px}.purchase-row{flex-wrap:wrap}.btn-add-cart{flex:1;min-width:200px}.tab-btn{padding:.75rem 1rem;font-size:13px}}
 @media(max-width:420px){.related-grid{grid-template-columns:1fr}.product-tabs .tab-nav{gap:0}}</style>
 <?php
 }, 20 );
@@ -181,7 +181,7 @@ get_header( 'alluvia' );
           <span class="gallery-badge" style="background:var(--coral);color:#fff">Sale</span>
         <?php endif; ?>
         <?php if ($thumb_url) : ?>
-          <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+          <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:24px">
         <?php else : ?>
           <i class="vial-icon" data-lucide="flask-conical" width="120" height="120" style="color:var(--teal)"></i>
         <?php endif; ?>
