@@ -838,3 +838,56 @@ add_action( 'admin_init', function() {
         exit;
     }
 } );
+
+/* ═══════════════════════════════════════
+   WOOCOMMERCE PAGES: ensure shop/cart/checkout/my-account exist
+   Runs once until all four WC options are correctly set.
+═══════════════════════════════════════ */
+add_action( 'init', function() {
+    if ( ! function_exists( 'WC' ) ) return;
+
+    $wc_pages = [
+        'shop'       => [ 'title' => 'Shop',       'option' => 'woocommerce_shop_page_id',       'content' => '' ],
+        'cart'       => [ 'title' => 'Cart',       'option' => 'woocommerce_cart_page_id',       'content' => '[woocommerce_cart]' ],
+        'checkout'   => [ 'title' => 'Checkout',   'option' => 'woocommerce_checkout_page_id',   'content' => '[woocommerce_checkout]' ],
+        'my-account' => [ 'title' => 'My Account', 'option' => 'woocommerce_myaccount_page_id',  'content' => '[woocommerce_my_account]' ],
+    ];
+
+    $all_ok = true;
+    foreach ( $wc_pages as $slug => $data ) {
+        $page_id = (int) get_option( $data['option'] );
+        if ( ! $page_id || 'publish' !== get_post_status( $page_id ) ) {
+            $all_ok = false;
+            break;
+        }
+    }
+    if ( $all_ok ) return; // nothing to do
+
+    $needs_flush = false;
+    foreach ( $wc_pages as $slug => $data ) {
+        $page_id = (int) get_option( $data['option'] );
+        if ( $page_id && 'publish' === get_post_status( $page_id ) ) continue;
+
+        // Find existing page by slug
+        $existing = get_page_by_path( $slug );
+        if ( $existing && 'publish' === $existing->post_status ) {
+            $page_id = $existing->ID;
+        } else {
+            $page_id = wp_insert_post( [
+                'post_title'   => $data['title'],
+                'post_name'    => $slug,
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_content' => $data['content'],
+                'post_author'  => 1,
+            ] );
+        }
+        if ( $page_id && ! is_wp_error( $page_id ) ) {
+            update_option( $data['option'], $page_id );
+            $needs_flush = true;
+        }
+    }
+    if ( $needs_flush ) {
+        flush_rewrite_rules();
+    }
+}, 20 );
