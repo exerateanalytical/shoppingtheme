@@ -7,69 +7,42 @@
 add_action( 'wp_head', function() {
 ?>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0a1a27;--navy-mid:#15283b;--navy-soft:#213f5d;--teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;--coral:#db627a;--purple:#8a60c1;--orange:#d4663c;--mint:#58b488;--sky:#6aa6c6;--pearl:#f5f0e7;--pearl-dark:#e8e0d2;--white:#fff;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;--radius:12px}
-html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
-.nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
-.logo-mark{width:34px;height:34px;flex-shrink:0}
-.logo-text{display:flex;flex-direction:column;line-height:1}
-
-
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--teal)}
-.nav-right{display:flex;align-items:center;gap:1rem}
-.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;text-decoration:none}
-.cart-count{background:var(--navy);color:var(--teal);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;text-decoration:none}
 .nav-account-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;text-decoration:none;transition:all .2s}.nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,26,39,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}.mobile-menu.open{display:flex}.mobile-menu a{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:24px;text-decoration:none}
-.mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;cursor:pointer}
 .page-hero{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:6rem 2rem 3rem;margin-top:72px;text-align:center}
-.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
+.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
 .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
-.page-hero p{color:rgba(255,255,255,0.55);font-size:16px;max-width:520px;margin:0 auto}
+.page-hero p{color:rgba(255,255,255,0.70);font-size:var(--fs-body);max-width:520px;margin:0 auto}
 .faq-wrap{max-width:820px;margin:0 auto;padding:3.5rem 2rem 5rem}
 .faq-search{display:flex;align-items:center;gap:0.75rem;background:#fff;border:1px solid var(--pearl-dark);border-radius:var(--radius);padding:0.75rem 1.25rem;margin-bottom:2.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
 .faq-search svg{color:var(--text-light);flex-shrink:0}
 .faq-search input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:16px;color:var(--text-dark);flex:1;background:transparent}.faq-search input::placeholder{color:var(--text-light)}
 .faq-section{margin-bottom:2.5rem}
-.faq-section-title{display:flex;align-items:center;gap:0.75rem;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
+.faq-section-title{display:flex;align-items:center;gap:0.75rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
 .faq-section-title svg{color:var(--teal)}
 .faq-item{background:#fff;border-radius:var(--radius);margin-bottom:0.75rem;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.05)}
-.faq-q{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;transition:background .2s;user-select:none;gap:1rem}
+.faq-q{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-body);transition:background .2s;user-select:none;gap:1rem}
 .faq-q:hover{background:var(--pearl)}
 .faq-q .chevron{transition:transform .3s;color:var(--teal);flex-shrink:0}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
 .faq-a.open{max-height:500px;padding:0 1.5rem 1.25rem}
-.faq-a p{font-size:15px;color:var(--text-mid);line-height:1.8}
+.faq-a p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.8}
 .faq-a a{color:var(--teal-dark);text-decoration:none}.faq-a a:hover{text-decoration:underline}
 .still-help{background:var(--navy);border-radius:var(--radius);padding:2.5rem;text-align:center;margin-top:3rem}
 .still-help h2{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:600;color:#fff;margin-bottom:0.5rem}
-.still-help p{color:rgba(255,255,255,0.55);margin-bottom:1.5rem;font-size:15px}
+.still-help p{color:rgba(255,255,255,0.70);margin-bottom:1.5rem;font-size:var(--fs-body)}
 .help-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .btn-help{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s}
 .btn-help.primary{background:var(--teal);color:var(--navy)}.btn-help.primary:hover{background:#fff}
 .btn-help.outline{background:transparent;border:1px solid rgba(255,255,255,0.25);color:#fff}.btn-help.outline:hover{border-color:var(--teal);color:var(--teal)}
-footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
+footer{background:#060e17;color:rgba(255,255,255,0.70);padding:4rem 2rem 2rem}
 .footer-inner{max-width:1200px;margin:0 auto}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:13px;color:rgba(255,255,255,0.35)}
-.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}.footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none}.footer-legal a:hover{color:var(--teal)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:var(--fs-xs);color:rgba(255,255,255,0.65)}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}.footer-legal a{color:rgba(255,255,255,0.65);text-decoration:none}.footer-legal a:hover{color:var(--teal)}
 @media(max-width:900px){
-  .nav-links{display:none}
-  .nav-hamburger{display:flex}
   .nav-right .nav-cart-btn span:not(.cart-count){display:none}
 }
 @media(max-width:640px){
-  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
-  .section-title{font-size:clamp(28px,7vw,42px)!important}
-  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
-  .product-title{font-size:clamp(28px,7vw,38px)!important}
-  .section-desc,.post-lead,.featured-body{font-size:16px}
-  body,p,.article p{font-size:15px;line-height:1.75}
-  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
-
-  .nav-hamburger{display:flex}
   .faq-wrap{padding:2.5rem 1.25rem 4rem}
   .page-hero{padding:5rem 1.25rem 2.5rem}
   .footer-bottom{flex-direction:column;align-items:flex-start}
