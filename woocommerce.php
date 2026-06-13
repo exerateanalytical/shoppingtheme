@@ -100,58 +100,7 @@ add_action( 'wp_head', function() {
 get_header( 'alluvia' );
 ?>
 
-<nav class="alluvia-nav" id="nav">
-  <div class="nav-inner">
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
-      <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/>
-        <circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/>
-        <circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/>
-        <circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/>
-        <line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
-        <line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
-        <line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
-      </svg>
-      <div class="logo-text">
-        <span class="nav-logo-word">Alluvia</span>
-        <span class="nav-logo-sub">Peptides</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="<?php echo esc_url( alluvia_shop_url() ); ?>" <?php if ( is_shop() || is_product() ) echo 'class="active"'; ?>>Products</a></li>
-      <li><a href="<?php echo esc_url( home_url( '/about/#science' ) ); ?>">Science</a></li>
-      <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" <?php if ( is_home() || is_single() ) echo 'class="active"'; ?>>Blog</a></li>
-      <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" <?php if ( is_page( 'about' ) ) echo 'class="active"'; ?>>About</a></li>
-      <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" <?php if ( is_page( 'contact' ) ) echo 'class="active"'; ?>>Contact</a></li>
-      <li><a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="nav-cta">Shop Now</a></li>
-    </ul>
-    <div class="nav-right">
-      <a href="<?php echo esc_url( alluvia_cart_url() ); ?>" class="nav-icon-btn">
-        <i data-lucide="shopping-bag" style="width:16px;height:16px"></i>
-        <?php if ( function_exists( 'WC' ) && WC()->cart ) : ?>
-          <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
-        <?php endif; ?>
-      </a>
-      <a href="<?php echo esc_url( alluvia_account_url() ); ?>" class="nav-icon-btn" style="padding:8px 12px;">
-        <i data-lucide="user" style="width:16px;height:16px"></i>
-      </a>
-      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<div class="mobile-overlay" id="mobileNav">
-  <button class="mobile-close" id="mobileClose" aria-label="Close menu">
-    <i data-lucide="x" style="width:28px;height:28px;color:white"></i>
-  </button>
-  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>">Products</a>
-  <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
-  <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a>
-  <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a>
-  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" style="color:var(--teal)">Shop Now</a>
-</div>
+<?php get_template_part( 'partials/nav-alluvia' ); ?>
 
 <div class="alluvia-woo-wrap">
   <div class="alluvia-woo-inner">
@@ -226,11 +175,7 @@ get_header( 'alluvia' );
 
 <script>
 lucide.createIcons();
-window.addEventListener('scroll', function(){ document.getElementById('nav').classList.toggle('scrolled', scrollY > 60); }, {passive:true});
-var mNav = document.getElementById('mobileNav');
-document.getElementById('hamburger').onclick = function(){ mNav.classList.add('open'); document.body.style.overflow='hidden'; };
-document.getElementById('mobileClose').onclick = closeMobile;
-function closeMobile(){ mNav.classList.remove('open'); document.body.style.overflow=''; }
+
 </script>
 
 <?php get_footer( 'alluvia' ); ?>

@@ -210,7 +210,6 @@ add_action( 'wp_head', function() {
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){
   .categories-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
   .hiw-steps{grid-template-columns:repeat(2,1fr);gap:48px}
   .hiw-steps::before{display:none}
   .hiw-step .hiw-arrow{display:none}
@@ -243,49 +242,7 @@ add_action( 'wp_head', function() {
 }, 20 );
 get_header( 'alluvia' );
 ?>
-<!-- NAV -->
-<nav class="alluvia-nav" id="nav">
-  <div class="nav-inner">
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">
-      <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/>
-        <circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/>
-        <circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/>
-        <circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/>
-        <line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
-        <line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
-        <line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
-      </svg>
-      <div class="logo-text">
-        <span class="nav-logo-word">Alluvia</span>
-        <span class="nav-logo-sub">Peptides</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#categories">Products</a></li>
-      <li><a href="#science">Science</a></li>
-      <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-      <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-      <li><a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="nav-cta">Shop Now</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-overlay" id="mobileNav">
-  <button class="mobile-close" id="mobileClose" aria-label="Close menu">
-    <i data-lucide="x" style="width:28px;height:28px;color:white"></i>
-  </button>
-  <a href="#categories"          onclick="closeMobile()">Products</a>
-  <a href="#science"             onclick="closeMobile()">Science</a>
-  <a href="<?php echo esc_url(home_url('/about/')); ?>"   onclick="closeMobile()">About</a>
-  <a href="#testimonials"        onclick="closeMobile()">Reviews</a>
-  <a href="<?php echo esc_url(home_url('/contact/')); ?>" onclick="closeMobile()">Contact</a>
-  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" onclick="closeMobile()" style="color:var(--teal)">Shop Now</a>
-</div>
+<?php get_template_part( 'partials/nav-alluvia' ); ?>
 
 
 <!-- HERO -->
@@ -794,15 +751,6 @@ lucide.createIcons();
   }
   draw();
 })();
-
-// Nav scroll
-window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',scrollY>60);},{passive:true});
-
-// Hamburger
-var nav=document.getElementById('mobileNav');
-document.getElementById('hamburger').onclick=function(){nav.classList.add('open');document.body.style.overflow='hidden';};
-document.getElementById('mobileClose').onclick=closeMobile;
-function closeMobile(){nav.classList.remove('open');document.body.style.overflow='';}
 
 // Typewriter
 (function(){

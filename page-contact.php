@@ -858,43 +858,7 @@ add_action( 'wp_head', function() {
 }, 20 );
 get_header( 'alluvia' );
 ?>
-<!-- ===== NAVIGATION ===== -->
-  <nav id="mainNav">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-    <ul class="nav-links">
-      <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
-      <li><a href="<?php echo esc_url(home_url('/about/#science')); ?>">Science</a></li>
-      <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="nav-icon-btn" aria-label="Cart">
-        <i data-lucide="shopping-cart"></i>
-        <span class="cart-badge">3</span>
-      </button>
-      <a href="<?php echo esc_url(alluvia_account_url()); ?>" class="nav-icon-btn" aria-label="Account">
-        <i data-lucide="user"></i>
-      </a>
-      <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="btn-shop-now">Shop Now</a>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <i data-lucide="menu"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Nav Overlay -->
-  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
-    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
-      <i data-lucide="x"></i>
-    </button>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a>
-    <a href="<?php echo esc_url(home_url('/about/#science')); ?>">Science</a>
-    <a href="<?php echo esc_url(home_url('/about/')); ?>">About</a>
-    <a href="#reviews">Reviews</a>
-    <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="btn-shop-now" style="margin-top: 16px;">Shop Now</a>
-  </div>
+<?php get_template_part( 'partials/nav-alluvia' ); ?>
 
   <!-- ===== PAGE HERO ===== -->
   <section class="page-hero">
@@ -1219,35 +1183,6 @@ get_header( 'alluvia' );
   </footer>
 
   <script>
-    // ---- Nav scroll effect ----
-    var mainNav = document.getElementById('mainNav');
-    window.addEventListener('scroll', function () {
-      mainNav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // ---- Mobile hamburger ----
-    var hamburgerBtn = document.getElementById('hamburgerBtn');
-    var mobileNav = document.getElementById('mobileNav');
-    var mobileNavClose = document.getElementById('mobileNavClose');
-
-    hamburgerBtn.addEventListener('click', function () {
-      mobileNav.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-
-    mobileNavClose.addEventListener('click', function () {
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-
-    // Close mobile nav on link click
-    mobileNav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-
     // ---- Contact form submit ----
     var contactForm = document.getElementById('contactForm');
     var contactFormWrap = document.getElementById('contactFormWrap');

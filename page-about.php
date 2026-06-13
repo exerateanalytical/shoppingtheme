@@ -191,35 +191,7 @@ add_action( 'wp_head', function() {
 }, 20 );
 get_header( 'alluvia' );
 ?>
-<!-- NAV -->
-<nav class="alluvia-nav">
-  <div class="nav-inner">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo">
-      <span class="nav-logo-word">Alluvia</span>
-      <span class="nav-logo-sub">Peptides</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="<?php echo esc_url(home_url('/')); ?>#categories">Products</a></li>
-      <li><a href="<?php echo esc_url(home_url('/')); ?>#science">Science</a></li>
-      <li><a href="<?php echo esc_url(home_url('/about/')); ?>" class="active">About</a></li>
-      <li><a href="<?php echo esc_url(home_url('/')); ?>#testimonials">Reviews</a></li>
-      <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-      <li><a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="nav-cta">Shop Now</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<div class="mobile-overlay" id="mobileNav">
-  <button class="mobile-close" id="mobileClose"><i data-lucide="x" style="width:28px;height:28px;color:white"></i></button>
-  <a href="<?php echo esc_url(home_url('/')); ?>#categories" onclick="closeMobile()">Products</a>
-  <a href="<?php echo esc_url(home_url('/')); ?>#science"    onclick="closeMobile()">Science</a>
-  <a href="<?php echo esc_url(home_url('/about/')); ?>"                 onclick="closeMobile()" style="color:var(--teal)">About</a>
-  <a href="<?php echo esc_url(home_url('/')); ?>#testimonials" onclick="closeMobile()">Reviews</a>
-  <a href="<?php echo esc_url(home_url('/contact/')); ?>"               onclick="closeMobile()">Contact</a>
-  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>"                                  onclick="closeMobile()">Shop Now</a>
-</div>
+<?php get_template_part( 'partials/nav-alluvia' ); ?>
 
 
 <!-- PAGE HERO -->
@@ -563,12 +535,6 @@ get_header( 'alluvia' );
 
 <script>
 lucide.createIcons();
-
-// Hamburger
-var mNav=document.getElementById('mobileNav');
-document.getElementById('hamburger').onclick=function(){mNav.classList.add('open');document.body.style.overflow='hidden';};
-document.getElementById('mobileClose').onclick=closeMobile;
-function closeMobile(){mNav.classList.remove('open');document.body.style.overflow='';}
 
 // Scroll Reveal
 var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('reveal-done');ro.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
