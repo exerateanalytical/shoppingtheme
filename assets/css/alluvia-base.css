@@ -213,3 +213,37 @@ a:hover { color: var(--teal-dark); }
 @media (max-width: 420px) {
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Production polish ── */
+
+/* Focus rings — accessibility */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection { background: rgba(14,175,159,0.25); color: var(--navy); }
+
+/* Scrollbar (webkit) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--pearl); }
+::-webkit-scrollbar-thumb { background: var(--pearl-dark); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
+
+/* WooCommerce notice spacing */
+.woocommerce-notices-wrapper { margin-bottom: 24px; }
+
+/* Images */
+img { max-width: 100%; height: auto; display: block; }
+
+/* Star ratings */
+.woocommerce .star-rating span::before,
+.woocommerce .star-rating::before { color: var(--gold); }
+
+/* Remove WooCommerce default blue active star override */
+.woocommerce .star-rating { color: var(--gold); }
+
+/* Loading overlay */
+.blockUI.blockOverlay { background: rgba(245,240,231,0.7) !important; }
