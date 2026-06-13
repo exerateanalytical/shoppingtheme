@@ -466,4 +466,3 @@ document.querySelectorAll('.also-add').forEach(btn => {
   btn.addEventListener('click', () => showToast('Added to cart!'));
 });
 </script>
-<?php get_footer( 'alluvia' ); ?>
