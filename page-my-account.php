@@ -58,87 +58,102 @@ add_action( 'wp_head', function() { ?>
 .btn-sm.outline{background:transparent;border:1px solid var(--pearl-dark);color:var(--text-mid)}
 .btn-sm.outline:hover{border-color:var(--teal);color:var(--teal);background:transparent}
 
-/* WooCommerce overrides inside account */
-.account-main .woocommerce-MyAccount-navigation{display:none}
-.account-main .woocommerce-MyAccount-content{font-family:var(--font-body);font-size:15px;color:var(--text-dark)}
-.account-main .woocommerce-MyAccount-content h2,.account-main .woocommerce-MyAccount-content h3{font-family:var(--font-display);color:var(--navy)}
-.account-main table.woocommerce-orders-table,.account-main table.shop_table{width:100%;border-collapse:collapse;font-size:14px}
-.account-main table.woocommerce-orders-table th,.account-main table.shop_table th{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--pearl-dark)}
-.account-main table.woocommerce-orders-table td,.account-main table.shop_table td{padding:1rem .75rem;border-bottom:1px solid var(--pearl);vertical-align:middle}
-.account-main table .button{display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;font-family:var(--font-ui);font-size:12px;font-weight:700;background:var(--navy);color:#fff;text-decoration:none;transition:.2s}
-.account-main table .button:hover{background:var(--teal);color:var(--navy)}
-.account-main .woocommerce-Address{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
-.account-main .woocommerce-Address-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
-.account-main .woocommerce-Address-title h3{margin:0;font-size:16px}
-/* col2-set: WC address two-column — use flex not grid to avoid conflicts */
-.account-main .col2-set{display:flex;gap:1.5rem;flex-wrap:wrap}
-.account-main .col2-set .col-1,.account-main .col2-set .col-2{flex:1;min-width:240px}
-/* WooCommerce form layout — override floats with a clean approach */
-.account-main form{width:100%}
-.account-main form p.form-row,
-.account-main form .form-row{
-  float:none !important;
-  width:100% !important;
-  margin-bottom:1rem;
-  clear:none;
-  box-sizing:border-box;
+/* ─────────────────────────────────────────────
+   WooCommerce form + content styling
+   Scoped to .account-layout so it applies to BOTH
+   the logged-in dashboard AND the logged-out login/register.
+   Works WITH WooCommerce's native float layout (clearfix added),
+   only restyling appearance + widths.
+───────────────────────────────────────────── */
+.account-layout .woocommerce-MyAccount-navigation{display:none}
+.account-layout .woocommerce-MyAccount-content{font-family:var(--font-body);font-size:15px;color:var(--text-dark)}
+.account-layout .woocommerce-MyAccount-content h2,.account-layout .woocommerce-MyAccount-content h3{font-family:var(--font-display);color:var(--navy)}
+.account-layout table.woocommerce-orders-table,.account-layout table.shop_table{width:100%;border-collapse:collapse;font-size:14px}
+.account-layout table.woocommerce-orders-table th,.account-layout table.shop_table th{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--pearl-dark)}
+.account-layout table.woocommerce-orders-table td,.account-layout table.shop_table td{padding:1rem .75rem;border-bottom:1px solid var(--pearl);vertical-align:middle}
+.account-layout table .button{display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;font-family:var(--font-ui);font-size:12px;font-weight:700;background:var(--navy);color:#fff;text-decoration:none;transition:.2s}
+.account-layout table .button:hover{background:var(--teal);color:var(--navy)}
+.account-layout .woocommerce-Address{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.account-layout .woocommerce-Address-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.account-layout .woocommerce-Address-title h3{margin:0;font-size:16px}
+
+/* col2-set (addresses / login+register two columns) — flex, wraps on mobile */
+.account-layout .col2-set,.account-layout .u-columns{display:flex;gap:1.5rem;flex-wrap:wrap;width:100%}
+.account-layout .col2-set>div,.account-layout .u-columns>div{flex:1 1 280px;min-width:0}
+
+/* Clearfix so WooCommerce's floated form-rows never collapse/overlap */
+.account-layout form::after{content:"";display:table;clear:both}
+
+/* Form rows: full width by default */
+.account-layout form .form-row{
+  float:none;width:100%;margin:0 0 1rem;padding:0;box-sizing:border-box;clear:both;
 }
-/* Two-column rows: pair first+last side by side */
-.account-main form .form-row-first,
-.account-main form .form-row-last{
-  display:inline-block;
-  width:calc(50% - 8px) !important;
-  vertical-align:top;
-  float:none !important;
+/* Two-column pair: first floats left, last floats right (WC-compatible) */
+.account-layout form .form-row-first{float:left;width:48%;clear:left;margin-right:4%}
+.account-layout form .form-row-last{float:left;width:48%;clear:none;margin-right:0}
+.account-layout form .form-row-wide{clear:both;width:100%}
+
+.account-layout form label{
+  font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--text-mid);display:block;margin-bottom:.35rem
 }
-.account-main form .form-row-first{margin-right:16px}
-.account-main form .form-row-wide,.account-main form .clear{display:block;width:100% !important;clear:both}
-.account-main form .clear{height:0;overflow:hidden}
-.account-main form .form-row label,
-.account-main form p.form-row label{
-  font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mid);display:block;margin-bottom:.35rem
+.account-layout form .form-row label.checkbox,
+.account-layout form label.woocommerce-form__label-for-checkbox{
+  text-transform:none;letter-spacing:0;font-weight:500;font-size:13px;display:inline-flex;align-items:center;gap:.4rem
 }
-.account-main form .form-row input[type=text],
-.account-main form .form-row input[type=email],
-.account-main form .form-row input[type=tel],
-.account-main form .form-row input[type=password],
-.account-main form .form-row input[type=number],
-.account-main form .form-row select,
-.account-main form .form-row textarea{
-  border:1.5px solid var(--pearl-dark);border-radius:8px;padding:.65rem .9rem;
+.account-layout form input[type=text],
+.account-layout form input[type=email],
+.account-layout form input[type=tel],
+.account-layout form input[type=password],
+.account-layout form input[type=number],
+.account-layout form select,
+.account-layout form textarea{
+  display:block;width:100%;box-sizing:border-box;
+  border:1.5px solid var(--pearl-dark);border-radius:8px;padding:.7rem .9rem;
   font-family:var(--font-body);font-size:14px;color:var(--text-dark);
-  outline:none;transition:border-color .2s;background:#fff;
-  width:100%;box-sizing:border-box;
+  background:#fff;outline:none;transition:border-color .2s;line-height:1.4
 }
-.account-main form .form-row input:focus,
-.account-main form .form-row select:focus,
-.account-main form .form-row textarea:focus{border-color:var(--teal)}
-.account-main form .woocommerce-password-strength{font-size:12px;margin-top:4px;padding:4px 8px;border-radius:4px}
-.account-main form .show-password-input{position:relative}
-.account-main form button[type=submit],
-.account-main form input[type=submit],
-.account-main form .button{
+.account-layout form input:focus,
+.account-layout form select:focus,
+.account-layout form textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,175,159,.1)}
+.account-layout form input[type=checkbox],
+.account-layout form input[type=radio]{width:auto;display:inline-block;margin-right:.4rem}
+.account-layout form .password-input{display:block;position:relative}
+.account-layout form .show-password-input{position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer}
+.account-layout .woocommerce-password-strength{font-size:12px;margin-top:6px;padding:6px 10px;border-radius:6px}
+.account-layout .woocommerce-password-hint{font-size:12px;color:var(--text-light);margin-top:4px;display:block}
+.account-layout form button[type=submit],
+.account-layout form input[type=submit],
+.account-layout form .button,
+.account-layout form .woocommerce-button{
   background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);
-  border:none;border-radius:8px;padding:.7rem 2rem;
+  border:none;border-radius:8px;padding:.8rem 2rem;
   font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;
   transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;
-  letter-spacing:.04em;text-decoration:none;
+  letter-spacing:.04em;text-decoration:none
 }
-.account-main form button[type=submit]:hover,
-.account-main form .button:hover{background:var(--teal-dark)}
-/* Required star */
-.account-main form .required{color:var(--coral)}
-/* WC notices inside account */
-.account-main .woocommerce-notices-wrapper .woocommerce-message{margin-bottom:1rem}
-@media(max-width:640px){
-  .account-main form .form-row-first,
-  .account-main form .form-row-last{width:100% !important;display:block;margin-right:0}
-}
-.account-main .woocommerce-message,.account-main .woocommerce-info{background:rgba(14,175,159,.08);border-left:3px solid var(--teal);padding:.85rem 1rem;border-radius:0 8px 8px 0;margin-bottom:1.25rem;font-size:14px}
-.account-main .woocommerce-error{background:rgba(219,98,122,.07);border-left:3px solid var(--coral);padding:.85rem 1rem;border-radius:0 8px 8px 0;margin-bottom:1.25rem;font-size:14px}
+.account-layout form button[type=submit]:hover,
+.account-layout form .button:hover,
+.account-layout form .woocommerce-button:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(14,175,159,.3)}
+.account-layout form .lost_password{margin-top:.5rem}
+.account-layout form .lost_password a{color:var(--teal-dark);font-size:13px;text-decoration:none}
+.account-layout .required{color:var(--coral);border:0}
+.account-layout .woocommerce-message,.account-layout .woocommerce-info{background:rgba(14,175,159,.08);border-left:3px solid var(--teal);padding:.85rem 1rem;border-radius:0 8px 8px 0;margin-bottom:1.25rem;font-size:14px;list-style:none}
+.account-layout .woocommerce-error{background:rgba(219,98,122,.07);border-left:3px solid var(--coral);padding:.85rem 1rem;border-radius:0 8px 8px 0;margin-bottom:1.25rem;font-size:14px;list-style:none}
 
-/* Login form when not logged in */
-.account-login-wrap{max-width:520px;margin:0 auto;background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 2px 16px rgba(0,0,0,.06)}
+/* Logged-out: login + register card */
+.account-login-wrap{max-width:920px;margin:0 auto}
+.account-login-wrap .woocommerce>h2,.account-login-wrap .u-column1>h2,.account-login-wrap .u-column2>h2{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--navy);margin-bottom:1rem}
+.account-login-wrap .col-1,.account-login-wrap .col-2,
+.account-login-wrap .u-column1,.account-login-wrap .u-column2{
+  background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 2px 16px rgba(0,0,0,.06)
+}
+.account-login-wrap form.login,.account-login-wrap form.register{border:0;padding:0;margin:0}
+
+@media(max-width:640px){
+  .account-layout form .form-row-first,
+  .account-layout form .form-row-last{float:none;width:100%;margin-right:0}
+}
 
 @media(max-width:900px){
   .account-layout{grid-template-columns:1fr}

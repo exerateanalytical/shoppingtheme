@@ -35,9 +35,10 @@ add_action( 'wp_head', function() {
 
 /* GALLERY */
 .gallery{}
-.gallery-main{background:#fff;border-radius:var(--radius);height:480px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative;overflow:hidden;border:1px solid var(--pearl-dark)}
+.gallery-main{background:#fff;border-radius:var(--radius);height:460px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative;overflow:hidden;border:1px solid var(--pearl-dark);padding:32px;box-sizing:border-box}
 .gallery-main::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(14,175,159,0.08),transparent 70%)}
 .gallery-main .vial-icon{position:relative;z-index:1}
+.gallery-img{position:relative;z-index:1;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
 .gallery-badge{position:absolute;top:1rem;left:1rem;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.06em;padding:4px 12px;border-radius:50px;text-transform:uppercase;z-index:2}
 .gallery-thumbs{display:flex;gap:0.75rem;margin-top:1rem}
 .gallery-thumb{flex:1;background:#fff;border-radius:8px;height:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid transparent;transition:all .2s}
@@ -181,7 +182,7 @@ get_header( 'alluvia' );
           <span class="gallery-badge" style="background:var(--coral);color:#fff">Sale</span>
         <?php endif; ?>
         <?php if ($thumb_url) : ?>
-          <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:24px">
+          <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="gallery-img">
         <?php else : ?>
           <i class="vial-icon" data-lucide="flask-conical" width="120" height="120" style="color:var(--teal)"></i>
         <?php endif; ?>
