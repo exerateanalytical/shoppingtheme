@@ -4,6 +4,13 @@
  *
  * @package Shopping
  */
+// ── Checkout/cart data ────────────────────────────────────────────────────────
+$cart_items      = function_exists('WC') && WC()->cart ? WC()->cart->get_cart() : [];
+$subtotal        = function_exists('WC') && WC()->cart ? WC()->cart->get_cart_subtotal() : '$0.00';
+$cart_total      = function_exists('WC') && WC()->cart ? WC()->cart->get_total() : '$0.00';
+$shipping_total  = function_exists('WC') && WC()->cart ? WC()->cart->get_shipping_total() : 0;
+$coupon_discount = function_exists('WC') && WC()->cart ? WC()->cart->get_discount_total() : 0;
+
 add_action( 'wp_head', function() {
 ?>
 <style>
@@ -419,26 +426,35 @@ get_header( 'alluvia' );
     </div>
     <div class="sidebar-body">
       <div class="sidebar-items">
-        <div class="s-item">
-          <div><div class="s-item-name">BPC-157 — 5 mg</div><div class="s-item-qty">×2</div></div>
-          <div class="s-item-price">$130.00</div>
-        </div>
-        <div class="s-item">
-          <div><div class="s-item-name">GHK-Cu — 200 mg</div><div class="s-item-qty">×1</div></div>
-          <div class="s-item-price">$52.00</div>
-        </div>
-        <div class="s-item">
-          <div><div class="s-item-name">Ipamorelin — 2 mg</div><div class="s-item-qty">×1</div></div>
-          <div class="s-item-price">$68.00</div>
-        </div>
+        <?php if (empty($cart_items)) : ?>
+  <div style="padding:16px;text-align:center;color:var(--text-light)">No items in cart.</div>
+<?php else : foreach ($cart_items as $cart_item) :
+    $ci_product  = $cart_item['data'];
+    $ci_qty      = $cart_item['quantity'];
+    $ci_name     = $ci_product->get_name();
+    $ci_subtotal = WC()->cart->get_product_subtotal($ci_product, $ci_qty);
+    $ci_thumb    = get_the_post_thumbnail_url($cart_item['product_id'], 'woocommerce_thumbnail');
+?>
+  <div class="s-item" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--pearl-dark)">
+    <div style="width:44px;height:44px;flex-shrink:0;border-radius:8px;background:linear-gradient(135deg,rgba(14,175,159,.12),rgba(14,175,159,.04));display:flex;align-items:center;justify-content:center;overflow:hidden">
+      <?php if ($ci_thumb) : ?><img src="<?php echo esc_url($ci_thumb); ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php else : ?><i data-lucide="flask-conical" width="18" height="18" style="color:var(--teal)"></i><?php endif; ?>
+    </div>
+    <div style="flex:1;min-width:0">
+      <div style="font-weight:600;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?php echo esc_html($ci_name); ?></div>
+      <div style="color:var(--text-mid);font-size:.78rem">Qty: <?php echo esc_html($ci_qty); ?></div>
+    </div>
+    <div style="font-weight:700;font-size:.9rem;white-space:nowrap"><?php echo $ci_subtotal; ?></div>
+  </div>
+<?php endforeach; endif; ?>
       </div>
       <hr class="s-divider">
-      <div class="s-row"><span class="lbl">Subtotal</span><span class="val">$250.00</span></div>
-      <div class="s-row" style="color:var(--teal-dark)"><span class="lbl">Discount (WELCOME10)</span><span class="val" style="color:var(--teal-dark)">−$25.00</span></div>
-      <div class="s-row"><span class="lbl">Shipping</span><span class="val" id="sideShipping">$24.99</span></div>
-      <div class="s-row"><span class="lbl">Tax (9%)</span><span class="val">$22.50</span></div>
+      <div class="s-row"><span class="lbl">Subtotal</span><span class="val"><?php echo $subtotal; ?></span></div>
+      <?php if ($coupon_discount > 0) : ?>
+      <div class="s-row" style="color:var(--teal-dark)"><span class="lbl">Discount</span><span class="val" style="color:var(--teal-dark)"><?php echo wc_price($coupon_discount); ?></span></div>
+      <?php endif; ?>
+      <div class="s-row"><span class="lbl">Shipping</span><span class="val" id="sideShipping"><?php echo $shipping_total > 0 ? wc_price($shipping_total) : '<em style="color:var(--mint)">Free</em>'; ?></span></div>
       <hr class="s-divider">
-      <div class="s-total"><span class="lbl">Total</span><span class="val" id="sideTotal">$272.49</span></div>
+      <div class="s-total"><span class="lbl">Total</span><span class="val" id="sideTotal"><?php echo $cart_total; ?></span></div>
     </div>
     <div class="sidebar-trust">
       <div class="s-trust-item"><i data-lucide="shield-check" width="14" height="14"></i> 256-bit SSL encryption</div>
@@ -465,19 +481,7 @@ get_header( 'alluvia' );
   </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-bottom">
-      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
-      <div class="footer-legal">
-        <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a>
-        <a href="#">Disclaimer</a>
-      </div>
-    </div>
-  </div>
-</footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 
 <script>
 lucide.createIcons();
@@ -545,4 +549,3 @@ document.getElementById('successOverlay').addEventListener('click', function(e) 
   if (e.target === this) this.classList.remove('show');
 });
 </script>
-<?php get_footer( 'alluvia' ); ?>
