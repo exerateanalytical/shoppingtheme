@@ -27,7 +27,7 @@ add_action( 'wp_head', function() {
 .woocommerce div.product .woocommerce-product-gallery .woocommerce-product-gallery__wrapper,
 .woocommerce div.product .woocommerce-product-gallery .flex-viewport { background: #fff; border: 1px solid var(--pearl-dark); border-radius: var(--radius-md); overflow: hidden; }
 .woocommerce div.product .woocommerce-product-gallery__image a { display: flex; align-items: center; justify-content: center; }
-.woocommerce div.product .woocommerce-product-gallery__image img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; padding: 28px; box-sizing: border-box; }
+.woocommerce div.product .woocommerce-product-gallery__image img { display: block; width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 .woocommerce div.product .woocommerce-product-gallery__trigger { top: 1rem; right: 1rem; }
 /* Thumbnails */
 .woocommerce div.product .flex-control-thumbs { display: flex; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
@@ -56,6 +56,31 @@ add_action( 'wp_head', function() {
 .woocommerce div.product form.cart .quantity input.qty::-webkit-outer-spin-button,
 .woocommerce div.product form.cart .quantity input.qty::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .woocommerce div.product form.cart button.single_add_to_cart_button { flex: 1; min-width: 200px; padding: 15px 28px; font-size: var(--fs-ui); }
+/* ── Platform button colors (override WooCommerce default purple) ── */
+.woocommerce a.button, .woocommerce button.button, .woocommerce input.button,
+.woocommerce #respond input#submit, .woocommerce .button.alt,
+.woocommerce div.product form.cart button.single_add_to_cart_button,
+.woocommerce a.button.add_to_cart_button {
+  background: var(--teal); color: var(--navy);
+  border: none; border-radius: 100px;
+  font-family: var(--font-ui); font-weight: 700; letter-spacing: .03em;
+  transition: var(--transition); text-shadow: none; box-shadow: none;
+}
+.woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover,
+.woocommerce #respond input#submit:hover, .woocommerce .button.alt:hover,
+.woocommerce div.product form.cart button.single_add_to_cart_button:hover,
+.woocommerce a.button.add_to_cart_button:hover {
+  background: var(--teal-dark); color: var(--navy);
+  transform: translateY(-1px); box-shadow: 0 6px 20px rgba(14,175,159,.35);
+}
+.woocommerce a.button.alt.disabled, .woocommerce button.button.alt.disabled { background: var(--teal); opacity: .55; }
+/* Secondary / outline buttons (e.g. "View cart", "Continue shopping") */
+.woocommerce .button.wc-backward, .woocommerce .added_to_cart {
+  background: transparent; color: var(--navy); border: 1.5px solid var(--pearl-dark);
+}
+.woocommerce .button.wc-backward:hover, .woocommerce .added_to_cart:hover {
+  border-color: var(--navy); color: var(--navy); background: transparent;
+}
 
 /* ── Product tabs ── */
 .woocommerce div.product .woocommerce-tabs { grid-column: 1/-1; margin-top: 24px; }
