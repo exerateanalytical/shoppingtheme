@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Template Name: Alluvia – Checkout
  *
@@ -15,13 +15,13 @@ add_action( 'wp_head', function() {
 ?>
 <style>
 /* CHECKOUT NAV SUPPLEMENT */
-.nav-secure{display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);color:rgba(255,255,255,0.70)}
+.nav-secure{display:flex;align-items:center;gap:0.4rem;font-family:var(--font-ui);font-size:var(--fs-sm);color:rgba(255,255,255,0.70)}
 .nav-secure svg{color:var(--teal)}
 
 /* HERO STRIP */
 .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);padding:6rem 2rem 2.5rem;margin-top:72px}
 .page-hero-inner{max-width:1100px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text-light);margin-bottom:1rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-bottom:1rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
 .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,60px);font-weight:600;color:#fff}
 
@@ -30,11 +30,11 @@ add_action( 'wp_head', function() {
 .progress-steps{display:flex;align-items:center;gap:0;background:#fff;border-radius:var(--radius);padding:1.25rem 2rem;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:2rem}
 .step{display:flex;align-items:center;gap:0.75rem;flex:1;position:relative}
 .step:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:100%;height:2px;background:var(--pearl-dark);z-index:0;left:60px}
-.step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;flex-shrink:0;z-index:1;position:relative;transition:all .3s}
+.step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-weight:700;font-size:15px;flex-shrink:0;z-index:1;position:relative;transition:all .3s}
 .step-circle.done{background:var(--teal);color:var(--navy)}
 .step-circle.active{background:var(--navy);color:#fff;box-shadow:0 0 0 4px rgba(14,175,159,0.2)}
 .step-circle.pending{background:var(--pearl-dark);color:var(--text-light)}
-.step-label{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em}
+.step-label{font-family:var(--font-ui);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em}
 .step-label.done{color:var(--teal-dark)}
 .step-label.active{color:var(--navy)}
 .step-label.pending{color:var(--text-light)}
@@ -57,8 +57,8 @@ add_action( 'wp_head', function() {
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
 .form-row.full{grid-template-columns:1fr}
 .form-group{display:flex;flex-direction:column;gap:0.35rem}
-.form-group label{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid)}
-.form-group input,.form-group select{border:1px solid var(--pearl-dark);border-radius:8px;padding:0.7rem 1rem;font-family:'Inter',sans-serif;font-size:var(--fs-base);color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
+.form-group label{font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid)}
+.form-group input,.form-group select{border:1px solid var(--pearl-dark);border-radius:8px;padding:0.7rem 1rem;font-family:var(--font-body);font-size:var(--fs-base);color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
 .form-group input:focus,.form-group select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,175,159,0.1)}
 .form-group input::placeholder{color:var(--text-light)}
 
@@ -69,22 +69,22 @@ add_action( 'wp_head', function() {
 .ship-opt.selected{border-color:var(--teal);background:rgba(14,175,159,0.05)}
 .ship-opt input[type=radio]{accent-color:var(--teal);width:18px;height:18px;flex-shrink:0}
 .ship-info{flex:1}
-.ship-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px}
+.ship-name{font-family:var(--font-ui);font-weight:600;font-size:15px}
 .ship-desc{font-size:var(--fs-base);color:var(--text-light);margin-top:2px}
-.ship-price{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--teal-dark)}
-.ship-badge{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:50px;text-transform:uppercase}
+.ship-price{font-family:var(--font-ui);font-weight:700;color:var(--teal-dark)}
+.ship-badge{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:50px;text-transform:uppercase}
 .badge-free{background:rgba(88,180,136,0.15);color:#2d8a5f}
 .badge-cold{background:rgba(106,166,198,0.15);color:#2d6e8a}
 
 /* PAYMENT SECTION */
 .payment-methods{display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.pay-method{border:2px solid var(--pearl-dark);border-radius:8px;padding:0.6rem 1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;color:var(--text-mid)}
+.pay-method{border:2px solid var(--pearl-dark);border-radius:8px;padding:0.6rem 1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:0.4rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;color:var(--text-mid)}
 .pay-method:hover{border-color:var(--teal)}
 .pay-method.active{border-color:var(--teal);color:var(--teal-dark);background:rgba(14,175,159,0.05)}
 .card-form{}
 .card-number-wrap{position:relative}
 .card-icons{position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);display:flex;gap:0.25rem}
-.c-icon{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 5px;border-radius:3px;background:var(--pearl);color:var(--text-mid)}
+.c-icon{font-family:var(--font-ui);font-size:10px;font-weight:700;padding:2px 5px;border-radius:3px;background:var(--pearl);color:var(--text-mid)}
 .secure-note{display:flex;align-items:center;gap:0.4rem;font-size:var(--fs-base);color:var(--text-light);margin-top:1rem}
 .secure-note svg{color:var(--teal)}
 
@@ -93,17 +93,17 @@ add_action( 'wp_head', function() {
 .review-item{display:flex;align-items:center;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--pearl)}
 .review-item:last-child{border-bottom:none}
 .review-thumb{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.review-item-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-base)}
+.review-item-name{font-family:var(--font-ui);font-weight:600;font-size:var(--fs-base)}
 .review-item-qty{font-size:var(--fs-base);color:var(--text-light)}
-.review-item-price{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:var(--fs-body)}
+.review-item-price{margin-left:auto;font-family:var(--font-ui);font-weight:700;font-size:var(--fs-body)}
 
 /* NAV BUTTONS */
 .form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--pearl)}
-.btn-back{background:transparent;border:1px solid var(--pearl-dark);color:var(--text-mid);border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all .2s}
+.btn-back{background:transparent;border:1px solid var(--pearl-dark);color:var(--text-mid);border-radius:8px;padding:0.75rem 1.5rem;font-family:var(--font-ui);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all .2s}
 .btn-back:hover{border-color:var(--teal);color:var(--teal)}
-.btn-next{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:8px;padding:0.75rem 2rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s}
+.btn-next{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:8px;padding:0.75rem 2rem;font-family:var(--font-ui);font-size:15px;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s}
 .btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.35)}
-.btn-place{background:linear-gradient(135deg,var(--gold),#a07c3a);color:#fff;border:none;border-radius:8px;padding:0.75rem 2rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s;text-transform:uppercase}
+.btn-place{background:linear-gradient(135deg,var(--gold),#a07c3a);color:#fff;border:none;border-radius:8px;padding:0.75rem 2rem;font-family:var(--font-ui);font-size:15px;font-weight:700;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all .3s;text-transform:uppercase}
 .btn-place:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(198,162,83,0.4)}
 
 /* ORDER SIDEBAR */
@@ -116,13 +116,13 @@ add_action( 'wp_head', function() {
 .s-item:last-child{border-bottom:none}
 .s-item-name{color:var(--text-dark);font-weight:500}
 .s-item-qty{color:var(--text-light);font-size:var(--fs-base)}
-.s-item-price{font-family:'Space Grotesk',sans-serif;font-weight:600;flex-shrink:0;margin-left:0.5rem}
+.s-item-price{font-family:var(--font-ui);font-weight:600;flex-shrink:0;margin-left:0.5rem}
 .s-divider{border:none;border-top:1px solid var(--pearl-dark);margin:1rem 0}
 .s-row{display:flex;justify-content:space-between;font-size:var(--fs-base);margin-bottom:0.6rem}
 .s-row .lbl{color:var(--text-mid)}
-.s-row .val{font-family:'Space Grotesk',sans-serif;font-weight:600}
+.s-row .val{font-family:var(--font-ui);font-weight:600}
 .s-total{display:flex;justify-content:space-between;padding-top:0.75rem}
-.s-total .lbl{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.s-total .lbl{font-family:var(--font-ui);font-weight:700}
 .s-total .val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700}
 .sidebar-trust{padding:1.25rem 1.5rem;border-top:1px solid var(--pearl);display:flex;flex-direction:column;gap:0.6rem}
 .s-trust-item{display:flex;align-items:center;gap:0.5rem;font-size:var(--fs-base);color:var(--text-mid)}
@@ -136,10 +136,10 @@ add_action( 'wp_head', function() {
 .success-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,rgba(14,175,159,0.2),rgba(14,175,159,0.05));border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:var(--teal)}
 .success-card h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:0.75rem}
 .success-card p{color:var(--text-mid);margin-bottom:0.5rem;font-size:15px}
-.success-order{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--teal-dark);font-size:16px;margin:0.5rem 0 1.5rem}
+.success-order{font-family:var(--font-ui);font-weight:700;color:var(--teal-dark);font-size:16px;margin:0.5rem 0 1.5rem}
 .success-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-track{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
-.btn-continue{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);border-radius:8px;padding:0.75rem 1.5rem;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
+.btn-track{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.75rem 1.5rem;font-family:var(--font-ui);font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
+.btn-continue{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);border-radius:8px;padding:0.75rem 1.5rem;font-family:var(--font-ui);font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -263,7 +263,7 @@ get_header( 'alluvia' );
           </div>
         </div>
 
-        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-top:1.5rem;margin-bottom:0.5rem">Shipping Method</h3>
+        <h3 style="font-family:var(--font-ui);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-top:1.5rem;margin-bottom:0.5rem">Shipping Method</h3>
         <div class="shipping-options">
           <label class="ship-opt selected">
             <input type="radio" name="shipping" value="standard" checked onchange="selectShipping(this)">
@@ -364,42 +364,36 @@ get_header( 'alluvia' );
 
       <!-- STEP 3: REVIEW -->
       <div class="tab-content" id="tab3">
-        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Order Items</h3>
+        <h3 style="font-family:var(--font-ui);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Order Items</h3>
         <div class="review-items">
+          <?php foreach ($cart_items as $cart_item) :
+            $rv_product  = $cart_item['data'];
+            $rv_qty      = $cart_item['quantity'];
+            $rv_name     = $rv_product->get_name();
+            $rv_subtotal = WC()->cart->get_product_subtotal($rv_product, $rv_qty);
+            $rv_thumb    = get_the_post_thumbnail_url($cart_item['product_id'], 'woocommerce_thumbnail');
+          ?>
           <div class="review-item">
-            <div class="review-thumb" style="background:rgba(14,175,159,0.1)"><i data-lucide="activity" width="22" height="22" style="color:var(--teal)"></i></div>
-            <div>
-              <div class="review-item-name">BPC-157 — 5 mg Vial</div>
-              <div class="review-item-qty">Qty: 2</div>
+            <div class="review-thumb" style="background:rgba(14,175,159,0.1);overflow:hidden">
+              <?php if ($rv_thumb) : ?><img src="<?php echo esc_url($rv_thumb); ?>" alt="" style="width:100%;height:100%;object-fit:cover"><?php else : ?><i data-lucide="flask-conical" width="22" height="22" style="color:var(--teal)"></i><?php endif; ?>
             </div>
-            <div class="review-item-price">$130.00</div>
-          </div>
-          <div class="review-item">
-            <div class="review-thumb" style="background:rgba(219,98,122,0.1)"><i data-lucide="sparkles" width="22" height="22" style="color:var(--coral)"></i></div>
             <div>
-              <div class="review-item-name">GHK-Cu — 200 mg Powder</div>
-              <div class="review-item-qty">Qty: 1</div>
+              <div class="review-item-name"><?php echo esc_html($rv_name); ?></div>
+              <div class="review-item-qty">Qty: <?php echo esc_html($rv_qty); ?></div>
             </div>
-            <div class="review-item-price">$52.00</div>
+            <div class="review-item-price"><?php echo $rv_subtotal; ?></div>
           </div>
-          <div class="review-item">
-            <div class="review-thumb" style="background:rgba(198,162,83,0.1)"><i data-lucide="zap" width="22" height="22" style="color:var(--gold)"></i></div>
-            <div>
-              <div class="review-item-name">Ipamorelin — 2 mg Vial</div>
-              <div class="review-item-qty">Qty: 1</div>
-            </div>
-            <div class="review-item-price">$68.00</div>
-          </div>
+          <?php endforeach; ?>
         </div>
 
         <div style="background:var(--pearl);border-radius:8px;padding:1rem;margin-bottom:1rem">
-          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;color:var(--text-mid)">Shipping To</h4>
+          <h4 style="font-family:var(--font-ui);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;color:var(--text-mid)">Shipping To</h4>
           <p style="font-size:14px;color:var(--text-dark)">Alexandra Chen · 123 Wellness Avenue, Los Angeles, CA 90001, US</p>
           <p style="font-size:12px;color:var(--teal-dark);margin-top:0.25rem;display:flex;align-items:center;gap:0.3rem"><i data-lucide="thermometer-snowflake" width="13" height="13"></i> Cold-Chain Overnight</p>
         </div>
 
         <div style="background:var(--pearl);border-radius:8px;padding:1rem">
-          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;color:var(--text-mid)">Payment</h4>
+          <h4 style="font-family:var(--font-ui);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;color:var(--text-mid)">Payment</h4>
           <p style="font-size:14px;color:var(--text-dark);display:flex;align-items:center;gap:0.4rem"><i data-lucide="credit-card" width="15" height="15" style="color:var(--teal)"></i> Visa ending in ••••3456</p>
         </div>
 
@@ -411,7 +405,7 @@ get_header( 'alluvia' );
         <div class="form-nav">
           <button class="btn-back" onclick="goStep(2)"><i data-lucide="arrow-left" width="16" height="16"></i> Back</button>
           <button class="btn-place" onclick="placeOrder()">
-            <i data-lucide="lock" width="16" height="16"></i> Place Order — $282.49
+            <i data-lucide="lock" width="16" height="16"></i> Place Order — <?php echo $cart_total; ?>
           </button>
         </div>
       </div>
@@ -472,7 +466,7 @@ get_header( 'alluvia' );
     <div class="success-icon"><i data-lucide="check" width="40" height="40"></i></div>
     <h2>Order Confirmed!</h2>
     <p>Thank you for your order. A confirmation has been sent to your email.</p>
-    <div class="success-order">Order #ALV-2025-04872</div>
+    <div class="success-order">Order confirmed — check your email for details.</div>
     <p style="font-size:13px;color:var(--text-light)">Estimated delivery: 1–2 business days via Cold-Chain Overnight</p>
     <div class="success-actions">
       <a href="<?php echo esc_url(alluvia_account_url()); ?>" class="btn-track"><i data-lucide="package" width="15" height="15"></i> Track Order</a>
