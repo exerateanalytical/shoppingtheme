@@ -4,6 +4,14 @@
  *
  * @package Shopping
  */
+// ── Cart data ─────────────────────────────────────────────────────────────────
+$cart_items   = function_exists('WC') && WC()->cart ? WC()->cart->get_cart() : [];
+$subtotal     = function_exists('WC') && WC()->cart ? WC()->cart->get_cart_subtotal() : '$0.00';
+$cart_total   = function_exists('WC') && WC()->cart ? WC()->cart->get_total() : '$0.00';
+$cart_count   = function_exists('WC') && WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+$shipping_total = function_exists('WC') && WC()->cart ? WC()->cart->get_shipping_total() : 0;
+$coupon_discount = function_exists('WC') && WC()->cart ? WC()->cart->get_discount_total() : 0;
+
 add_action( 'wp_head', function() {
 ?>
 <style>
@@ -153,7 +161,7 @@ get_header( 'alluvia' );
 
   <!-- LEFT: CART TABLE -->
   <div class="cart-section">
-    <h2><i data-lucide="shopping-cart" width="22" height="22" style="color:var(--teal)"></i> 4 Items</h2>
+    <h2><i data-lucide="shopping-cart" width="22" height="22" style="color:var(--teal)"></i> <?php echo $cart_count; ?> Item<?php echo $cart_count !== 1 ? 's' : ''; ?></h2>
 
     <div class="cart-table">
       <div class="cart-header">
@@ -164,71 +172,52 @@ get_header( 'alluvia' );
         <span></span>
       </div>
 
-      <!-- Item 1: BPC-157 ×2 -->
-      <div class="cart-item">
-        <div class="item-info">
-          <div class="item-thumb teal-bg">
-            <i data-lucide="activity" width="28" height="28" style="color:var(--teal)"></i>
-          </div>
-          <div class="item-details">
-            <div class="item-name">BPC-157 — 5 mg Vial</div>
-            <span class="item-badge badge-teal">Medical Peptide</span>
-            <div class="item-meta">Lyophilized · HPLC ≥99% · COA included</div>
-          </div>
+      <?php if (empty($cart_items)) : ?>
+        <div class="cart-empty" style="text-align:center;padding:60px 20px">
+          <i data-lucide="shopping-cart" width="48" height="48" style="color:var(--text-light);margin-bottom:16px"></i>
+          <p style="color:var(--text-mid);font-size:1.1rem">Your cart is empty.</p>
+          <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="btn-add-cart" style="display:inline-flex;margin-top:16px">Browse Products</a>
         </div>
-        <div class="item-price">$65.00</div>
-        <div class="qty-stepper">
-          <button class="qty-btn" onclick="changeQty(this,-1)"><i data-lucide="minus" width="12" height="12"></i></button>
-          <input class="qty-input" type="number" value="2" min="1" max="99" onchange="updateTotals()">
-          <button class="qty-btn" onclick="changeQty(this,1)"><i data-lucide="plus" width="12" height="12"></i></button>
-        </div>
-        <div class="item-total">$130.00</div>
-        <button class="remove-btn" onclick="removeItem(this)" title="Remove"><i data-lucide="trash-2" width="16" height="16"></i></button>
-      </div>
-
-      <!-- Item 2: GHK-Cu ×1 -->
-      <div class="cart-item">
-        <div class="item-info">
-          <div class="item-thumb coral-bg">
-            <i data-lucide="sparkles" width="28" height="28" style="color:var(--coral)"></i>
+      <?php else : ?>
+        <?php foreach ($cart_items as $cart_item_key => $cart_item) :
+          $product_id = $cart_item['product_id'];
+          $quantity   = $cart_item['quantity'];
+          $item_product = $cart_item['data'];
+          $item_name  = $item_product->get_name();
+          $item_price = WC()->cart->get_product_subtotal($item_product, $quantity);
+          $unit_price = wc_price($item_product->get_price());
+          $thumb      = get_the_post_thumbnail_url($product_id, 'woocommerce_thumbnail');
+          $remove_url = wc_get_cart_remove_url($cart_item_key);
+          $update_url = wc_get_cart_url();
+        ?>
+        <div class="cart-item">
+          <div class="item-info">
+            <div class="item-thumb teal-bg">
+              <?php if ($thumb) : ?>
+                <img src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($item_name); ?>" style="width:60px;height:60px;object-fit:cover;border-radius:8px">
+              <?php else : ?>
+                <i data-lucide="flask-conical" width="28" height="28" style="color:var(--teal)"></i>
+              <?php endif; ?>
+            </div>
+            <div class="item-details">
+              <div class="item-name"><a href="<?php echo esc_url(get_permalink($product_id)); ?>" style="color:inherit;text-decoration:none"><?php echo esc_html($item_name); ?></a></div>
+            </div>
           </div>
-          <div class="item-details">
-            <div class="item-name">GHK-Cu — 200 mg Powder</div>
-            <span class="item-badge badge-coral">Skincare Peptide</span>
-            <div class="item-meta">Copper tripeptide-1 · &gt;98% purity · COA included</div>
+          <div class="item-price"><?php echo $unit_price; ?></div>
+          <div class="qty-stepper">
+            <form method="post" action="<?php echo esc_url($update_url); ?>" style="display:contents">
+              <input type="hidden" name="cart_item_key" value="<?php echo esc_attr($cart_item_key); ?>">
+              <button class="qty-btn" type="button" onclick="changeQty(this,-1)"><i data-lucide="minus" width="12" height="12"></i></button>
+              <input class="qty-input" type="number" name="cart[<?php echo esc_attr($cart_item_key); ?>][qty]" value="<?php echo esc_attr($quantity); ?>" min="1" max="99" onchange="this.form.submit()">
+              <button class="qty-btn" type="button" onclick="changeQty(this,1)"><i data-lucide="plus" width="12" height="12"></i></button>
+              <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
+            </form>
           </div>
+          <div class="item-total"><?php echo $item_price; ?></div>
+          <a href="<?php echo esc_url($remove_url); ?>" class="remove-btn" title="Remove"><i data-lucide="trash-2" width="16" height="16"></i></a>
         </div>
-        <div class="item-price">$52.00</div>
-        <div class="qty-stepper">
-          <button class="qty-btn" onclick="changeQty(this,-1)"><i data-lucide="minus" width="12" height="12"></i></button>
-          <input class="qty-input" type="number" value="1" min="1" max="99" onchange="updateTotals()">
-          <button class="qty-btn" onclick="changeQty(this,1)"><i data-lucide="plus" width="12" height="12"></i></button>
-        </div>
-        <div class="item-total">$52.00</div>
-        <button class="remove-btn" onclick="removeItem(this)" title="Remove"><i data-lucide="trash-2" width="16" height="16"></i></button>
-      </div>
-
-      <!-- Item 3: Ipamorelin ×1 -->
-      <div class="cart-item">
-        <div class="item-info">
-          <div class="item-thumb gold-bg">
-            <i data-lucide="zap" width="28" height="28" style="color:var(--gold)"></i>
-          </div>
-          <div class="item-details">
-            <div class="item-name">Ipamorelin — 2 mg Vial</div>
-            <span class="item-badge badge-gold">Hormone & Anti-Aging</span>
-            <div class="item-meta">GH secretagogue · Lyophilized · &gt;98.5% purity</div>
-          </div>
-        </div>
-        <div class="item-price">$68.00</div>
-        <div class="qty-stepper">
-          <button class="qty-btn" onclick="changeQty(this,-1)"><i data-lucide="minus" width="12" height="12"></i></button>
-          <input class="qty-input" type="number" value="1" min="1" max="99" onchange="updateTotals()">
-          <button class="qty-btn" onclick="changeQty(this,1)"><i data-lucide="plus" width="12" height="12"></i></button>
-        </div>
-        <div class="item-total">$68.00</div>
-        <button class="remove-btn" onclick="removeItem(this)" title="Remove"><i data-lucide="trash-2" width="16" height="16"></i></button>
-      </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
     </div><!-- .cart-table -->
 
     <!-- COUPON + UPDATE -->
@@ -281,25 +270,23 @@ get_header( 'alluvia' );
     </div>
     <div class="summary-body">
       <div class="summary-row">
-        <span class="label">Subtotal (4 items)</span>
-        <span class="value" id="subtotalVal">$250.00</span>
+        <span class="label">Subtotal (<?php echo $cart_count; ?> item<?php echo $cart_count !== 1 ? 's' : ''; ?>)</span>
+        <span class="value" id="subtotalVal"><?php echo $subtotal; ?></span>
       </div>
-      <div class="summary-row discount" id="discountSummaryRow" style="display:none">
-        <span class="label">Discount (WELCOME10)</span>
-        <span class="value">−$<span id="discountSummaryAmt">25.00</span></span>
+      <?php if ($coupon_discount > 0) : ?>
+      <div class="summary-row discount" id="discountSummaryRow">
+        <span class="label">Discount</span>
+        <span class="value" style="color:var(--mint)">-<?php echo wc_price($coupon_discount); ?></span>
       </div>
+      <?php endif; ?>
       <div class="summary-row shipping">
-        <span class="label">Cold-Chain Fee</span>
-        <span class="value">$9.99</span>
-      </div>
-      <div class="summary-row">
-        <span class="label">Estimated Tax</span>
-        <span class="value" id="taxVal">$22.50</span>
+        <span class="label">Shipping</span>
+        <span class="value"><?php echo $shipping_total > 0 ? wc_price($shipping_total) : '<em style="color:var(--mint)">Free</em>'; ?></span>
       </div>
       <hr class="summary-divider">
       <div class="summary-total">
         <span class="label">Total</span>
-        <span class="value" id="totalVal">$282.49</span>
+        <span class="value" id="totalVal" style="font-weight:700"><?php echo $cart_total; ?></span>
       </div>
 
       <a href="<?php echo esc_url(alluvia_checkout_url()); ?>" class="btn-checkout">
@@ -340,102 +327,38 @@ get_header( 'alluvia' );
 <div class="also-like">
   <h2><i data-lucide="heart" width="22" height="22" style="color:var(--coral)"></i> You May Also Like</h2>
   <div class="also-grid">
-    <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(138,96,193,0.15),rgba(138,96,193,0.05))">
-        <i data-lucide="trending-down" width="32" height="32" style="color:var(--purple)"></i>
+    <?php
+    $featured_args = [
+        'post_type'      => 'product',
+        'posts_per_page' => 4,
+        'meta_key'       => '_featured',
+        'meta_value'     => 'yes',
+        'orderby'        => 'rand',
+    ];
+    $featured_q = new WP_Query($featured_args);
+    if (!$featured_q->have_posts()) {
+        $featured_args = ['post_type'=>'product','posts_per_page'=>4,'orderby'=>'rand'];
+        $featured_q = new WP_Query($featured_args);
+    }
+    if ($featured_q->have_posts()) : while ($featured_q->have_posts()) : $featured_q->the_post();
+        $rel_product = wc_get_product(get_the_ID());
+        $rel_thumb   = get_the_post_thumbnail_url(get_the_ID(), 'woocommerce_thumbnail');
+    ?>
+    <a href="<?php echo esc_url(get_permalink()); ?>" class="also-card" style="text-decoration:none;color:inherit">
+      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(14,175,159,.12),rgba(14,175,159,.04))">
+        <?php if ($rel_thumb) : ?><img src="<?php echo esc_url($rel_thumb); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:100%;object-fit:cover"><?php else : ?><i data-lucide="flask-conical" width="36" height="36" style="color:var(--teal)"></i><?php endif; ?>
       </div>
       <div class="also-body">
-        <div class="also-name">AOD-9604 — 5 mg Vial</div>
-        <div class="also-price">$58.00</div>
+        <div class="also-name"><?php echo esc_html(get_the_title()); ?></div>
+        <div class="also-price"><?php echo $rel_product ? $rel_product->get_price_html() : ''; ?></div>
         <button class="also-add"><i data-lucide="plus" width="14" height="14"></i> Add to Cart</button>
       </div>
-    </div>
-    <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(212,102,60,0.15),rgba(212,102,60,0.05))">
-        <i data-lucide="dumbbell" width="32" height="32" style="color:var(--orange)"></i>
-      </div>
-      <div class="also-body">
-        <div class="also-name">TB-500 — 5 mg Vial</div>
-        <div class="also-price">$78.00</div>
-        <button class="also-add"><i data-lucide="plus" width="14" height="14"></i> Add to Cart</button>
-      </div>
-    </div>
-    <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(88,180,136,0.15),rgba(88,180,136,0.05))">
-        <i data-lucide="feather" width="32" height="32" style="color:var(--mint)"></i>
-      </div>
-      <div class="also-body">
-        <div class="also-name">PTD-DBM — 10 mg Vial</div>
-        <div class="also-price">$55.00</div>
-        <button class="also-add"><i data-lucide="plus" width="14" height="14"></i> Add to Cart</button>
-      </div>
-    </div>
-    <div class="also-card">
-      <div class="also-thumb" style="background:linear-gradient(135deg,rgba(106,166,198,0.15),rgba(106,166,198,0.05))">
-        <i data-lucide="dna" width="32" height="32" style="color:var(--sky)"></i>
-      </div>
-      <div class="also-body">
-        <div class="also-name">Epithalon — 10 mg Vial</div>
-        <div class="also-price">$95.00</div>
-        <button class="also-add"><i data-lucide="plus" width="14" height="14"></i> Add to Cart</button>
-      </div>
-    </div>
+    </a>
+    <?php endwhile; wp_reset_postdata(); endif; ?>
   </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-        <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
-        <div class="social-links">
-          <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="twitter" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="facebook" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="youtube" width="16" height="16"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Medical Peptides</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Skincare Peptides</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Sports & Recovery</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Anti-Aging</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Research Peptides</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
-          <li><a href="<?php echo esc_url(home_url('/about/')); ?>#science"><i data-lucide="chevron-right" width="12" height="12"></i>Our Science</a></li>
-          <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact Us</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms & Conditions</a></li>
-          <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Shipping Policy</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
-          <li><a href="#"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
-      <div class="footer-legal">
-        <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a>
-        <a href="#">Disclaimer</a>
-      </div>
-    </div>
-  </div>
-</footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 
 <script>
 lucide.createIcons();
