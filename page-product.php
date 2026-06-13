@@ -4,6 +4,25 @@
  *
  * @package Shopping
  */
+
+// ── Product data ─────────────────────────────────────────────────────────────
+$product      = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : null;
+$price_html   = $product ? $product->get_price_html() : '';
+$short_desc   = $product ? $product->get_short_description() : '';
+$long_desc    = get_the_content();
+$avg_rating   = $product ? floatval($product->get_average_rating()) : 0;
+$review_count = $product ? $product->get_review_count() : 0;
+$stock_status = $product ? $product->get_stock_status() : 'instock';
+$is_on_sale   = $product && $product->is_on_sale();
+$is_featured  = $product && $product->is_featured();
+$add_to_cart_url = $product ? $product->add_to_cart_url() : '#';
+$thumb_url    = get_the_post_thumbnail_url(get_the_ID(), 'woocommerce_single');
+$terms        = wp_get_post_terms(get_the_ID(), 'product_cat', ['number' => 1]);
+$primary_cat  = (!is_wp_error($terms) && !empty($terms)) ? $terms[0] : null;
+$cat_name     = $primary_cat ? $primary_cat->name : '';
+$cat_url      = $primary_cat ? get_term_link($primary_cat) : alluvia_shop_url();
+$related_ids  = $product ? wc_get_related_products(get_the_ID(), 4) : [];
+
 add_action( 'wp_head', function() {
 ?>
 <style>
@@ -143,17 +162,27 @@ get_header( 'alluvia' );
     <i data-lucide="chevron-right" width="14" height="14"></i>
     <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Shop</a>
     <i data-lucide="chevron-right" width="14" height="14"></i>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Medical Peptides</a>
-    <i data-lucide="chevron-right" width="14" height="14"></i>
-    <span>BPC-157</span>
+    <?php if ($cat_name) : ?>
+      <a href="<?php echo esc_url(is_wp_error($cat_url) ? alluvia_shop_url() : $cat_url); ?>"><?php echo esc_html($cat_name); ?></a>
+      <i data-lucide="chevron-right" width="14" height="14"></i>
+    <?php endif; ?>
+    <span><?php echo esc_html(get_the_title()); ?></span>
   </div>
 
   <div class="product-main">
     <!-- GALLERY -->
     <div class="gallery">
       <div class="gallery-main">
-        <span class="gallery-badge">Best Seller</span>
-        <i class="vial-icon" data-lucide="activity" width="120" height="120" style="color:var(--teal)"></i>
+        <?php if ($is_featured) : ?>
+          <span class="gallery-badge">Best Seller</span>
+        <?php elseif ($is_on_sale) : ?>
+          <span class="gallery-badge" style="background:var(--coral);color:#fff">Sale</span>
+        <?php endif; ?>
+        <?php if ($thumb_url) : ?>
+          <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <?php else : ?>
+          <i class="vial-icon" data-lucide="flask-conical" width="120" height="120" style="color:var(--teal)"></i>
+        <?php endif; ?>
       </div>
       <div class="gallery-thumbs">
         <div class="gallery-thumb active"><i data-lucide="activity" width="32" height="32" style="color:var(--teal)"></i></div>
@@ -165,30 +194,37 @@ get_header( 'alluvia' );
 
     <!-- INFO -->
     <div class="product-info">
-      <div class="prod-cat">Medical Peptide · Tissue Repair</div>
-      <h1>BPC-157</h1>
-      <p class="prod-subtitle">Body Protection Compound-157 · 5 mg Lyophilized Vial</p>
+      <?php if ($cat_name) : ?><div class="prod-cat"><?php echo esc_html($cat_name); ?></div><?php endif; ?>
+      <h1><?php echo esc_html(get_the_title()); ?></h1>
+      <?php if ($short_desc) : ?><p class="prod-subtitle"><?php echo wp_kses_post($short_desc); ?></p><?php endif; ?>
+      <?php if ($avg_rating > 0) : ?>
       <div class="prod-rating">
         <span class="stars">
-          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
-          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
-          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
-          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
-          <i data-lucide="star" width="16" height="16" fill="currentColor"></i>
+          <?php for ($s=1;$s<=5;$s++): ?><svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo $s<=round($avg_rating)?'currentColor':'none'; ?>" stroke="currentColor" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><?php endfor; ?>
         </span>
-        <span class="rating-text">4.9 · <a href="#reviews">214 verified reviews</a></span>
+        <span class="rating-text"><?php echo esc_html(number_format($avg_rating,1)); ?><?php if($review_count>0): ?> · <a href="#reviews"><?php echo esc_html($review_count); ?> verified reviews</a><?php endif; ?></span>
       </div>
+      <?php endif; ?>
       <div class="prod-price-row">
-        <span class="prod-price">$65.00</span>
-        <span class="prod-price-old">$80.00</span>
-        <span class="prod-save">Save 19%</span>
+        <span class="prod-price"><?php echo $price_html; ?></span>
       </div>
 
       <div class="spec-grid">
-        <div class="spec-item"><i data-lucide="beaker" width="18" height="18"></i><div><div class="spec-label">Purity</div><div class="spec-value">≥99% (HPLC)</div></div></div>
-        <div class="spec-item"><i data-lucide="package" width="18" height="18"></i><div><div class="spec-label">Quantity</div><div class="spec-value">5 mg / vial</div></div></div>
-        <div class="spec-item"><i data-lucide="snowflake" width="18" height="18"></i><div><div class="spec-label">Form</div><div class="spec-value">Lyophilized powder</div></div></div>
-        <div class="spec-item"><i data-lucide="check-circle" width="18" height="18"></i><div><div class="spec-label">Stock</div><div class="spec-value" style="color:var(--mint)">In Stock</div></div></div>
+        <div class="spec-item"><i data-lucide="check-circle" width="18" height="18"></i><div>
+          <div class="spec-label">Stock</div>
+          <div class="spec-value" style="color:<?php echo $stock_status==='instock'?'var(--mint)':'var(--coral)'; ?>">
+            <?php echo $stock_status==='instock'?'In Stock':($stock_status==='onbackorder'?'On Backorder':'Out of Stock'); ?>
+          </div>
+        </div></div>
+        <?php if($product&&$product->get_sku()): ?>
+        <div class="spec-item"><i data-lucide="tag" width="18" height="18"></i><div><div class="spec-label">SKU</div><div class="spec-value"><?php echo esc_html($product->get_sku()); ?></div></div></div>
+        <?php endif; ?>
+        <?php if($product&&$product->get_attribute('purity')): ?>
+        <div class="spec-item"><i data-lucide="beaker" width="18" height="18"></i><div><div class="spec-label">Purity</div><div class="spec-value"><?php echo esc_html($product->get_attribute('purity')); ?></div></div></div>
+        <?php endif; ?>
+        <?php if($product&&$product->get_attribute('form')): ?>
+        <div class="spec-item"><i data-lucide="snowflake" width="18" height="18"></i><div><div class="spec-label">Form</div><div class="spec-value"><?php echo esc_html($product->get_attribute('form')); ?></div></div></div>
+        <?php endif; ?>
       </div>
 
       <div class="purchase-row">
@@ -197,7 +233,11 @@ get_header( 'alluvia' );
           <input class="qty-input" id="qty" type="number" value="1" min="1" max="99">
           <button class="qty-btn" onclick="changeQty(1)"><i data-lucide="plus" width="14" height="14"></i></button>
         </div>
-        <button class="btn-add-cart" onclick="showToast('Added to cart!')"><i data-lucide="shopping-cart" width="18" height="18"></i> Add to Cart</button>
+        <?php if($stock_status==='instock'): ?>
+          <a href="<?php echo esc_url($add_to_cart_url); ?>" class="btn-add-cart"><i data-lucide="shopping-cart" width="18" height="18"></i> Add to Cart</a>
+        <?php else: ?>
+          <button class="btn-add-cart" disabled style="opacity:.5;cursor:not-allowed;background:var(--pearl-dark);color:var(--text-mid)">Out of Stock</button>
+        <?php endif; ?>
         <button class="btn-wishlist" id="wishBtn" onclick="toggleWish()"><i data-lucide="heart" width="20" height="20"></i></button>
       </div>
       <a href="<?php echo esc_url(alluvia_checkout_url()); ?>" class="buy-now">Buy Now — Express Checkout</a>
@@ -224,16 +264,11 @@ get_header( 'alluvia' );
 
   <div class="tab-pane active" id="tab-desc">
     <div class="tab-content-card">
-      <h3>About BPC-157</h3>
-      <p>BPC-157 (Body Protection Compound-157) is a synthetic pentadecapeptide composed of 15 amino acids, derived from a partial sequence of a body protection compound discovered in human gastric juice. It has become one of the most widely studied peptides in regenerative research due to its observed effects on tissue repair, angiogenesis, and cytoprotection.</p>
-      <p>In laboratory and animal-model research, BPC-157 has been investigated for its role in accelerating the healing of tendon, ligament, muscle, and connective tissue, as well as its protective effects on the gastrointestinal lining. Researchers have noted its apparent stability in gastric acid — a property uncommon among peptides.</p>
-      <h4>Primary Research Areas</h4>
-      <ul class="research-list">
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Tendon-to-bone and ligament healing models</li>
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Gastrointestinal mucosal protection and ulcer research</li>
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Angiogenesis and vascular repair pathways (VEGFR2)</li>
-        <li><i data-lucide="check-circle" width="16" height="16"></i>Nitric oxide system modulation</li>
-      </ul>
+      <h3>About <?php echo esc_html(get_the_title()); ?></h3>
+      <?php if($long_desc): echo apply_filters('the_content',$long_desc);
+      elseif($short_desc): echo '<p>'.wp_kses_post($short_desc).'</p>';
+      else: echo '<p style="color:var(--text-light)">No description available.</p>';
+      endif; ?>
     </div>
   </div>
 
@@ -368,65 +403,27 @@ get_header( 'alluvia' );
 <div class="related">
   <h2>Frequently Bought Together</h2>
   <div class="related-grid">
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(212,102,60,0.12),rgba(212,102,60,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
-      <div class="rel-body"><div class="rel-cat">Sports & Recovery</div><div class="rel-name">TB-500 — 5 mg</div><div class="rel-price">$78.00</div></div>
-    </a>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(219,98,122,0.12),rgba(219,98,122,0.04))"><i data-lucide="sparkles" width="36" height="36" style="color:var(--coral)"></i></div>
-      <div class="rel-body"><div class="rel-cat">Skincare</div><div class="rel-name">GHK-Cu — 200 mg</div><div class="rel-price">$52.00</div></div>
-    </a>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(198,162,83,0.12),rgba(198,162,83,0.04))"><i data-lucide="zap" width="36" height="36" style="color:var(--gold)"></i></div>
-      <div class="rel-body"><div class="rel-cat">Anti-Aging</div><div class="rel-name">Ipamorelin — 2 mg</div><div class="rel-price">$68.00</div></div>
-    </a>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="rel-card">
-      <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(14,175,159,0.12),rgba(14,175,159,0.04))"><i data-lucide="layers" width="36" height="36" style="color:var(--teal)"></i></div>
-      <div class="rel-body"><div class="rel-cat">Stack</div><div class="rel-name">BPC-157 + TB-500</div><div class="rel-price">$119.00</div></div>
-    </a>
+    <?php if(!empty($related_ids)): foreach(array_slice($related_ids,0,4) as $rel_id):
+      $rel=wc_get_product($rel_id); if(!$rel) continue;
+      $rel_thumb=get_the_post_thumbnail_url($rel_id,'woocommerce_thumbnail');
+      $rel_cats=wp_get_post_terms($rel_id,'product_cat',['number'=>1]);
+      $rel_cat=(!is_wp_error($rel_cats)&&!empty($rel_cats))?$rel_cats[0]->name:'';
+    ?>
+      <a href="<?php echo esc_url(get_permalink($rel_id)); ?>" class="rel-card">
+        <div class="rel-thumb" style="background:linear-gradient(135deg,rgba(14,175,159,.12),rgba(14,175,159,.04))">
+          <?php if($rel_thumb): ?><img src="<?php echo esc_url($rel_thumb); ?>" alt="<?php echo esc_attr($rel->get_name()); ?>" style="width:100%;height:100%;object-fit:cover"><?php else: ?><i data-lucide="flask-conical" width="36" height="36" style="color:var(--teal)"></i><?php endif; ?>
+        </div>
+        <div class="rel-body">
+          <?php if($rel_cat): ?><div class="rel-cat"><?php echo esc_html($rel_cat); ?></div><?php endif; ?>
+          <div class="rel-name"><?php echo esc_html($rel->get_name()); ?></div>
+          <div class="rel-price"><?php echo $rel->get_price_html(); ?></div>
+        </div>
+      </a>
+    <?php endforeach; endif; ?>
   </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-        <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
-        <div class="social-links">
-          <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="twitter" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="facebook" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="youtube" width="16" height="16"></i></a>
-        </div>
-      </div>
-      <div class="footer-col"><h4>Products</h4><ul>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Medical Peptides</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Skincare Peptides</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Sports & Recovery</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Anti-Aging</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
-        <li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Blog</a></li>
-        <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact Us</a></li>
-        <li><a href="<?php echo esc_url(home_url('/coa-library/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul>
-        <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms & Conditions</a></li>
-        <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Shipping Policy</a></li>
-        <li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
-        <li><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
-      <div class="footer-legal">
-        <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a>
-      </div>
-    </div>
-  </div>
-</footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 
 <script>
 lucide.createIcons();
