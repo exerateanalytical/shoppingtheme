@@ -124,6 +124,12 @@ function shopping_widgets_init() {
 function shopping_init() {
     if ( ! is_admin() ) {
         wp_enqueue_script( 'tinynav', get_stylesheet_directory_uri() . '/js/tinynav.js', array( 'jquery' ) );
+        wp_enqueue_style(
+            'alluvia-base',
+            get_stylesheet_directory_uri() . '/assets/css/alluvia-base.css',
+            array(),
+            '1.0.0'
+        );
     }
 }
 
