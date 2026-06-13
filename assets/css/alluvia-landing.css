@@ -1,4 +1,4 @@
-/* =============================================================
+﻿/* =============================================================
    Alluvia Peptides — Premium Landing Page
    Palette: Navy #0a1a27 | Teal #0eaf9f | Gold #c6a253 | Pearl #f5f0e7
    ============================================================= */
@@ -6,7 +6,35 @@
 /* ── Google Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-/* CSS Variables are defined in alluvia-base.css */
+/* ── CSS Variables ── */
+:root {
+  --navy:      #0a1a27;
+  --navy-mid:  #15283b;
+  --navy-soft: #213f5d;
+  --teal:      #0eaf9f;
+  --teal-dark: #0a8174;
+  --teal-glow: rgba(14,175,159,0.18);
+  --gold:      #c6a253;
+  --gold-light:#e4c98f;
+  --pearl:     #f5f0e7;
+  --pearl-dark:#e8e0d2;
+  --white:     #ffffff;
+  --text-dark: #0a1a27;
+  --text-mid:  #44515f;
+  --text-light:#8392a2;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-xl: 48px;
+  --shadow-sm: 0 2px 12px rgba(10,26,39,0.08);
+  --shadow-md: 0 8px 32px rgba(10,26,39,0.14);
+  --shadow-lg: 0 20px 60px rgba(10,26,39,0.2);
+  --shadow-glow: 0 0 40px rgba(14,175,159,0.25);
+  --transition: 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-ui:      'Space Grotesk', system-ui, sans-serif;
+}
 
 /* ── Reset for landing sections ── */
 .alluvia-landing * {
@@ -22,7 +50,119 @@
   background: var(--pearl);
 }
 
-/* Navigation rules are defined in alluvia-base.css */
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+.alluvia-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: var(--transition);
+}
+
+.alluvia-nav.scrolled {
+  background: rgba(10,26,39,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 0;
+  box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.nav-logo-word {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.05em;
+}
+
+.nav-logo-sub {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-ui);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--teal);
+}
+
+.nav-cta {
+  font-family: var(--font-ui);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--navy) !important;
+  background: var(--teal);
+  padding: 10px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: var(--transition) !important;
+}
+
+.nav-cta:hover {
+  background: var(--teal-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(14,175,159,0.4);
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: var(--transition);
+}
 
 /* ═══════════════════════════════════════
    HERO
@@ -89,7 +229,7 @@
 
 .hero-badge-text {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -98,8 +238,8 @@
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(48px, 6vw, 82px);
-  font-weight: 300;
+  font-size: clamp(96px, 12vw, 164px);
+  font-weight: 700;
   line-height: 1.05;
   color: var(--white);
   margin-bottom: 28px;
@@ -119,10 +259,10 @@
 }
 
 .hero-desc {
-  font-size: 18px;
-  font-weight: 300;
+  font-size: 36px;
+  font-weight: 700;
   line-height: 1.75;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.65);
   max-width: 500px;
   margin-bottom: 44px;
   opacity: 0;
@@ -140,7 +280,60 @@
   animation: fadeUp 0.9s 0.65s ease forwards;
 }
 
-/* .btn-primary and .btn-ghost are defined in alluvia-base.css */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: var(--font-ui);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 16px 36px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--teal-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(14,175,159,0.45);
+}
+
+.btn-primary svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-ui);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 16px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: var(--transition);
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: var(--white);
+  background: rgba(255,255,255,0.06);
+}
 
 .hero-stats {
   display: flex;
@@ -160,7 +353,7 @@
 
 .stat-number {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: 72px;
   font-weight: 600;
   color: var(--white);
   line-height: 1;
@@ -171,10 +364,10 @@
 }
 
 .stat-label {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 700;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.45);
   margin-top: 6px;
   text-transform: uppercase;
 }
@@ -241,13 +434,13 @@
 }
 
 .molecule-core-icon {
-  font-size: 48px;
+  font-size: 96px;
   margin-bottom: 8px;
 }
 
 .molecule-core-label {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -285,7 +478,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 36px;
 }
 
 .float-card-text {
@@ -295,14 +488,14 @@
 
 .float-card-title {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 600;
   color: var(--white);
   white-space: nowrap;
 }
 
 .float-card-sub {
-  font-size: 10px;
+  font-size: 20px;
   color: rgba(255,255,255,0.45);
   white-space: nowrap;
 }
@@ -333,7 +526,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: 0.80;
+  opacity: 0.55;
   transition: opacity 0.3s ease;
 }
 
@@ -342,19 +535,74 @@
 }
 
 .trust-icon {
-  font-size: 20px;
+  font-size: 40px;
 }
 
 .trust-text {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--navy);
 }
 
-/* .section-label, .section-title, .section-desc, .container are defined in alluvia-base.css */
+/* ═══════════════════════════════════════
+   SECTION COMMONS
+═══════════════════════════════════════ */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--teal);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 8vw, 116px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.section-title .gold {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.section-desc {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.8;
+  color: var(--text-mid);
+  max-width: 560px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
 /* ═══════════════════════════════════════
    ABOUT / BRAND STORY
@@ -370,7 +618,7 @@
   content: 'ALLUVIA';
   position: absolute;
   font-family: var(--font-display);
-  font-size: 220px;
+  font-size: 440px;
   font-weight: 700;
   color: rgba(10,26,39,0.025);
   top: 50%;
@@ -453,7 +701,7 @@
 
 .about-accent-number {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 96px;
   font-weight: 600;
   line-height: 1;
   margin-bottom: 4px;
@@ -461,7 +709,7 @@
 
 .about-accent-text {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -487,7 +735,7 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  font-size: 16px;
+  font-size: 32px;
   color: var(--text-mid);
   line-height: 1.6;
 }
@@ -503,7 +751,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 2px;
-  font-size: 11px;
+  font-size: 22px;
   color: var(--teal);
 }
 
@@ -537,7 +785,7 @@
 }
 
 .categories-header .section-desc {
-  color: rgba(255,255,255,0.70);
+  color: rgba(255,255,255,0.55);
   margin: 0 auto;
 }
 
@@ -591,7 +839,7 @@
 
 .cat-number {
   font-family: var(--font-display);
-  font-size: 64px;
+  font-size: 128px;
   font-weight: 600;
   line-height: 1;
   color: rgba(255,255,255,0.04);
@@ -613,7 +861,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 52px;
   margin-bottom: 20px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.08);
@@ -631,7 +879,7 @@
 
 .cat-name {
   font-family: var(--font-ui);
-  font-size: 15px;
+  font-size: 30px;
   font-weight: 600;
   color: var(--white);
   margin-bottom: 10px;
@@ -641,8 +889,8 @@
 }
 
 .cat-desc {
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 26px;
+  font-weight: 700;
   color: rgba(255,255,255,0.45);
   line-height: 1.65;
   position: relative;
@@ -659,7 +907,7 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--teal);
@@ -733,7 +981,7 @@
   background: var(--navy);
   color: var(--teal);
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -768,14 +1016,14 @@
 
 .process-step-title {
   font-family: var(--font-ui);
-  font-size: 16px;
+  font-size: 32px;
   font-weight: 600;
   color: var(--navy);
   margin-bottom: 6px;
 }
 
 .process-step-text {
-  font-size: 14px;
+  font-size: 28px;
   color: var(--text-mid);
   line-height: 1.7;
 }
@@ -804,18 +1052,18 @@
 }
 
 .cert-icon {
-  font-size: 32px;
+  font-size: 64px;
 }
 
 .cert-title {
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--navy);
 }
 
 .cert-text {
-  font-size: 13px;
+  font-size: 26px;
   color: var(--text-mid);
   line-height: 1.6;
 }
@@ -864,7 +1112,7 @@
 
 .stats-num {
   font-family: var(--font-display);
-  font-size: 56px;
+  font-size: 112px;
   font-weight: 600;
   color: var(--white);
   line-height: 1;
@@ -875,11 +1123,11 @@
 
 .stats-label {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.45);
 }
 
 .stats-divider {
@@ -945,13 +1193,13 @@
   display: flex;
   gap: 4px;
   color: var(--gold);
-  font-size: 16px;
+  font-size: 32px;
 }
 
 .testi-quote {
   font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 300;
+  font-size: 38px;
+  font-weight: 700;
   font-style: italic;
   line-height: 1.65;
   color: var(--navy);
@@ -961,7 +1209,7 @@
 .testi-quote::before {
   content: '\201C';
   color: var(--teal);
-  font-size: 28px;
+  font-size: 56px;
   line-height: 0;
   vertical-align: -8px;
   margin-right: 3px;
@@ -984,7 +1232,7 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-ui);
-  font-size: 16px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--white);
   flex-shrink: 0;
@@ -992,13 +1240,13 @@
 
 .testi-name {
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 600;
   color: var(--navy);
 }
 
 .testi-meta {
-  font-size: 12px;
+  font-size: 24px;
   color: var(--text-light);
   margin-top: 2px;
 }
@@ -1007,7 +1255,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1056,11 +1304,11 @@
 
 .cta-section .section-title {
   color: var(--white);
-  font-size: clamp(40px, 5vw, 68px);
+  font-size: clamp(80px, 10vw, 136px);
 }
 
 .cta-section .section-desc {
-  color: rgba(255,255,255,0.70);
+  color: rgba(255,255,255,0.55);
   margin: 0 auto 48px;
 }
 
@@ -1094,14 +1342,14 @@
   border: none;
   color: var(--white);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 28px;
   padding: 10px 0;
   outline: none;
   min-width: 0;
 }
 
 .email-form input::placeholder {
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.35);
 }
 
 .email-form button {
@@ -1111,7 +1359,7 @@
   border-radius: 100px;
   padding: 12px 24px;
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -1124,8 +1372,8 @@
 }
 
 .cta-guarantee {
-  font-size: 12px;
-  color: rgba(255,255,255,0.65);
+  font-size: 24px;
+  color: rgba(255,255,255,0.35);
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -1133,7 +1381,117 @@
   gap: 6px;
 }
 
-/* Footer rules are defined in alluvia-base.css */
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.alluvia-footer {
+  background: #070f1a;
+  padding: 80px 0 0;
+  color: rgba(255,255,255,0.6);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.footer-brand .nav-logo {
+  margin-bottom: 20px;
+  display: inline-flex;
+}
+
+.footer-brand-desc {
+  font-size: 28px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.45);
+  max-width: 280px;
+  margin-bottom: 28px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.social-btn:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+  transform: translateY(-3px);
+}
+
+.footer-col-title {
+  font-family: var(--font-ui);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  font-size: 28px;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: var(--teal);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  font-size: 26px;
+  color: rgba(255,255,255,0.25);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-bottom-links a {
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  font-size: 26px;
+  transition: color 0.25s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: rgba(255,255,255,0.6);
+}
 
 /* ═══════════════════════════════════════
    ANIMATIONS
@@ -1192,7 +1550,53 @@
 .reveal-delay-7 { transition-delay: 0.7s; }
 .reveal-delay-8 { transition-delay: 0.8s; }
 
-/* Mobile nav overlay rules are defined in alluvia-base.css */
+/* ═══════════════════════════════════════
+   MOBILE NAV OVERLAY
+═══════════════════════════════════════ */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-nav-overlay a {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.mobile-nav-overlay a:hover {
+  color: var(--teal);
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 56px;
+  cursor: pointer;
+  line-height: 1;
+}
 
 /* ═══════════════════════════════════════
    RESPONSIVE
@@ -1212,6 +1616,7 @@
   .about-visual { display: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
 }
@@ -1222,7 +1627,9 @@
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .hero-inner { padding: 100px 20px 60px; }
   .hero-stats { flex-direction: column; gap: 24px; }
+  .footer-grid { grid-template-columns: 1fr; }
   .trust-strip-inner { gap: 28px; }
   .cta-actions { flex-direction: column; width: 100%; }
   .email-form { max-width: 100%; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
