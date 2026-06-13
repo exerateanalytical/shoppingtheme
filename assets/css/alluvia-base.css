@@ -376,3 +376,27 @@ img { max-width: 100%; height: auto; display: block; }
   transition: var(--transition);
 }
 .nav-account-btn:hover { background: rgba(255,255,255,0.15); }
+
+/* ── Unified button system ── */
+.alluvia-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-ui); font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  border: none; border-radius: 100px; cursor: pointer; text-decoration: none;
+  transition: var(--transition); white-space: nowrap;
+}
+.alluvia-btn-primary {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: var(--navy); padding: 13px 28px; font-size: 14px;
+}
+.alluvia-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,175,159,.35); color: var(--navy); }
+.alluvia-btn-navy {
+  background: var(--navy); color: #fff; padding: 13px 28px; font-size: 14px;
+}
+.alluvia-btn-navy:hover { background: var(--teal-dark); color: #fff; }
+.alluvia-btn-outline {
+  background: transparent; color: var(--navy); border: 1.5px solid var(--pearl-dark);
+  padding: 12px 24px; font-size: 13px;
+}
+.alluvia-btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+.alluvia-btn-sm { padding: 9px 18px; font-size: 12px; }
+.alluvia-btn-lg { padding: 16px 36px; font-size: 15px; }

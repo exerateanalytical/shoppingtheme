@@ -26,7 +26,7 @@ $related_ids  = $product ? wc_get_related_products(get_the_ID(), 4) : [];
 add_action( 'wp_head', function() {
 ?>
 <style>
-.product-wrap{max-width:1200px;margin:0 auto;padding:6.5rem 2rem 2rem}
+.product-wrap{max-width:1200px;margin:0 auto;padding:5.5rem 1.5rem 2rem}
 .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-mid);margin-bottom:1.5rem}
 .breadcrumb a{color:var(--teal-dark);text-decoration:none}
 
@@ -47,14 +47,14 @@ add_action( 'wp_head', function() {
 /* PRODUCT INFO */
 .product-info{}
 .prod-cat{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.5rem}
-.product-info h1{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h1);font-weight:600;line-height:1.1;margin-bottom:0.5rem}
+.product-info h1{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,40px);font-weight:600;line-height:1.1;margin-bottom:0.5rem}
 .prod-subtitle{font-size:var(--fs-body);color:var(--text-mid);margin-bottom:1rem;line-height:1.8}
 .prod-rating{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem}
 .stars{display:flex;gap:2px;color:var(--gold)}
 .rating-text{font-family:var(--font-ui);font-size:13px;color:var(--text-mid)}
 .rating-text a{color:var(--teal-dark);text-decoration:none}
 .prod-price-row{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.5rem}
-.prod-price{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h3);font-weight:700;color:var(--navy)}
+.prod-price{font-family:var(--font-ui);font-size:28px;font-weight:700;color:var(--navy)}
 .prod-price-old{font-family:var(--font-ui);font-size:18px;color:var(--text-light);text-decoration:line-through}
 .prod-save{background:rgba(219,98,122,0.12);color:#c0405a;font-family:var(--font-ui);font-size:12px;font-weight:700;padding:3px 10px;border-radius:50px}
 
@@ -71,8 +71,8 @@ add_action( 'wp_head', function() {
 .qty-btn{background:#fff;border:none;width:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-mid);transition:all .2s}
 .qty-btn:hover{background:var(--teal);color:#fff}
 .qty-input{width:50px;border:none;border-left:1px solid var(--pearl-dark);border-right:1px solid var(--pearl-dark);text-align:center;font-family:var(--font-ui);font-weight:600;font-size:16px;outline:none}
-.btn-add-cart{flex:1;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;font-family:var(--font-ui);font-size:16px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:all .3s}
-.btn-add-cart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.35)}
+.btn-add-cart{flex:1;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;padding:14px 20px;font-family:var(--font-ui);font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:all .3s;text-decoration:none;min-height:52px}
+.btn-add-cart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.35);color:var(--navy)}
 .btn-wishlist{width:52px;background:#fff;border:1px solid var(--pearl-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-mid);transition:all .2s}
 .btn-wishlist:hover{border-color:var(--coral);color:var(--coral)}
 .btn-wishlist.active{background:rgba(219,98,122,0.08);border-color:var(--coral);color:var(--coral)}
@@ -148,8 +148,10 @@ add_action( 'wp_head', function() {
 .rel-name{font-family:var(--font-ui);font-weight:600;font-size:var(--fs-base);margin:0.25rem 0}
 .rel-price{font-family:var(--font-ui);font-weight:700;font-size:16px;color:var(--teal-dark)}
 
-@media(max-width:900px){.product-main{grid-template-columns:1fr;gap:2rem}.related-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.spec-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.gallery-main{height:300px}}</style>
+@media(max-width:1024px){.product-main{gap:2rem}}
+@media(max-width:900px){.product-main{grid-template-columns:1fr;gap:2rem}.related-grid{grid-template-columns:repeat(2,1fr)}.product-tabs{padding:0 1rem}.related{padding:0 1rem}}
+@media(max-width:640px){.product-wrap{padding:4.5rem 1rem 2rem}.spec-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr 1fr}.gallery-main{height:280px}.purchase-row{flex-wrap:wrap}.btn-add-cart{flex:1;min-width:200px}.tab-btn{padding:.75rem 1rem;font-size:13px}}
+@media(max-width:420px){.related-grid{grid-template-columns:1fr}.product-tabs .tab-nav{gap:0}}</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );

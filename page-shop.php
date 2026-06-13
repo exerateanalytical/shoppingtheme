@@ -166,11 +166,11 @@ add_action( 'wp_head', function() {
 .view-btn.active{background:var(--navy);color:var(--white)}
 /* PRODUCT GRID */
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.product-card{background:var(--white);border-radius:var(--radius-md);border:1px solid var(--pearl-dark);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column}
-.product-card:hover{border-color:rgba(14,175,159,.25);box-shadow:var(--shadow-md);transform:translateY(-4px)}
-.product-img{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-card{background:linear-gradient(160deg,#0e2235 0%,var(--navy) 100%);border-radius:var(--radius-md);border:1px solid rgba(14,175,159,.12);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column}
+.product-card:hover{border-color:rgba(14,175,159,.35);box-shadow:0 8px 32px rgba(0,0,0,.3);transform:translateY(-4px)}
+.product-img{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,rgba(14,175,159,.08) 0%,rgba(14,175,159,.02) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
 .product-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.product-img svg,.product-img-placeholder{opacity:.25;color:var(--white)}
+.product-img svg,.product-img-placeholder{opacity:.35;color:var(--teal)}
 .product-img-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 30% 40%,var(--teal) 0%,transparent 40%),radial-gradient(circle at 70% 70%,var(--gold) 0%,transparent 40%)}
 .product-badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;z-index:2}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
@@ -178,14 +178,15 @@ add_action( 'wp_head', function() {
 .badge-bestseller{background:var(--gold);color:var(--navy)}
 .badge-new{background:var(--teal);color:var(--navy)}
 .badge-low{background:var(--coral);color:var(--white)}
-.product-info{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
-.product-category{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
-.product-name{font-family:var(--font-ui);font-size:var(--fs-body);font-weight:700;color:var(--navy);line-height:1.3;text-decoration:none;display:block}
+.product-info{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.product-category{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.product-name{font-family:var(--font-ui);font-size:15px;font-weight:700;color:#fff;line-height:1.3;text-decoration:none;display:block}
 .product-name:hover{color:var(--teal)}
-.product-desc{font-size:var(--fs-base);color:var(--text-mid);line-height:1.6;flex:1}
-.product-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--pearl-dark)}
-.product-price{font-family:var(--font-display);font-size:var(--fs-title);font-weight:600;color:var(--navy)}
-.product-price ins{text-decoration:none}
+.product-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5;flex:1}
+.product-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.07)}
+.product-price{font-family:var(--font-ui);font-size:20px;font-weight:700;color:#fff}
+.product-price ins{text-decoration:none;color:var(--teal)}
+.product-price del{font-size:14px;color:rgba(255,255,255,.4);font-weight:400}
 .add-cart-btn{display:flex;align-items:center;gap:7px;background:var(--teal);color:var(--navy);border:none;border-radius:100px;padding:9px 18px;font-family:var(--font-ui);font-size:12px;font-weight:700;cursor:pointer;transition:var(--transition);white-space:nowrap;text-decoration:none}
 .add-cart-btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(14,175,159,.35);color:var(--navy)}
 .no-products{padding:60px 20px;text-align:center;color:var(--text-mid);font-size:var(--fs-body);grid-column:1/-1}

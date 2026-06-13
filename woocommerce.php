@@ -94,6 +94,18 @@ add_action( 'wp_head', function() {
   .woocommerce div.product form.cart .quantity { align-self: flex-start; }
   .woocommerce div.product form.cart button.single_add_to_cart_button { width: 100%; }
 }
+/* ── Shop layout with sidebar ── */
+.alluvia-shop-wrap { max-width: 1340px; margin: 0 auto; padding: 48px 40px 100px; display: grid; grid-template-columns: 260px 1fr; gap: 40px; }
+.alluvia-shop-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 80px; align-self: start; }
+.sidebar-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--pearl-dark); }
+.sidebar-card-title { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; }
+.sidebar-cat-link { display: flex; align-items: center; justify-content: space-between; padding: 9px 10px; border-radius: 8px; font-size: 14px; font-family: var(--font-ui); font-weight: 500; color: var(--text-dark); text-decoration: none; transition: background .2s; }
+.sidebar-cat-link:hover { background: var(--pearl); }
+.sidebar-cat-link.current { background: rgba(14,175,159,.08); color: var(--teal); font-weight: 600; }
+.sidebar-cat-count { font-size: 11px; background: var(--pearl-dark); border-radius: 100px; padding: 2px 7px; color: var(--text-light); }
+.sidebar-cat-link.current .sidebar-cat-count { background: rgba(14,175,159,.15); color: var(--teal); }
+@media(max-width:1000px){.alluvia-shop-wrap{grid-template-columns:200px 1fr;padding:32px 24px 80px}}
+@media(max-width:780px){.alluvia-shop-wrap{grid-template-columns:1fr}.alluvia-shop-sidebar{position:static}}
 </style>';
 }, 20 );
 
@@ -102,10 +114,47 @@ get_header( 'alluvia' );
 
 <?php get_template_part( 'partials/nav-alluvia' ); ?>
 
-<div class="alluvia-woo-wrap">
+<div class="alluvia-woo-wrap" style="padding-top:88px;min-height:60vh;background:var(--pearl)">
+<?php if ( function_exists('is_shop') && (is_shop() || is_product_category()) ) :
+  $uncategorized_id = absint(get_option('default_product_cat'));
+  $nav_cats = get_terms([
+    'taxonomy'   => 'product_cat',
+    'hide_empty' => true,
+    'orderby'    => 'name',
+    'order'      => 'ASC',
+    'exclude'    => $uncategorized_id ? [$uncategorized_id] : [],
+  ]);
+  $current_cat_obj = is_product_category() ? get_queried_object() : null;
+  $shop_base = function_exists('alluvia_shop_url') ? alluvia_shop_url() : get_option('shop_url');
+?>
+  <div class="alluvia-shop-wrap">
+    <aside class="alluvia-shop-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Categories</div>
+        <nav>
+          <a href="<?php echo esc_url($shop_base); ?>" class="sidebar-cat-link<?php echo (!$current_cat_obj) ? ' current' : ''; ?>">
+            All Peptides <span class="sidebar-cat-count"><?php echo wp_count_posts('product')->publish; ?></span>
+          </a>
+          <?php if (!is_wp_error($nav_cats) && $nav_cats) : foreach ($nav_cats as $nc) : ?>
+          <a href="<?php echo esc_url(get_term_link($nc)); ?>" class="sidebar-cat-link<?php echo ($current_cat_obj && $current_cat_obj->term_id === $nc->term_id) ? ' current' : ''; ?>">
+            <?php echo esc_html($nc->name); ?> <span class="sidebar-cat-count"><?php echo esc_html($nc->count); ?></span>
+          </a>
+          <?php endforeach; endif; ?>
+        </nav>
+      </div>
+      <a href="<?php echo esc_url($shop_base); ?>" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:8px;border:1.5px solid var(--pearl-dark);font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--text-mid);text-decoration:none;background:#fff;transition:.2s">
+        Reset Filters
+      </a>
+    </aside>
+    <div>
+      <?php woocommerce_content(); ?>
+    </div>
+  </div>
+<?php else : ?>
   <div class="alluvia-woo-inner">
     <?php woocommerce_content(); ?>
   </div>
+<?php endif; ?>
 </div>
 
 <footer class="alluvia-footer">
