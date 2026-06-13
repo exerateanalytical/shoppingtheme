@@ -15,15 +15,15 @@ get_header( 'alluvia' );
   .alluvia-topbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,26,39,.97);backdrop-filter:blur(20px);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
   .alluvia-topbar a.brand{color:#fff;text-decoration:none;font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:600;letter-spacing:.03em}
   .alluvia-topbar a.brand span{color:#0eaf9f}
-  .alluvia-topbar a.shop{color:#0a1a27;background:#0eaf9f;text-decoration:none;font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;padding:9px 20px;border-radius:100px}
+  .alluvia-topbar a.shop{color:#0a1a27;background:#0eaf9f;text-decoration:none;font-family:'Space Grotesk',system-ui,sans-serif;font-size:var(--fs-ui);font-weight:600;padding:9px 20px;border-radius:100px}
   .alluvia-index{max-width:880px;margin:0 auto;padding:130px 24px 90px;font-family:'Inter',system-ui,sans-serif}
   .alluvia-index .page-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,5vw,52px);font-weight:600;margin-bottom:36px}
   .alluvia-index article{padding:26px 0;border-bottom:1px solid #e8e0d2}
-  .alluvia-index h2{font-size:23px;margin:0 0 8px;font-weight:600;line-height:1.3}
+  .alluvia-index h2{font-size:var(--fs-h3);margin:0 0 8px;font-weight:600;line-height:1.3}
   .alluvia-index h2 a{color:#0a1a27;text-decoration:none}
   .alluvia-index h2 a:hover{color:#0a8174}
-  .alluvia-index .meta{font-size:13px;color:#8392a2;margin-bottom:12px;font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase}
-  .alluvia-index p{color:#44515f;line-height:1.75;margin:0 0 12px}
+  .alluvia-index .meta{font-size:var(--fs-ui);color:#8392a2;margin-bottom:12px;font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+  .alluvia-index p{color:#44515f;font-size:var(--fs-body);line-height:1.75;margin:0 0 12px}
   .alluvia-index .more{color:#0a8174;font-weight:600;text-decoration:none}
   .alluvia-index .pagination{margin-top:36px;display:flex;gap:8px;flex-wrap:wrap}
   .alluvia-index .pagination .page-numbers{border:1.5px solid #e8e0d2;border-radius:10px;min-width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#0a1a27;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600}

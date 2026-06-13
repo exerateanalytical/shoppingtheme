@@ -40,10 +40,10 @@
 .woocommerce div.product .woocommerce-product-gallery{margin:0;float:none;width:auto;position:sticky;top:110px}
 .woocommerce div.product .woocommerce-product-gallery__image img{border-radius:var(--radius-md);background:var(--pearl)}
 .woocommerce div.product .entry-summary{margin:0;float:none;width:auto}
-.woocommerce div.product .product_title{font-family:var(--font-display);font-size:clamp(30px,4vw,46px);font-weight:500;line-height:1.1;color:var(--navy);margin:0 0 10px}
+.woocommerce div.product .product_title{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:500;line-height:1.1;color:var(--navy);margin:0 0 10px}
 .woocommerce div.product p.price,
-.woocommerce div.product span.price{color:var(--navy);font-size:30px;font-weight:700;font-family:var(--font-ui);margin:14px 0}
-.woocommerce div.product p.price del{color:var(--text-light);font-size:20px;font-weight:400;margin-right:10px}
+.woocommerce div.product span.price{color:var(--navy);font-size:var(--fs-h2);font-weight:700;font-family:var(--font-ui);margin:14px 0}
+.woocommerce div.product p.price del{color:var(--text-light);font-size:var(--fs-label);font-weight:400;margin-right:10px}
 .woocommerce div.product p.price ins{text-decoration:none}
 .woocommerce div.product .woocommerce-product-details__short-description{font-size:15px;line-height:1.75;color:var(--text-mid);margin:18px 0}
 .woocommerce div.product .product_meta{font-family:var(--font-ui);font-size:12px;color:var(--text-light);margin-top:22px;border-top:1px solid var(--pearl-dark);padding-top:18px}
@@ -77,13 +77,13 @@
 .woocommerce .related,
 .woocommerce .upsells{grid-column:1/-1;margin-top:48px}
 .woocommerce .related>h2,
-.woocommerce .upsells>h2{font-family:var(--font-display);font-size:30px;font-weight:500;color:var(--navy);margin-bottom:24px}
+.woocommerce .upsells>h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:500;color:var(--navy);margin-bottom:24px}
 
 /* ---- Cart --------------------------------------------------------------- */
 .woocommerce .cart-collaterals,
 .woocommerce-page .cart-collaterals{width:100%;margin-top:32px;display:flex;justify-content:flex-end}
 .woocommerce .cart-collaterals .cart_totals{width:100%;max-width:420px}
-.woocommerce .cart_totals h2{font-family:var(--font-display);font-size:26px;font-weight:500;color:var(--navy);margin-bottom:16px}
+.woocommerce .cart_totals h2{font-family:var(--font-display);font-size:var(--fs-ui);font-weight:500;color:var(--navy);margin-bottom:16px}
 .woocommerce table.cart img{width:64px;height:64px;object-fit:cover;border-radius:var(--radius-sm)}
 .woocommerce a.remove{color:var(--coral,#db627a) !important;font-weight:700}
 .woocommerce a.remove:hover{background:var(--coral,#db627a) !important;color:#fff !important}

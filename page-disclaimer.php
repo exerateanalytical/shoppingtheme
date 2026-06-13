@@ -7,67 +7,39 @@
 add_action( 'wp_head', function() {
 ?>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0a1a27;--navy-soft:#213f5d;--teal:#0eaf9f;--teal-dark:#0a8174;--gold:#c6a253;--coral:#db627a;--pearl:#f5f0e7;--pearl-dark:#e8e0d2;--text-dark:#0a1a27;--text-mid:#44515f;--text-light:#8392a2;--radius:12px}
-html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(--pearl);color:var(--text-dark);line-height:1.6}
-.alluvia-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,26,39,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(14,175,159,0.15)}
-.nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
-.logo-mark{width:34px;height:34px;flex-shrink:0}
-.logo-text{display:flex;flex-direction:column;line-height:1}
-
-
-.nav-links{display:flex;gap:2rem;list-style:none}.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--teal)}
-.nav-right{display:flex;align-items:center;gap:1rem}
-.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;text-decoration:none}
-.cart-count{background:var(--navy);color:var(--teal);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
-.nav-account-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;text-decoration:none}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+/* PAGE HERO */
 .page-hero{background:linear-gradient(135deg,#5a0a18,#8b1a2e);padding:6rem 2rem 3.5rem;margin-top:72px}
 .page-hero-inner{max-width:860px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:1rem}.breadcrumb a{color:rgba(255,255,255,0.7);text-decoration:none}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:rgba(255,255,255,0.65);margin-bottom:1rem}.breadcrumb a{color:rgba(255,255,255,0.8);text-decoration:none}
 .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.75rem}
-.page-hero-subtitle{color:rgba(255,255,255,0.6);font-size:15px}
+.page-hero-subtitle{color:rgba(255,255,255,0.65);font-size:var(--fs-base)}
+
+/* PRIMARY BANNER */
 .primary-banner{background:linear-gradient(135deg,#7b1c1c,#5a0a18);border:2px solid rgba(255,255,255,0.15);border-radius:var(--radius);padding:2.5rem;max-width:860px;margin:0 auto 2rem;text-align:center}
 .primary-banner svg{color:#fff;margin-bottom:1rem}
-.primary-banner h2{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:600;color:#fff;margin-bottom:0.75rem}
-.primary-banner p{color:rgba(255,255,255,0.75);font-size:16px;line-height:1.8;max-width:640px;margin:0 auto}
+.primary-banner h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h2);font-weight:600;color:#fff;margin-bottom:0.75rem}
+.primary-banner p{color:rgba(255,255,255,0.75);font-size:var(--fs-body);line-height:1.85;max-width:640px;margin:0 auto}
+
+/* POLICY LAYOUT */
 .policy-wrap{max-width:860px;margin:0 auto;padding:2.5rem 2rem 5rem}
 .policy-section{background:#fff;border-radius:var(--radius);padding:2rem 2.25rem;margin-bottom:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
-.section-num{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c0405a;margin-bottom:0.25rem}
-.policy-section h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
-.policy-section p{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:0.9rem}
+.section-num{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-micro);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c0405a;margin-bottom:0.25rem}
+.policy-section h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h3);font-weight:600;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
+.policy-section p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.85;margin-bottom:0.9rem}
 .policy-section p:last-child{margin-bottom:0}
 .policy-section a{color:var(--teal-dark);text-decoration:none}.policy-section a:hover{text-decoration:underline}
 .warn-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem}
-.warn-list li{display:flex;align-items:flex-start;gap:0.6rem;font-size:14px;color:var(--text-mid)}.warn-list li svg{color:#c0405a;flex-shrink:0;margin-top:3px}
-.warn-box{background:rgba(192,64,90,0.06);border:1px solid rgba(192,64,90,0.2);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:14px;color:var(--text-mid)}.warn-box strong{color:var(--text-dark)}
-footer{background:#060e17;color:rgba(255,255,255,0.7);padding:4rem 2rem 2rem}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:13px;color:rgba(255,255,255,0.35)}
-.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}.footer-legal a{color:rgba(255,255,255,0.35);text-decoration:none}.footer-legal a:hover{color:var(--teal)}
-@media(max-width:900px){.nav-links{display:none}.nav-hamburger{display:flex}}
-@media(max-width:640px){
-  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
-  .section-title{font-size:clamp(28px,7vw,42px)!important}
-  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
-  .product-title{font-size:clamp(28px,7vw,38px)!important}
-  .section-desc,.post-lead,.featured-body{font-size:16px}
-  body,p,.article p{font-size:15px;line-height:1.75}
-  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
-.nav-links{display:none}.nav-hamburger{display:flex}}
+.warn-list li{display:flex;align-items:flex-start;gap:0.6rem;font-size:var(--fs-body);color:var(--text-mid);line-height:1.85}.warn-list li svg{color:#c0405a;flex-shrink:0;margin-top:3px}
+.warn-box{background:rgba(192,64,90,0.06);border:1px solid rgba(192,64,90,0.2);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:var(--fs-body);color:var(--text-mid)}.warn-box strong{color:var(--text-dark)}
 
-@media(max-width:400px){
-  .page-hero h1,.hero-title{font-size:32px!important}
-  .section-title{font-size:26px!important}
-  .btn-primary,.btn-ghost,.btn-help{font-size:14px;padding:13px 22px}
+@media(max-width:640px){
+  .page-hero h1{font-size:clamp(36px,9vw,52px)!important}
 }</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );
 ?>
-<nav class="alluvia-nav"><a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-<ul class="nav-links"><li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li><li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li><li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li></ul>
-<div class="nav-right"><a href="<?php echo esc_url(alluvia_cart_url()); ?>" class="nav-cart-btn"><i data-lucide="shopping-bag" width="16" height="16"></i> Cart <span class="cart-count">4</span></a><a href="<?php echo esc_url(alluvia_account_url()); ?>" class="nav-account-btn"><i data-lucide="user" width="18" height="18"></i></a><button class="nav-hamburger"><span></span><span></span><span></span></button></div></nav>
+<?php get_template_part( 'partials/nav-alluvia' ); ?>
 
 <div class="page-hero"><div class="page-hero-inner">
   <div class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Home</a><i data-lucide="chevron-right" width="14" height="14"></i><span>Disclaimer</span></div>

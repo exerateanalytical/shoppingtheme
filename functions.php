@@ -642,7 +642,7 @@ function alluvia_coa_product_tab_content() {
 
 add_action( 'woocommerce_single_product_summary', 'alluvia_product_ruo_notice', 25 );
 function alluvia_product_ruo_notice() {
-    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid #c6a253;border-left:4px solid #c6a253;background:#fbf7ef;border-radius:8px;font-size:13px;line-height:1.5;color:#3a3320;">'
+    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid #c6a253;border-left:4px solid #c6a253;background:#fbf7ef;border-radius:8px;font-size:15px;line-height:1.5;color:#3a3320;">'
         . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:#0a1a27;margin-bottom:4px;">For Research Use Only</strong>'
         . 'This product is supplied strictly for laboratory and in-vitro research by qualified researchers. '
         . 'It is <strong>not for human or animal consumption</strong> and is not a drug, food, cosmetic or dietary supplement.'
@@ -655,7 +655,7 @@ function alluvia_footer_disclaimer() {
     if ( is_admin() ) {
         return;
     }
-    echo '<div class="alluvia-footer-disclaimer" style="background:#0a1a27;color:#aeb9c4;font-size:12px;line-height:1.6;text-align:center;padding:18px 20px;border-top:2px solid #c6a253;">'
+    echo '<div class="alluvia-footer-disclaimer" style="background:#0a1a27;color:#aeb9c4;font-size:15px;line-height:1.6;text-align:center;padding:18px 20px;border-top:2px solid #c6a253;">'
         . '<div style="max-width:960px;margin:0 auto;">'
         . '<strong style="color:#fff;">Research Use Only &mdash; Not for Human Consumption.</strong> '
         . 'All products supplied by Alluvia Peptides are sold strictly as research-grade chemicals for in-vitro and laboratory research purposes only. '

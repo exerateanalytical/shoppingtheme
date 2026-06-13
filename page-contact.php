@@ -7,38 +7,7 @@
 add_action( 'wp_head', function() {
 ?>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
-    :root {
-      --navy: #0a1a27;
-      --navy-mid: #15283b;
-      --navy-soft: #213f5d;
-      --teal: #0eaf9f;
-      --teal-dark: #0a8174;
-      --gold: #c6a253;
-      --coral: #db627a;
-      --purple: #8a60c1;
-      --orange: #d4663c;
-      --mint: #58b488;
-      --sky: #6aa6c6;
-      --pearl: #f5f0e7;
-      --pearl-dark: #e8e0d2;
-      --white: #ffffff;
-      --text-dark: #0a1a27;
-      --text-mid: #44515f;
-      --text-light: #8392a2;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--pearl);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    /* ===== NAVIGATION ===== */
+    /* ===== NAV SCROLL STATE (page-contact specific) ===== */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -56,38 +25,6 @@ add_action( 'wp_head', function() {
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 1px 0 rgba(14,175,159, 0.15);
-    }
-
-    .nav-logo{display:flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none}
-.logo-mark{width:34px;height:34px;flex-shrink:0}
-.logo-text{display:flex;flex-direction:column;line-height:1}
-.nav-logo-word{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:600;color:#fff;letter-spacing:.05em}
-.nav-logo-sub{font-family:'Space Grotesk',system-ui,sans-serif;font-size:9px;font-weight:600;letter-spacing:.38em;color:#0eaf9f;text-transform:uppercase;margin-top:3px}
-
-    
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--teal); }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 14px;
     }
 
     .nav-icon-btn {
@@ -114,7 +51,7 @@ add_action( 'wp_head', function() {
       background: var(--teal);
       color: var(--navy);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 9px;
+      font-size: var(--fs-micro);
       font-weight: 700;
       width: 16px;
       height: 16px;
@@ -126,7 +63,7 @@ add_action( 'wp_head', function() {
 
     .btn-shop-now {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-ui);
       font-weight: 600;
       background: var(--teal);
       color: var(--navy);
@@ -230,8 +167,8 @@ add_action( 'wp_head', function() {
 
     .breadcrumb {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.45);
+      font-size: var(--fs-ui);
+      color: rgba(255, 255, 255, 0.65);
       margin-bottom: 22px;
       display: flex;
       align-items: center;
@@ -240,7 +177,7 @@ add_action( 'wp_head', function() {
     }
 
     .breadcrumb a {
-      color: rgba(255, 255, 255, 0.45);
+      color: rgba(255, 255, 255, 0.65);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -264,8 +201,8 @@ add_action( 'wp_head', function() {
 
     .page-hero p {
       font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: var(--fs-lead);
+      color: rgba(255, 255, 255, 0.70);
       max-width: 560px;
       margin: 0 auto;
       line-height: 1.75;
@@ -330,7 +267,7 @@ add_action( 'wp_head', function() {
 
     .info-card .info-note {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-base);
       color: var(--text-light);
     }
 
@@ -380,7 +317,7 @@ add_action( 'wp_head', function() {
 
     .form-group label {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-ui);
       font-weight: 500;
       color: var(--text-dark);
       letter-spacing: 0.2px;
@@ -390,7 +327,7 @@ add_action( 'wp_head', function() {
     .form-group select,
     .form-group textarea {
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: var(--fs-base);
       color: var(--text-dark);
       background: var(--pearl);
       border: 1.5px solid var(--pearl-dark);
@@ -430,7 +367,7 @@ add_action( 'wp_head', function() {
 
     .checkbox-group label {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-base);
       color: var(--text-mid);
       line-height: 1.6;
       cursor: pointer;
@@ -517,7 +454,7 @@ add_action( 'wp_head', function() {
 
     .sidebar-card h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
+      font-size: var(--fs-sm);
       font-weight: 600;
       color: var(--text-light);
       letter-spacing: 1.5px;
@@ -537,14 +474,14 @@ add_action( 'wp_head', function() {
       justify-content: space-between;
       align-items: center;
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-body);
     }
 
     .response-list .channel { color: var(--text-mid); }
 
     .response-list .time {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
+      font-size: var(--fs-micro);
       font-weight: 600;
       color: var(--teal-dark);
       background: rgba(14,175,159, 0.08);
@@ -563,7 +500,7 @@ add_action( 'wp_head', function() {
       display: flex;
       justify-content: space-between;
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-body);
       color: var(--text-mid);
       padding: 8px 0;
       border-bottom: 1px solid var(--pearl-dark);
@@ -577,7 +514,7 @@ add_action( 'wp_head', function() {
       align-items: center;
       gap: 7px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
+      font-size: var(--fs-micro);
       font-weight: 600;
       color: #16a34a;
       background: rgba(22, 163, 74, 0.1);
@@ -608,7 +545,7 @@ add_action( 'wp_head', function() {
 
     .sidebar-card.teal-bg p {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-body);
       color: rgba(10,26,39, 0.78);
       margin-bottom: 18px;
       line-height: 1.65;
@@ -616,7 +553,7 @@ add_action( 'wp_head', function() {
 
     .btn-ghost-white {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-ui);
       font-weight: 600;
       background: transparent;
       color: var(--navy);
@@ -637,7 +574,7 @@ add_action( 'wp_head', function() {
 
     .tracking-text {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-body);
       color: var(--text-mid);
       margin-bottom: 14px;
       line-height: 1.6;
@@ -712,7 +649,7 @@ add_action( 'wp_head', function() {
 
     .faq-question h4 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
+      font-size: var(--fs-body);
       font-weight: 500;
       color: var(--text-dark);
       flex: 1;
@@ -747,9 +684,9 @@ add_action( 'wp_head', function() {
     .faq-answer-inner {
       padding: 0 24px 22px;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: var(--fs-body);
       color: var(--text-mid);
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     .faq-answer-inner a { color: var(--teal-dark); text-decoration: none; }
@@ -808,8 +745,8 @@ add_action( 'wp_head', function() {
 
     .map-placeholder p {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.45);
+      font-size: var(--fs-body);
+      color: rgba(255, 255, 255, 0.70);
       position: relative;
       z-index: 1;
     }
@@ -836,8 +773,8 @@ add_action( 'wp_head', function() {
 
     .newsletter-inner p {
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: var(--fs-body);
+      color: rgba(255, 255, 255, 0.70);
       margin-bottom: 24px;
     }
 
@@ -878,158 +815,26 @@ add_action( 'wp_head', function() {
 
     .btn-subscribe:hover { background: var(--teal-dark); }
 
-    /* ===== FOOTER ===== */
-    footer {
-      background: #060e17;
-      padding: 72px 40px 0;
-    }
-
-    .footer-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 56px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--white);
-      text-decoration: none;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-
-    .footer-logo span {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 9px;
-      font-weight: 500;
-      color: var(--teal);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .footer-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.4);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
-
+    /* ===== FOOTER (page-contact specifics) ===== */
     .social-row {
       display: flex;
       gap: 10px;
     }
-
-    .social-btn {
-      width: 36px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.45);
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .social-btn:hover { background: var(--teal); color: var(--navy); }
-
-    .footer-col h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.3);
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .footer-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.45);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s, gap 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--teal); gap: 9px; }
-    .footer-links i { width: 14px; height: 14px; }
-
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer-bottom p {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.25);
-    }
-
-    .footer-bottom-links {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-bottom-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.25);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-bottom-links a:hover { color: var(--teal); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1100px) {
       .info-cards-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-layout { grid-template-columns: 1fr; }
       .contact-sidebar { display: grid; grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
 
     @media (max-width: 900px) {
-      .nav-links { display: none; }
       .hamburger { display: flex; }
       .btn-shop-now { display: none; }
       .contact-form-card { padding: 32px 24px; }
     }
 
     @media (max-width: 640px) {
-  .page-hero h1,.hero-title{font-size:clamp(36px,9vw,52px)!important}
-  .section-title{font-size:clamp(28px,7vw,42px)!important}
-  .featured-title,.post-title{font-size:clamp(24px,6vw,36px)!important}
-  .product-title{font-size:clamp(28px,7vw,38px)!important}
-  .section-desc,.post-lead,.featured-body{font-size:16px}
-  body,p,.article p{font-size:15px;line-height:1.75}
-  .still-help h2,.newsletter h2,.cta-title{font-size:clamp(24px,6vw,36px)!important}
-
       nav { padding: 0 20px; }
       .page-hero { padding: 120px 20px 60px; }
       .info-cards-section { padding: 52px 20px; }
@@ -1040,9 +845,6 @@ add_action( 'wp_head', function() {
       .map-section { padding: 0 20px 52px; }
       .newsletter-strip { padding: 44px 20px; }
       .newsletter-form { flex-direction: column; }
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-      footer { padding: 48px 20px 0; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form-card { padding: 28px 20px; }
     }
@@ -1056,43 +858,7 @@ add_action( 'wp_head', function() {
 }, 20 );
 get_header( 'alluvia' );
 ?>
-<!-- ===== NAVIGATION ===== -->
-  <nav id="mainNav">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-    <ul class="nav-links">
-      <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a></li>
-      <li><a href="<?php echo esc_url(home_url('/about/#science')); ?>">Science</a></li>
-      <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="nav-icon-btn" aria-label="Cart">
-        <i data-lucide="shopping-cart"></i>
-        <span class="cart-badge">3</span>
-      </button>
-      <a href="<?php echo esc_url(alluvia_account_url()); ?>" class="nav-icon-btn" aria-label="Account">
-        <i data-lucide="user"></i>
-      </a>
-      <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="btn-shop-now">Shop Now</a>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <i data-lucide="menu"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Nav Overlay -->
-  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
-    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
-      <i data-lucide="x"></i>
-    </button>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>">Products</a>
-    <a href="<?php echo esc_url(home_url('/about/#science')); ?>">Science</a>
-    <a href="<?php echo esc_url(home_url('/about/')); ?>">About</a>
-    <a href="#reviews">Reviews</a>
-    <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
-    <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="btn-shop-now" style="margin-top: 16px;">Shop Now</a>
-  </div>
+<?php get_template_part( 'partials/nav-alluvia' ); ?>
 
   <!-- ===== PAGE HERO ===== -->
   <section class="page-hero">
@@ -1417,35 +1183,6 @@ get_header( 'alluvia' );
   </footer>
 
   <script>
-    // ---- Nav scroll effect ----
-    var mainNav = document.getElementById('mainNav');
-    window.addEventListener('scroll', function () {
-      mainNav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // ---- Mobile hamburger ----
-    var hamburgerBtn = document.getElementById('hamburgerBtn');
-    var mobileNav = document.getElementById('mobileNav');
-    var mobileNavClose = document.getElementById('mobileNavClose');
-
-    hamburgerBtn.addEventListener('click', function () {
-      mobileNav.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-
-    mobileNavClose.addEventListener('click', function () {
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-
-    // Close mobile nav on link click
-    mobileNav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-
     // ---- Contact form submit ----
     var contactForm = document.getElementById('contactForm');
     var contactFormWrap = document.getElementById('contactFormWrap');
