@@ -70,12 +70,70 @@ add_action( 'wp_head', function() { ?>
 .account-main .woocommerce-Address{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
 .account-main .woocommerce-Address-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .account-main .woocommerce-Address-title h3{margin:0;font-size:16px}
-.account-main .col2-set{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.account-main form .form-row{margin-bottom:1rem}
-.account-main form .form-row label{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mid);display:block;margin-bottom:.35rem}
-.account-main form .form-row input,.account-main form .form-row select{border:1px solid var(--pearl-dark);border-radius:8px;padding:.65rem .9rem;font-family:var(--font-body);font-size:14px;color:var(--text-dark);outline:none;transition:border .2s;background:#fff;width:100%}
-.account-main form .form-row input:focus,.account-main form .form-row select:focus{border-color:var(--teal)}
-.account-main form button[type=submit],.account-main form .button{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:8px;padding:.7rem 2rem;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;letter-spacing:.04em}
+/* col2-set: WC address two-column — use flex not grid to avoid conflicts */
+.account-main .col2-set{display:flex;gap:1.5rem;flex-wrap:wrap}
+.account-main .col2-set .col-1,.account-main .col2-set .col-2{flex:1;min-width:240px}
+/* WooCommerce form layout — override floats with a clean approach */
+.account-main form{width:100%}
+.account-main form p.form-row,
+.account-main form .form-row{
+  float:none !important;
+  width:100% !important;
+  margin-bottom:1rem;
+  clear:none;
+  box-sizing:border-box;
+}
+/* Two-column rows: pair first+last side by side */
+.account-main form .form-row-first,
+.account-main form .form-row-last{
+  display:inline-block;
+  width:calc(50% - 8px) !important;
+  vertical-align:top;
+  float:none !important;
+}
+.account-main form .form-row-first{margin-right:16px}
+.account-main form .form-row-wide,.account-main form .clear{display:block;width:100% !important;clear:both}
+.account-main form .clear{height:0;overflow:hidden}
+.account-main form .form-row label,
+.account-main form p.form-row label{
+  font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mid);display:block;margin-bottom:.35rem
+}
+.account-main form .form-row input[type=text],
+.account-main form .form-row input[type=email],
+.account-main form .form-row input[type=tel],
+.account-main form .form-row input[type=password],
+.account-main form .form-row input[type=number],
+.account-main form .form-row select,
+.account-main form .form-row textarea{
+  border:1.5px solid var(--pearl-dark);border-radius:8px;padding:.65rem .9rem;
+  font-family:var(--font-body);font-size:14px;color:var(--text-dark);
+  outline:none;transition:border-color .2s;background:#fff;
+  width:100%;box-sizing:border-box;
+}
+.account-main form .form-row input:focus,
+.account-main form .form-row select:focus,
+.account-main form .form-row textarea:focus{border-color:var(--teal)}
+.account-main form .woocommerce-password-strength{font-size:12px;margin-top:4px;padding:4px 8px;border-radius:4px}
+.account-main form .show-password-input{position:relative}
+.account-main form button[type=submit],
+.account-main form input[type=submit],
+.account-main form .button{
+  background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);
+  border:none;border-radius:8px;padding:.7rem 2rem;
+  font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;
+  transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;
+  letter-spacing:.04em;text-decoration:none;
+}
+.account-main form button[type=submit]:hover,
+.account-main form .button:hover{background:var(--teal-dark)}
+/* Required star */
+.account-main form .required{color:var(--coral)}
+/* WC notices inside account */
+.account-main .woocommerce-notices-wrapper .woocommerce-message{margin-bottom:1rem}
+@media(max-width:640px){
+  .account-main form .form-row-first,
+  .account-main form .form-row-last{width:100% !important;display:block;margin-right:0}
+}
 .account-main .woocommerce-message,.account-main .woocommerce-info{background:rgba(14,175,159,.08);border-left:3px solid var(--teal);padding:.85rem 1rem;border-radius:0 8px 8px 0;margin-bottom:1.25rem;font-size:14px}
 .account-main .woocommerce-error{background:rgba(219,98,122,.07);border-left:3px solid var(--coral);padding:.85rem 1rem;border-radius:0 8px 8px 0;margin-bottom:1.25rem;font-size:14px}
 
