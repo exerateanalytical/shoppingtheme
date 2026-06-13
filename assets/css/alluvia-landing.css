@@ -1212,7 +1212,6 @@
   .about-visual { display: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
 }
@@ -1223,9 +1222,7 @@
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .hero-inner { padding: 100px 20px 60px; }
   .hero-stats { flex-direction: column; gap: 24px; }
-  .footer-grid { grid-template-columns: 1fr; }
   .trust-strip-inner { gap: 28px; }
   .cta-actions { flex-direction: column; width: 100%; }
   .email-form { max-width: 100%; }
-  .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
