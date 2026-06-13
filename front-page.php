@@ -222,10 +222,6 @@ add_action( 'wp_head', function() {
   .about-visual{display:none}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .testimonials-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
-  .nav-links{display:none}
-  .nav-hamburger{display:flex}
-  .nav-inner{padding:0 24px}
-  .container{padding:0 24px}
 }
 @media(max-width:640px){
   .categories-grid{grid-template-columns:1fr}
@@ -233,17 +229,14 @@ add_action( 'wp_head', function() {
   .hiw-icon-ring{width:88px;height:88px}
   .stats-grid{grid-template-columns:1fr 1fr}
   .hero-stats{gap:24px}
-  .footer-grid{grid-template-columns:1fr}
   .trust-inner{gap:24px}
   .cta-inner{padding:0 24px}
   .science-certs{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;align-items:flex-start}
   .about-section{padding:80px 0}
   .categories-section,.science-section,.testimonials-section,.cta-section,.hiw-section{padding:80px 0}
 }
 @media(max-width:380px){
   .hero-actions{flex-direction:column;align-items:stretch}
-  .btn-primary,.btn-ghost{justify-content:center}
 }
 </style>
 <?php
