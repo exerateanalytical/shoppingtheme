@@ -121,3 +121,19 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
   </a>
   <a href="<?php echo esc_url( alluvia_account_url() ); ?>" onclick="closeMobile()">My Account</a>
 </div>
+<script>
+(function(){
+  if(window.__alluviaNavInit) return;
+  window.__alluviaNavInit = true;
+  var nav = document.getElementById('nav');
+  var mNav = document.getElementById('mobileNav');
+  var hamburger = document.getElementById('hamburger');
+  var mClose = document.getElementById('mobileClose');
+  window.closeMobile = function(){ mNav.classList.remove('open'); document.body.style.overflow=''; };
+  if(hamburger) hamburger.onclick = function(){ mNav.classList.add('open'); document.body.style.overflow='hidden'; };
+  if(mClose) mClose.onclick = closeMobile;
+  window.addEventListener('scroll', function(){
+    if(nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+})();
+</script>
