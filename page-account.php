@@ -126,7 +126,7 @@ add_action( 'wp_head', function() {
 
 /* RESPONSIVE */
 @media(max-width:1100px){.stat-cards{grid-template-columns:1fr 1fr}.wishlist-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:900px){.account-layout{grid-template-columns:1fr}.account-sidebar{position:static}.sidebar-nav{display:flex;overflow-x:auto;padding:0.5rem}.sidebar-nav li a{white-space:nowrap;border-left:none;border-bottom:3px solid transparent}.sidebar-nav li a.active{border-bottom-color:var(--teal);border-left-color:transparent}.footer-grid{grid-template-columns:1fr 1fr}.address-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.account-layout{grid-template-columns:1fr}.account-sidebar{position:static}.sidebar-nav{display:flex;overflow-x:auto;padding:0.5rem}.sidebar-nav li a{white-space:nowrap;border-left:none;border-bottom:3px solid transparent}.sidebar-nav li a.active{border-bottom-color:var(--teal);border-left-color:transparent}.address-grid{grid-template-columns:1fr}}
 @media(max-width:640px){
 .stat-cards{grid-template-columns:1fr 1fr}.wishlist-grid{grid-template-columns:1fr}.profile-grid{grid-template-columns:1fr}.account-hero-inner{flex-direction:column;align-items:flex-start}.orders-table{font-size:var(--fs-base)}}</style>
 <?php

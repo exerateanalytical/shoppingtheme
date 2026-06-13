@@ -119,7 +119,6 @@ add_action( 'wp_head', function() {
 @media(max-width:900px){
   .cart-layout{grid-template-columns:1fr}
   .order-summary{position:static}
-  .footer-grid{grid-template-columns:1fr 1fr}
   .cart-header{display:none}
   .cart-item{grid-template-columns:1fr auto;gap:0.75rem}
   .cart-item .item-price,.cart-item .item-total{display:none}
