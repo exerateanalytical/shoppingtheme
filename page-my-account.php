@@ -66,20 +66,38 @@ add_action( 'wp_head', function() { ?>
    only restyling appearance + widths.
 ───────────────────────────────────────────── */
 .account-layout .woocommerce-MyAccount-navigation{display:none}
-.account-layout .woocommerce-MyAccount-content{font-family:var(--font-body);font-size:15px;color:var(--text-dark)}
-.account-layout .woocommerce-MyAccount-content h2,.account-layout .woocommerce-MyAccount-content h3{font-family:var(--font-display);color:var(--navy)}
+.account-layout .woocommerce-MyAccount-content{font-family:var(--font-body);font-size:15px;color:var(--text-dark);width:100%}
+/* Cap ALL headings inside account content so nothing renders giant */
+.account-layout .woocommerce-MyAccount-content h1{font-family:var(--font-display);color:var(--navy);font-size:26px;font-weight:600;margin:0 0 .75rem}
+.account-layout .woocommerce-MyAccount-content h2{font-family:var(--font-display);color:var(--navy);font-size:22px;font-weight:600;margin:0 0 .75rem}
+.account-layout .woocommerce-MyAccount-content h3{font-family:var(--font-display);color:var(--navy);font-size:18px;font-weight:600;margin:0 0 .5rem}
+.account-layout .woocommerce-MyAccount-content p{margin:0 0 1rem}
 .account-layout table.woocommerce-orders-table,.account-layout table.shop_table{width:100%;border-collapse:collapse;font-size:14px}
 .account-layout table.woocommerce-orders-table th,.account-layout table.shop_table th{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--pearl-dark)}
 .account-layout table.woocommerce-orders-table td,.account-layout table.shop_table td{padding:1rem .75rem;border-bottom:1px solid var(--pearl);vertical-align:middle}
-.account-layout table .button{display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;font-family:var(--font-ui);font-size:12px;font-weight:700;background:var(--navy);color:#fff;text-decoration:none;transition:.2s}
-.account-layout table .button:hover{background:var(--teal);color:var(--navy)}
-.account-layout .woocommerce-Address{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
-.account-layout .woocommerce-Address-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
-.account-layout .woocommerce-Address-title h3{margin:0;font-size:16px}
+/* Tables scroll horizontally instead of overflowing on small screens */
+.account-layout .woocommerce-orders-table,.account-layout .woocommerce-MyAccount-downloads,.account-layout .shop_table{display:table}
+.account-layout .woocommerce-MyAccount-content .woocommerce-table--order-downloads,
+.account-layout .woocommerce-MyAccount-content .my_account_orders{overflow-x:auto;display:block;width:100%}
+.account-layout table .button,.account-layout table .woocommerce-button{display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;font-family:var(--font-ui);font-size:12px;font-weight:700;background:var(--navy);color:#fff;text-decoration:none;transition:.2s;white-space:nowrap}
+.account-layout table .button:hover,.account-layout table .woocommerce-button:hover{background:var(--teal);color:var(--navy)}
 
-/* col2-set (addresses / login+register two columns) — flex, wraps on mobile */
-.account-layout .col2-set,.account-layout .u-columns{display:flex;gap:1.5rem;flex-wrap:wrap;width:100%}
-.account-layout .col2-set>div,.account-layout .u-columns>div{flex:1 1 280px;min-width:0}
+/* ── Addresses ── */
+.account-layout .woocommerce-Address{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+/* Title can be <header>/<h2>/<h3> across WC versions — target all of them */
+.account-layout .woocommerce-Address-title,
+.account-layout .woocommerce-Address .title{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.account-layout .woocommerce-Address-title h2,
+.account-layout .woocommerce-Address-title h3,
+.account-layout .woocommerce-Address .title h2,
+.account-layout .woocommerce-Address .title h3{margin:0;font-size:17px;font-weight:600;line-height:1.2}
+.account-layout .woocommerce-Address-title a.edit,
+.account-layout .woocommerce-Address .title a.edit{flex:0 0 auto;font-family:var(--font-ui);font-size:12px;font-weight:700;color:var(--teal-dark);text-decoration:none;white-space:nowrap}
+.account-layout .woocommerce-Address address{font-style:normal;font-size:14px;line-height:1.7;color:var(--text-mid)}
+
+/* col2-set (addresses listing / login+register) — clean flex, no float cramming */
+.account-layout .col2-set,.account-layout .u-columns,.account-layout .woocommerce-Addresses{display:flex;gap:1.5rem;flex-wrap:wrap;width:100%;float:none}
+.account-layout .col2-set>div,.account-layout .u-columns>div,.account-layout .woocommerce-Addresses>div{flex:1 1 300px;min-width:0;float:none!important;width:auto!important}
 
 /* Clearfix so WooCommerce's floated form-rows never collapse/overlap */
 .account-layout form::after{content:"";display:table;clear:both}
@@ -185,11 +203,13 @@ if ( $current_user->first_name ) $initials .= strtoupper( substr( $current_user-
 if ( $current_user->last_name )  $initials .= strtoupper( substr( $current_user->last_name,  0, 1 ) );
 if ( ! $initials ) $initials = strtoupper( substr( $display_name, 0, 2 ) );
 
-// Active endpoint for nav highlighting
+// Active endpoint for nav highlighting.
+// NOTE: get_query_var() returns '' for endpoints like edit-address (falsy),
+// so we use is_wc_endpoint_url() which is reliable even for empty values.
 $active_ep = 'dashboard';
-if ( function_exists( 'WC' ) && WC()->query ) {
-    foreach ( WC()->query->get_query_vars() as $key => $var ) {
-        if ( get_query_var( $var ) ) { $active_ep = $key; break; }
+if ( function_exists( 'is_wc_endpoint_url' ) ) {
+    foreach ( array( 'orders', 'downloads', 'edit-address', 'edit-account', 'view-order', 'payment-methods', 'add-payment-method', 'lost-password', 'customer-logout' ) as $ep ) {
+        if ( is_wc_endpoint_url( $ep ) ) { $active_ep = $ep; break; }
     }
 }
 $account_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'myaccount' ) : home_url( '/my-account/' );
