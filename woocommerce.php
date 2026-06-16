@@ -8,7 +8,17 @@ add_action( 'wp_head', function() {
 /* WooCommerce page supplements — alluvia-base.css owns nav/footer/buttons/global woo */
 
 /* ── Content wrapper ── */
-.alluvia-woo-wrap { padding-top: 88px; min-height: 60vh; background: var(--pearl); }
+.alluvia-woo-wrap { padding-top: 88px; min-height: 60vh; background: transparent; }
+/* Shop/archive loose text sits on the navy platform background — keep it light */
+.alluvia-woo-wrap .woocommerce-products-header__title,
+.alluvia-woo-wrap .page-title,
+.alluvia-woo-inner h1 { color: #fff; }
+.alluvia-woo-wrap .woocommerce-result-count,
+.alluvia-woo-wrap .term-description,
+.alluvia-woo-wrap .woocommerce-ordering label { color: rgba(255,255,255,0.7); }
+.alluvia-woo-wrap .woocommerce-ordering select { background: #fff; color: var(--navy); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 9px 16px; }
+.alluvia-woo-wrap .woocommerce-breadcrumb { color: rgba(255,255,255,0.6); }
+.alluvia-woo-wrap .woocommerce-breadcrumb a { color: var(--teal); }
 .alluvia-woo-inner { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
 .alluvia-woo-inner h1,
 .alluvia-woo-inner .page-title {
@@ -165,7 +175,7 @@ get_header( 'alluvia' );
 
 <?php get_template_part( 'partials/nav-alluvia' ); ?>
 
-<div class="alluvia-woo-wrap" style="padding-top:88px;min-height:60vh;background:var(--pearl)">
+<div class="alluvia-woo-wrap" style="padding-top:88px;min-height:60vh;background:transparent">
 <?php if ( function_exists('is_shop') && (is_shop() || is_product_category()) ) :
   $uncategorized_id = absint(get_option('default_product_cat'));
   $nav_cats = get_terms([
