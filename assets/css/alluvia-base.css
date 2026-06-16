@@ -93,14 +93,18 @@ body {
   overflow-x: hidden;
 }
 
-/* Universal platform background — every page carries the `alluvia-site` body
-   class (added in header-alluvia.php). Higher specificity than a bare `body{}`
-   rule, so this stays the single source of truth for the page background and
-   no per-template style can accidentally override it. Hero/section blocks set
-   their own backgrounds on their own elements, not on <body>. */
+/* Universal platform background — matches the landing page (navy).
+   Every page carries the `alluvia-site` body class (added in header-alluvia.php),
+   giving higher specificity than a bare `body{}` rule, so this is the single
+   source of truth for the page background. Light content blocks (white/pearl
+   cards and sections) keep their own backgrounds and dark text on top of this
+   navy base — the same navy-base + light-cards pattern the landing page uses.
+   The fixed header always clears 72px below it. */
 body.alluvia-site {
-  background: var(--pearl);
+  background: var(--navy);
 }
+/* Push fixed-header content clear of the always-solid nav on templates that
+   don't already start with a full-height hero. Heroes use their own top padding. */
 
 p {
   font-size: var(--fs-body);
@@ -128,14 +132,22 @@ a:hover { color: var(--teal-dark); }
 .icon-2xl { width: 40px; height: 40px; stroke-width: 1.4; flex-shrink: 0; }
 
 /* ── Shared nav (used on ALL pages) ── */
-.alluvia-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 18px 0; transition: var(--transition); }
-.alluvia-nav.scrolled,
-.alluvia-nav.solid {
+/* Distinct, consistent header on EVERY page — always a solid navy bar
+   (previously transparent until scroll, which made it invisible on light pages). */
+.alluvia-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 14px 0;
+  transition: var(--transition);
   background: rgba(10,26,39,0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(14,175,159,0.18);
+  box-shadow: 0 2px 30px rgba(0,0,0,0.30);
+}
+.alluvia-nav.scrolled,
+.alluvia-nav.solid {
   padding: 12px 0;
-  box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 34px rgba(0,0,0,0.40);
 }
 .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; }
 .nav-logo { display: flex; flex-direction: row; align-items: center; gap: 11px; text-decoration: none; }
