@@ -155,7 +155,8 @@ a:hover { color: var(--teal-dark); }
 .logo-text { display: flex; flex-direction: column; line-height: 1; }
 .nav-logo-word { font-family: var(--font-display); font-size: 28px; font-weight: 600; color: #fff; letter-spacing: 0.05em; }
 .nav-logo-sub  { font-family: var(--font-ui); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.35em; color: var(--teal); text-transform: uppercase; margin-top: 3px; }
-.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+@media (max-width: 1180px) { .nav-links { gap: 16px; } .nav-links a { font-size: 11px; } }
 .nav-links a { font-family: var(--font-ui); font-size: var(--fs-ui); font-weight: 500; letter-spacing: 0.06em; color: rgba(255,255,255,0.8); text-decoration: none; text-transform: uppercase; transition: color 0.25s; }
 .nav-links a:hover,
 .nav-links a.active { color: var(--teal); }

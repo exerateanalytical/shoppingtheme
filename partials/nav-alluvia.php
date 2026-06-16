@@ -78,7 +78,10 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
       </li>
       <li><a href="<?php echo esc_url( home_url('/') ); ?>#science">Science</a></li>
       <li><a href="<?php echo esc_url( home_url('/about/') ); ?>">About</a></li>
+      <li><a href="<?php echo esc_url( get_option('page_for_posts') ? get_permalink( get_option('page_for_posts') ) : home_url('/blog/') ); ?>">Blog</a></li>
       <li><a href="<?php echo esc_url( function_exists('alluvia_reviews_url') ? alluvia_reviews_url() : home_url('/reviews/') ); ?>">Reviews</a></li>
+      <li><a href="<?php echo esc_url( home_url('/faq/') ); ?>">FAQ</a></li>
+      <li><a href="<?php echo esc_url( home_url('/coa-library/') ); ?>">COA</a></li>
       <li><a href="<?php echo esc_url( home_url('/contact/') ); ?>">Contact</a></li>
     </ul>
 
@@ -115,6 +118,10 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
   <a href="<?php echo esc_url( alluvia_cat_url('hair-growth-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Hair Growth</a>
   <a href="<?php echo esc_url( alluvia_cat_url('research-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Research</a>
   <a href="<?php echo esc_url( home_url('/about/') ); ?>" onclick="closeMobile()">About</a>
+  <a href="<?php echo esc_url( get_option('page_for_posts') ? get_permalink( get_option('page_for_posts') ) : home_url('/blog/') ); ?>" onclick="closeMobile()">Blog</a>
+  <a href="<?php echo esc_url( function_exists('alluvia_reviews_url') ? alluvia_reviews_url() : home_url('/reviews/') ); ?>" onclick="closeMobile()">Reviews</a>
+  <a href="<?php echo esc_url( home_url('/faq/') ); ?>" onclick="closeMobile()">FAQ</a>
+  <a href="<?php echo esc_url( home_url('/coa-library/') ); ?>" onclick="closeMobile()">COA Library</a>
   <a href="<?php echo esc_url( home_url('/contact/') ); ?>" onclick="closeMobile()">Contact</a>
   <a href="<?php echo esc_url( alluvia_cart_url() ); ?>" onclick="closeMobile()">
     Cart<?php if ( $cart_count > 0 ) echo ' (' . esc_html($cart_count) . ')'; ?>
