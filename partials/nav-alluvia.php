@@ -25,6 +25,7 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
     </a>
 
     <ul class="nav-links">
+      <li><a href="<?php echo esc_url( home_url('/') ); ?>">Home</a></li>
       <li class="has-dropdown">
         <a href="<?php echo esc_url( alluvia_shop_url() ); ?>">
           Products <i data-lucide="chevron-down" style="width:13px;height:13px;vertical-align:middle;margin-left:2px;transition:transform .25s"></i>
@@ -109,6 +110,7 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">
     <i data-lucide="x" style="width:28px;height:28px;color:white"></i>
   </button>
+  <a href="<?php echo esc_url( home_url('/') ); ?>" onclick="closeMobile()">Home</a>
   <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" onclick="closeMobile()">All Products</a>
   <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Medical Peptides</a>
   <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Skincare</a>
