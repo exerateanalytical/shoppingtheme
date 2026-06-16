@@ -93,6 +93,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Universal platform background — every page carries the `alluvia-site` body
+   class (added in header-alluvia.php). Higher specificity than a bare `body{}`
+   rule, so this stays the single source of truth for the page background and
+   no per-template style can accidentally override it. Hero/section blocks set
+   their own backgrounds on their own elements, not on <body>. */
+body.alluvia-site {
+  background: var(--pearl);
+}
+
 p {
   font-size: var(--fs-body);
   line-height: 1.75;
