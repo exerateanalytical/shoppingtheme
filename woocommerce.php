@@ -175,8 +175,14 @@ add_action( 'wp_head', function() {
 .sidebar-price-input:focus{border-color:var(--teal)}
 .sidebar-apply-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:10px;border-radius:var(--radius-sm);border:none;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
 .sidebar-apply-btn:hover{background:var(--teal-dark)}
+/* Shop product grid: 4 columns on desktop (scoped to the shop archive so
+   related/upsell grids elsewhere keep their own auto-fill layout). */
+.alluvia-shop-wrap ul.products{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1200px){.alluvia-shop-wrap ul.products{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.alluvia-shop-wrap ul.products{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:1000px){.alluvia-shop-wrap{grid-template-columns:200px 1fr;padding:32px 24px 80px}}
-@media(max-width:768px){.alluvia-shop-wrap{grid-template-columns:1fr;padding:28px 20px 60px}.alluvia-shop-sidebar{display:none}}
+@media(max-width:768px){.alluvia-shop-wrap{grid-template-columns:1fr;padding:28px 20px 60px}.alluvia-shop-sidebar{display:none}.alluvia-shop-wrap ul.products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.alluvia-shop-wrap ul.products{grid-template-columns:repeat(2,1fr);gap:14px}}
 </style>';
 }, 20 );
 

@@ -331,6 +331,9 @@ function alluvia_woo_loop_hooks() {
 }
 add_filter( 'loop_shop_per_page', function () { return 24; }, 20 );
 
+/* Hide the WooCommerce shop/archive page title ("Shop" heading). */
+add_filter( 'woocommerce_show_page_title', '__return_false' );
+
 /* ═══════════════════════════════════════
    WOOCOMMERCE: Sidebar price-range filter
    Applies the ?min_price / ?max_price query params from the shop sidebar to the
