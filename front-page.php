@@ -245,33 +245,90 @@ get_header( 'alluvia' );
 <?php get_template_part( 'partials/nav-alluvia' ); ?>
 
 
+<style>
+/* Hero slider */
+.hero-content{position:relative;z-index:2}
+.hero-slider{position:relative}
+.hero-slide{display:none}
+.hero-slide.active{display:block;animation:heroSlideIn .55s cubic-bezier(.23,1,.32,1)}
+@keyframes heroSlideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero-slider-nav{display:flex;align-items:center;gap:16px;margin-top:30px}
+.hero-dots{display:flex;gap:8px}
+.hero-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);border:none;cursor:pointer;padding:0;transition:all .3s}
+.hero-dot:hover{background:rgba(255,255,255,.45)}
+.hero-dot.active{background:var(--teal);width:26px;border-radius:5px}
+.hero-arrow{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;flex-shrink:0}
+.hero-arrow:hover{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+@media(max-width:640px){.hero-slider-nav{gap:12px;margin-top:22px}.hero-arrow{width:36px;height:36px}}
+</style>
+
 <!-- HERO -->
 <section class="hero" id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-gradient"></div>
   <div class="hero-inner">
-    <div>
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        <span class="hero-badge-text">Bioactive Peptide Science</span>
+    <div class="hero-content">
+      <div class="hero-slider" id="heroSlider">
+
+        <!-- Slide 1 — Longevity -->
+        <div class="hero-slide active">
+          <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Bioactive Peptide Science</span></div>
+          <h1 class="hero-title">Science That Makes<br>You <em>Younger</em></h1>
+          <p class="hero-desc">Pharmaceutical-grade bioactive peptides backed by peer-reviewed research — formulated for real, measurable results in skin, body, and longevity.</p>
+          <div class="hero-actions">
+            <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="btn-primary">Explore Products <i data-lucide="arrow-right" class="icon-sm"></i></a>
+            <a href="#science" class="btn-ghost"><i data-lucide="flask-conical" class="icon-sm"></i> Our Science</a>
+          </div>
+        </div>
+
+        <!-- Slide 2 — Medical / Recovery -->
+        <div class="hero-slide">
+          <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Tissue Repair &amp; Recovery</span></div>
+          <h1 class="hero-title">Repair. Recover.<br><em>Rebuild.</em></h1>
+          <p class="hero-desc">BPC-157, TB-500 and recovery peptides engineered to accelerate healing of tendons, gut lining and soft tissue — the gold standard for repair.</p>
+          <div class="hero-actions">
+            <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" class="btn-primary">Shop Medical Peptides <i data-lucide="arrow-right" class="icon-sm"></i></a>
+          </div>
+        </div>
+
+        <!-- Slide 3 — Skincare -->
+        <div class="hero-slide">
+          <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Dermal Renewal</span></div>
+          <h1 class="hero-title">Radiance From<br><em>Within</em></h1>
+          <p class="hero-desc">Copper peptides and matrikines like GHK-Cu that stimulate collagen synthesis, firmness and visible skin renewal at the dermal matrix.</p>
+          <div class="hero-actions">
+            <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" class="btn-primary">Shop Skincare <i data-lucide="arrow-right" class="icon-sm"></i></a>
+          </div>
+        </div>
+
+        <!-- Slide 4 — Sports / Performance -->
+        <div class="hero-slide">
+          <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Performance Engineered</span></div>
+          <h1 class="hero-title">Peak Performance,<br><em>Engineered</em></h1>
+          <p class="hero-desc">Growth-hormone secretagogues and recovery stacks for lean mass, deeper sleep and faster training adaptation — cleanly dosed.</p>
+          <div class="hero-actions">
+            <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" class="btn-primary">Shop Sports &amp; Recovery <i data-lucide="arrow-right" class="icon-sm"></i></a>
+          </div>
+        </div>
+
+        <!-- Slide 5 — Quality / COA -->
+        <div class="hero-slide">
+          <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Verified Purity</span></div>
+          <h1 class="hero-title">Proven Pure,<br><em>Every Batch</em></h1>
+          <p class="hero-desc">HPLC ≥99% verified with a Certificate of Analysis on every lot, cold-chain shipped to preserve peptide integrity end to end.</p>
+          <div class="hero-actions">
+            <a href="<?php echo esc_url( home_url('/coa-library/') ); ?>" class="btn-primary">View COA Library <i data-lucide="arrow-right" class="icon-sm"></i></a>
+          </div>
+        </div>
+
       </div>
-      <h1 class="hero-title">
-        Science That Makes<br>You <em class="hero-typewriter">Younger</em>
-      </h1>
-      <p class="hero-desc">
-        Alluvia Peptides delivers pharmaceutical-grade bioactive peptides backed by
-        peer-reviewed research — formulated for real, measurable results in skin, body, and longevity.
-      </p>
-      <div class="hero-actions">
-        <a href="#categories" class="btn-primary">
-          Explore Products
-          <i data-lucide="arrow-right" class="icon-sm"></i>
-        </a>
-        <a href="#science" class="btn-ghost">
-          <i data-lucide="flask-conical" class="icon-sm"></i>
-          Our Science
-        </a>
+
+      <div class="hero-slider-nav">
+        <button class="hero-arrow" data-dir="-1" aria-label="Previous slide"><i data-lucide="chevron-left" style="width:18px;height:18px"></i></button>
+        <div class="hero-dots" id="heroDots"></div>
+        <button class="hero-arrow" data-dir="1" aria-label="Next slide"><i data-lucide="chevron-right" style="width:18px;height:18px"></i></button>
       </div>
+
       <div class="hero-stats">
         <div class="stat-item">
           <span class="stat-number"><span data-count="98" data-suffix="%">98%</span></span>
@@ -692,6 +749,36 @@ lucide.createIcons();
   else{el.textContent=w.substring(0,ci-1);ci--;if(ci===0){del=false;idx=(idx+1)%words.length;delay=300;}else delay=50;}
   setTimeout(t,delay);}
   setTimeout(t,1000);
+})();
+
+// Hero slider (5 slides, autoplay, dots + arrows, pause on hover)
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.hero-slide'));
+  var dotsWrap=document.getElementById('heroDots');
+  if(slides.length<2||!dotsWrap)return;
+  var i=0,timer;
+  slides.forEach(function(_,idx){
+    var b=document.createElement('button');
+    b.className='hero-dot'+(idx===0?' active':'');
+    b.setAttribute('aria-label','Go to slide '+(idx+1));
+    b.addEventListener('click',function(){go(idx);reset();});
+    dotsWrap.appendChild(b);
+  });
+  var dots=[].slice.call(dotsWrap.children);
+  function go(n){
+    slides[i].classList.remove('active');dots[i].classList.remove('active');
+    i=(n+slides.length)%slides.length;
+    slides[i].classList.add('active');dots[i].classList.add('active');
+    if(window.lucide&&lucide.createIcons)lucide.createIcons();
+  }
+  function next(){go(i+1);}
+  document.querySelectorAll('.hero-arrow').forEach(function(a){
+    a.addEventListener('click',function(){go(i+parseInt(a.getAttribute('data-dir'),10));reset();});
+  });
+  function reset(){clearInterval(timer);timer=setInterval(next,6000);}
+  reset();
+  var slider=document.getElementById('heroSlider');
+  if(slider){slider.addEventListener('mouseenter',function(){clearInterval(timer);});slider.addEventListener('mouseleave',reset);}
 })();
 
 // DNA Rungs
