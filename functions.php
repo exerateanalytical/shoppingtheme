@@ -124,11 +124,12 @@ function shopping_widgets_init() {
 function shopping_init() {
     if ( ! is_admin() ) {
         wp_enqueue_script( 'tinynav', get_stylesheet_directory_uri() . '/js/tinynav.js', array( 'jquery' ) );
+        $base_css_path = get_stylesheet_directory() . '/assets/css/alluvia-base.css';
         wp_enqueue_style(
             'alluvia-base',
             get_stylesheet_directory_uri() . '/assets/css/alluvia-base.css',
             array(),
-            '1.0.0'
+            file_exists( $base_css_path ) ? filemtime( $base_css_path ) : '1.0.0' // cache-bust on every edit
         );
     }
 }
@@ -307,9 +308,12 @@ function alluvia_global_assets() {
         || ( function_exists( 'is_account_page' ) && is_account_page() );
     if ( $is_woo ) {
         $base = get_stylesheet_directory_uri();
-        $ver  = wp_get_theme()->get( 'Version' );
-        wp_enqueue_style( 'alluvia-commerce', $base . '/assets/css/alluvia-commerce.css', array(), $ver );
-        wp_enqueue_script( 'alluvia-commerce', $base . '/assets/js/alluvia-commerce.js', array(), $ver, true );
+        $dir  = get_stylesheet_directory();
+        $css_path = $dir . '/assets/css/alluvia-commerce.css';
+        $js_path  = $dir . '/assets/js/alluvia-commerce.js';
+        // filemtime() versions cache-bust automatically on every file edit.
+        wp_enqueue_style( 'alluvia-commerce', $base . '/assets/css/alluvia-commerce.css', array(), file_exists( $css_path ) ? filemtime( $css_path ) : '1.0.0' );
+        wp_enqueue_script( 'alluvia-commerce', $base . '/assets/js/alluvia-commerce.js', array(), file_exists( $js_path ) ? filemtime( $js_path ) : '1.0.0', true );
     }
 }
 

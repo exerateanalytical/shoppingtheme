@@ -156,14 +156,14 @@ add_action( 'wp_head', function() {
 /* ── Shop layout with sidebar ── */
 .alluvia-shop-wrap { max-width: 1340px; margin: 0 auto; padding: 48px 40px 100px; display: grid; grid-template-columns: 260px 1fr; gap: 40px; }
 .alluvia-shop-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 80px; align-self: start; }
-.sidebar-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--pearl-dark); }
+.sidebar-card { background: var(--white); border-radius: var(--radius-md); padding: 20px; border: 1px solid var(--pearl-dark); }
 .sidebar-card-title { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; }
-.sidebar-cat-link { display: flex; align-items: center; justify-content: space-between; padding: 9px 10px; border-radius: 8px; font-size: 14px; font-family: var(--font-ui); font-weight: 500; color: var(--text-dark); text-decoration: none; transition: background .2s; }
+.sidebar-cat-link { display: flex; align-items: center; justify-content: space-between; padding: 9px 10px; border-radius: var(--radius-sm); font-size: 14px; font-family: var(--font-ui); font-weight: 500; color: var(--text-dark); text-decoration: none; transition: background .2s; }
 .sidebar-cat-link:hover { background: var(--pearl); }
 .sidebar-cat-link.current { background: rgba(14,175,159,.08); color: var(--teal); font-weight: 600; }
 .sidebar-cat-count { font-size: 11px; background: var(--pearl-dark); border-radius: 100px; padding: 2px 7px; color: var(--text-light); }
 .sidebar-cat-link.current .sidebar-cat-count { background: rgba(14,175,159,.15); color: var(--teal); }
-.sidebar-reset-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:8px;border:1.5px solid var(--pearl-dark);font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--text-mid);text-decoration:none;background:#fff;transition:.2s}
+.sidebar-reset-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:var(--radius-sm);border:1.5px solid var(--pearl-dark);font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--text-mid);text-decoration:none;background:var(--white);transition:.2s}
 .sidebar-reset-btn:hover{border-color:var(--navy);color:var(--navy)}
 @media(max-width:1000px){.alluvia-shop-wrap{grid-template-columns:200px 1fr;padding:32px 24px 80px}}
 @media(max-width:768px){.alluvia-shop-wrap{grid-template-columns:1fr;padding:28px 20px 60px}.alluvia-shop-sidebar{display:none}}
@@ -191,13 +191,17 @@ get_header( 'alluvia' );
   <div class="alluvia-shop-wrap">
     <aside class="alluvia-shop-sidebar">
       <div class="sidebar-card">
-        <div class="sidebar-card-title">Categories</div>
-        <nav>
-          <a href="<?php echo esc_url($shop_base); ?>" class="sidebar-cat-link<?php echo (!$current_cat_obj) ? ' current' : ''; ?>">
-            All Peptides <span class="sidebar-cat-count"><?php echo wp_count_posts('product')->publish; ?></span>
+        <div class="sidebar-card-title" id="shop-cat-heading">Categories</div>
+        <nav aria-labelledby="shop-cat-heading">
+          <a href="<?php echo esc_url($shop_base); ?>" class="sidebar-cat-link<?php echo (!$current_cat_obj) ? ' current' : ''; ?>"<?php echo (!$current_cat_obj) ? ' aria-current="page"' : ''; ?>>
+            All Peptides <span class="sidebar-cat-count"><?php echo (int) wp_count_posts('product')->publish; ?></span>
           </a>
-          <?php if (!is_wp_error($nav_cats) && $nav_cats) : foreach ($nav_cats as $nc) : ?>
-          <a href="<?php echo esc_url(get_term_link($nc)); ?>" class="sidebar-cat-link<?php echo ($current_cat_obj && $current_cat_obj->term_id === $nc->term_id) ? ' current' : ''; ?>">
+          <?php if (!is_wp_error($nav_cats) && $nav_cats) : foreach ($nav_cats as $nc) :
+            $term_url = get_term_link($nc);
+            if (is_wp_error($term_url)) { continue; }
+            $is_current = $current_cat_obj && (int) $current_cat_obj->term_id === (int) $nc->term_id;
+          ?>
+          <a href="<?php echo esc_url($term_url); ?>" class="sidebar-cat-link<?php echo $is_current ? ' current' : ''; ?>"<?php echo $is_current ? ' aria-current="page"' : ''; ?>>
             <?php echo esc_html($nc->name); ?> <span class="sidebar-cat-count"><?php echo esc_html($nc->count); ?></span>
           </a>
           <?php endforeach; endif; ?>
