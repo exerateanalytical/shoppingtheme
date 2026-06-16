@@ -365,6 +365,15 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-drop-icon { width: 28px; height: 28px; border-radius: var(--radius-sm); background: var(--pearl); display: flex; align-items: center; justify-content: center; color: var(--teal); flex-shrink: 0; }
 .nav-dropdown .nav-drop-item:hover .nav-drop-icon { background: rgba(14,175,159,0.14); }
 
+/* ── Product review reactions (lucide icons) ── */
+.review-reactions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.review-reaction { display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px; border: 1.5px solid var(--pearl-dark); border-radius: 100px; background: #fff; font-family: var(--font-ui); font-size: 12px; font-weight: 600; color: var(--text-mid); cursor: pointer; transition: all 0.18s; line-height: 1; }
+.review-reaction:hover:not(:disabled) { border-color: var(--teal); color: var(--teal-dark); transform: translateY(-1px); }
+.review-reaction .reaction-count { font-weight: 700; color: var(--navy); }
+.review-reaction.reacted { background: rgba(14,175,159,0.1); border-color: var(--teal); color: var(--teal-dark); cursor: default; }
+.review-reaction.reacted .reaction-count { color: var(--teal-dark); }
+.review-reaction:disabled { cursor: default; }
+
 /* rotate chevron when dropdown open */
 .has-dropdown:hover > a i[data-lucide="chevron-down"],
 .has-dropdown:focus-within > a i[data-lucide="chevron-down"] { transform: rotate(180deg); }

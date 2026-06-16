@@ -78,7 +78,7 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
       </li>
       <li><a href="<?php echo esc_url( home_url('/') ); ?>#science">Science</a></li>
       <li><a href="<?php echo esc_url( home_url('/about/') ); ?>">About</a></li>
-      <li><a href="<?php echo esc_url( home_url('/') ); ?>#testimonials">Reviews</a></li>
+      <li><a href="<?php echo esc_url( function_exists('alluvia_reviews_url') ? alluvia_reviews_url() : home_url('/reviews/') ); ?>">Reviews</a></li>
       <li><a href="<?php echo esc_url( home_url('/contact/') ); ?>">Contact</a></li>
     </ul>
 

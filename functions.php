@@ -335,6 +335,123 @@ add_filter( 'loop_shop_per_page', function () { return 24; }, 20 );
 add_filter( 'woocommerce_show_page_title', '__return_false' );
 
 /* ═══════════════════════════════════════
+   PRODUCT REVIEW REACTIONS (lucide icons, not emojis)
+   Reactions are stored per-review as comment meta and incremented via AJAX.
+   Rendered both under each review on the product page and on the Reviews page.
+═══════════════════════════════════════ */
+function alluvia_review_reaction_types() {
+    return array(
+        'helpful'    => array( 'icon' => 'thumbs-up', 'label' => 'Helpful' ),
+        'love'       => array( 'icon' => 'heart',     'label' => 'Love' ),
+        'insightful' => array( 'icon' => 'lightbulb', 'label' => 'Insightful' ),
+    );
+}
+
+function alluvia_render_review_reactions( $comment_id ) {
+    $comment_id = (int) $comment_id;
+    if ( ! $comment_id ) {
+        return;
+    }
+    echo '<div class="review-reactions" data-comment="' . esc_attr( $comment_id ) . '">';
+    foreach ( alluvia_review_reaction_types() as $key => $r ) {
+        $count = (int) get_comment_meta( $comment_id, 'alluvia_reaction_' . $key, true );
+        printf(
+            '<button type="button" class="review-reaction" data-reaction="%1$s" aria-label="%2$s">'
+            . '<i data-lucide="%3$s" style="width:15px;height:15px"></i>'
+            . '<span class="reaction-label">%2$s</span>'
+            . '<span class="reaction-count">%4$d</span>'
+            . '</button>',
+            esc_attr( $key ),
+            esc_attr( $r['label'] ),
+            esc_attr( $r['icon'] ),
+            $count
+        );
+    }
+    echo '</div>';
+}
+
+/* Inject reactions under each review on the single product page. */
+add_action( 'woocommerce_review_after_comment_text', function ( $comment ) {
+    alluvia_render_review_reactions( $comment->comment_ID );
+}, 20 );
+
+/* AJAX: increment a reaction. Guarded by nonce; one count per click. */
+add_action( 'wp_ajax_alluvia_react', 'alluvia_ajax_react' );
+add_action( 'wp_ajax_nopriv_alluvia_react', 'alluvia_ajax_react' );
+function alluvia_ajax_react() {
+    check_ajax_referer( 'alluvia_react', 'nonce' );
+    $comment_id = isset( $_POST['comment'] ) ? (int) $_POST['comment'] : 0;
+    $reaction   = isset( $_POST['reaction'] ) ? sanitize_key( $_POST['reaction'] ) : '';
+    $types      = alluvia_review_reaction_types();
+    if ( ! $comment_id || ! isset( $types[ $reaction ] ) || ! get_comment( $comment_id ) ) {
+        wp_send_json_error( array( 'message' => 'invalid' ), 400 );
+    }
+    $meta_key = 'alluvia_reaction_' . $reaction;
+    $count    = (int) get_comment_meta( $comment_id, $meta_key, true ) + 1;
+    update_comment_meta( $comment_id, $meta_key, $count );
+    wp_send_json_success( array( 'count' => $count ) );
+}
+
+/* Enqueue the small reactions script (+ ajax url/nonce) on product & reviews pages. */
+add_action( 'wp_enqueue_scripts', function () {
+    $is_reviews_page = is_page_template( 'page-reviews.php' );
+    $is_product      = function_exists( 'is_product' ) && is_product();
+    if ( ! $is_reviews_page && ! $is_product ) {
+        return;
+    }
+    $dir = get_stylesheet_directory();
+    $uri = get_stylesheet_directory_uri();
+    $js  = $dir . '/assets/js/alluvia-reviews.js';
+    wp_enqueue_script(
+        'alluvia-reviews',
+        $uri . '/assets/js/alluvia-reviews.js',
+        array(),
+        file_exists( $js ) ? filemtime( $js ) : '1.0.0',
+        true
+    );
+    wp_localize_script( 'alluvia-reviews', 'AlluviaReact', array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'nonce'   => wp_create_nonce( 'alluvia_react' ),
+    ) );
+} );
+
+/* Ensure a published "Reviews" page exists with the page-reviews.php template. */
+add_action( 'init', function () {
+    $id = (int) get_option( 'alluvia_reviews_page_id' );
+    if ( $id && 'publish' === get_post_status( $id ) ) {
+        return;
+    }
+    $existing = get_page_by_path( 'reviews' );
+    if ( $existing && 'publish' === $existing->post_status ) {
+        $id = $existing->ID;
+    } else {
+        $id = wp_insert_post( array(
+            'post_title'   => 'Reviews',
+            'post_name'    => 'reviews',
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_content' => '',
+            'post_author'  => 1,
+        ) );
+    }
+    if ( $id && ! is_wp_error( $id ) ) {
+        update_post_meta( $id, '_wp_page_template', 'page-reviews.php' );
+        update_option( 'alluvia_reviews_page_id', (int) $id );
+    }
+}, 21 );
+
+/* Helper: URL of the Reviews page. */
+if ( ! function_exists( 'alluvia_reviews_url' ) ) {
+    function alluvia_reviews_url() {
+        $id = (int) get_option( 'alluvia_reviews_page_id' );
+        if ( $id && 'publish' === get_post_status( $id ) ) {
+            return get_permalink( $id );
+        }
+        return home_url( '/reviews/' );
+    }
+}
+
+/* ═══════════════════════════════════════
    WOOCOMMERCE: Sidebar price-range filter
    Applies the ?min_price / ?max_price query params from the shop sidebar to the
    main product query via a numeric meta_query on _price. (WooCommerce only wires
