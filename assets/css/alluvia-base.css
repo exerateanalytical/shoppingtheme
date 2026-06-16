@@ -178,7 +178,8 @@ a:hover { color: var(--teal-dark); }
 .mobile-close { position: absolute; top: 24px; right: 28px; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; display: flex; }
 
 /* ── Shared footer ── */
-.alluvia-footer { background: #060e17; padding: 80px 0 0; color: rgba(255,255,255,0.65); }
+.alluvia-footer { position: relative; background: radial-gradient(ellipse 60% 80% at 15% 0%, rgba(17,182,163,0.06), transparent 55%), radial-gradient(ellipse 50% 70% at 90% 10%, rgba(198,162,83,0.05), transparent 55%), #060e17; padding: 80px 0 0; color: rgba(255,255,255,0.65); }
+.alluvia-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--teal), #1fb074, #e07b43, var(--gold), var(--teal)); opacity: 0.7; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding: 0 40px 60px; border-bottom: 1px solid rgba(255,255,255,0.07); max-width: 1280px; margin: 0 auto; }
 .footer-desc { font-size: var(--fs-base); line-height: 1.75; color: rgba(255,255,255,0.55); margin-top: 20px; max-width: 280px; }
 .footer-socials { display: flex; gap: 10px; margin-top: 24px; }

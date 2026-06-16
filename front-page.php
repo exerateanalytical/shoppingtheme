@@ -49,9 +49,15 @@ add_action( 'wp_head', function() {
 /* TRUST STRIP */
 .trust-strip{background:var(--white);border-top:1px solid var(--pearl-dark);border-bottom:1px solid var(--pearl-dark);padding:24px 0;overflow:hidden}
 .trust-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:10px;opacity:.55;transition:opacity .3s;cursor:default}
-.trust-item:hover{opacity:1}
-.trust-item svg{color:var(--navy)}
+.trust-item{display:flex;align-items:center;gap:10px;opacity:.9;transition:opacity .3s,transform .3s;cursor:default}
+.trust-item:hover{opacity:1;transform:translateY(-2px)}
+.trust-item svg{color:var(--t-accent,var(--teal));transition:color .3s}
+.trust-inner .trust-item:nth-child(1){--t-accent:#11b6a3}
+.trust-inner .trust-item:nth-child(2){--t-accent:#1fb074}
+.trust-inner .trust-item:nth-child(3){--t-accent:#6aa6c6}
+.trust-inner .trust-item:nth-child(4){--t-accent:#58b488}
+.trust-inner .trust-item:nth-child(5){--t-accent:#c6a253}
+.trust-inner .trust-item:nth-child(6){--t-accent:#e07b43}
 .trust-text{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);white-space:nowrap}
 
 /* SECTION COMMONS */
