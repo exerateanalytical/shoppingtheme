@@ -246,19 +246,43 @@ get_header( 'alluvia' );
 
 
 <style>
-/* Hero slider */
+/* ── Richer hero base + dynamic colour glow ── */
+.hero{background:radial-gradient(ellipse 62% 72% at 72% 30%,#123150 0%,#0b2034 46%,var(--navy) 82%)}
+.hero-glow{position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(ellipse 46% 54% at 72% 40%,var(--hero-accent,rgba(14,175,159,.26)),transparent 62%),
+    radial-gradient(ellipse 40% 48% at 14% 84%,rgba(198,162,83,.08),transparent 60%);
+  transition:background 1.1s ease;opacity:.9}
+
+/* ── Hero slider ── */
 .hero-content{position:relative;z-index:2}
 .hero-slider{position:relative}
 .hero-slide{display:none}
-.hero-slide.active{display:block;animation:heroSlideIn .55s cubic-bezier(.23,1,.32,1)}
+.hero-slide.active{display:block;animation:heroSlideIn .6s cubic-bezier(.23,1,.32,1)}
 @keyframes heroSlideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* per-slide accent palette — vitality / healing / radiance / energy / premium */
+.hero-slide{--accent:var(--teal);--accent-dark:var(--teal-dark)}
+.hero-slide:nth-child(1){--accent:#11b6a3;--accent-dark:#0a8174}
+.hero-slide:nth-child(2){--accent:#1fb074;--accent-dark:#0e7d50}
+.hero-slide:nth-child(3){--accent:#e76f93;--accent-dark:#c44e6e}
+.hero-slide:nth-child(4){--accent:#ef8246;--accent-dark:#c95c27}
+.hero-slide:nth-child(5){--accent:#d4b566;--accent-dark:#a8853c}
+
+.hero-slide .hero-badge{background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);backdrop-filter:blur(6px)}
+.hero-slide .hero-badge-dot{background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.hero-slide .hero-badge-text{color:var(--accent)}
+.hero-slide .hero-title em{color:var(--accent);font-style:italic;text-shadow:0 4px 30px color-mix(in srgb,var(--accent) 45%,transparent)}
+.hero-slide .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;box-shadow:0 16px 38px -12px var(--accent),0 0 0 1px color-mix(in srgb,var(--accent) 30%,transparent)}
+.hero-slide .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 48px -12px var(--accent)}
+
 .hero-slider-nav{display:flex;align-items:center;gap:16px;margin-top:30px}
 .hero-dots{display:flex;gap:8px}
 .hero-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);border:none;cursor:pointer;padding:0;transition:all .3s}
 .hero-dot:hover{background:rgba(255,255,255,.45)}
-.hero-dot.active{background:var(--teal);width:26px;border-radius:5px}
+.hero-dot.active{background:var(--accent,var(--teal));width:26px;border-radius:5px}
 .hero-arrow{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;flex-shrink:0}
-.hero-arrow:hover{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+.hero-arrow:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
 @media(max-width:640px){.hero-slider-nav{gap:12px;margin-top:22px}.hero-arrow{width:36px;height:36px}}
 </style>
 
@@ -266,6 +290,7 @@ get_header( 'alluvia' );
 <section class="hero" id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-gradient"></div>
+  <div class="hero-glow" id="heroGlow"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-slider" id="heroSlider">
@@ -765,12 +790,22 @@ lucide.createIcons();
     dotsWrap.appendChild(b);
   });
   var dots=[].slice.call(dotsWrap.children);
+  var accents=['#11b6a3','#1fb074','#e76f93','#ef8246','#d4b566'];
+  var glows=['rgba(17,182,163,.28)','rgba(31,176,116,.26)','rgba(231,111,147,.24)','rgba(239,130,70,.24)','rgba(212,181,102,.26)'];
+  var glowEl=document.getElementById('heroGlow');
+  var navEl=document.querySelector('.hero-slider-nav');
+  function applyAccent(){
+    if(glowEl)glowEl.style.setProperty('--hero-accent',glows[i%glows.length]);
+    if(navEl)navEl.style.setProperty('--accent',accents[i%accents.length]);
+  }
   function go(n){
     slides[i].classList.remove('active');dots[i].classList.remove('active');
     i=(n+slides.length)%slides.length;
     slides[i].classList.add('active');dots[i].classList.add('active');
+    applyAccent();
     if(window.lucide&&lucide.createIcons)lucide.createIcons();
   }
+  applyAccent();
   function next(){go(i+1);}
   document.querySelectorAll('.hero-arrow').forEach(function(a){
     a.addEventListener('click',function(){go(i+parseInt(a.getAttribute('data-dir'),10));reset();});
