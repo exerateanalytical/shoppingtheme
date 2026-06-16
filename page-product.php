@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Alluvia – Product
  *
@@ -48,7 +48,7 @@ add_action( 'wp_head', function() {
 /* PRODUCT INFO */
 .product-info{}
 .prod-cat{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.5rem}
-.product-info h1{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,40px);font-weight:600;line-height:1.1;margin-bottom:0.5rem}
+.product-info h1{font-family:var(--font-display);font-size:clamp(26px,3.5vw,40px);font-weight:600;line-height:1.1;margin-bottom:0.5rem}
 .prod-subtitle{font-size:var(--fs-body);color:var(--text-mid);margin-bottom:1rem;line-height:1.8}
 .prod-rating{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem}
 .stars{display:flex;gap:2px;color:var(--gold)}
@@ -95,7 +95,7 @@ add_action( 'wp_head', function() {
 .tab-pane.active{display:block}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .tab-content-card{background:#fff;border-radius:var(--radius);padding:2.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
-.tab-content-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:1rem}
+.tab-content-card h3{font-family:var(--font-display);font-size:24px;font-weight:600;margin-bottom:1rem}
 .tab-content-card h4{font-family:var(--font-ui);font-size:15px;font-weight:700;margin:1.5rem 0 0.5rem}
 .tab-content-card p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.8;margin-bottom:1rem}
 .research-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem}
@@ -121,7 +121,7 @@ add_action( 'wp_head', function() {
 /* REVIEWS */
 .review-summary{display:flex;gap:2.5rem;align-items:center;margin-bottom:2rem;flex-wrap:wrap}
 .review-score{text-align:center}
-.review-score .big{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;line-height:1}
+.review-score .big{font-family:var(--font-display);font-size:56px;font-weight:700;line-height:1}
 .review-bars{flex:1;min-width:240px}
 .review-bar-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;font-size:13px}
 .review-bar-row .lbl{font-family:var(--font-ui);color:var(--text-mid);width:40px}
@@ -139,7 +139,7 @@ add_action( 'wp_head', function() {
 
 /* RELATED */
 .related{max-width:1200px;margin:4rem auto;padding:0 2rem}
-.related h2{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:600;margin-bottom:1.5rem}
+.related h2{font-family:var(--font-display);font-size:29px;font-weight:600;margin-bottom:1.5rem}
 .related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
 .rel-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
 .rel-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.12)}
@@ -454,6 +454,6 @@ function changeQty(d){const i=document.getElementById('qty');i.value=Math.max(1,
 function showTab(id,btn){document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
 function toggleWish(){document.getElementById('wishBtn').classList.toggle('active');}
 document.querySelectorAll('.gallery-thumb').forEach(t=>t.addEventListener('click',function(){document.querySelectorAll('.gallery-thumb').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 </script>
 <?php get_footer( 'alluvia' ); ?>

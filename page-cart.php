@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Alluvia – Cart
  *
@@ -20,7 +20,7 @@ add_action( 'wp_head', function() {
 .page-hero-inner{max-width:1200px;margin:0 auto}
 .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-bottom:1rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
 .page-hero p{color:rgba(255,255,255,0.6);font-size:16px}
 
 /* LAYOUT */
@@ -28,7 +28,7 @@ add_action( 'wp_head', function() {
 
 /* CART TABLE */
 .cart-section{}
-.cart-section h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
+.cart-section h2{font-family:var(--font-display);font-size:24px;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
 .cart-table{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
 .cart-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 40px;gap:1rem;padding:1rem 1.5rem;background:var(--navy);color:rgba(255,255,255,0.65);font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
 .cart-item{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 40px;gap:1rem;padding:1.25rem 1.5rem;align-items:center;border-bottom:1px solid var(--pearl);transition:background .2s}
@@ -80,7 +80,7 @@ add_action( 'wp_head', function() {
 /* ORDER SUMMARY */
 .order-summary{background:#fff;border-radius:var(--radius);box-shadow:0 4px 24px rgba(0,0,0,0.08);position:sticky;top:90px}
 .summary-header{background:var(--navy);padding:1.25rem 1.5rem;border-radius:var(--radius) var(--radius) 0 0}
-.summary-header h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff}
+.summary-header h3{font-family:var(--font-display);font-size:20px;font-weight:600;color:#fff}
 .summary-body{padding:1.5rem}
 .summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.9rem;font-size:var(--fs-body)}
 .summary-row .label{color:var(--text-mid)}
@@ -90,7 +90,7 @@ add_action( 'wp_head', function() {
 .summary-divider{border:none;border-top:1px solid var(--pearl-dark);margin:1rem 0}
 .summary-total{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 0.5rem}
 .summary-total .label{font-family:var(--font-ui);font-weight:700;font-size:var(--fs-body)}
-.summary-total .value{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--navy)}
+.summary-total .value{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--navy)}
 .btn-checkout{display:block;width:100%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;padding:1rem;font-family:var(--font-ui);font-size:16px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;margin-top:1.25rem;transition:all .3s;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.5rem}
 .btn-checkout:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.4)}
 .summary-note{text-align:center;font-size:var(--fs-base);color:var(--text-light);margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.3rem}
@@ -111,7 +111,7 @@ add_action( 'wp_head', function() {
 
 /* ALSO LIKE */
 .also-like{max-width:1200px;margin:0 auto 4rem;padding:0 2rem}
-.also-like h2{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
+.also-like h2{font-family:var(--font-display);font-size:29px;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
 .also-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
 .also-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all .3s;cursor:pointer}
 .also-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.12)}
@@ -454,7 +454,7 @@ function showToast(msg, err = false) {
   Object.assign(t.style, {
     position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',
     background: err ? '#c0405a' : '#0eaf9f',color: err ? '#fff' : '#0a1a27',
-    padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",
+    padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",
     fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',
     boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'
   });

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Alluvia – Checkout
  *
@@ -23,7 +23,7 @@ add_action( 'wp_head', function() {
 .page-hero-inner{max-width:1100px;margin:0 auto}
 .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-bottom:1rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,60px);font-weight:600;color:#fff}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(36px,4.5vw,60px);font-weight:600;color:#fff}
 
 /* PROGRESS STEPS */
 .progress-wrap{max-width:1100px;margin:0 auto;padding:2rem 2rem 0}
@@ -45,7 +45,7 @@ add_action( 'wp_head', function() {
 /* FORMS */
 .checkout-panel{background:#fff;border-radius:var(--radius);box-shadow:0 2px 16px rgba(0,0,0,0.06);overflow:hidden}
 .panel-header{background:var(--navy);padding:1.25rem 1.75rem;display:flex;align-items:center;gap:0.75rem}
-.panel-header h2{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#fff}
+.panel-header h2{font-family:var(--font-display);font-size:21px;font-weight:600;color:#fff}
 .panel-header svg{color:var(--teal)}
 .panel-body{padding:1.75rem}
 
@@ -109,7 +109,7 @@ add_action( 'wp_head', function() {
 /* ORDER SIDEBAR */
 .order-sidebar{background:#fff;border-radius:var(--radius);box-shadow:0 4px 24px rgba(0,0,0,0.08);position:sticky;top:90px}
 .sidebar-header{background:var(--navy);padding:1.25rem 1.5rem;border-radius:var(--radius) var(--radius) 0 0}
-.sidebar-header h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#fff}
+.sidebar-header h3{font-family:var(--font-display);font-size:19px;font-weight:600;color:#fff}
 .sidebar-body{padding:1.5rem}
 .sidebar-items{}
 .s-item{display:flex;justify-content:space-between;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid var(--pearl);font-size:var(--fs-base)}
@@ -123,7 +123,7 @@ add_action( 'wp_head', function() {
 .s-row .val{font-family:var(--font-ui);font-weight:600}
 .s-total{display:flex;justify-content:space-between;padding-top:0.75rem}
 .s-total .lbl{font-family:var(--font-ui);font-weight:700}
-.s-total .val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700}
+.s-total .val{font-family:var(--font-display);font-size:24px;font-weight:700}
 .sidebar-trust{padding:1.25rem 1.5rem;border-top:1px solid var(--pearl);display:flex;flex-direction:column;gap:0.6rem}
 .s-trust-item{display:flex;align-items:center;gap:0.5rem;font-size:var(--fs-base);color:var(--text-mid)}
 .s-trust-item svg{color:var(--teal);flex-shrink:0}
@@ -134,7 +134,7 @@ add_action( 'wp_head', function() {
 .success-card{background:#fff;border-radius:16px;padding:3rem;max-width:480px;width:90%;text-align:center;animation:popIn .4s ease}
 @keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
 .success-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,rgba(14,175,159,0.2),rgba(14,175,159,0.05));border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:var(--teal)}
-.success-card h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:0.75rem}
+.success-card h2{font-family:var(--font-display);font-size:32px;font-weight:600;margin-bottom:0.75rem}
 .success-card p{color:var(--text-mid);margin-bottom:0.5rem;font-size:15px}
 .success-order{font-family:var(--font-ui);font-weight:700;color:var(--teal-dark);font-size:16px;margin:0.5rem 0 1.5rem}
 .success-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
@@ -315,7 +315,7 @@ get_header( 'alluvia' );
           <div class="form-row full">
             <div class="form-group">
               <label>Name on Card</label>
-              <input type="text" placeholder="Alexandra Chen">
+              <input type="text" placeholder="Full name">
             </div>
           </div>
           <div class="form-row full">
@@ -388,7 +388,22 @@ get_header( 'alluvia' );
 
         <div style="background:var(--pearl);border-radius:8px;padding:1rem;margin-bottom:1rem">
           <h4 style="font-family:var(--font-ui);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;color:var(--text-mid)">Shipping To</h4>
-          <p style="font-size:14px;color:var(--text-dark)">Alexandra Chen · 123 Wellness Avenue, Los Angeles, CA 90001, US</p>
+          <p style="font-size:14px;color:var(--text-dark)"><?php
+            $cust = function_exists('WC') ? WC()->customer : null;
+            if ( $cust && $cust->get_billing_address_1() ) {
+                $parts = array_filter([
+                    trim( $cust->get_billing_first_name() . ' ' . $cust->get_billing_last_name() ),
+                    $cust->get_billing_address_1(),
+                    $cust->get_billing_city(),
+                    $cust->get_billing_state(),
+                    $cust->get_billing_postcode(),
+                    $cust->get_billing_country(),
+                ]);
+                echo esc_html( implode( ' · ', $parts ) );
+            } else {
+                echo 'Enter your shipping address at checkout.';
+            }
+          ?></p>
           <p style="font-size:12px;color:var(--teal-dark);margin-top:0.25rem;display:flex;align-items:center;gap:0.3rem"><i data-lucide="thermometer-snowflake" width="13" height="13"></i> Cold-Chain Overnight</p>
         </div>
 

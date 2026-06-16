@@ -7,21 +7,21 @@
 add_action( 'wp_head', function() {
 ?>
 <style>
-.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;text-decoration:none}
+.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;text-decoration:none}
 .nav-account-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;text-decoration:none;transition:all .2s}.nav-account-btn:hover{border-color:var(--teal);color:var(--teal)}
 .page-hero{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:6rem 2rem 3rem;margin-top:72px;text-align:center}
-.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
+.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
 .page-hero p{color:rgba(255,255,255,0.70);font-size:var(--fs-body);max-width:520px;margin:0 auto}
 .faq-wrap{max-width:820px;margin:0 auto;padding:3.5rem 2rem 5rem}
 .faq-search{display:flex;align-items:center;gap:0.75rem;background:#fff;border:1px solid var(--pearl-dark);border-radius:var(--radius);padding:0.75rem 1.25rem;margin-bottom:2.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
 .faq-search svg{color:var(--text-light);flex-shrink:0}
-.faq-search input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:16px;color:var(--text-dark);flex:1;background:transparent}.faq-search input::placeholder{color:var(--text-light)}
+.faq-search input{border:none;outline:none;font-family:var(--font-body);font-size:16px;color:var(--text-dark);flex:1;background:transparent}.faq-search input::placeholder{color:var(--text-light)}
 .faq-section{margin-bottom:2.5rem}
-.faq-section-title{display:flex;align-items:center;gap:0.75rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
+.faq-section-title{display:flex;align-items:center;gap:0.75rem;font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
 .faq-section-title svg{color:var(--teal)}
 .faq-item{background:#fff;border-radius:var(--radius);margin-bottom:0.75rem;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.05)}
-.faq-q{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-body);transition:background .2s;user-select:none;gap:1rem}
+.faq-q{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:var(--font-ui);font-weight:600;font-size:var(--fs-body);transition:background .2s;user-select:none;gap:1rem}
 .faq-q:hover{background:var(--pearl)}
 .faq-q .chevron{transition:transform .3s;color:var(--teal);flex-shrink:0}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
@@ -29,10 +29,10 @@ add_action( 'wp_head', function() {
 .faq-a p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.8}
 .faq-a a{color:var(--teal-dark);text-decoration:none}.faq-a a:hover{text-decoration:underline}
 .still-help{background:var(--navy);border-radius:var(--radius);padding:2.5rem;text-align:center;margin-top:3rem}
-.still-help h2{font-family:'Cormorant Garamond',serif;font-size:29px;font-weight:600;color:#fff;margin-bottom:0.5rem}
+.still-help h2{font-family:var(--font-display);font-size:29px;font-weight:600;color:#fff;margin-bottom:0.5rem}
 .still-help p{color:rgba(255,255,255,0.70);margin-bottom:1.5rem;font-size:var(--fs-body)}
 .help-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-help{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-help{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:8px;font-family:var(--font-ui);font-size:14px;font-weight:600;text-decoration:none;transition:all .2s}
 .btn-help.primary{background:var(--teal);color:var(--navy)}.btn-help.primary:hover{background:#fff}
 .btn-help.outline{background:transparent;border:1px solid rgba(255,255,255,0.25);color:#fff}.btn-help.outline:hover{border-color:var(--teal);color:var(--teal)}
 footer{background:#060e17;color:rgba(255,255,255,0.70);padding:4rem 2rem 2rem}
@@ -126,7 +126,7 @@ get_header( 'alluvia' );
   </div>
 </div>
 
-<footer><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Alluvia Peptides. All rights reserved.</span><div class="footer-legal"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a></div></div></div></footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 <script>
 lucide.createIcons();
 function toggleFaq(el){const a=el.nextElementSibling;a.classList.toggle('open');el.querySelector('.chevron').style.transform=a.classList.contains('open')?'rotate(180deg)':'';}

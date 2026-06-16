@@ -10,21 +10,21 @@ add_action( 'wp_head', function() {
 /* PAGE HERO */
 .page-hero{background:linear-gradient(135deg,#5a0a18,#8b1a2e);padding:6rem 2rem 3.5rem;margin-top:72px}
 .page-hero-inner{max-width:860px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:rgba(255,255,255,0.65);margin-bottom:1rem}.breadcrumb a{color:rgba(255,255,255,0.8);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.75rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:rgba(255,255,255,0.65);margin-bottom:1rem}.breadcrumb a{color:rgba(255,255,255,0.8);text-decoration:none}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.75rem}
 .page-hero-subtitle{color:rgba(255,255,255,0.65);font-size:var(--fs-base)}
 
 /* PRIMARY BANNER */
 .primary-banner{background:linear-gradient(135deg,#7b1c1c,#5a0a18);border:2px solid rgba(255,255,255,0.15);border-radius:var(--radius);padding:2.5rem;max-width:860px;margin:0 auto 2rem;text-align:center}
 .primary-banner svg{color:#fff;margin-bottom:1rem}
-.primary-banner h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h2);font-weight:600;color:#fff;margin-bottom:0.75rem}
+.primary-banner h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:600;color:#fff;margin-bottom:0.75rem}
 .primary-banner p{color:rgba(255,255,255,0.75);font-size:var(--fs-body);line-height:1.85;max-width:640px;margin:0 auto}
 
 /* POLICY LAYOUT */
 .policy-wrap{max-width:860px;margin:0 auto;padding:2.5rem 2rem 5rem}
 .policy-section{background:#fff;border-radius:var(--radius);padding:2rem 2.25rem;margin-bottom:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
-.section-num{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-micro);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c0405a;margin-bottom:0.25rem}
-.policy-section h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h3);font-weight:600;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
+.section-num{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c0405a;margin-bottom:0.25rem}
+.policy-section h2{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:600;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--pearl-dark)}
 .policy-section p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.85;margin-bottom:0.9rem}
 .policy-section p:last-child{margin-bottom:0}
 .policy-section a{color:var(--teal-dark);text-decoration:none}.policy-section a:hover{text-decoration:underline}
@@ -50,7 +50,7 @@ get_header( 'alluvia' );
 <div class="policy-wrap" style="padding-top:2.5rem">
   <div class="primary-banner" style="background:linear-gradient(135deg,rgba(192,64,90,0.08),rgba(192,64,90,0.03));border:2px solid rgba(192,64,90,0.2);margin-bottom:2rem;border-radius:var(--radius);padding:2rem;text-align:center">
     <i data-lucide="alert-triangle" width="40" height="40" style="color:#c0405a;margin-bottom:1rem"></i>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:600;color:var(--text-dark);margin-bottom:0.75rem">FOR RESEARCH USE ONLY</h2>
+    <h2 style="font-family:var(--font-display);font-size:1.75rem;font-weight:600;color:var(--text-dark);margin-bottom:0.75rem">FOR RESEARCH USE ONLY</h2>
     <p style="color:var(--text-mid);font-size:0.95rem;line-height:1.8;max-width:640px;margin:0 auto">All products sold by Alluvia Peptides LLC are intended <strong>exclusively for in vitro laboratory research</strong>. They are <strong>NOT</strong> intended for human or veterinary use, consumption, injection, or any diagnostic or therapeutic application.</p>
   </div>
 
@@ -87,6 +87,6 @@ get_header( 'alluvia' );
   </div>
 </div>
 
-<footer><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Alluvia Peptides LLC. All rights reserved.</span><div class="footer-legal"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a></div></div></div></footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 <script>lucide.createIcons();</script>
 <?php get_footer( 'alluvia' ); ?>

@@ -6,8 +6,8 @@
 add_action( 'wp_head', function() { ?>
 <style>
 .error-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);padding:2rem;text-align:center;flex-direction:column;gap:2rem}
-.error-code{font-family:'Cormorant Garamond',serif;font-size:clamp(100px,20vw,180px);font-weight:700;color:rgba(14,175,159,.18);line-height:1;display:block}
-.error-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:#fff;margin-bottom:.5rem}
+.error-code{font-family:var(--font-display);font-size:clamp(100px,20vw,180px);font-weight:700;color:rgba(14,175,159,.18);line-height:1;display:block}
+.error-title{font-family:var(--font-display);font-size:clamp(28px,4vw,48px);font-weight:300;color:#fff;margin-bottom:.5rem}
 .error-sub{font-size:16px;color:rgba(255,255,255,.55);max-width:440px;line-height:1.7}
 .error-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
 .error-actions a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:100px;font-family:var(--font-ui);font-size:14px;font-weight:700;letter-spacing:.05em;text-decoration:none;transition:.3s;text-transform:uppercase}

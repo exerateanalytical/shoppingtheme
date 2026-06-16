@@ -10,9 +10,9 @@ add_action( 'wp_head', function() {
 /* HERO */
 .page-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);padding:6rem 2rem 3rem;margin-top:72px}
 .page-hero-inner{max-width:900px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
 .page-hero p{color:rgba(255,255,255,0.65);font-size:var(--fs-base)}
 
 /* COLD CHAIN COMMITMENT */
@@ -20,8 +20,8 @@ add_action( 'wp_head', function() {
 .cold-chain-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem}
 .cold-stat{text-align:center;padding:1.5rem;border-radius:var(--radius);background:rgba(255,255,255,0.04);border:1px solid rgba(14,175,159,0.12)}
 .cold-stat-icon{width:56px;height:56px;border-radius:50%;background:rgba(14,175,159,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:var(--teal)}
-.cold-stat-num{font-family:'Cormorant Garamond',serif;font-size:35px;font-weight:700;color:#fff;line-height:1}
-.cold-stat-label{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-top:0.3rem}
+.cold-stat-num{font-family:var(--font-display);font-size:35px;font-weight:700;color:#fff;line-height:1}
+.cold-stat-label{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-top:0.3rem}
 
 /* MAIN CONTENT */
 .shipping-content{max-width:900px;margin:0 auto;padding:4rem 2rem}
@@ -30,22 +30,22 @@ add_action( 'wp_head', function() {
 .shipping-section{background:#fff;border-radius:var(--radius);padding:2rem;margin-bottom:2rem;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
 .section-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
 .section-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.section-header h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600}
+.section-header h2{font-family:var(--font-display);font-size:24px;font-weight:600}
 
 /* SHIPPING TABLE */
 .ship-table{width:100%;border-collapse:collapse;font-size:14px}
-.ship-table th{background:var(--navy);color:rgba(255,255,255,0.7);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.75rem 1rem;text-align:left}
+.ship-table th{background:var(--navy);color:rgba(255,255,255,0.7);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.75rem 1rem;text-align:left}
 .ship-table th:first-child{border-radius:8px 0 0 0}
 .ship-table th:last-child{border-radius:0 8px 0 0}
 .ship-table td{padding:0.85rem 1rem;border-bottom:1px solid var(--pearl);vertical-align:middle}
 .ship-table tr:last-child td{border-bottom:none}
 .ship-table tr:hover td{background:var(--pearl)}
-.method-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px}
+.method-name{font-family:var(--font-ui);font-weight:600;font-size:14px}
 .method-sub{font-size:12px;color:var(--text-light);margin-top:2px}
-.price-cell{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--teal-dark)}
+.price-cell{font-family:var(--font-ui);font-weight:700;color:var(--teal-dark)}
 .price-free{color:var(--mint)}
 .eta-cell{color:var(--text-mid)}
-.ship-badge-sm{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 7px;border-radius:50px;letter-spacing:0.06em}
+.ship-badge-sm{font-family:var(--font-ui);font-size:10px;font-weight:700;padding:2px 7px;border-radius:50px;letter-spacing:0.06em}
 .badge-rec{background:rgba(106,166,198,0.15);color:#2d6e8a}
 .badge-fast{background:rgba(212,102,60,0.15);color:#a04020}
 
@@ -61,7 +61,7 @@ add_action( 'wp_head', function() {
 
 /* FAQ */
 .faq-item{border:1px solid var(--pearl-dark);border-radius:8px;margin-bottom:0.75rem;overflow:hidden}
-.faq-q{padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-body);background:#fff;transition:background .2s;user-select:none}
+.faq-q{padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:var(--font-ui);font-weight:600;font-size:var(--fs-body);background:#fff;transition:background .2s;user-select:none}
 .faq-q:hover{background:var(--pearl)}
 .faq-q svg{transition:transform .3s;color:var(--teal);flex-shrink:0}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
@@ -72,7 +72,7 @@ add_action( 'wp_head', function() {
 .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .pkg-card{border:1px solid var(--pearl-dark);border-radius:10px;padding:1.25rem;text-align:center}
 .pkg-card-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem}
-.pkg-card h4{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);font-weight:700;margin-bottom:0.3rem}
+.pkg-card h4{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;margin-bottom:0.3rem}
 .pkg-card p{font-size:var(--fs-sm);color:var(--text-light)}
 
 @media(max-width:900px){.cold-chain-inner{grid-template-columns:1fr 1fr}.pkg-grid{grid-template-columns:1fr 1fr}}
@@ -335,57 +335,7 @@ get_header( 'alluvia' );
 
 </div><!-- .shipping-content -->
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-        <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
-        <div class="social-links">
-          <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="twitter" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="facebook" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="youtube" width="16" height="16"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Medical Peptides</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Skincare Peptides</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Sports & Recovery</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Anti-Aging</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
-          <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact Us</a></li>
-          <li><a href="<?php echo esc_url( home_url( '/coa-library/' ) ); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms & Conditions</a></li>
-          <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Shipping Policy</a></li>
-          <li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
-          <li><a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
-      <div class="footer-legal">
-        <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a>
-        <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy</a>
-        <a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a>
-        <a href="<?php echo esc_url( home_url( '/disclaimer/' ) ); ?>">Disclaimer</a>
-      </div>
-    </div>
-  </div>
-</footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 
 <script>
 lucide.createIcons();

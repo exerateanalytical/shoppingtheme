@@ -1,161 +1,22 @@
 <?php
 /**
- * Template Name: Alluvia – Login
+ * Template Name: Alluvia – Login (legacy redirect)
+ *
+ * This legacy template held a non-functional demo login/register form whose
+ * JavaScript redirected to a static alluvia-account.html file. Authentication
+ * is now handled by WooCommerce on the My Account page. Redirect there so the
+ * real login/register form is always used.
  *
  * @package Shopping
  */
-add_action( 'wp_head', function() {
-?>
-<style>
-body{background:var(--navy);min-height:100vh;display:flex;flex-direction:column}
-/* SPLIT LAYOUT */
-.login-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
-/* LEFT PANEL */
-.login-left{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 60%,#0a2540 100%);display:flex;flex-direction:column;padding:3rem;position:relative;overflow:hidden}
-.login-left::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(14,175,159,0.12),transparent 70%);pointer-events:none}
-.login-left::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(198,162,83,0.08),transparent 70%);pointer-events:none}
-.left-logo{display:flex;flex-direction:column;line-height:1;text-decoration:none;margin-bottom:auto}
-.left-logo span:first-child{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#fff}
-.left-logo span:last-child{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.3em;color:var(--teal);text-transform:uppercase}
-.left-content{position:relative;z-index:1;margin-top:auto;padding-bottom:2rem}
-.left-content h2{font-family:'Cormorant Garamond',serif;font-size:45px;font-weight:600;color:#fff;line-height:1.15;margin-bottom:1rem}
-.left-content p{color:rgba(255,255,255,0.70);font-size:var(--fs-body);line-height:1.7;margin-bottom:2rem}
-.left-benefits{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
-.left-benefits li{display:flex;align-items:center;gap:0.6rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-base);color:rgba(255,255,255,0.70)}
-.left-benefits li svg{color:var(--teal);flex-shrink:0}
-/* RIGHT PANEL */
-.login-right{background:var(--pearl);display:flex;align-items:center;justify-content:center;padding:3rem 2rem}
-.auth-card{width:100%;max-width:440px}
-/* TABS */
-.auth-tabs{display:flex;background:#fff;border-radius:10px;padding:4px;margin-bottom:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
-.auth-tab{flex:1;background:none;border:none;border-radius:7px;padding:0.7rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;cursor:pointer;transition:all .2s;color:var(--text-light)}
-.auth-tab.active{background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
-.auth-panel{display:none}.auth-panel.active{display:block}
-.auth-panel h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-h3);font-weight:600;margin-bottom:0.35rem}
-.auth-panel p{font-size:var(--fs-base);color:var(--text-light);margin-bottom:1.75rem}
-.form-group{margin-bottom:1.1rem}
-.form-group label{display:block;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.35rem}
-.input-wrap{position:relative}
-.input-wrap svg{position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);color:var(--text-light);pointer-events:none}
-.input-wrap input{width:100%;border:1px solid var(--pearl-dark);border-radius:10px;padding:0.8rem 0.9rem 0.8rem 2.6rem;font-family:'Inter',sans-serif;font-size:var(--fs-base);color:var(--text-dark);outline:none;transition:border .2s;background:#fff}
-.input-wrap input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,175,159,0.1)}
-.forgot-link{float:right;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-base);color:var(--teal-dark);text-decoration:none}
-.forgot-link:hover{text-decoration:underline}
-.btn-auth{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--navy);border:none;border-radius:10px;padding:0.9rem;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.04em;cursor:pointer;margin-top:1.25rem;transition:all .3s}
-.btn-auth:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,175,159,0.35)}
-.divider{display:flex;align-items:center;gap:0.75rem;margin:1.25rem 0}
-.divider span{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text-light);white-space:nowrap}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--pearl-dark)}
-.social-auth{display:flex;gap:0.75rem}
-.btn-social{flex:1;display:flex;align-items:center;justify-content:center;gap:0.5rem;border:1px solid var(--pearl-dark);border-radius:10px;padding:0.7rem;background:#fff;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
-.btn-social:hover{border-color:var(--teal);color:var(--teal-dark)}
-.terms-note{font-size:var(--fs-base);color:var(--text-light);text-align:center;margin-top:1rem;line-height:1.5}
-.terms-note a{color:var(--teal-dark);text-decoration:none}
-/* PASSWORD STRENGTH */
-.strength-bar{height:4px;border-radius:4px;background:var(--pearl-dark);margin-top:0.4rem;overflow:hidden;transition:all .3s}
-.strength-fill{height:100%;border-radius:4px;width:0;transition:width .3s,background .3s}
-.strength-label{font-size:11px;color:var(--text-light);margin-top:0.25rem;font-family:'Space Grotesk',sans-serif}
-@media(max-width:800px){.login-wrap{grid-template-columns:1fr}.login-left{display:none}}
-@media(max-width:900px){
-  .login-grid,.register-panel,.login-panel{grid-template-columns:1fr}
-  .login-panel-right{display:none}
+
+$account_url = function_exists( 'wc_get_page_permalink' )
+    ? wc_get_page_permalink( 'myaccount' )
+    : home_url( '/my-account/' );
+
+if ( ! $account_url ) {
+    $account_url = home_url( '/' );
 }
-@media(max-width:640px){
-  .login-wrap,.register-wrap{padding:2rem 1.25rem}
-  .form-actions{flex-direction:column}
-  .btn-full{width:100%}
-}</style>
-<?php
-}, 20 );
-get_header( 'alluvia' );
-?>
-<div class="login-wrap">
-  <!-- LEFT PANEL -->
-  <div class="login-left">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="left-logo"><span>Alluvia</span><span>Peptides</span></a>
-    <div class="left-content">
-      <h2>Premium peptides. Verified science. Your research, elevated.</h2>
-      <p>Join thousands of researchers who trust Alluvia Peptides for pharmaceutical-grade compounds with full COA documentation and cold-chain integrity.</p>
-      <ul class="left-benefits">
-        <li><i data-lucide="award" width="16" height="16"></i> COA on every batch — HPLC ≥99% verified</li>
-        <li><i data-lucide="thermometer-snowflake" width="16" height="16"></i> Cold-chain shipping that preserves peptide integrity</li>
-        <li><i data-lucide="package" width="16" height="16"></i> Track all orders from your dashboard</li>
-        <li><i data-lucide="star" width="16" height="16"></i> Earn loyalty points — 5% off as a Pro member</li>
-        <li><i data-lucide="heart" width="16" height="16"></i> Wishlist and reorder in one click</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- RIGHT PANEL -->
-  <div class="login-right">
-    <div class="auth-card">
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchAuth('login',this)">Sign In</button>
-        <button class="auth-tab" onclick="switchAuth('register',this)">Create Account</button>
-      </div>
-
-      <!-- SIGN IN -->
-      <div class="auth-panel active" id="panel-login">
-        <h2>Welcome back</h2>
-        <p>Sign in to your Alluvia Peptides account</p>
-        <div class="form-group">
-          <label>Email Address</label>
-          <div class="input-wrap"><i data-lucide="mail" width="16" height="16"></i><input type="email" placeholder="you@research.edu"></div>
-        </div>
-        <div class="form-group">
-          <label>Password <a href="#" class="forgot-link">Forgot password?</a></label>
-          <div class="input-wrap"><i data-lucide="lock" width="16" height="16"></i><input type="password" placeholder="••••••••"></div>
-        </div>
-        <button class="btn-auth" onclick="doLogin()"><i data-lucide="log-in" width="18" height="18"></i> Sign In</button>
-        <div class="divider"><span>or continue with</span></div>
-        <div class="social-auth">
-          <button class="btn-social"><i data-lucide="chrome" width="16" height="16"></i> Google</button>
-          <button class="btn-social"><i data-lucide="github" width="16" height="16"></i> GitHub</button>
-        </div>
-        <p class="terms-note">By signing in you agree to our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms & Conditions</a> and <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy Policy</a>.</p>
-      </div>
-
-      <!-- REGISTER -->
-      <div class="auth-panel" id="panel-register">
-        <h2>Create account</h2>
-        <p>Start your Alluvia Peptides research account</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
-          <div class="form-group">
-            <label>First Name</label>
-            <div class="input-wrap"><i data-lucide="user" width="16" height="16"></i><input type="text" placeholder="First"></div>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <div class="input-wrap"><i data-lucide="user" width="16" height="16"></i><input type="text" placeholder="Last"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <div class="input-wrap"><i data-lucide="mail" width="16" height="16"></i><input type="email" placeholder="you@research.edu"></div>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <div class="input-wrap"><i data-lucide="lock" width="16" height="16"></i><input type="password" placeholder="Min. 8 characters" oninput="checkStrength(this.value)"></div>
-          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
-          <div class="strength-label" id="strengthLabel"></div>
-        </div>
-        <div class="form-group">
-          <label>Institution / Organization</label>
-          <div class="input-wrap"><i data-lucide="building" width="16" height="16"></i><input type="text" placeholder="University / Lab / Company"></div>
-        </div>
-        <button class="btn-auth" onclick="doRegister()"><i data-lucide="user-plus" width="18" height="18"></i> Create Account</button>
-        <p class="terms-note">By creating an account you confirm you are 18+, a qualified researcher, and agree to our <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a>, <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy Policy</a>, and <a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Research Disclaimer</a>.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-lucide.createIcons();
-function switchAuth(panel,btn){document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.auth-tab').forEach(b=>b.classList.remove('active'));document.getElementById('panel-'+panel).classList.add('active');btn.classList.add('active');}
-function doLogin(){showToast('Signing in…');setTimeout(()=>{window.location.href='alluvia-account.html';},1000);}
-function doRegister(){showToast('Account created! Redirecting…');setTimeout(()=>{window.location.href='alluvia-account.html';},1200);}
-function checkStrength(pw){const fill=document.getElementById('strengthFill');const lbl=document.getElementById('strengthLabel');let score=0;if(pw.length>=8)score++;if(pw.length>=12)score++;if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^a-zA-Z0-9]/.test(pw))score++;const levels=[{w:'0%',c:'transparent',t:''},{ w:'30%',c:'#db627a',t:'Weak'},{w:'55%',c:'#d4663c',t:'Fair'},{w:'75%',c:' #c6a253',t:'Good'},{w:'100%',c:'#58b488',t:'Strong'},{w:'100%',c:'#0eaf9f',t:'Very Strong'}];const l=levels[Math.min(score,5)];fill.style.width=l.w;fill.style.background=l.c;lbl.textContent=l.t;}
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
-</script>
-<?php get_footer( 'alluvia' ); ?>
+wp_safe_redirect( $account_url, 302 );
+exit;

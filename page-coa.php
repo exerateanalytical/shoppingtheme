@@ -7,21 +7,21 @@
 add_action( 'wp_head', function() {
 ?>
 <style>
-.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;text-decoration:none}
+.nav-cart-btn{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.4rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;text-decoration:none}
 .nav-account-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;text-decoration:none}
 .page-hero{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:6rem 2rem 3rem;margin-top:72px}
 .page-hero-inner{max-width:1100px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}.breadcrumb a{color:var(--teal);text-decoration:none}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
 .page-hero p{color:rgba(255,255,255,0.70);font-size:var(--fs-body)}
 .trust-strip{background:rgba(14,175,159,0.06);border-bottom:1px solid rgba(14,175,159,0.12);padding:1.25rem 2rem}
 .trust-strip-inner{max-width:1100px;margin:0 auto;display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center}
-.trust-item{display:flex;align-items:center;gap:0.6rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-body);color:var(--text-mid)}.trust-item svg{color:var(--teal)}
+.trust-item{display:flex;align-items:center;gap:0.6rem;font-family:var(--font-ui);font-size:var(--fs-body);color:var(--text-mid)}.trust-item svg{color:var(--teal)}
 .coa-wrap{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem}
 .search-bar{display:flex;align-items:center;gap:0.75rem;background:#fff;border:1px solid var(--pearl-dark);border-radius:var(--radius);padding:0.85rem 1.25rem;margin-bottom:0.75rem;box-shadow:0 2px 12px rgba(0,0,0,0.06)}.search-bar svg{color:var(--text-light);flex-shrink:0}
-.search-bar input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:16px;flex:1;background:transparent}.search-bar input::placeholder{color:var(--text-light)}
+.search-bar input{border:none;outline:none;font-family:var(--font-body);font-size:16px;flex:1;background:transparent}.search-bar input::placeholder{color:var(--text-light)}
 .filter-row{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2rem}
-.filter-pill{background:#fff;border:1px solid var(--pearl-dark);border-radius:50px;padding:0.4rem 1rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
+.filter-pill{background:#fff;border:1px solid var(--pearl-dark);border-radius:50px;padding:0.4rem 1rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
 .filter-pill:hover{border-color:var(--teal);color:var(--teal-dark)}
 .filter-pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .coa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
@@ -29,16 +29,16 @@ add_action( 'wp_head', function() {
 .coa-card:hover{border-color:var(--teal);box-shadow:0 6px 24px rgba(0,0,0,0.1)}
 .coa-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
 .coa-icon-wrap{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.coa-badge{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-micro);font-weight:700;letter-spacing:0.06em;padding:3px 8px;border-radius:50px;text-transform:uppercase}
+.coa-badge{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:0.06em;padding:3px 8px;border-radius:50px;text-transform:uppercase}
 .badge-verified{background:rgba(88,180,136,0.15);color:#2d8a5f}
-.coa-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:var(--fs-body);margin-bottom:0.2rem}
+.coa-name{font-family:var(--font-ui);font-weight:700;font-size:var(--fs-body);margin-bottom:0.2rem}
 .coa-lot{font-size:var(--fs-base);color:var(--text-light)}
 .coa-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin:1rem 0;padding:0.75rem;background:var(--pearl);border-radius:8px}
 .coa-stat{text-align:center}
-.coa-stat-val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:var(--fs-base);color:var(--text-dark)}
-.coa-stat-lbl{font-size:var(--fs-micro);color:var(--text-light);font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:0.04em}
+.coa-stat-val{font-family:var(--font-ui);font-weight:700;font-size:var(--fs-base);color:var(--text-dark)}
+.coa-stat-lbl{font-size:var(--fs-micro);color:var(--text-light);font-family:var(--font-ui);text-transform:uppercase;letter-spacing:0.04em}
 .coa-meta{font-size:var(--fs-base);color:var(--text-light);display:flex;align-items:center;gap:0.4rem;margin-bottom:1rem}
-.btn-coa{display:flex;align-items:center;justify-content:center;gap:0.4rem;width:100%;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.6rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-coa{display:flex;align-items:center;justify-content:center;gap:0.4rem;width:100%;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.6rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
 .btn-coa:hover{background:var(--teal);color:var(--navy)}
 footer{background:#060e17;color:rgba(255,255,255,0.70);padding:4rem 2rem 2rem}
 .footer-inner{max-width:1200px;margin:0 auto}
@@ -221,11 +221,11 @@ get_header( 'alluvia' );
   </div>
 </div>
 
-<footer><div class="footer-inner"><div class="footer-bottom"><span>© 2025 Alluvia Peptides. All rights reserved.</span><div class="footer-legal"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a></div></div></div></footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 <script>
 lucide.createIcons();
 function setCat(cat,btn){document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.coa-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';});}
 function filterCOA(q){const t=q.toLowerCase();document.querySelectorAll('.coa-card').forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(t)?'':'none';});}
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 </script>
 <?php get_footer( 'alluvia' ); ?>

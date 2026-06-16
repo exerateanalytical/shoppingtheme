@@ -10,17 +10,17 @@ add_action( 'wp_head', function() {
 /* POST HERO */
 .post-hero{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:6rem 2rem 4rem;margin-top:72px}
 .post-hero-inner{max-width:800px;margin:0 auto}
-.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1.25rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1.25rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.post-cat-tag{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(14,175,159,0.12);color:var(--teal-dark);font-family:'Space Grotesk',sans-serif;font-size:var(--fs-micro);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:1rem}
-.post-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:1.25rem}
+.post-cat-tag{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(14,175,159,0.12);color:var(--teal-dark);font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:1rem}
+.post-hero h1{font-family:var(--font-display);font-size:clamp(40px,5vw,68px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:1.25rem}
 .post-meta-bar{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 .author-row{display:flex;align-items:center;gap:0.75rem}
-.author-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--navy);font-size:var(--fs-ui)}
-.author-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-ui);color:#fff}
+.author-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-weight:700;color:var(--navy);font-size:var(--fs-ui)}
+.author-name{font-family:var(--font-ui);font-weight:600;font-size:var(--fs-ui);color:#fff}
 .author-title{font-size:var(--fs-xs);color:rgba(255,255,255,0.65)}
 .meta-divider{width:1px;height:30px;background:rgba(255,255,255,0.15)}
-.meta-item{display:flex;align-items:center;gap:0.35rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:rgba(255,255,255,0.65)}
+.meta-item{display:flex;align-items:center;gap:0.35rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:rgba(255,255,255,0.65)}
 .meta-item svg{color:var(--teal)}
 
 /* LAYOUT */
@@ -31,46 +31,46 @@ add_action( 'wp_head', function() {
 .article-img{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:var(--radius);height:340px;display:flex;align-items:center;justify-content:center;margin-bottom:2.5rem;position:relative;overflow:hidden}
 .article-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(14,175,159,0.12),transparent 70%)}
 .article p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.9;margin-bottom:1.5rem}
-.article h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--text-dark);margin:2.5rem 0 1rem}
-.article h3{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-body);font-weight:700;color:var(--text-dark);margin:1.75rem 0 0.75rem}
+.article h2{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--text-dark);margin:2.5rem 0 1rem}
+.article h3{font-family:var(--font-ui);font-size:var(--fs-body);font-weight:700;color:var(--text-dark);margin:1.75rem 0 0.75rem}
 .article ul,.article ol{padding-left:1.5rem;margin-bottom:1.5rem}
 .article ul li,.article ol li{font-size:var(--fs-body);color:var(--text-mid);margin-bottom:0.5rem;line-height:1.8}
 .article a{color:var(--teal-dark);text-decoration:none}
 .article a:hover{text-decoration:underline}
 .pull-quote{border-left:4px solid var(--teal);background:rgba(14,175,159,0.05);padding:1.5rem 1.75rem;border-radius:0 var(--radius) var(--radius) 0;margin:2rem 0}
-.pull-quote p{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;color:var(--navy);margin:0;line-height:1.6}
-.pull-quote cite{display:block;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-top:0.5rem;font-style:normal}
+.pull-quote p{font-family:var(--font-display);font-size:21px;font-style:italic;color:var(--navy);margin:0;line-height:1.6}
+.pull-quote cite{display:block;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-top:0.5rem;font-style:normal}
 .info-box{background:rgba(106,166,198,0.08);border:1px solid rgba(106,166,198,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
-.info-box h4{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--sky);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
+.info-box h4{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--sky);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
 .info-box p{font-size:var(--fs-base);margin-bottom:0;color:var(--text-mid)}
 .warn-box{background:rgba(198,162,83,0.07);border:1px solid rgba(198,162,83,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
-.warn-box h4{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
+.warn-box h4{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
 .warn-box p{font-size:var(--fs-base);margin-bottom:0;color:var(--text-mid)}
 
 /* SHARE + TAGS */
 .post-footer-bar{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0;border-top:1px solid var(--pearl-dark);margin-top:2.5rem;flex-wrap:wrap;gap:1rem}
 .tags{display:flex;gap:0.5rem;flex-wrap:wrap}
-.tag{background:var(--pearl);border-radius:50px;padding:4px 12px;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-xs);font-weight:600;color:var(--text-mid)}
+.tag{background:var(--pearl);border-radius:50px;padding:4px 12px;font-family:var(--font-ui);font-size:var(--fs-xs);font-weight:600;color:var(--text-mid)}
 .share-row{display:flex;align-items:center;gap:0.75rem}
-.share-label{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;color:var(--text-light)}
+.share-label{font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;color:var(--text-light)}
 .share-btn{width:36px;height:36px;border-radius:8px;background:var(--pearl-dark);border:none;display:flex;align-items:center;justify-content:center;color:var(--text-mid);cursor:pointer;transition:all .2s}
 .share-btn:hover{background:var(--teal);color:var(--navy)}
 
 /* RELATED POSTS */
 .related-posts{margin-top:3rem}
-.related-posts h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:1.25rem}
+.related-posts h2{font-family:var(--font-display);font-size:24px;font-weight:600;margin-bottom:1.25rem}
 .related-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 .rel-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:all .25s}
 .rel-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
 .rel-img{height:100px;display:flex;align-items:center;justify-content:center}
 .rel-body{padding:1rem}
-.rel-body h4{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-ui);line-height:1.3}
+.rel-body h4{font-family:var(--font-ui);font-weight:600;font-size:var(--fs-ui);line-height:1.3}
 .rel-meta{font-size:var(--fs-xs);color:var(--text-light);margin-top:0.4rem;display:flex;gap:0.5rem}
 
 /* SIDEBAR */
 .post-sidebar{position:sticky;top:90px;display:flex;flex-direction:column;gap:1.75rem}
 .sidebar-card{background:#fff;border-radius:var(--radius);padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
-.sidebar-card h4{font-family:'Space Grotesk',sans-serif;font-size:var(--fs-sm);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dark);margin-bottom:1rem;display:flex;align-items:center;gap:0.4rem}
+.sidebar-card h4{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dark);margin-bottom:1rem;display:flex;align-items:center;gap:0.4rem}
 .sidebar-card h4 svg{color:var(--teal)}
 .toc-links{list-style:none;display:flex;flex-direction:column;gap:0.25rem}
 .toc-links a{display:block;font-size:var(--fs-ui);color:var(--text-mid);text-decoration:none;padding:0.35rem 0.5rem;border-radius:6px;border-left:2px solid transparent;transition:all .2s}
@@ -80,9 +80,9 @@ add_action( 'wp_head', function() {
 .sidebar-product:last-child{margin-bottom:0}
 .sp-head{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem}
 .sp-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sp-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-ui)}
-.sp-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:var(--fs-ui);color:var(--teal-dark)}
-.sp-btn{display:block;width:100%;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:0.45rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-xs);font-weight:600;cursor:pointer;margin-top:0.6rem;transition:background .2s}
+.sp-name{font-family:var(--font-ui);font-weight:600;font-size:var(--fs-ui)}
+.sp-price{font-family:var(--font-ui);font-weight:700;font-size:var(--fs-ui);color:var(--teal-dark)}
+.sp-btn{display:block;width:100%;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:0.45rem;font-family:var(--font-ui);font-size:var(--fs-xs);font-weight:600;cursor:pointer;margin-top:0.6rem;transition:background .2s}
 .sp-btn:hover{background:var(--teal);color:var(--navy)}
 
 @media(max-width:1000px){.post-layout{grid-template-columns:1fr}.post-sidebar{position:static}.related-grid{grid-template-columns:1fr 1fr}}
@@ -277,50 +277,16 @@ get_header( 'alluvia' );
     <div class="sidebar-card" style="background:var(--navy)">
       <h4 style="color:rgba(255,255,255,0.7)"><i data-lucide="mail" width="14" height="14"></i> Research Digest</h4>
       <p style="font-size:var(--fs-base);color:rgba(255,255,255,0.65);margin-bottom:1rem">Monthly peptide science updates, new COA releases, and protocol guides.</p>
-      <input type="email" placeholder="your@email.com" style="width:100%;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.6rem 0.9rem;background:rgba(255,255,255,0.07);color:#fff;font-size:var(--fs-base);outline:none;font-family:'Inter',sans-serif;margin-bottom:0.6rem">
-      <button onclick="showToast('Subscribed!')" style="width:100%;background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.6rem;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:var(--fs-ui);cursor:pointer">Subscribe Free</button>
+      <input type="email" placeholder="your@email.com" style="width:100%;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.6rem 0.9rem;background:rgba(255,255,255,0.07);color:#fff;font-size:var(--fs-base);outline:none;font-family:var(--font-body);margin-bottom:0.6rem">
+      <button onclick="showToast('Subscribed!')" style="width:100%;background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.6rem;font-family:var(--font-ui);font-weight:700;font-size:var(--fs-ui);cursor:pointer">Subscribe Free</button>
     </div>
   </aside>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-        <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal.</p>
-        <div class="social-links">
-          <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="twitter" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="facebook" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="youtube" width="16" height="16"></i></a>
-        </div>
-      </div>
-      <div class="footer-col"><h4>Products</h4><ul>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Medical Peptides</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Skincare Peptides</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Sports & Recovery</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
-        <li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Blog</a></li>
-        <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul>
-        <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms</a></li>
-        <li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy</a></li>
-        <li><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
-      <div class="footer-legal"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a></div>
-    </div>
-  </div>
-</footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 <script>
 lucide.createIcons();
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 window.addEventListener('scroll',()=>{const links=document.querySelectorAll('.toc-links a');links.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(sec&&window.scrollY>=sec.offsetTop-140)links.forEach(x=>x.classList.remove('active'))&&a.classList.add('active');});});
 document.querySelectorAll('.share-btn').forEach(b=>b.addEventListener('click',()=>showToast('Link copied!')));
 </script>

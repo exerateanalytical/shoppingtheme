@@ -8,13 +8,13 @@ add_action( 'wp_head', function() {
 ?>
 <style>
 .page-hero{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:6rem 2rem 3rem;margin-top:72px;text-align:center}
-.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}
+.breadcrumb{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-bottom:1rem}
 .breadcrumb a{color:var(--teal);text-decoration:none}
-.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(44px,5.5vw,76px);font-weight:600;color:#fff;margin-bottom:0.5rem}
 .page-hero p{color:rgba(255,255,255,0.65);font-size:var(--fs-base);max-width:560px;margin:0 auto}
 .blog-wrap{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
 .cat-filter{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
-.cat-pill{background:#fff;border:1px solid var(--pearl-dark);border-radius:50px;padding:0.5rem 1.25rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
+.cat-pill{background:#fff;border:1px solid var(--pearl-dark);border-radius:50px;padding:0.5rem 1.25rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;color:var(--text-mid);cursor:pointer;transition:all .2s}
 .cat-pill:hover{border-color:var(--teal);color:var(--teal-dark)}
 .cat-pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 /* FEATURED */
@@ -22,31 +22,31 @@ add_action( 'wp_head', function() {
 .featured-img{background:linear-gradient(135deg,var(--navy),var(--navy-soft));min-height:320px;display:flex;align-items:center;justify-content:center;position:relative}
 .featured-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(14,175,159,0.15),transparent 70%)}
 .featured-body{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
-.post-cat{display:inline-flex;align-items:center;gap:0.3rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-micro);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.75rem;width:fit-content;background:rgba(14,175,159,0.1);padding:3px 10px;border-radius:50px}
-.featured-body h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.2;margin-bottom:0.75rem}
+.post-cat{display:inline-flex;align-items:center;gap:0.3rem;font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.75rem;width:fit-content;background:rgba(14,175,159,0.1);padding:3px 10px;border-radius:50px}
+.featured-body h2{font-family:var(--font-display);font-size:30px;font-weight:600;line-height:1.2;margin-bottom:0.75rem}
 .featured-body p{font-size:var(--fs-body);color:var(--text-mid);margin-bottom:1.25rem}
-.post-meta{display:flex;align-items:center;gap:1rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);color:var(--text-light)}
+.post-meta{display:flex;align-items:center;gap:1rem;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light)}
 .post-meta span{display:flex;align-items:center;gap:0.3rem}
-.read-tag{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:600;color:var(--teal-dark);margin-top:1.25rem}
+.read-tag{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;color:var(--teal-dark);margin-top:1.25rem}
 /* GRID */
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
 .blog-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .blog-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
 .blog-card-img{height:180px;display:flex;align-items:center;justify-content:center;position:relative}
 .blog-card-body{padding:1.5rem;display:flex;flex-direction:column;flex:1}
-.blog-card-body h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;line-height:1.25;margin:0.5rem 0}
+.blog-card-body h3{font-family:var(--font-display);font-size:21px;font-weight:600;line-height:1.25;margin:0.5rem 0}
 .blog-card-body p{font-size:var(--fs-body);color:var(--text-mid);margin-bottom:1rem;flex:1}
 /* NEWSLETTER */
 .newsletter{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:var(--radius);padding:3rem;text-align:center;margin-top:3.5rem}
-.newsletter h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#fff;margin-bottom:0.5rem}
+.newsletter h2{font-family:var(--font-display);font-size:32px;font-weight:600;color:#fff;margin-bottom:0.5rem}
 .newsletter p{color:rgba(255,255,255,0.65);font-size:var(--fs-base);margin-bottom:1.5rem}
 .newsletter-form{display:flex;gap:0.75rem;max-width:480px;margin:0 auto}
-.newsletter-form input{flex:1;border:none;border-radius:8px;padding:0.85rem 1.25rem;font-family:'Inter',sans-serif;font-size:var(--fs-base);outline:none}
-.newsletter-form button{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.85rem 1.75rem;font-family:'Space Grotesk',sans-serif;font-size:var(--fs-ui);font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.newsletter-form input{flex:1;border:none;border-radius:8px;padding:0.85rem 1.25rem;font-family:var(--font-body);font-size:var(--fs-base);outline:none}
+.newsletter-form button{background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.85rem 1.75rem;font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
 .newsletter-form button:hover{background:#fff}
 /* PAGINATION */
 .pagination{display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-top:3rem}
-.page-btn{width:40px;height:40px;border-radius:8px;border:1px solid var(--pearl-dark);background:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:var(--fs-ui);color:var(--text-mid);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.page-btn{width:40px;height:40px;border-radius:8px;border:1px solid var(--pearl-dark);background:#fff;font-family:var(--font-ui);font-weight:600;font-size:var(--fs-ui);color:var(--text-mid);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .page-btn:hover{border-color:var(--teal);color:var(--teal)}
 .page-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 @media(max-width:900px){.featured-post{grid-template-columns:1fr}.featured-img{min-height:220px}.blog-grid{grid-template-columns:1fr 1fr}}
@@ -222,47 +222,10 @@ get_header( 'alluvia' );
   </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-anchor"><svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/><circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/><line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/></svg><div class="logo-text"><span class="nav-logo-word">Alluvia</span><span class="nav-logo-sub">Peptides</span></div></a>
-        <p>Pharmaceutical-grade bioactive peptides engineered for performance, longevity, and cellular renewal. HPLC verified. COA on every batch.</p>
-        <div class="social-links">
-          <a class="social-link" href="#"><i data-lucide="instagram" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="twitter" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="facebook" width="16" height="16"></i></a>
-          <a class="social-link" href="#"><i data-lucide="youtube" width="16" height="16"></i></a>
-        </div>
-      </div>
-      <div class="footer-col"><h4>Products</h4><ul>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Medical Peptides</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Skincare Peptides</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Sports & Recovery</a></li>
-        <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Anti-Aging</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>About Alluvia</a></li>
-        <li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Blog</a></li>
-        <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Contact Us</a></li>
-        <li><a href="<?php echo esc_url(home_url('/coa-library/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>COA Library</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul>
-        <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Terms & Conditions</a></li>
-        <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Shipping Policy</a></li>
-        <li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Privacy Policy</a></li>
-        <li><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>"><i data-lucide="chevron-right" width="12" height="12"></i>Disclaimer</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Alluvia Peptides. All rights reserved.</span>
-      <div class="footer-legal"><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms</a><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>">Shipping</a><a href="<?php echo esc_url(home_url('/disclaimer/')); ?>">Disclaimer</a></div>
-    </div>
-  </div>
-</footer>
+<?php get_template_part('partials/footer-alluvia'); ?>
 <script>
 lucide.createIcons();
 document.querySelectorAll('.cat-pill').forEach(p=>p.addEventListener('click',function(){document.querySelectorAll('.cat-pill').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
-function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"'Space Grotesk',sans-serif",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 </script>
 <?php get_footer( 'alluvia' ); ?>

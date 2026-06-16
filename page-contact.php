@@ -50,7 +50,7 @@ add_action( 'wp_head', function() {
       top: -2px; right: -2px;
       background: var(--teal);
       color: var(--navy);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-micro);
       font-weight: 700;
       width: 16px;
@@ -62,7 +62,7 @@ add_action( 'wp_head', function() {
     }
 
     .btn-shop-now {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-ui);
       font-weight: 600;
       background: var(--teal);
@@ -126,7 +126,7 @@ add_action( 'wp_head', function() {
     .mobile-nav-close:hover { background: rgba(255,255,255,0.1); }
 
     .mobile-nav-overlay a {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: 36px;
       font-weight: 400;
       color: var(--white);
@@ -166,7 +166,7 @@ add_action( 'wp_head', function() {
     }
 
     .breadcrumb {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-ui);
       color: rgba(255, 255, 255, 0.65);
       margin-bottom: 22px;
@@ -185,7 +185,7 @@ add_action( 'wp_head', function() {
     .breadcrumb a:hover { color: var(--teal); }
 
     .page-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: clamp(44px, 6vw, 76px);
       font-weight: 300;
       color: var(--white);
@@ -200,7 +200,7 @@ add_action( 'wp_head', function() {
     }
 
     .page-hero p {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-lead);
       color: rgba(255, 255, 255, 0.70);
       max-width: 560px;
@@ -250,7 +250,7 @@ add_action( 'wp_head', function() {
     }
 
     .info-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: 16px;
       font-weight: 600;
       color: var(--text-dark);
@@ -258,7 +258,7 @@ add_action( 'wp_head', function() {
     }
 
     .info-card .info-value {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: 15px;
       color: var(--text-dark);
       font-weight: 500;
@@ -266,7 +266,7 @@ add_action( 'wp_head', function() {
     }
 
     .info-card .info-note {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-base);
       color: var(--text-light);
     }
@@ -295,7 +295,7 @@ add_action( 'wp_head', function() {
     }
 
     .contact-form-card h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: 38px;
       font-weight: 500;
       color: var(--text-dark);
@@ -316,7 +316,7 @@ add_action( 'wp_head', function() {
     }
 
     .form-group label {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-ui);
       font-weight: 500;
       color: var(--text-dark);
@@ -326,7 +326,7 @@ add_action( 'wp_head', function() {
     .form-group input,
     .form-group select,
     .form-group textarea {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-base);
       color: var(--text-dark);
       background: var(--pearl);
@@ -366,7 +366,7 @@ add_action( 'wp_head', function() {
     }
 
     .checkbox-group label {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-base);
       color: var(--text-mid);
       line-height: 1.6;
@@ -377,7 +377,7 @@ add_action( 'wp_head', function() {
     .checkbox-group label a:hover { text-decoration: underline; }
 
     .btn-submit {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: 15px;
       font-weight: 600;
       background: var(--teal);
@@ -422,7 +422,7 @@ add_action( 'wp_head', function() {
     }
 
     .form-success h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: 36px;
       font-weight: 500;
       color: var(--text-dark);
@@ -430,7 +430,7 @@ add_action( 'wp_head', function() {
     }
 
     .form-success p {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: 15px;
       color: var(--text-mid);
       max-width: 380px;
@@ -453,7 +453,7 @@ add_action( 'wp_head', function() {
     }
 
     .sidebar-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-sm);
       font-weight: 600;
       color: var(--text-light);
@@ -473,14 +473,14 @@ add_action( 'wp_head', function() {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
     }
 
     .response-list .channel { color: var(--text-mid); }
 
     .response-list .time {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-micro);
       font-weight: 600;
       color: var(--teal-dark);
@@ -499,7 +499,7 @@ add_action( 'wp_head', function() {
     .hours-list li {
       display: flex;
       justify-content: space-between;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       color: var(--text-mid);
       padding: 8px 0;
@@ -513,7 +513,7 @@ add_action( 'wp_head', function() {
       display: none;
       align-items: center;
       gap: 7px;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-micro);
       font-weight: 600;
       color: #16a34a;
@@ -544,7 +544,7 @@ add_action( 'wp_head', function() {
     .sidebar-card.teal-bg h3 { color: rgba(10,26,39, 0.7); }
 
     .sidebar-card.teal-bg p {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       color: rgba(10,26,39, 0.78);
       margin-bottom: 18px;
@@ -552,7 +552,7 @@ add_action( 'wp_head', function() {
     }
 
     .btn-ghost-white {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-ui);
       font-weight: 600;
       background: transparent;
@@ -573,7 +573,7 @@ add_action( 'wp_head', function() {
     }
 
     .tracking-text {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       color: var(--text-mid);
       margin-bottom: 14px;
@@ -581,7 +581,7 @@ add_action( 'wp_head', function() {
     }
 
     .tracking-link {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: 14px;
       font-weight: 600;
       color: var(--teal-dark);
@@ -606,7 +606,7 @@ add_action( 'wp_head', function() {
     }
 
     .section-heading h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: clamp(34px, 4vw, 52px);
       font-weight: 400;
       color: var(--text-dark);
@@ -614,7 +614,7 @@ add_action( 'wp_head', function() {
     }
 
     .section-heading p {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: 16px;
       color: var(--text-mid);
     }
@@ -648,7 +648,7 @@ add_action( 'wp_head', function() {
     }
 
     .faq-question h4 {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: var(--fs-body);
       font-weight: 500;
       color: var(--text-dark);
@@ -683,7 +683,7 @@ add_action( 'wp_head', function() {
 
     .faq-answer-inner {
       padding: 0 24px 22px;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       color: var(--text-mid);
       line-height: 1.8;
@@ -735,7 +735,7 @@ add_action( 'wp_head', function() {
     }
 
     .map-placeholder h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: 30px;
       font-weight: 400;
       color: var(--white);
@@ -744,7 +744,7 @@ add_action( 'wp_head', function() {
     }
 
     .map-placeholder p {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       color: rgba(255, 255, 255, 0.70);
       position: relative;
@@ -764,7 +764,7 @@ add_action( 'wp_head', function() {
     }
 
     .newsletter-inner h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: 34px;
       font-weight: 400;
       color: var(--white);
@@ -772,7 +772,7 @@ add_action( 'wp_head', function() {
     }
 
     .newsletter-inner p {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       color: rgba(255, 255, 255, 0.70);
       margin-bottom: 24px;
@@ -785,7 +785,7 @@ add_action( 'wp_head', function() {
 
     .newsletter-form input {
       flex: 1;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: 14px;
       background: rgba(255, 255, 255, 0.07);
       border: 1.5px solid rgba(255, 255, 255, 0.14);
@@ -800,7 +800,7 @@ add_action( 'wp_head', function() {
     .newsletter-form input:focus { border-color: var(--teal); background: rgba(255,255,255,0.1); }
 
     .btn-subscribe {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-ui);
       font-size: 14px;
       font-weight: 600;
       background: var(--teal);
@@ -1124,63 +1124,7 @@ get_header( 'alluvia' );
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo footer-logo-link"><?php echo alluvia_logo_svg(); ?></a>
-        <p class="footer-desc">Pharmaceutical-grade peptides backed by peer-reviewed science.</p>
-        <div class="social-row">
-          <a href="#" class="social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-          <a href="#" class="social-btn" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-          <a href="#" class="social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-          <a href="#" class="social-btn" aria-label="YouTube"><i data-lucide="youtube"></i></a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul class="footer-links">
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right"></i>BPC-157</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right"></i>GHK-Cu Peptide</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right"></i>Ipamorelin</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right"></i>AOD-9604</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right"></i>Semaglutide</a></li>
-          <li><a href="<?php echo esc_url(alluvia_shop_url()); ?>"><i data-lucide="chevron-right"></i>View All Products</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul class="footer-links">
-          <li><a href="<?php echo esc_url(home_url('/about/')); ?>"><i data-lucide="chevron-right"></i>About Us</a></li>
-          <li><a href="<?php echo esc_url(home_url('/about/#science')); ?>"><i data-lucide="chevron-right"></i>Science</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i>Research</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i>Careers</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i>Press</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <ul class="footer-links">
-          <li><a href="<?php echo esc_url(home_url('/contact/')); ?>"><i data-lucide="chevron-right"></i>Contact Us</a></li>
-          <li><a href="<?php echo esc_url(home_url('/shipping-policy/')); ?>"><i data-lucide="chevron-right"></i>Shipping Info</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i>Returns Policy</a></li>
-          <li><a href="#"><i data-lucide="chevron-right"></i>FAQ</a></li>
-          <li><a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>"><i data-lucide="chevron-right"></i>Terms</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2025 Alluvia Peptides. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Terms of Service</a>
-        <a href="#">Disclaimer</a>
-      </div>
-    </div>
-  </footer>
+  <?php get_template_part('partials/footer-alluvia'); ?>
 
   <script>
     // ---- Contact form submit ----
