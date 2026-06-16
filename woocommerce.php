@@ -165,6 +165,16 @@ add_action( 'wp_head', function() {
 .sidebar-cat-link.current .sidebar-cat-count { background: rgba(14,175,159,.15); color: var(--teal); }
 .sidebar-reset-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:var(--radius-sm);border:1.5px solid var(--pearl-dark);font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--text-mid);text-decoration:none;background:var(--white);transition:.2s}
 .sidebar-reset-btn:hover{border-color:var(--navy);color:var(--navy)}
+.sidebar-search{display:flex;align-items:center;gap:9px;border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:9px 12px;background:var(--pearl)}
+.sidebar-search:focus-within{border-color:var(--teal)}
+.sidebar-search svg{color:var(--text-light);flex-shrink:0}
+.sidebar-search input{border:none;background:none;outline:none;width:100%;font-family:var(--font-body);font-size:14px;color:var(--text-dark)}
+.sidebar-search input::placeholder{color:var(--text-light)}
+.sidebar-price-row{display:flex;gap:8px;margin-bottom:10px}
+.sidebar-price-input{width:100%;min-width:0;border:1.5px solid var(--pearl-dark);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;color:var(--text-dark);background:var(--pearl);outline:none;transition:border-color .2s}
+.sidebar-price-input:focus{border-color:var(--teal)}
+.sidebar-apply-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:10px;border-radius:var(--radius-sm);border:none;background:var(--teal);color:var(--navy);font-family:var(--font-ui);font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
+.sidebar-apply-btn:hover{background:var(--teal-dark)}
 @media(max-width:1000px){.alluvia-shop-wrap{grid-template-columns:200px 1fr;padding:32px 24px 80px}}
 @media(max-width:768px){.alluvia-shop-wrap{grid-template-columns:1fr;padding:28px 20px 60px}.alluvia-shop-sidebar{display:none}}
 </style>';
@@ -191,6 +201,16 @@ get_header( 'alluvia' );
   <div class="alluvia-shop-wrap">
     <aside class="alluvia-shop-sidebar">
       <div class="sidebar-card">
+        <form role="search" method="get" action="<?php echo esc_url( home_url('/') ); ?>">
+          <input type="hidden" name="post_type" value="product">
+          <label class="sidebar-search">
+            <i data-lucide="search" style="width:15px;height:15px"></i>
+            <span class="screen-reader-text">Search peptides</span>
+            <input type="search" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search peptides&hellip;">
+          </label>
+        </form>
+      </div>
+      <div class="sidebar-card">
         <div class="sidebar-card-title" id="shop-cat-heading">Categories</div>
         <nav aria-labelledby="shop-cat-heading">
           <a href="<?php echo esc_url($shop_base); ?>" class="sidebar-cat-link<?php echo (!$current_cat_obj) ? ' current' : ''; ?>"<?php echo (!$current_cat_obj) ? ' aria-current="page"' : ''; ?>>
@@ -206,6 +226,19 @@ get_header( 'alluvia' );
           </a>
           <?php endforeach; endif; ?>
         </nav>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Price Range</div>
+        <form method="get" action="<?php echo esc_url( $current_cat_obj && ! is_wp_error( get_term_link( $current_cat_obj ) ) ? get_term_link( $current_cat_obj ) : $shop_base ); ?>">
+          <?php if ( ! empty( $_GET['orderby'] ) ) : ?>
+            <input type="hidden" name="orderby" value="<?php echo esc_attr( sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) ); ?>">
+          <?php endif; ?>
+          <div class="sidebar-price-row">
+            <input class="sidebar-price-input" type="number" min="0" step="any" name="min_price" value="<?php echo isset( $_GET['min_price'] ) ? esc_attr( (float) $_GET['min_price'] ) : ''; ?>" placeholder="Min $" aria-label="Minimum price">
+            <input class="sidebar-price-input" type="number" min="0" step="any" name="max_price" value="<?php echo isset( $_GET['max_price'] ) ? esc_attr( (float) $_GET['max_price'] ) : ''; ?>" placeholder="Max $" aria-label="Maximum price">
+          </div>
+          <button type="submit" class="sidebar-apply-btn"><i data-lucide="sliders-horizontal" style="width:13px;height:13px"></i> Apply</button>
+        </form>
       </div>
       <a href="<?php echo esc_url($shop_base); ?>" class="sidebar-reset-btn">Reset Filters</a>
     </aside>

@@ -332,6 +332,37 @@ function alluvia_woo_loop_hooks() {
 add_filter( 'loop_shop_per_page', function () { return 24; }, 20 );
 
 /* ═══════════════════════════════════════
+   WOOCOMMERCE: Sidebar price-range filter
+   Applies the ?min_price / ?max_price query params from the shop sidebar to the
+   main product query via a numeric meta_query on _price. (WooCommerce only wires
+   these params natively when its price-filter widget/block is present.)
+═══════════════════════════════════════ */
+add_action( 'woocommerce_product_query', function ( $q ) {
+    if ( is_admin() ) {
+        return;
+    }
+    $min = isset( $_GET['min_price'] ) && $_GET['min_price'] !== '' ? (float) $_GET['min_price'] : null;
+    $max = isset( $_GET['max_price'] ) && $_GET['max_price'] !== '' ? (float) $_GET['max_price'] : null;
+    if ( null === $min && null === $max ) {
+        return;
+    }
+    $meta_query   = (array) $q->get( 'meta_query' );
+    $price_clause = array( 'key' => '_price', 'type' => 'NUMERIC' );
+    if ( null !== $min && null !== $max ) {
+        $price_clause['compare'] = 'BETWEEN';
+        $price_clause['value']   = array( min( $min, $max ), max( $min, $max ) );
+    } elseif ( null !== $min ) {
+        $price_clause['compare'] = '>=';
+        $price_clause['value']   = $min;
+    } else {
+        $price_clause['compare'] = '<=';
+        $price_clause['value']   = $max;
+    }
+    $meta_query[] = $price_clause;
+    $q->set( 'meta_query', $meta_query );
+} );
+
+/* ═══════════════════════════════════════
    WOOCOMMERCE: Custom AJAX cart engine
    Backs the bespoke add-to-cart / qty-stepper / remove interactions on the
    Alluvia commerce templates. Uses WooCommerce's own cart object and fragment
