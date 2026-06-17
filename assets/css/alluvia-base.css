@@ -171,11 +171,11 @@ a:hover { color: var(--teal-dark); }
 .nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); }
 
 /* ── Mobile overlay ── */
-.mobile-overlay { position: fixed; inset: 0; z-index: 999; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+.mobile-overlay { position: fixed; inset: 0; z-index: 999; background: var(--navy); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 14px; padding: 88px 32px 48px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .mobile-overlay.open { opacity: 1; pointer-events: all; }
-.mobile-overlay a { font-family: var(--font-display); font-size: clamp(32px, 6vw, 48px); font-weight: 300; color: #fff; text-decoration: none; transition: color 0.25s; }
+.mobile-overlay a { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: #fff; text-decoration: none; transition: color 0.25s; line-height: 1.1; }
 .mobile-overlay a:hover { color: var(--teal); }
-.mobile-close { position: absolute; top: 24px; right: 28px; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; display: flex; }
+.mobile-close { position: fixed; top: 20px; right: 22px; z-index: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; width: 42px; height: 42px; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
 /* ── Shared footer ── */
 .alluvia-footer { position: relative; background: radial-gradient(ellipse 60% 80% at 15% 0%, rgba(17,182,163,0.06), transparent 55%), radial-gradient(ellipse 50% 70% at 90% 10%, rgba(198,162,83,0.05), transparent 55%), #060e17; padding: 80px 0 0; color: rgba(255,255,255,0.65); }
@@ -236,6 +236,14 @@ a:hover { color: var(--teal-dark); }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .nav-inner, .footer-grid { padding-left: 24px; padding-right: 24px; }
+  /* group the cart/account icons to the right, next to the hamburger */
+  .nav-right { margin-left: auto; gap: 8px; }
+}
+@media (max-width: 480px) {
+  .nav-inner { padding-left: 16px; padding-right: 16px; gap: 8px; }
+  .nav-icon-btn { padding: 8px 12px; font-size: 12px; }
+  .nav-right { gap: 6px; }
+  .nav-hamburger { padding: 8px 4px; }
 }
 @media (max-width: 640px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
