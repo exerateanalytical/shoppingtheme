@@ -752,10 +752,10 @@ function alluvia_product_coa_button() {
         return;
     }
     echo '<a href="' . esc_url( $pdf ) . '" target="_blank" rel="noopener" class="alluvia-coa-btn" '
-        . 'style="display:inline-flex;align-items:center;gap:9px;margin:6px 0 4px;background:#fff;color:#0a1a27;'
-        . 'border:1.5px solid #c6a253;border-radius:100px;padding:11px 22px;font-family:inherit;font-weight:700;'
+        . 'style="display:inline-flex;align-items:center;gap:9px;margin:6px 0 4px;background:var(--white,#fff);color:var(--navy,#0a1a27);'
+        . 'border:1.5px solid var(--gold,#c6a253);border-radius:100px;padding:11px 22px;font-family:inherit;font-weight:700;'
         . 'font-size:14px;text-decoration:none;transition:.25s;">'
-        . '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c6a253" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+        . '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold,#c6a253)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
         . 'Download Certificate of Analysis (PDF)</a>';
 }
 
@@ -797,8 +797,8 @@ function alluvia_coa_product_tab_content() {
 
 add_action( 'woocommerce_single_product_summary', 'alluvia_product_ruo_notice', 25 );
 function alluvia_product_ruo_notice() {
-    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid #c6a253;border-left:4px solid #c6a253;background:#fbf7ef;border-radius:8px;font-size:15px;line-height:1.5;color:#3a3320;">'
-        . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:#0a1a27;margin-bottom:4px;">For Research Use Only</strong>'
+    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid var(--gold,#c6a253);border-left:4px solid var(--gold,#c6a253);background:#fbf7ef;border-radius:8px;font-size:15px;line-height:1.5;color:#3a3320;">'
+        . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:var(--navy,#0a1a27);margin-bottom:4px;">For Research Use Only</strong>'
         . 'This product is supplied strictly for laboratory and in-vitro research by qualified researchers. '
         . 'It is <strong>not for human or animal consumption</strong> and is not a drug, food, cosmetic or dietary supplement.'
         . '</div>';
@@ -810,7 +810,7 @@ function alluvia_footer_disclaimer() {
     if ( is_admin() ) {
         return;
     }
-    echo '<div class="alluvia-footer-disclaimer" style="background:#0a1a27;color:#aeb9c4;font-size:15px;line-height:1.6;text-align:center;padding:18px 20px;border-top:2px solid #c6a253;">'
+    echo '<div class="alluvia-footer-disclaimer" style="background:var(--navy,#0a1a27);color:#aeb9c4;font-size:15px;line-height:1.6;text-align:center;padding:18px 20px;border-top:2px solid var(--gold,#c6a253);">'
         . '<div style="max-width:960px;margin:0 auto;">'
         . '<strong style="color:#fff;">Research Use Only &mdash; Not for Human Consumption.</strong> '
         . 'All products supplied by Alluvia Peptides are sold strictly as research-grade chemicals for in-vitro and laboratory research purposes only. '
