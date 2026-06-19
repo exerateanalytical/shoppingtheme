@@ -18,9 +18,7 @@ add_action( 'wp_head', function() {
 .alluvia-woo-wrap .woocommerce-ordering select { background: #fff; color: var(--navy); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 9px 16px; }
 .alluvia-woo-wrap .woocommerce-breadcrumb { color: rgba(255,255,255,0.6); }
 .alluvia-woo-wrap .woocommerce-breadcrumb a { color: var(--teal); }
-.alluvia-woo-inner { max-width: 1200px; margin: 40px auto; padding: 60px 40px; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
-/* Inner is a white card — bare body text must read dark, not inherit anything light */
-.alluvia-woo-inner, .alluvia-woo-inner p { color: var(--text-dark); }
+.alluvia-woo-inner { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
 .alluvia-woo-inner h1,
 .alluvia-woo-inner .page-title {
   font-family: var(--font-display);
@@ -57,6 +55,30 @@ add_action( 'wp_head', function() {
 .woocommerce div.product .woocommerce-tabs,
 .woocommerce div.product .related,
 .woocommerce div.product .upsells { grid-column: 1 / -1; }
+
+/* ── Single product sits on the navy platform background (no card): recolor
+   text to light so it reads on navy. Scoped to body.single-product so the
+   cart / checkout / account pages (which share .alluvia-woo-inner and rely on
+   white surfaces) are unaffected. ── */
+body.single-product .woocommerce div.product .product_title,
+body.single-product .woocommerce div.product .summary .price,
+body.single-product .woocommerce div.product p.price { color: #fff; }
+body.single-product .woocommerce div.product .woocommerce-product-details__short-description,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel p { color: rgba(255,255,255,0.82); }
+body.single-product .woocommerce div.product .product_meta,
+body.single-product .woocommerce div.product .product_meta a { color: rgba(255,255,255,0.6); }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h3,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h4 { color: #fff; }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom-color: rgba(255,255,255,0.18); }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a { color: rgba(255,255,255,0.6); }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: #fff; border-bottom-color: var(--teal); }
+body.single-product .woocommerce .related > h2,
+body.single-product .woocommerce .upsells > h2 { color: #fff; }
+body.single-product .woocommerce div.product .stock.in-stock { color: var(--mint,#3ddc97); }
+body.single-product .woocommerce div.product .stock.out-of-stock { color: var(--coral,#db627a); }
 
 /* ── Add to cart ── */
 .woocommerce div.product form.cart { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 24px 0; }
