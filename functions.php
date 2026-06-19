@@ -246,11 +246,14 @@ function alluvia_seo_meta() {
 }
 
 /* Per-product SEO <title> — use the curated _alluvia_seo_title when present. */
-add_filter( 'pre_get_document_title', 'alluvia_seo_document_title', 20 );
+add_filter( 'pre_get_document_title', 'alluvia_seo_document_title', 1 );
 function alluvia_seo_document_title( $title ) {
-    if ( alluvia_active_seo_plugin() ) {
-        return $title; // the SEO plugin sets the title from the bridged meta
-    }
+    // Always provide a strong baseline title at an EARLY priority. If an SEO
+    // plugin is active and actually rendering, it runs later on this same filter
+    // and overrides us — so a manual title edit inside the plugin still wins. If
+    // no plugin is present, or one is installed but not yet rendering (e.g.
+    // RankMath before its setup wizard is finished), ours stands and the title is
+    // never lost to the bare WordPress default.
     if ( is_front_page() ) {
         return 'Alluvia Peptides — Premium Bioactive Peptides | HPLC-Verified Purity & COA';
     }
