@@ -97,7 +97,7 @@ body {
   font-size: var(--fs-body);
   line-height: 1.7;
   color: var(--text-dark);
-  background: var(--pearl);
+  /* background intentionally omitted — body.alluvia-site overrides via var(--navy) */
   overflow-x: hidden;
 }
 
@@ -236,8 +236,8 @@ a:hover { color: var(--teal-dark); }
 .woocommerce a.button:hover,
 .woocommerce button.button:hover { background: var(--teal-dark); transform: translateY(-2px); }
 .woocommerce a.button.alt,
-.woocommerce button.button.alt { background: var(--navy); color: #fff; }
-.woocommerce form .form-row label { font-family: var(--font-ui); font-size: var(--fs-ui); font-weight: 600; color: var(--navy); margin-bottom: 6px; display: block; }
+.woocommerce button.button.alt { background: var(--navy); color: var(--color-on-navy); }
+.woocommerce form .form-row label { font-family: var(--font-ui); font-size: var(--fs-ui); font-weight: 600; color: var(--color-on-navy); margin-bottom: 6px; display: block; }
 .woocommerce form .form-row input.input-text,
 .woocommerce form .form-row select,
 .woocommerce form .form-row textarea { border: 1.5px solid var(--pearl-dark); border-radius: var(--radius-sm); padding: 13px 16px; font-size: var(--fs-base); font-family: var(--font-body); width: 100%; transition: border-color 0.25s; }
