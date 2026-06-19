@@ -242,10 +242,12 @@ function alluvia_seo_meta() {
         echo '<script type="application/ld+json">' . wp_json_encode( $website ) . '</script>' . "\n";
     } elseif ( function_exists( 'is_product' ) && is_product() ) {
         alluvia_product_schema();
+    } elseif ( is_singular( 'post' ) ) {
+        alluvia_post_schema();
     }
 }
 
-/* Per-product SEO <title> — use the curated _alluvia_seo_title when present. */
+/* Per-product / per-post SEO <title> — use the curated _alluvia_seo_title when present. */
 add_filter( 'pre_get_document_title', 'alluvia_seo_document_title', 1 );
 function alluvia_seo_document_title( $title ) {
     // Always provide a strong baseline title at an EARLY priority. If an SEO
@@ -257,13 +259,99 @@ function alluvia_seo_document_title( $title ) {
     if ( is_front_page() ) {
         return 'Alluvia Peptides — Premium Bioactive Peptides | HPLC-Verified Purity & COA';
     }
-    if ( is_singular( 'product' ) ) {
+    if ( is_singular( array( 'product', 'post' ) ) ) {
         $custom = get_post_meta( get_the_ID(), '_alluvia_seo_title', true );
         if ( $custom ) {
             return $custom;
         }
     }
     return $title;
+}
+
+/* ── Blog post SEO/AEO/GEO output (meta + Article/Breadcrumb/FAQ schema) ──
+   Mirrors alluvia_product_schema for single posts: curated meta description,
+   canonical, Open Graph (article), an Article JSON-LD (GEO), BreadcrumbList,
+   and a FAQPage built from the post's _alluvia_seo_faq meta (AEO). */
+function alluvia_post_schema() {
+    $pid = get_the_ID();
+    if ( ! $pid ) {
+        return;
+    }
+    $url       = get_permalink( $pid );
+    $title     = wp_strip_all_tags( get_the_title( $pid ) );
+    $seo_title = get_post_meta( $pid, '_alluvia_seo_title', true ) ?: ( $title . ' | Alluvia Peptides' );
+    $desc      = get_post_meta( $pid, '_alluvia_seo_desc', true );
+    if ( ! $desc ) {
+        $desc = wp_html_excerpt( wp_strip_all_tags( get_post_field( 'post_content', $pid ) ), 155, '…' );
+    }
+    $img = get_the_post_thumbnail_url( $pid, 'large' );
+
+    echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+    echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+    echo '<meta property="og:type" content="article">' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr( $seo_title ) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+    echo '<meta property="og:site_name" content="Alluvia Peptides">' . "\n";
+    if ( $img ) {
+        echo '<meta property="og:image" content="' . esc_url( $img ) . '">' . "\n";
+    }
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+
+    $publisher = array(
+        '@type' => 'Organization',
+        'name'  => 'Alluvia Peptides',
+        'logo'  => array( '@type' => 'ImageObject', 'url' => get_template_directory_uri() . '/assets/images/favicon.svg' ),
+    );
+    $article = array(
+        '@context'         => 'https://schema.org',
+        '@type'            => 'Article',
+        'headline'         => $title,
+        'description'      => $desc,
+        'mainEntityOfPage' => array( '@type' => 'WebPage', '@id' => $url ),
+        'datePublished'    => get_the_date( 'c', $pid ),
+        'dateModified'     => get_the_modified_date( 'c', $pid ),
+        'author'           => array( '@type' => 'Organization', 'name' => 'Alluvia Peptides' ),
+        'publisher'        => $publisher,
+    );
+    if ( $img ) {
+        $article['image'] = array( $img );
+    }
+    echo '<script type="application/ld+json">' . wp_json_encode( $article ) . '</script>' . "\n";
+
+    $blog_url = get_option( 'page_for_posts' ) ? get_permalink( get_option( 'page_for_posts' ) ) : home_url( '/blog/' );
+    $crumbs   = array(
+        array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url( '/' ) ),
+        array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Blog', 'item' => $blog_url ),
+        array( '@type' => 'ListItem', 'position' => 3, 'name' => $title, 'item' => $url ),
+    );
+    echo '<script type="application/ld+json">' . wp_json_encode( array(
+        '@context'        => 'https://schema.org',
+        '@type'           => 'BreadcrumbList',
+        'itemListElement' => $crumbs,
+    ) ) . '</script>' . "\n";
+
+    $faq = get_post_meta( $pid, '_alluvia_seo_faq', true );
+    if ( is_array( $faq ) && $faq ) {
+        $items = array();
+        foreach ( $faq as $qa ) {
+            if ( empty( $qa['q'] ) || empty( $qa['a'] ) ) {
+                continue;
+            }
+            $items[] = array(
+                '@type'          => 'Question',
+                'name'           => wp_strip_all_tags( $qa['q'] ),
+                'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $qa['a'] ) ),
+            );
+        }
+        if ( $items ) {
+            echo '<script type="application/ld+json">' . wp_json_encode( array(
+                '@context'   => 'https://schema.org',
+                '@type'      => 'FAQPage',
+                'mainEntity' => $items,
+            ) ) . '</script>' . "\n";
+        }
+    }
 }
 
 /* Avoid a duplicate Product JSON-LD: the theme emits its own enriched Product
