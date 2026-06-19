@@ -201,17 +201,59 @@ function alluvia_handle_subscribe() {
 add_action( 'wp_head', 'alluvia_seo_meta', 1 );
 function alluvia_seo_meta() {
     if ( is_front_page() ) {
-        echo '<meta name="description" content="Alluvia Peptides — Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. COA on every batch.">' . "\n";
+        $desc = 'Alluvia Peptides — pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. HPLC-verified purity with a Certificate of Analysis on every batch.';
+        $logo = get_template_directory_uri() . '/assets/images/favicon.svg';
+        echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
         echo '<meta property="og:type" content="website">' . "\n";
         echo '<meta property="og:title" content="Alluvia Peptides — Premium Bioactive Peptides">' . "\n";
+        echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
         echo '<meta property="og:url" content="' . esc_url( home_url( '/' ) ) . '">' . "\n";
         echo '<meta property="og:site_name" content="Alluvia Peptides">' . "\n";
+        echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
         echo '<link rel="canonical" href="' . esc_url( home_url( '/' ) ) . '">' . "\n";
-        echo '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Alluvia Peptides","url":"' . esc_url( home_url( '/' ) ) . '","description":"Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, and longevity."}</script>' . "\n";
+        // Organization schema (logo + description). sameAs left empty — add real social profiles only.
+        $org = array(
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Organization',
+            'name'        => 'Alluvia Peptides',
+            'url'         => home_url( '/' ),
+            'logo'        => $logo,
+            'description' => $desc,
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $org ) . '</script>' . "\n";
+        // WebSite schema with sitelinks search.
+        $website = array(
+            '@context'        => 'https://schema.org',
+            '@type'           => 'WebSite',
+            'name'            => 'Alluvia Peptides',
+            'url'             => home_url( '/' ),
+            'potentialAction' => array(
+                '@type'       => 'SearchAction',
+                'target'      => array( '@type' => 'EntryPoint', 'urlTemplate' => home_url( '/?s={search_term_string}' ) ),
+                'query-input' => 'required name=search_term_string',
+            ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $website ) . '</script>' . "\n";
     } elseif ( function_exists( 'is_product' ) && is_product() ) {
         alluvia_product_schema();
     }
 }
+
+/* Per-product SEO <title> — use the curated _alluvia_seo_title when present. */
+add_filter( 'pre_get_document_title', 'alluvia_seo_document_title', 20 );
+function alluvia_seo_document_title( $title ) {
+    if ( is_singular( 'product' ) ) {
+        $custom = get_post_meta( get_the_ID(), '_alluvia_seo_title', true );
+        if ( $custom ) {
+            return $custom;
+        }
+    }
+    return $title;
+}
+
+/* Avoid a duplicate Product JSON-LD: the theme emits its own enriched Product
+   schema (alluvia_product_schema), so suppress WooCommerce's default one. */
+add_filter( 'woocommerce_structured_data_product', '__return_empty_array' );
 
 /* ═══════════════════════════════════════
    PRODUCT SEO: Product + FAQPage JSON-LD
@@ -228,61 +270,136 @@ function alluvia_product_schema() {
     if ( ! $product ) {
         return;
     }
+    $pid = $product->get_id();
 
     $name        = wp_strip_all_tags( $product->get_name() );
-    $description  = wp_strip_all_tags( $product->get_short_description() ?: $product->get_description() );
-    $description  = trim( preg_replace( '/\s+/', ' ', $description ) );
-    $sku         = $product->get_sku();
+    $description = wp_strip_all_tags( $product->get_short_description() ?: $product->get_description() );
+    $description = trim( preg_replace( '/\s+/', ' ', $description ) );
+    $sku         = $product->get_sku() ?: ( 'AV-' . $pid );
     $price       = $product->get_price();
-    $url         = get_permalink( $product->get_id() );
+    $url         = get_permalink( $pid );
+    $img         = wp_get_attachment_image_url( $product->get_image_id(), 'large' );
     $availability = $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock';
 
-    // --- Product schema ---
+    $cats        = wp_get_post_terms( $pid, 'product_cat', array( 'fields' => 'all' ) );
+    $primary_cat = ( ! is_wp_error( $cats ) && ! empty( $cats ) ) ? html_entity_decode( $cats[0]->name ) : '';
+
+    // Curated SEO title/description (from Phase-2 generation); graceful fallbacks.
+    $seo_title = get_post_meta( $pid, '_alluvia_seo_title', true ) ?: ( $name . ' | Alluvia Peptides' );
+    $meta_desc = get_post_meta( $pid, '_alluvia_seo_desc', true ) ?: wp_html_excerpt( $description, 155, '…' );
+
+    /* ── Meta description + canonical + Open Graph / Twitter (product) ── */
+    echo '<meta name="description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+    echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+    echo '<meta property="og:type" content="product">' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr( $seo_title ) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+    echo '<meta property="og:site_name" content="Alluvia Peptides">' . "\n";
+    if ( $img ) {
+        echo '<meta property="og:image" content="' . esc_url( $img ) . '">' . "\n";
+    }
+    if ( '' !== $price ) {
+        echo '<meta property="product:price:amount" content="' . esc_attr( $price ) . '">' . "\n";
+        echo '<meta property="product:price:currency" content="' . esc_attr( get_woocommerce_currency() ) . '">' . "\n";
+    }
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+
+    /* ── Product schema (enriched; real reviews only — never fabricated) ── */
+    $props = array(
+        array( '@type' => 'PropertyValue', 'name' => 'Purity',       'value' => 'HPLC-verified — Certificate of Analysis on every batch' ),
+        array( '@type' => 'PropertyValue', 'name' => 'Form',         'value' => 'Lyophilised powder' ),
+        array( '@type' => 'PropertyValue', 'name' => 'Intended Use', 'value' => 'Laboratory research use only — not for human consumption' ),
+    );
+    if ( preg_match( '/([0-9.]+\s?(?:mg|mcg|iu|ml))/i', $name, $dm ) ) {
+        array_splice( $props, 1, 0, array( array( '@type' => 'PropertyValue', 'name' => 'Unit Size', 'value' => trim( $dm[1] ) ) ) );
+    }
+
     $schema = array(
-        '@context'    => 'https://schema.org/',
-        '@type'       => 'Product',
-        'name'        => $name,
-        'description' => $description,
-        'sku'         => $sku,
-        'brand'       => array( '@type' => 'Brand', 'name' => 'Alluvia Peptides' ),
-        'offers'      => array(
-            '@type'         => 'Offer',
-            'url'           => $url,
-            'priceCurrency' => get_woocommerce_currency(),
-            'price'         => $price,
-            'availability'  => $availability,
-            'seller'        => array( '@type' => 'Organization', 'name' => 'Alluvia Peptides' ),
+        '@context'           => 'https://schema.org/',
+        '@type'              => 'Product',
+        '@id'                => $url . '#product',
+        'name'               => $name,
+        'description'        => $description ?: $meta_desc,
+        'sku'                => $sku,
+        'mpn'                => $sku,
+        'category'           => $primary_cat,
+        'brand'              => array( '@type' => 'Brand', 'name' => 'Alluvia Peptides', 'url' => home_url( '/' ) ),
+        'additionalProperty' => $props,
+        'offers'             => array(
+            '@type'           => 'Offer',
+            'url'             => $url,
+            'priceCurrency'   => get_woocommerce_currency(),
+            'price'           => $price,
+            'availability'    => $availability,
+            'priceValidUntil' => gmdate( 'Y' ) . '-12-31',
+            'seller'          => array( '@type' => 'Organization', 'name' => 'Alluvia Peptides' ),
         ),
     );
+    if ( $img ) {
+        $schema['image'] = array( $img );
+    }
+    $review_count = (int) $product->get_review_count();
+    if ( $review_count > 0 ) { // only emit ratings backed by REAL reviews
+        $schema['aggregateRating'] = array(
+            '@type'       => 'AggregateRating',
+            'ratingValue' => (string) $product->get_average_rating(),
+            'reviewCount' => (string) $review_count,
+            'bestRating'  => '5',
+            'worstRating' => '1',
+        );
+    }
     echo '<script type="application/ld+json">' . wp_json_encode( $schema ) . '</script>' . "\n";
 
-    // --- FAQPage schema (parsed from the <h4>Q</h4><p>A</p> blocks in the body) ---
-    if ( preg_match_all( '/<h4[^>]*>(.*?)<\/h4>\s*<p[^>]*>(.*?)<\/p>/is', $product->get_description(), $m, PREG_SET_ORDER ) ) {
-        $faqs = array();
+    /* ── BreadcrumbList schema ── */
+    $crumbs = array(
+        array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url( '/' ) ),
+        array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Shop', 'item' => function_exists( 'alluvia_shop_url' ) ? alluvia_shop_url() : home_url( '/shop/' ) ),
+    );
+    $pos = 3;
+    if ( $primary_cat && ! is_wp_error( $cats ) && ! empty( $cats ) ) {
+        $cat_link = get_term_link( $cats[0] );
+        if ( ! is_wp_error( $cat_link ) ) {
+            $crumbs[] = array( '@type' => 'ListItem', 'position' => $pos++, 'name' => $primary_cat, 'item' => $cat_link );
+        }
+    }
+    $crumbs[] = array( '@type' => 'ListItem', 'position' => $pos, 'name' => $name, 'item' => $url );
+    echo '<script type="application/ld+json">' . wp_json_encode( array(
+        '@context'        => 'https://schema.org',
+        '@type'           => 'BreadcrumbList',
+        'itemListElement' => $crumbs,
+    ) ) . '</script>' . "\n";
+
+    /* ── FAQPage schema (AEO) — built from curated meta, else parsed from the
+          <h4>Q</h4><p>A</p> blocks already authored in the product body. ── */
+    $faqs       = array();
+    $faq_stored = get_post_meta( $pid, '_alluvia_seo_faq', true );
+    if ( is_array( $faq_stored ) && $faq_stored ) {
+        foreach ( $faq_stored as $qa ) {
+            if ( empty( $qa['q'] ) || empty( $qa['a'] ) ) {
+                continue;
+            }
+            $faqs[] = array(
+                '@type'          => 'Question',
+                'name'           => wp_strip_all_tags( $qa['q'] ),
+                'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $qa['a'] ) ),
+            );
+        }
+    } elseif ( preg_match_all( '/<h4[^>]*>(.*?)<\/h4>\s*<p[^>]*>(.*?)<\/p>/is', $product->get_description(), $m, PREG_SET_ORDER ) ) {
         foreach ( $m as $pair ) {
             $faqs[] = array(
                 '@type'          => 'Question',
                 'name'           => wp_strip_all_tags( $pair[1] ),
-                'acceptedAnswer' => array(
-                    '@type' => 'Answer',
-                    'text'  => wp_strip_all_tags( $pair[2] ),
-                ),
+                'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $pair[2] ) ),
             );
-        }
-        if ( $faqs ) {
-            $faq_schema = array(
-                '@context'   => 'https://schema.org',
-                '@type'      => 'FAQPage',
-                'mainEntity' => $faqs,
-            );
-            echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema ) . '</script>' . "\n";
         }
     }
-
-    // --- Fallback meta description when Yoast is not active ---
-    if ( ! defined( 'WPSEO_VERSION' ) && $description ) {
-        echo '<meta name="description" content="' . esc_attr( wp_html_excerpt( $description, 155, '…' ) ) . '">' . "\n";
-        echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+    if ( $faqs ) {
+        echo '<script type="application/ld+json">' . wp_json_encode( array(
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => $faqs,
+        ) ) . '</script>' . "\n";
     }
 }
 
