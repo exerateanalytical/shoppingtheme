@@ -1,0 +1,66 @@
+<h2>Three Approaches to Fix All 17 Issues</h2>
+<p class="subtitle">Same end result — different organization. Pick your preferred strategy.</p>
+
+<style>
+  .approach-card { border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; border: 1.5px solid rgba(255,255,255,0.12); }
+  .approach-card.recommended { border-color: rgba(14,175,159,0.5); background: rgba(14,175,159,0.06); }
+  .tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; border-radius:4px; padding:2px 8px; margin-bottom:10px; }
+  .tag.rec { background:rgba(14,175,159,0.2); color:#0eaf9f; }
+  .tag.alt { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.5); }
+  .steps { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .step { background:rgba(255,255,255,0.07); border-radius:6px; padding:4px 10px; font-size:12px; }
+  .pros-cons { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; font-size:13px; }
+  .pro { color:#3ddc97; } .con { color:#e05263; }
+  ul.tight { margin:4px 0; padding-left:18px; } ul.tight li { margin-bottom:3px; }
+</style>
+
+<div class="approach-card recommended">
+  <div class="tag rec">★ Recommended — Approach A</div>
+  <h3>Expand dark-platform.css to cover everything</h3>
+  <p>One authoritative CSS file owns ALL color overrides for the navy platform. We add missing page scopes (<code>.archive-layout</code>, <code>.search-layout</code>, <code>.page-checkout</code>, etc.) and fix the source files that still emit conflicting dark tokens. Verified page-by-page as we go.</p>
+  <div class="steps">
+    <div class="step">1. Fix critical CSS collisions in 4 templates</div>
+    <div class="step">2. Expand dark-platform.css with 5 new page scopes</div>
+    <div class="step">3. Fix mobile gaps in archive + search + product tabs</div>
+    <div class="step">4. Fix button token inconsistency</div>
+    <div class="step">5. Verify Lucide icons enqueue</div>
+    <div class="step">6. Final visual pass all pages</div>
+  </div>
+  <div class="pros-cons">
+    <ul class="tight"><li class="pro">✓ Single file = single source of truth</li><li class="pro">✓ Consistent with existing architecture</li><li class="pro">✓ Easy to audit in future</li></ul>
+    <ul class="tight"><li class="con">✗ dark-platform.css gets longer (~180 lines)</li></ul>
+  </div>
+</div>
+
+<div class="approach-card">
+  <div class="tag alt">Approach B</div>
+  <h3>Fix at the source — remove dark tokens from base CSS</h3>
+  <p>Instead of overriding, change <code>alluvia-base.css</code> global defaults (<code>p</code>, <code>h1-h6</code>, form labels) to use CSS variables that resolve differently on navy vs light backgrounds. Requires adding new tokens like <code>--color-body-text</code> that inherit from context.</p>
+  <div class="steps">
+    <div class="step">1. Add context-aware tokens to :root</div>
+    <div class="step">2. Replace all hardcoded dark colors in base.css</div>
+    <div class="step">3. Update every template to use new tokens</div>
+    <div class="step">4. Test that light-bg pages (none currently) still work</div>
+  </div>
+  <div class="pros-cons">
+    <ul class="tight"><li class="pro">✓ Cleaner architecture long-term</li><li class="pro">✓ No override cascade needed</li></ul>
+    <ul class="tight"><li class="con">✗ High risk — touches every file</li><li class="con">✗ Since ALL pages are navy, no immediate benefit</li></ul>
+  </div>
+</div>
+
+<div class="approach-card">
+  <div class="tag alt">Approach C</div>
+  <h3>Template-by-template inline fix</h3>
+  <p>Go into each template's <code>&lt;style&gt;</code> block and directly change dark color values to white/gold/teal. No new CSS file, no abstraction — just correct the wrong values in place.</p>
+  <div class="steps">
+    <div class="step">1. Edit archive.php inline styles</div>
+    <div class="step">2. Edit search.php inline styles</div>
+    <div class="step">3. Edit page-product.php inline styles</div>
+    <div class="step">4. Edit page-checkout.php, page-contact.php</div>
+    <div class="step">5. Repeat for 6 more templates…</div>
+  </div>
+  <div class="pros-cons">
+    <ul class="tight"><li class="pro">✓ Simple, no abstraction</li></ul>
+    <ul class="tight"><li class="con">✗ Color values scattered across 10+ files</li><li class="con">✗ Future color change = update everywhere</li><li class="con">✗ We've been here before — this is what caused the mess</li></ul>
+  </div>
+</div>

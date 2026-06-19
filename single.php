@@ -30,29 +30,29 @@ add_action( 'wp_head', function() {
 .article{}
 .article-img{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:var(--radius);height:340px;display:flex;align-items:center;justify-content:center;margin-bottom:2.5rem;position:relative;overflow:hidden}
 .article-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(14,175,159,0.12),transparent 70%)}
-.article p{font-size:var(--fs-body);line-height:1.9;margin-bottom:1.5rem}
-.article h2{font-family:var(--font-display);font-size:28px;font-weight:600;margin:2.5rem 0 1rem}
-.article h3{font-family:var(--font-ui);font-size:var(--fs-body);font-weight:700;margin:1.75rem 0 0.75rem}
+.article p{font-size:var(--fs-body);color:var(--text-mid);line-height:1.9;margin-bottom:1.5rem}
+.article h2{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--text-dark);margin:2.5rem 0 1rem}
+.article h3{font-family:var(--font-ui);font-size:var(--fs-body);font-weight:700;color:var(--text-dark);margin:1.75rem 0 0.75rem}
 .article ul,.article ol{padding-left:1.5rem;margin-bottom:1.5rem}
-.article ul li,.article ol li{font-size:var(--fs-body);margin-bottom:0.5rem;line-height:1.8}
+.article ul li,.article ol li{font-size:var(--fs-body);color:var(--text-mid);margin-bottom:0.5rem;line-height:1.8}
 .article a{color:var(--teal-dark);text-decoration:none}
 .article a:hover{text-decoration:underline}
 .pull-quote{border-left:4px solid var(--teal);background:rgba(14,175,159,0.05);padding:1.5rem 1.75rem;border-radius:0 var(--radius) var(--radius) 0;margin:2rem 0}
-.pull-quote p{font-family:var(--font-display);font-size:21px;font-style:italic;margin:0;line-height:1.6}
-.pull-quote cite{display:block;font-family:var(--font-ui);font-size:var(--fs-ui);margin-top:0.5rem;font-style:normal}
+.pull-quote p{font-family:var(--font-display);font-size:21px;font-style:italic;color:var(--navy);margin:0;line-height:1.6}
+.pull-quote cite{display:block;font-family:var(--font-ui);font-size:var(--fs-ui);color:var(--text-light);margin-top:0.5rem;font-style:normal}
 .info-box{background:rgba(106,166,198,0.08);border:1px solid rgba(106,166,198,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
 .info-box h4{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--sky);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
-.info-box p{font-size:var(--fs-base);margin-bottom:0}
+.info-box p{font-size:var(--fs-base);margin-bottom:0;color:var(--text-mid)}
 .warn-box{background:rgba(198,162,83,0.07);border:1px solid rgba(198,162,83,0.25);border-radius:var(--radius);padding:1.5rem;margin:2rem 0}
 .warn-box h4{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
-.warn-box p{font-size:var(--fs-base);margin-bottom:0}
+.warn-box p{font-size:var(--fs-base);margin-bottom:0;color:var(--text-mid)}
 
 /* SHARE + TAGS */
 .post-footer-bar{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0;border-top:1px solid var(--pearl-dark);margin-top:2.5rem;flex-wrap:wrap;gap:1rem}
 .tags{display:flex;gap:0.5rem;flex-wrap:wrap}
-.tag{background:var(--pearl);border-radius:50px;padding:4px 12px;font-family:var(--font-ui);font-size:var(--fs-xs);font-weight:600}
+.tag{background:var(--pearl);border-radius:50px;padding:4px 12px;font-family:var(--font-ui);font-size:var(--fs-xs);font-weight:600;color:var(--text-mid)}
 .share-row{display:flex;align-items:center;gap:0.75rem}
-.share-label{font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600}
+.share-label{font-family:var(--font-ui);font-size:var(--fs-ui);font-weight:600;color:var(--text-light)}
 .share-btn{width:36px;height:36px;border-radius:8px;background:var(--pearl-dark);border:none;display:flex;align-items:center;justify-content:center;color:var(--text-mid);cursor:pointer;transition:all .2s}
 .share-btn:hover{background:var(--teal);color:var(--navy)}
 
@@ -240,13 +240,6 @@ get_header( 'alluvia' );
       </div>
     </div>
   </div>
-
-  <?php
-  // Comments — renders comments.php when open or existing comments are present.
-  if ( comments_open() || get_comments_number() ) {
-    comments_template();
-  }
-  ?>
 
   <?php endwhile; ?>
 

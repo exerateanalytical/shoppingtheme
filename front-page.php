@@ -77,7 +77,7 @@ add_action( 'wp_head', function() {
 ?>
 <style>
 /* HERO */
-.hero{position:relative;min-height:70vh;background:var(--navy);display:flex;align-items:center;overflow:hidden;border-top:3px solid var(--teal);box-shadow:0 14px 60px rgba(0,0,0,.55)}
+.hero{position:relative;min-height:70vh;background:var(--navy);display:flex;align-items:center;overflow:hidden}
 /* Hero visual slider (molecule on slides 1&5, product grids on 2/3/4) */
 .hero-vslide{display:none}
 .hero-vslide.active{display:block;animation:fadeRight .6s ease}
@@ -98,7 +98,7 @@ add_action( 'wp_head', function() {
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(14,175,159,.1);border:1px solid rgba(14,175,159,.3);border-radius:100px;padding:8px 18px;margin-bottom:28px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s ease forwards}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
 .hero-badge-text{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
-.hero-title{font-family:var(--font-display);font-size:clamp(31px,3.9vw,59px);font-weight:300;line-height:1.03;color:var(--white);margin-bottom:30px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .35s ease forwards}
+.hero-title{font-family:var(--font-display);font-size:clamp(52px,6.5vw,98px);font-weight:300;line-height:1.03;color:var(--white);margin-bottom:30px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .35s ease forwards}
 .hero-title em{font-style:italic;color:var(--teal)}
 .hero-desc{font-size:var(--fs-lead);font-weight:300;line-height:1.85;color:rgba(255,255,255,.85);max-width:520px;margin-bottom:48px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .5s ease forwards}
 .hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(30px);animation:fadeUp .9s .65s ease forwards}
@@ -110,13 +110,6 @@ add_action( 'wp_head', function() {
 .stat-number{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--white);line-height:1}
 .stat-number span{color:var(--teal)}
 .stat-label{font-size:var(--fs-micro);font-weight:500;letter-spacing:.1em;color:rgba(255,255,255,.70);margin-top:6px;text-transform:uppercase}
-
-/* Hero visual stats row */
-.hero-visual-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:18px;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
-.hvs-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 12px;border-right:1px solid rgba(255,255,255,.08);text-align:center}
-.hvs-item:last-child{border-right:none}
-.hvs-number{font-family:var(--font-display);font-size:clamp(20px,2.2vw,28px);font-weight:700;color:var(--white);line-height:1}
-.hvs-label{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:5px}
 
 /* Hero Visual */
 .hero-visual{position:relative;opacity:0;transform:translateX(40px) scale(.96);animation:fadeRight 1s .6s ease forwards}
@@ -139,33 +132,18 @@ add_action( 'wp_head', function() {
 .float-card-title{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:600;color:var(--white);white-space:nowrap}
 .float-card-sub{font-size:var(--fs-xs);color:rgba(255,255,255,.70);white-space:nowrap;margin-top:1px}
 
-/* PROMISES */
-.promises-section{background:var(--pearl);padding:72px 0;position:relative;border-top:4px solid transparent;border-image:linear-gradient(90deg,var(--teal),var(--gold),var(--teal)) 1}
-.promises-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.promise-card{background:var(--white);border-radius:var(--radius-md);padding:40px 32px;border:1px solid var(--pearl-dark);border-top:3px solid var(--pc,var(--teal));display:flex;flex-direction:column;gap:18px;transition:var(--transition);text-align:left}
-.promise-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.10);border-color:color-mix(in srgb,var(--pc,var(--teal)) 30%,var(--pearl-dark))}
-.promise-icon{width:56px;height:56px;border-radius:14px;background:color-mix(in srgb,var(--pc,var(--teal)) 12%,transparent);border:1px solid color-mix(in srgb,var(--pc,var(--teal)) 28%,transparent);display:flex;align-items:center;justify-content:center;color:var(--pc,var(--teal))}
-.promise-title{font-family:var(--font-ui);font-size:18px;font-weight:700;color:var(--navy);line-height:1.2}
-.promise-desc{font-size:var(--fs-body);font-weight:300;color:var(--text-mid);line-height:1.8}
-.promise-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
-.promise-list li{display:flex;align-items:flex-start;gap:10px;font-size:var(--fs-body);color:var(--text-mid);line-height:1.6}
-.promise-list li::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--pc,var(--teal));margin-top:7px;flex-shrink:0}
-@media(max-width:900px){.promises-grid{grid-template-columns:1fr;max-width:560px;margin:0 auto}}
-
 /* TRUST STRIP */
 .trust-strip{background:var(--white);border-top:1px solid var(--pearl-dark);border-bottom:1px solid var(--pearl-dark);padding:24px 0;overflow:hidden}
-.trust-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:nowrap}
-.trust-item{display:flex;align-items:center;gap:8px;opacity:.9;transition:opacity .3s,transform .3s;cursor:default;white-space:nowrap;flex-shrink:0}
+.trust-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;opacity:.9;transition:opacity .3s,transform .3s;cursor:default}
 .trust-item:hover{opacity:1;transform:translateY(-2px)}
-.trust-item svg{color:var(--t-accent,var(--teal));transition:color .3s;flex-shrink:0}
-.trust-text{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+.trust-item svg{color:var(--t-accent,var(--teal));transition:color .3s}
 .trust-inner .trust-item:nth-child(1){--t-accent:#11b6a3}
 .trust-inner .trust-item:nth-child(2){--t-accent:#1fb074}
 .trust-inner .trust-item:nth-child(3){--t-accent:#6aa6c6}
 .trust-inner .trust-item:nth-child(4){--t-accent:#58b488}
 .trust-inner .trust-item:nth-child(5){--t-accent:#c6a253}
 .trust-inner .trust-item:nth-child(6){--t-accent:#e07b43}
-.trust-inner .trust-item:nth-child(7){--t-accent:#e76f93}
 .trust-text{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);white-space:nowrap}
 
 /* SECTION COMMONS */
@@ -176,7 +154,7 @@ add_action( 'wp_head', function() {
 
 /* ABOUT */
 .about-section{padding:120px 0;background:var(--pearl);position:relative;overflow:hidden}
-.about-section::before{content:'ALLUVIA';position:absolute;font-family:var(--font-display);font-size:clamp(100px,18vw,220px);font-weight:700;color:rgba(10,26,39,.05);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
+.about-section::before{content:'ALLUVIA';position:absolute;font-family:var(--font-display);font-size:clamp(100px,18vw,220px);font-weight:700;color:rgba(10,26,39,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .about-image-wrap{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);display:flex;align-items:center;justify-content:center;position:relative}
 .dna-animation{position:relative;width:140px;height:280px}
@@ -332,57 +310,30 @@ add_action( 'wp_head', function() {
   .hiw-step .hiw-arrow{display:none}
 }
 @media(max-width:900px){
-  /* Hero — single column, hide molecule visual */
-  .hero-inner{grid-template-columns:1fr;padding:90px 24px 56px;gap:40px}
+  .hero-inner{grid-template-columns:1fr;padding:110px 24px 70px}
+  /* hide only the decorative molecule on mobile; product grids stay (1 column) */
   .hero-vslide.is-molecule{display:none}
-  .hero-title{font-size:clamp(22px,5.4vw,35px);margin-bottom:18px}
-  .hero-desc{font-size:var(--fs-base);margin-bottom:32px;max-width:100%}
-  .hero-badge{margin-bottom:18px}
-  .hero-stats.hero-stats-inline{gap:20px;margin:4px 0 18px;flex-wrap:wrap}
-  .hero-stats-inline .stat-number{font-size:clamp(20px,5vw,28px)}
-  .stat-label{font-size:10px}
-  .hero-actions{gap:12px}
-  .hero-product-grid{grid-template-columns:1fr 1fr;gap:12px;max-width:100%}
-  .hpc-img{aspect-ratio:1/1}
-  /* Other sections */
+  .hero-product-grid{grid-template-columns:1fr;gap:12px;max-width:340px}
+  .hpc-img{aspect-ratio:16/10}
   .about-grid,.science-grid{grid-template-columns:1fr;gap:60px}
   .about-visual{display:none}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .testimonials-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
 }
 @media(max-width:640px){
-  .hero-inner{padding:80px 18px 48px;gap:32px}
-  .hero-title{font-size:clamp(18px,5.1vw,26px);line-height:1.1}
-  .hero-desc{font-size:15px;line-height:1.7;margin-bottom:24px}
-  .hero-badge{padding:6px 14px;margin-bottom:14px}
-  .hero-stats.hero-stats-inline{gap:16px;padding-top:14px;margin-bottom:14px}
-  .hero-stats-inline .stat-number{font-size:22px}
-  .hero-actions{flex-direction:column;align-items:stretch;gap:10px}
-  .hero-actions .btn-primary,.hero-actions .btn-ghost{justify-content:center;width:100%}
-  .hero-product-grid{grid-template-columns:1fr;gap:10px}
-  .hpc-img{aspect-ratio:16/9}
-  .hero-slider-nav{gap:10px;margin-top:18px}
-  .hero-dot{width:7px;height:7px}
-  .hero-dot.active{width:20px}
-  /* Other sections */
   .categories-grid{grid-template-columns:1fr}
   .hiw-steps{grid-template-columns:1fr;gap:40px}
   .hiw-icon-ring{width:88px;height:88px}
   .stats-grid{grid-template-columns:1fr 1fr}
   .hero-stats{gap:24px}
-  .trust-inner{flex-wrap:wrap;justify-content:center;gap:16px}
-  .trust-text{font-size:11px}
+  .trust-inner{gap:24px}
   .cta-inner{padding:0 24px}
   .science-certs{grid-template-columns:1fr}
   .about-section{padding:80px 0}
   .categories-section,.science-section,.testimonials-section,.cta-section,.hiw-section{padding:80px 0}
 }
-@media(max-width:400px){
-  .hero-inner{padding:72px 16px 40px}
-  .hero-title{font-size:clamp(16px,4.8vw,23px)}
-  .hero-stats.hero-stats-inline{gap:12px}
-  .hero-stats-inline .stat-number{font-size:20px}
-  .stat-label{font-size:9px;letter-spacing:.06em}
+@media(max-width:380px){
+  .hero-actions{flex-direction:column;align-items:stretch}
 }
 </style>
 <?php
@@ -430,7 +381,7 @@ get_header( 'alluvia' );
 .hero-dot.active{background:var(--accent,var(--teal));width:26px;border-radius:5px}
 .hero-arrow{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;flex-shrink:0}
 .hero-arrow:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
-@media(max-width:640px){.hero-arrow{width:34px;height:34px}}
+@media(max-width:640px){.hero-slider-nav{gap:12px;margin-top:22px}.hero-arrow{width:36px;height:36px}}
 </style>
 
 <!-- HERO -->
@@ -447,6 +398,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Bioactive Peptide Science</span></div>
           <h1 class="hero-title">Science That Makes<br>You <em>Younger</em></h1>
           <p class="hero-desc">Pharmaceutical-grade bioactive peptides backed by peer-reviewed research — formulated for real, measurable results in skin, body, and longevity.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="btn-primary">Explore Products <i data-lucide="arrow-right" class="icon-sm"></i></a>
             <a href="#science" class="btn-ghost"><i data-lucide="flask-conical" class="icon-sm"></i> Our Science</a>
@@ -458,6 +410,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Tissue Repair &amp; Recovery</span></div>
           <h1 class="hero-title">Repair. Recover.<br><em>Rebuild.</em></h1>
           <p class="hero-desc">BPC-157, TB-500 and recovery peptides engineered to accelerate healing of tendons, gut lining and soft tissue — the gold standard for repair.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" class="btn-primary">Shop Medical Peptides <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -468,6 +421,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Dermal Renewal</span></div>
           <h1 class="hero-title">Radiance From<br><em>Within</em></h1>
           <p class="hero-desc">Copper peptides and matrikines like GHK-Cu that stimulate collagen synthesis, firmness and visible skin renewal at the dermal matrix.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" class="btn-primary">Shop Skincare <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -478,6 +432,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Performance Engineered</span></div>
           <h1 class="hero-title">Peak Performance,<br><em>Engineered</em></h1>
           <p class="hero-desc">Growth-hormone secretagogues and recovery stacks for lean mass, deeper sleep and faster training adaptation — cleanly dosed.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" class="btn-primary">Shop Sports &amp; Recovery <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -488,6 +443,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Verified Purity</span></div>
           <h1 class="hero-title">Proven Pure,<br><em>Every Batch</em></h1>
           <p class="hero-desc">HPLC ≥99% verified with a Certificate of Analysis on every lot, cold-chain shipped to preserve peptide integrity end to end.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( home_url('/coa-library/') ); ?>" class="btn-primary">View COA Library <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -536,22 +492,6 @@ get_header( 'alluvia' );
       <div class="hero-vslide" data-for="2"><?php alluvia_hero_card_grid( $hero_skincare ); ?></div>
       <div class="hero-vslide" data-for="3"><?php alluvia_hero_card_grid( $hero_sports ); ?></div>
 
-      <!-- Stats row — always visible below the visual -->
-      <div class="hero-visual-stats">
-        <div class="hvs-item">
-          <span class="hvs-number">98%</span>
-          <span class="hvs-label">Purity Grade</span>
-        </div>
-        <div class="hvs-item">
-          <span class="hvs-number">8</span>
-          <span class="hvs-label">Categories</span>
-        </div>
-        <div class="hvs-item">
-          <span class="hvs-number">50+</span>
-          <span class="hvs-label">Active Peptides</span>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -566,67 +506,8 @@ get_header( 'alluvia' );
     <div class="trust-item"><i data-lucide="leaf" class="icon-md"></i><span class="trust-text">No Fillers</span></div>
     <div class="trust-item"><i data-lucide="thermometer-snowflake" class="icon-md"></i><span class="trust-text">Cold-Chain Shipping</span></div>
     <div class="trust-item"><i data-lucide="pill" class="icon-md"></i><span class="trust-text">Pharmaceutical Grade</span></div>
-    <div class="trust-item"><i data-lucide="headset" class="icon-md"></i><span class="trust-text">24/7 Customer Support</span></div>
   </div>
 </div>
-
-
-<!-- PROMISES -->
-<section class="promises-section">
-  <div class="container">
-    <div class="promises-grid">
-
-      <div class="promise-card reveal" style="--pc:#11b6a3;">
-        <div class="promise-icon">
-          <i data-lucide="shield-check" style="width:28px;height:28px;stroke-width:1.5"></i>
-        </div>
-        <div>
-          <h3 class="promise-title">Uncompromising Quality</h3>
-          <p class="promise-desc">Every Alluvia peptide is synthesised in cGMP-certified facilities and independently verified before it ever reaches you.</p>
-        </div>
-        <ul class="promise-list">
-          <li>≥98% purity confirmed by HPLC</li>
-          <li>Third-party mass-spectrometry ID on every lot</li>
-          <li>Certificate of Analysis included with every order</li>
-          <li>No fillers, no proprietary blends</li>
-        </ul>
-      </div>
-
-      <div class="promise-card reveal reveal-delay-1" style="--pc:#d4b566;">
-        <div class="promise-icon">
-          <i data-lucide="headset" style="width:28px;height:28px;stroke-width:1.5"></i>
-        </div>
-        <div>
-          <h3 class="promise-title">24/7 Customer Support</h3>
-          <p class="promise-desc">Our team of peptide specialists is available around the clock — whether you have a formulation question or need help with your order.</p>
-        </div>
-        <ul class="promise-list">
-          <li>Live chat and email support, day or night</li>
-          <li>Expert guidance on dosing and reconstitution</li>
-          <li>Rapid response — under 2 hours, guaranteed</li>
-          <li>Dedicated aftercare for research customers</li>
-        </ul>
-      </div>
-
-      <div class="promise-card reveal reveal-delay-2" style="--pc:#ef8246;">
-        <div class="promise-icon">
-          <i data-lucide="package-check" style="width:28px;height:28px;stroke-width:1.5"></i>
-        </div>
-        <div>
-          <h3 class="promise-title">Fast, Safe Delivery</h3>
-          <p class="promise-desc">Orders dispatch within 24 hours in cold-chain insulated packaging — your peptides arrive exactly as potent as the day they left the lab.</p>
-        </div>
-        <ul class="promise-list">
-          <li>Same-day dispatch on orders before 2 pm</li>
-          <li>Cold-chain preserved throughout transit</li>
-          <li>Tracked &amp; insured on every shipment</li>
-          <li>Discreet packaging as standard</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 
 <!-- ABOUT -->

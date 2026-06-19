@@ -11,7 +11,8 @@ add_action( 'wp_head', function() {
 .alluvia-woo-wrap { padding-top: 88px; min-height: 60vh; background: transparent; }
 /* Shop/archive loose text sits on the navy platform background — keep it light */
 .alluvia-woo-wrap .woocommerce-products-header__title,
-.alluvia-woo-wrap .page-title { color: #fff; }
+.alluvia-woo-wrap .page-title,
+.alluvia-woo-inner h1 { color: #fff; }
 .alluvia-woo-wrap .woocommerce-result-count,
 .alluvia-woo-wrap .term-description,
 .alluvia-woo-wrap .woocommerce-ordering label { color: rgba(255,255,255,0.7); }
@@ -24,6 +25,7 @@ add_action( 'wp_head', function() {
   font-family: var(--font-display);
   font-size: var(--fs-h1);
   font-weight: 300;
+  color: var(--navy);
   margin-bottom: 32px;
 }
 
@@ -45,45 +47,15 @@ add_action( 'wp_head', function() {
 .woocommerce div.product .flex-control-thumbs img:hover { border-color: var(--teal); }
 /* Summary column */
 .woocommerce div.product .summary { float: none !important; width: 100% !important; margin: 0 !important; }
-.woocommerce div.product .product_title { font-family: var(--font-display); font-size: clamp(28px,3.5vw,42px); font-weight: 300; margin: 0 0 12px; line-height: 1.1; }
+.woocommerce div.product .product_title { font-family: var(--font-display); font-size: clamp(28px,3.5vw,42px); font-weight: 300; color: var(--navy); margin: 0 0 12px; line-height: 1.1; }
 .woocommerce div.product .summary .price,
-.woocommerce div.product p.price { font-family: var(--font-display); font-size: 32px; font-weight: 600; margin: 0 0 16px; }
-.woocommerce div.product .woocommerce-product-details__short-description { font-size: var(--fs-body); line-height: 1.8; margin: 16px 0; }
+.woocommerce div.product p.price { font-family: var(--font-display); font-size: 32px; font-weight: 600; color: var(--navy); margin: 0 0 16px; }
+.woocommerce div.product .woocommerce-product-details__short-description { font-size: var(--fs-body); line-height: 1.8; color: var(--text-mid); margin: 16px 0; }
 .woocommerce div.product .product_meta { font-size: var(--fs-base); color: var(--text-light); margin-top: 20px; }
 /* Full-width rows below the two columns */
 .woocommerce div.product .woocommerce-tabs,
 .woocommerce div.product .related,
 .woocommerce div.product .upsells { grid-column: 1 / -1; }
-
-/* ── Single product sits on the navy platform background (no card): recolor
-   text to light so it reads on navy. Scoped to body.single-product so the
-   cart / checkout / account pages (which share .alluvia-woo-inner and rely on
-   white surfaces) are unaffected. ── */
-/* Body text → white; headings → brand accents (gold title, teal section heads) */
-body.single-product .woocommerce div.product .woocommerce-product-details__short-description,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel p,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel li { color: #fff; }
-body.single-product .woocommerce div.product .product_meta,
-body.single-product .woocommerce div.product .product_meta a { color: rgba(255,255,255,0.7); }
-/* Main product title — gold */
-body.single-product .woocommerce div.product .product_title { color: var(--gold); }
-/* Price — teal (key figure pops) */
-body.single-product .woocommerce div.product .summary .price,
-body.single-product .woocommerce div.product p.price { color: var(--teal); }
-/* Section / tab-panel headings — teal, with h4 in gold */
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h3 { color: var(--teal); }
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h4 { color: var(--gold); }
-body.single-product .woocommerce .related > h2,
-body.single-product .woocommerce .upsells > h2 { color: var(--teal); }
-/* Tab nav */
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom-color: rgba(255,255,255,0.18); }
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a { color: rgba(255,255,255,0.65); }
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: var(--gold); border-bottom-color: var(--teal); }
-body.single-product .woocommerce div.product .stock.in-stock { color: var(--mint,#3ddc97); }
-body.single-product .woocommerce div.product .stock.out-of-stock { color: var(--coral,#db627a); }
 
 /* ── Add to cart ── */
 .woocommerce div.product form.cart { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 24px 0; }
@@ -125,26 +97,26 @@ body.single-product .woocommerce div.product .stock.out-of-stock { color: var(--
 .woocommerce div.product .woocommerce-tabs ul.tabs { padding: 0; margin: 0 0 24px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--pearl-dark); }
 .woocommerce div.product .woocommerce-tabs ul.tabs::before { display: none; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li { background: none; border: none; border-radius: 0; margin: 0; padding: 0; }
-.woocommerce div.product .woocommerce-tabs ul.tabs li a { font-family: var(--font-ui); font-size: var(--fs-ui); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 14px 18px; display: block; border-bottom: 2px solid transparent; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li a { font-family: var(--font-ui); font-size: var(--fs-ui); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-light); padding: 14px 18px; display: block; border-bottom: 2px solid transparent; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
-.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { border-bottom-color: var(--teal); }
+.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: var(--navy); border-bottom-color: var(--teal); }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active { background: none; }
-.woocommerce div.product .woocommerce-tabs .panel { font-size: var(--fs-body); line-height: 1.8; }
+.woocommerce div.product .woocommerce-tabs .panel { font-size: var(--fs-body); line-height: 1.8; color: var(--text-mid); }
 .woocommerce div.product .woocommerce-tabs .panel h2,
-.woocommerce div.product .woocommerce-tabs .panel h3 { font-family: var(--font-display); font-weight: 600; }
-.woocommerce div.product .woocommerce-tabs .panel h4 { font-family: var(--font-ui); font-size: var(--fs-title); margin: 18px 0 4px; }
+.woocommerce div.product .woocommerce-tabs .panel h3 { font-family: var(--font-display); color: var(--navy); font-weight: 600; }
+.woocommerce div.product .woocommerce-tabs .panel h4 { font-family: var(--font-ui); font-size: var(--fs-title); color: var(--navy); margin: 18px 0 4px; }
 
 /* ── Related / upsells ── */
 .woocommerce .related,
 .woocommerce .upsells { grid-column: 1/-1; margin-top: 48px; }
 .woocommerce .related > h2,
-.woocommerce .upsells > h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 500; margin-bottom: 24px; }
+.woocommerce .upsells > h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 500; color: var(--navy); margin-bottom: 24px; }
 
 /* ── Cart ── */
 .woocommerce .cart-collaterals,
 .woocommerce-page .cart-collaterals { width: 100%; margin-top: 32px; display: flex; justify-content: flex-end; }
 .woocommerce .cart-collaterals .cart_totals { width: 100%; max-width: 420px; }
-.woocommerce .cart_totals h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 500; margin-bottom: 16px; }
+.woocommerce .cart_totals h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 500; color: var(--navy); margin-bottom: 16px; }
 .woocommerce table.cart img { width: 64px; height: 64px; object-fit: cover; border-radius: var(--radius-sm); }
 .woocommerce a.remove { color: var(--coral) !important; font-weight: 700; }
 .woocommerce a.remove:hover { background: var(--coral) !important; color: #fff !important; }

@@ -3,8 +3,39 @@
    Palette: Navy #0a1a27 | Teal #0eaf9f | Gold #c6a253 | Pearl #f5f0e7
    ============================================================= */
 
-/* Fonts are enqueued via wp_enqueue_style('alluvia-fonts') in functions.php.
-   The render-blocking @import was removed for performance. */
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+  --navy:      #0a1a27;
+  --navy-mid:  #15283b;
+  --navy-soft: #213f5d;
+  --teal:      #0eaf9f;
+  --teal-dark: #0a8174;
+  --teal-glow: rgba(14,175,159,0.18);
+  --gold:      #c6a253;
+  --gold-light:#e4c98f;
+  --pearl:     #f5f0e7;
+  --pearl-dark:#e8e0d2;
+  --white:     #ffffff;
+  --text-dark: #0a1a27;
+  --text-mid:  #44515f;
+  --text-light:#8392a2;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-xl: 48px;
+  --shadow-sm: 0 2px 12px rgba(10,26,39,0.08);
+  --shadow-md: 0 8px 32px rgba(10,26,39,0.14);
+  --shadow-lg: 0 20px 60px rgba(10,26,39,0.2);
+  --shadow-glow: 0 0 40px rgba(14,175,159,0.25);
+  --transition: 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  /* Unified platform typeface — Montserrat across body + headings */
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui:      'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
 
 /* ── Reset for landing sections ── */
 .alluvia-landing * {

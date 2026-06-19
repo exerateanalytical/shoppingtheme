@@ -21,31 +21,23 @@ add_action( 'wp_head', function() { ?>
 .post-card-img { height: 220px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); overflow: hidden; }
 .post-card-img img { width: 100%; height: 100%; object-fit: cover; }
 .post-card-body { padding: 24px; }
-.post-meta { display: flex; align-items: center; gap: 12px; font-family: var(--font-ui); font-size: 12px; margin-bottom: 10px; }
+.post-meta { display: flex; align-items: center; gap: 12px; font-family: var(--font-ui); font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
 .post-meta a { color: var(--teal); text-decoration: none; font-weight: 600; }
-.post-card-title { font-family: var(--font-display); font-size: clamp(20px,2vw,26px); font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+.post-card-title { font-family: var(--font-display); font-size: clamp(20px,2vw,26px); font-weight: 600; color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
 .post-card-title a { color: inherit; text-decoration: none; }
 .post-card-title a:hover { color: var(--teal); }
-.post-excerpt { font-size: 15px; line-height: 1.7; }
+.post-excerpt { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
 .read-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-family: var(--font-ui); font-size: 13px; font-weight: 700; color: var(--teal); text-decoration: none; letter-spacing: .04em; text-transform: uppercase; }
 .read-more:hover { color: var(--teal-dark); }
 .archive-sidebar { position: sticky; top: 88px; align-self: start; display: flex; flex-direction: column; gap: 24px; }
 .sidebar-widget { background: #fff; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--pearl-dark); }
-.sidebar-widget h3 { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px; }
+.sidebar-widget h3 { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--navy); margin-bottom: 16px; }
 .archive-pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 48px; }
-.archive-pagination .page-numbers { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid var(--pearl-dark); font-family: var(--font-ui); font-size: 13px; font-weight: 600; text-decoration: none; transition: var(--transition); }
+.archive-pagination .page-numbers { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid var(--pearl-dark); font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--text-mid); text-decoration: none; transition: var(--transition); }
 .archive-pagination .page-numbers:hover { border-color: var(--teal); color: var(--teal); }
 .archive-pagination .page-numbers.current { background: var(--navy); border-color: var(--navy); color: #fff; }
 @media(max-width:860px) { .archive-layout { grid-template-columns: 1fr; } .archive-sidebar { position: static; } }
 @media(max-width:600px) { .post-card-img { height: 180px; } }
-@media (max-width: 768px) {
-  .archive-layout { grid-template-columns: 1fr; }
-  .archive-sidebar { position: static; width: 100%; margin-top: 32px; }
-  .post-card-img { height: 160px; }
-}
-@media (max-width: 480px) {
-  .archive-hero { padding: 40px 20px; }
-}
 </style>
 <?php }, 20 );
 get_header('alluvia');
@@ -110,7 +102,7 @@ get_header('alluvia');
           <?php echo paginate_links(['type' => 'list', 'prev_text' => '&larr;', 'next_text' => '&rarr;']); ?>
         </div>
       <?php else : ?>
-        <div style="text-align:center;padding:60px 20px">
+        <div style="text-align:center;padding:60px 20px;color:var(--text-mid)">
           <p style="font-size:18px">No posts found.</p>
           <a href="<?php echo esc_url(home_url('/')); ?>" style="display:inline-block;margin-top:16px;color:var(--teal)">← Back to Home</a>
         </div>
@@ -131,7 +123,7 @@ get_header('alluvia');
           <h3>Recent Posts</h3>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
             <?php $recent = get_posts(['numberposts' => 5]); foreach ($recent as $p) : ?>
-            <li><a href="<?php echo get_permalink($p->ID); ?>" style="font-size:14px;text-decoration:none;font-weight:500"><?php echo esc_html($p->post_title); ?></a></li>
+            <li><a href="<?php echo get_permalink($p->ID); ?>" style="font-size:14px;color:var(--navy);text-decoration:none;font-weight:500"><?php echo esc_html($p->post_title); ?></a></li>
             <?php endforeach; ?>
           </ul>
         </div>

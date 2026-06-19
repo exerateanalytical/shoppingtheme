@@ -78,8 +78,8 @@ html {
 }
 
 body {
-	color: var(--text-dark, #0a1a27);
-	font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+	color: #333;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 26px;
 	font-weight: 700;
 	line-height: 1.625;
@@ -290,8 +290,8 @@ h3,
 h4,
 h5,
 h6 {
-	color: var(--text-dark, #0a1a27);
-	font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+	color: #333;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: normal;
 	line-height: 1.2;
 	margin: 0;
@@ -347,7 +347,7 @@ textarea {
 	background: #fff;
 	border: 1px solid #ddd;
 	color: #999;
-	font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 28px;
 	padding: 10px 10px;
 	max-width: 100%;
@@ -590,7 +590,7 @@ img.alignright,
 
 .entry-title a,
 .sidebar .widget-title a {
-	color: var(--text-dark, #0a1a27);
+	color: #333;
 }
 
 .entry-title a:hover {
@@ -1218,16 +1218,4 @@ input#subscribe-field {
 .variations td {
     border-bottom: none;
     border-right: none;
-}
-
-/* ── Archive, Single Post, & Search page content wrappers ──
-   Ensure main content areas have light backgrounds for readability on navy body bg. */
-.archive-wrap,
-.post-layout,
-.search-wrap {
-  background: var(--white, #fff);
-  color: var(--text-dark, #0a1a27);
-  border-radius: var(--radius-md, 16px);
-  margin-left: auto;
-  margin-right: auto;
 }

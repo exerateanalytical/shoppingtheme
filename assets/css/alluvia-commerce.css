@@ -49,19 +49,6 @@
 .woocommerce div.product .product_meta{font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-top:22px;border-top:1px solid var(--pearl-dark);padding-top:18px}
 .woocommerce div.product .product_meta>span{display:block;margin-bottom:6px}
 
-/* Single product on navy platform — override dark defaults with light colors */
-body.single-product .woocommerce div.product .product_title{color:#c6a253 !important}
-body.single-product .woocommerce div.product p.price,
-body.single-product .woocommerce div.product span.price{color:#0eaf9f !important}
-body.single-product .woocommerce div.product .woocommerce-product-details__short-description p,
-body.single-product .woocommerce div.product .woocommerce-product-details__short-description{color:#ffffff !important}
-body.single-product .woocommerce div.product .product_meta,
-body.single-product .woocommerce div.product .product_meta a{color:rgba(255,255,255,0.7) !important}
-
-/* alt button styling (checkout proceed, etc.) */
-.woocommerce a.button.alt,
-.woocommerce button.button.alt { background: var(--navy); color: var(--color-on-navy); }
-
 /* add-to-cart form + quantity */
 .woocommerce div.product form.cart{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:24px 0}
 .woocommerce div.product form.cart .quantity{display:inline-flex;align-items:center;border:1.5px solid var(--pearl-dark);border-radius:100px;overflow:hidden}
@@ -77,9 +64,9 @@ body.single-product .woocommerce div.product .product_meta a{color:rgba(255,255,
 .woocommerce div.product .woocommerce-tabs ul.tabs{padding:0;margin:0 0 24px;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--pearl-dark)}
 .woocommerce div.product .woocommerce-tabs ul.tabs::before{display:none}
 .woocommerce div.product .woocommerce-tabs ul.tabs li{background:none;border:none;border-radius:0;margin:0;padding:0}
-.woocommerce div.product .woocommerce-tabs ul.tabs li a{font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,0.6);padding:14px 18px;display:block;border-bottom:2px solid transparent}
+.woocommerce div.product .woocommerce-tabs ul.tabs li a{font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-light);padding:14px 18px;display:block;border-bottom:2px solid transparent}
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
-.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover{color:var(--gold);border-bottom-color:var(--teal)}
+.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover{color:var(--navy);border-bottom-color:var(--teal)}
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active{background:none}
 .woocommerce div.product .woocommerce-tabs .panel{font-size:16px;line-height:1.8;color:var(--text-mid)}
 .woocommerce div.product .woocommerce-tabs .panel h2,
@@ -91,20 +78,6 @@ body.single-product .woocommerce div.product .product_meta a{color:rgba(255,255,
 .woocommerce .upsells{grid-column:1/-1;margin-top:48px}
 .woocommerce .related>h2,
 .woocommerce .upsells>h2{font-family:var(--font-display);font-size:30px;font-weight:500;color:var(--navy);margin-bottom:24px}
-
-/* ---- Single product on navy platform background — light text overrides ---- */
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs{border-bottom-color:rgba(255,255,255,0.18)}
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a{color:rgba(255,255,255,0.65)}
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover{color:#c6a253 !important;border-bottom-color:#0eaf9f !important}
-body.single-product .woocommerce div.product .woocommerce-tabs .panel p,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel li,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel{color:#ffffff !important}
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h3{color:#0eaf9f !important}
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h4{color:#c6a253 !important}
-body.single-product .woocommerce .related>h2,
-body.single-product .woocommerce .upsells>h2{color:#0eaf9f !important}
 
 /* ---- Cart --------------------------------------------------------------- */
 .woocommerce .cart-collaterals,

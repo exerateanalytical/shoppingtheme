@@ -1,0 +1,86 @@
+<h2>Design — Section 3 of 3: Mobile + Polish Fixes</h2>
+<p class="subtitle">The remaining 9 non-color issues: responsive gaps, token inconsistencies, and Lucide icons.</p>
+
+<style>
+  .fix-table { width:100%; border-collapse:collapse; font-size:13px; margin:16px 0; }
+  .fix-table th { text-align:left; padding:8px 12px; background:rgba(255,255,255,0.07); font-size:11px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.55); }
+  .fix-table td { padding:9px 12px; border-bottom:1px solid rgba(255,255,255,0.06); vertical-align:top; }
+  .fix-table tr:last-child td { border-bottom:none; }
+  .file-tag { font-family:monospace; font-size:11px; background:rgba(255,255,255,0.09); border-radius:3px; padding:1px 5px; }
+  .sev { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1px; border-radius:3px; padding:1px 6px; text-transform:uppercase; }
+  .sev.major { background:rgba(255,140,0,0.15); color:#e08c00; }
+  .sev.minor { background:rgba(99,179,237,0.12); color:#4a90d9; }
+  code { background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:3px; font-size:11px; }
+</style>
+
+<table class="fix-table">
+  <tr>
+    <th>File</th>
+    <th>Issue</th>
+    <th>Fix</th>
+    <th>Sev</th>
+  </tr>
+  <tr>
+    <td><span class="file-tag">archive.php</span></td>
+    <td>No mobile breakpoints — sidebar overflows on phones, post cards don't stack</td>
+    <td>Add <code>@media (max-width:768px)</code>: sidebar stacks below cards, image height 160px, single column</td>
+    <td><span class="sev minor">minor</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">search.php</span></td>
+    <td>Search form and results grid not responsive below 480px</td>
+    <td>Add breakpoint: form full-width, results single column, reduce padding</td>
+    <td><span class="sev minor">minor</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">page-product.php</span></td>
+    <td>Tab buttons too small to tap on mobile (no padding reduction)</td>
+    <td>Add breakpoint: reduce tab padding, allow horizontal scroll with snap, increase touch target to 44px</td>
+    <td><span class="sev minor">minor</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">alluvia-base.css:81</span></td>
+    <td>Redundant <code>body { background:#fff }</code> overridden immediately by navy rule</td>
+    <td>Remove the <code>#fff</code> line — navy is the only background</td>
+    <td><span class="sev minor">minor</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">alluvia-commerce.css:82</span></td>
+    <td>Active tab: <code>color:var(--navy)</code> = invisible on navy background</td>
+    <td>Change to <code>color:var(--gold)</code> in base — dark-platform.css already overrides with <code>!important</code> but base should be correct too</td>
+    <td><span class="sev major">major</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">alluvia-base.css + alluvia-commerce.css</span></td>
+    <td><code>.button.alt</code> uses <code>#fff</code> in base but <code>var(--color-on-navy)</code> in commerce — same value, inconsistent token</td>
+    <td>Standardise to <code>var(--color-on-navy)</code> in both files</td>
+    <td><span class="sev minor">minor</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">alluvia-base.css:240</span></td>
+    <td><code>.woocommerce form .form-row label { color: var(--navy) }</code> — invisible on navy pages</td>
+    <td>Change to <code>var(--color-on-navy)</code> or remove (dark-platform.css will handle it)</td>
+    <td><span class="sev major">major</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">functions.php</span></td>
+    <td>Lucide icon library — no confirmed <code>wp_enqueue_script</code> for lucide.min.js</td>
+    <td>Check if enqueued; if not, add CDN enqueue. All <code>&lt;i data-lucide="..."&gt;</code> icons depend on it.</td>
+    <td><span class="sev major">major</span></td>
+  </tr>
+  <tr>
+    <td><span class="file-tag">front-page.php:179</span></td>
+    <td>Watermark <code>::before</code> opacity 2.5% — invisible</td>
+    <td>Either remove it or raise to 4–5% if it's meant to be a subtle texture. Currently does nothing.</td>
+    <td><span class="sev minor">minor</span></td>
+  </tr>
+</table>
+
+<div style="background:rgba(14,175,159,0.07);border:1px solid rgba(14,175,159,0.25);border-radius:8px;padding:16px 18px;margin-top:8px;font-size:13px;line-height:1.7;">
+  <strong style="color:#0eaf9f">Verification plan (A+B+C):</strong><br>
+  After each task: <strong>A)</strong> curl check — confirm correct CSS rules in rendered HTML, no dark-color conflicts remaining.<br>
+  After each page-group: <strong>B)</strong> Browser screenshot — I take a screenshot and show you before committing.<br>
+  At the end: <strong>C)</strong> Final visual pass — you hard-refresh every page and confirm all text is readable.
+</div>
+
+<p style="margin-top:20px;font-size:14px;opacity:0.8">That's the full design. Approve and I'll write the spec doc + implementation plan.</p>
