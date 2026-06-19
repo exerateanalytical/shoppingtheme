@@ -81,6 +81,9 @@ add_action( 'wp_head', function() {
 /* Hero visual slider (molecule on slides 1&5, product grids on 2/3/4) */
 .hero-vslide{display:none}
 .hero-vslide.active{display:block;animation:fadeRight .6s ease}
+.hero-showcase{display:flex;flex-direction:column;gap:18px}
+.hero-showcase .hero-stats{margin:0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);border-bottom:none}
+.hero-showcase-cta{align-self:flex-start;margin-top:0}
 .hero-product-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .hpc{display:flex;flex-direction:column;background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:transform .25s,box-shadow .25s}
 .hpc:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(0,0,0,.38)}
@@ -410,10 +413,6 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Tissue Repair &amp; Recovery</span></div>
           <h1 class="hero-title">Repair. Recover.<br><em>Rebuild.</em></h1>
           <p class="hero-desc">BPC-157, TB-500 and recovery peptides engineered to accelerate healing of tendons, gut lining and soft tissue — the gold standard for repair.</p>
-          <?php echo $hero_stats_html; ?>
-          <div class="hero-actions">
-            <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" class="btn-primary">Shop Medical Peptides <i data-lucide="arrow-right" class="icon-sm"></i></a>
-          </div>
         </div>
 
         <!-- Slide 3 — Skincare -->
@@ -421,10 +420,6 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Dermal Renewal</span></div>
           <h1 class="hero-title">Radiance From<br><em>Within</em></h1>
           <p class="hero-desc">Copper peptides and matrikines like GHK-Cu that stimulate collagen synthesis, firmness and visible skin renewal at the dermal matrix.</p>
-          <?php echo $hero_stats_html; ?>
-          <div class="hero-actions">
-            <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" class="btn-primary">Shop Skincare <i data-lucide="arrow-right" class="icon-sm"></i></a>
-          </div>
         </div>
 
         <!-- Slide 4 — Sports / Performance -->
@@ -432,10 +427,6 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Performance Engineered</span></div>
           <h1 class="hero-title">Peak Performance,<br><em>Engineered</em></h1>
           <p class="hero-desc">Growth-hormone secretagogues and recovery stacks for lean mass, deeper sleep and faster training adaptation — cleanly dosed.</p>
-          <?php echo $hero_stats_html; ?>
-          <div class="hero-actions">
-            <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" class="btn-primary">Shop Sports &amp; Recovery <i data-lucide="arrow-right" class="icon-sm"></i></a>
-          </div>
         </div>
 
         <!-- Slide 5 — Quality / COA -->
@@ -487,10 +478,28 @@ get_header( 'alluvia' );
         </div>
       </div>
 
-      <!-- Product showcases — synced to slides 2/3/4 -->
-      <div class="hero-vslide" data-for="1"><?php alluvia_hero_card_grid( $hero_medical ); ?></div>
-      <div class="hero-vslide" data-for="2"><?php alluvia_hero_card_grid( $hero_skincare ); ?></div>
-      <div class="hero-vslide" data-for="3"><?php alluvia_hero_card_grid( $hero_sports ); ?></div>
+      <!-- Product showcases — synced to slides 2/3/4 (cards -> stats -> CTA) -->
+      <div class="hero-vslide" data-for="1">
+        <div class="hero-showcase">
+          <?php alluvia_hero_card_grid( $hero_medical ); ?>
+          <?php echo $hero_stats_html; ?>
+          <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" class="btn-primary hero-showcase-cta">Shop Medical Peptides <i data-lucide="arrow-right" class="icon-sm"></i></a>
+        </div>
+      </div>
+      <div class="hero-vslide" data-for="2">
+        <div class="hero-showcase">
+          <?php alluvia_hero_card_grid( $hero_skincare ); ?>
+          <?php echo $hero_stats_html; ?>
+          <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" class="btn-primary hero-showcase-cta">Shop Skincare <i data-lucide="arrow-right" class="icon-sm"></i></a>
+        </div>
+      </div>
+      <div class="hero-vslide" data-for="3">
+        <div class="hero-showcase">
+          <?php alluvia_hero_card_grid( $hero_sports ); ?>
+          <?php echo $hero_stats_html; ?>
+          <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" class="btn-primary hero-showcase-cta">Shop Sports &amp; Recovery <i data-lucide="arrow-right" class="icon-sm"></i></a>
+        </div>
+      </div>
 
     </div>
   </div>
