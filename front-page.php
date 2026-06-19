@@ -44,6 +44,14 @@ $hero_medical  = alluvia_hero_products( 'medical-peptides', 2 );
 $hero_skincare = alluvia_hero_products( 'skincare-peptides', 2 );
 $hero_sports   = alluvia_hero_products( 'sports-recovery', 2 );
 
+// Shared stats row, rendered inside each slide just above its CTA buttons.
+$hero_stats_html =
+	'<div class="hero-stats hero-stats-inline">'
+	. '<div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">Purity Grade</span></div>'
+	. '<div class="stat-item"><span class="stat-number">8</span><span class="stat-label">Categories</span></div>'
+	. '<div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Active Peptides</span></div>'
+	. '</div>';
+
 /** Render a compact hero product-card grid (2 col desktop / 1 col mobile). */
 function alluvia_hero_card_grid( $items ) {
 	if ( empty( $items ) ) { return; }
@@ -95,8 +103,9 @@ add_action( 'wp_head', function() {
 .hero-desc{font-size:var(--fs-lead);font-weight:300;line-height:1.85;color:rgba(255,255,255,.85);max-width:520px;margin-bottom:48px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .5s ease forwards}
 .hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(30px);animation:fadeUp .9s .65s ease forwards}
 .hero-stats{display:flex;gap:40px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1);opacity:0;transform:translateY(20px);animation:fadeUp .9s .85s ease forwards;flex-wrap:wrap}
-/* Stats placed above the slider/buttons (top of hero content) */
-.hero-stats.hero-stats-top{margin-top:0;margin-bottom:30px;padding-top:0;padding-bottom:24px;border-top:none;border-bottom:1px solid rgba(255,255,255,.1);animation-delay:.3s}
+/* Stats placed inside each slide, just above the CTA buttons */
+.hero-stats.hero-stats-inline{margin:6px 0 22px;padding-top:20px;padding-bottom:0;border-top:1px solid rgba(255,255,255,.1);border-bottom:none;gap:28px;animation:none;opacity:1;transform:none}
+.hero-stats-inline .stat-number{font-size:clamp(24px,2.6vw,32px)}
 .stat-item{display:flex;flex-direction:column}
 .stat-number{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--white);line-height:1}
 .stat-number span{color:var(--teal)}
@@ -382,20 +391,6 @@ get_header( 'alluvia' );
   <div class="hero-glow" id="heroGlow"></div>
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-stats hero-stats-top">
-        <div class="stat-item">
-          <span class="stat-number"><span data-count="98" data-suffix="%">98%</span></span>
-          <span class="stat-label">Purity Grade</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number"><span data-count="8">8</span></span>
-          <span class="stat-label">Categories</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number"><span data-count="50" data-suffix="+">50+</span></span>
-          <span class="stat-label">Active Peptides</span>
-        </div>
-      </div>
       <div class="hero-slider" id="heroSlider">
 
         <!-- Slide 1 — Longevity -->
@@ -403,6 +398,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Bioactive Peptide Science</span></div>
           <h1 class="hero-title">Science That Makes<br>You <em>Younger</em></h1>
           <p class="hero-desc">Pharmaceutical-grade bioactive peptides backed by peer-reviewed research — formulated for real, measurable results in skin, body, and longevity.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="btn-primary">Explore Products <i data-lucide="arrow-right" class="icon-sm"></i></a>
             <a href="#science" class="btn-ghost"><i data-lucide="flask-conical" class="icon-sm"></i> Our Science</a>
@@ -414,6 +410,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Tissue Repair &amp; Recovery</span></div>
           <h1 class="hero-title">Repair. Recover.<br><em>Rebuild.</em></h1>
           <p class="hero-desc">BPC-157, TB-500 and recovery peptides engineered to accelerate healing of tendons, gut lining and soft tissue — the gold standard for repair.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" class="btn-primary">Shop Medical Peptides <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -424,6 +421,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Dermal Renewal</span></div>
           <h1 class="hero-title">Radiance From<br><em>Within</em></h1>
           <p class="hero-desc">Copper peptides and matrikines like GHK-Cu that stimulate collagen synthesis, firmness and visible skin renewal at the dermal matrix.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" class="btn-primary">Shop Skincare <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -434,6 +432,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Performance Engineered</span></div>
           <h1 class="hero-title">Peak Performance,<br><em>Engineered</em></h1>
           <p class="hero-desc">Growth-hormone secretagogues and recovery stacks for lean mass, deeper sleep and faster training adaptation — cleanly dosed.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" class="btn-primary">Shop Sports &amp; Recovery <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
@@ -444,6 +443,7 @@ get_header( 'alluvia' );
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Verified Purity</span></div>
           <h1 class="hero-title">Proven Pure,<br><em>Every Batch</em></h1>
           <p class="hero-desc">HPLC ≥99% verified with a Certificate of Analysis on every lot, cold-chain shipped to preserve peptide integrity end to end.</p>
+          <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( home_url('/coa-library/') ); ?>" class="btn-primary">View COA Library <i data-lucide="arrow-right" class="icon-sm"></i></a>
           </div>
