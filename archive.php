@@ -38,6 +38,14 @@ add_action( 'wp_head', function() { ?>
 .archive-pagination .page-numbers.current { background: var(--navy); border-color: var(--navy); color: #fff; }
 @media(max-width:860px) { .archive-layout { grid-template-columns: 1fr; } .archive-sidebar { position: static; } }
 @media(max-width:600px) { .post-card-img { height: 180px; } }
+@media (max-width: 768px) {
+  .archive-layout { grid-template-columns: 1fr; }
+  .archive-sidebar { position: static; width: 100%; margin-top: 32px; }
+  .post-card-img { height: 160px; }
+}
+@media (max-width: 480px) {
+  .archive-hero { padding: 40px 20px; }
+}
 </style>
 <?php }, 20 );
 get_header('alluvia');

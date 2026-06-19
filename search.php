@@ -28,6 +28,12 @@ add_action( 'wp_head', function() { ?>
 .no-results { text-align: center; padding: 60px 20px; }
 .no-results h2 { font-family: var(--font-display); font-size: 32px; font-weight: 300; margin-bottom: 12px; }
 .no-results p { font-size: 16px; margin-bottom: 24px; }
+@media (max-width: 600px) {
+  .search-bar { max-width: 100%; padding: 0 16px; }
+  .search-bar input { font-size: 15px; padding: 12px 16px; }
+  .search-results { grid-template-columns: 1fr; gap: 16px; }
+  .result-card { padding: 16px; }
+}
 </style>
 <?php }, 20 );
 get_header('alluvia');
