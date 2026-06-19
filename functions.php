@@ -242,6 +242,9 @@ function alluvia_seo_meta() {
 /* Per-product SEO <title> — use the curated _alluvia_seo_title when present. */
 add_filter( 'pre_get_document_title', 'alluvia_seo_document_title', 20 );
 function alluvia_seo_document_title( $title ) {
+    if ( is_front_page() ) {
+        return 'Alluvia Peptides — Premium Bioactive Peptides | HPLC-Verified Purity & COA';
+    }
     if ( is_singular( 'product' ) ) {
         $custom = get_post_meta( get_the_ID(), '_alluvia_seo_title', true );
         if ( $custom ) {
