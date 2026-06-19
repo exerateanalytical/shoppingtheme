@@ -60,23 +60,29 @@ add_action( 'wp_head', function() {
    text to light so it reads on navy. Scoped to body.single-product so the
    cart / checkout / account pages (which share .alluvia-woo-inner and rely on
    white surfaces) are unaffected. ── */
-body.single-product .woocommerce div.product .product_title,
-body.single-product .woocommerce div.product .summary .price,
-body.single-product .woocommerce div.product p.price { color: #fff; }
+/* Body text → white; headings → brand accents (gold title, teal section heads) */
 body.single-product .woocommerce div.product .woocommerce-product-details__short-description,
 body.single-product .woocommerce div.product .woocommerce-tabs .panel,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel p { color: rgba(255,255,255,0.82); }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel p,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel li { color: #fff; }
 body.single-product .woocommerce div.product .product_meta,
-body.single-product .woocommerce div.product .product_meta a { color: rgba(255,255,255,0.6); }
+body.single-product .woocommerce div.product .product_meta a { color: rgba(255,255,255,0.7); }
+/* Main product title — gold */
+body.single-product .woocommerce div.product .product_title { color: var(--gold); }
+/* Price — teal (key figure pops) */
+body.single-product .woocommerce div.product .summary .price,
+body.single-product .woocommerce div.product p.price { color: var(--teal); }
+/* Section / tab-panel headings — teal, with h4 in gold */
 body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h3,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h4 { color: #fff; }
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom-color: rgba(255,255,255,0.18); }
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a { color: rgba(255,255,255,0.6); }
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: #fff; border-bottom-color: var(--teal); }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h3 { color: var(--teal); }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h4 { color: var(--gold); }
 body.single-product .woocommerce .related > h2,
-body.single-product .woocommerce .upsells > h2 { color: #fff; }
+body.single-product .woocommerce .upsells > h2 { color: var(--teal); }
+/* Tab nav */
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom-color: rgba(255,255,255,0.18); }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a { color: rgba(255,255,255,0.65); }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: var(--gold); border-bottom-color: var(--teal); }
 body.single-product .woocommerce div.product .stock.in-stock { color: var(--mint,#3ddc97); }
 body.single-product .woocommerce div.product .stock.out-of-stock { color: var(--coral,#db627a); }
 
