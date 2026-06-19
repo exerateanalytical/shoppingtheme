@@ -312,7 +312,9 @@ function alluvia_product_schema() {
 ═══════════════════════════════════════ */
 add_action( 'wp_enqueue_scripts', 'alluvia_global_assets' );
 function alluvia_global_assets() {
-    // Lucide icons CDN — loaded via header-alluvia.php inline, but also here as fallback
+    // Lucide icons CDN — registered via wp_enqueue_script for proper WordPress asset management
+    wp_enqueue_script( 'lucide', 'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js', array(), null, true );
+    wp_add_inline_script( 'lucide', 'document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});' );
     wp_localize_script( 'jquery', 'alluviaAjax', array(
         'ajax_url'      => admin_url( 'admin-ajax.php' ),
         'contact_nonce' => wp_create_nonce( 'alluvia_contact_nonce' ),

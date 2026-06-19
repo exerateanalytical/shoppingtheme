@@ -176,7 +176,7 @@ add_action( 'wp_head', function() {
 
 /* ABOUT */
 .about-section{padding:120px 0;background:var(--pearl);position:relative;overflow:hidden}
-.about-section::before{content:'ALLUVIA';position:absolute;font-family:var(--font-display);font-size:clamp(100px,18vw,220px);font-weight:700;color:rgba(10,26,39,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
+.about-section::before{content:'ALLUVIA';position:absolute;font-family:var(--font-display);font-size:clamp(100px,18vw,220px);font-weight:700;color:rgba(10,26,39,.05);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .about-image-wrap{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);display:flex;align-items:center;justify-content:center;position:relative}
 .dna-animation{position:relative;width:140px;height:280px}
