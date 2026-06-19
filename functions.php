@@ -196,10 +196,30 @@ function alluvia_handle_subscribe() {
 }
 
 /* ═══════════════════════════════════════
-   SEO META TAGS (all Alluvia pages)
+   FAVICON — fallback when no Site Icon set in Customizer
 ═══════════════════════════════════════ */
+add_action( 'wp_head', 'alluvia_favicon', 0 );
+function alluvia_favicon() {
+    if ( has_site_icon() ) {
+        return; // Customizer Site Icon takes priority
+    }
+    $svg = get_theme_file_uri( 'assets/images/favicon.svg' );
+    echo '<link rel="icon" href="' . esc_url( $svg ) . '" type="image/svg+xml">' . "\n";
+    echo '<link rel="apple-touch-icon" href="' . esc_url( $svg ) . '">' . "\n";
+}
+
+/* ═══════════════════════════════════════
+   SEO META TAGS — skipped when RankMath / Yoast active
+═══════════════════════════════════════ */
+function alluvia_seo_plugin_active() {
+    return defined( 'RANK_MATH_VERSION' ) || defined( 'WPSEO_VERSION' ) || defined( 'AIOSEO_VERSION' );
+}
+
 add_action( 'wp_head', 'alluvia_seo_meta', 1 );
 function alluvia_seo_meta() {
+    if ( alluvia_seo_plugin_active() ) {
+        return; // Let the SEO plugin handle all meta / OG / canonical
+    }
     if ( is_front_page() ) {
         echo '<meta name="description" content="Alluvia Peptides — Pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. COA on every batch.">' . "\n";
         echo '<meta property="og:type" content="website">' . "\n";
