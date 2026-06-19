@@ -70,17 +70,33 @@ foreach ( $ids as $pid ) {
     $lname = strtolower( $name );
     $lbase = strtolower( $base );
 
-    // ── SEO title — rotate 4 honest, commercial-intent templates by id ──
-    $titles = array(
-        "Buy {$name} — HPLC-Verified + COA | Alluvia Peptides",
-        "{$name} for Research — Lab-Tested Purity, COA | Alluvia",
-        "Order {$name} — Cold-Chain Shipped, COA | Alluvia Peptides",
-        "{$name} | HPLC-Verified Purity & COA — Shop Alluvia",
-    );
+    // Lab supplies/accessories are consumables, not peptides — no purity/COA claims.
+    $is_supply = ( 'lab-supplies-accessories' === $cat_slug );
+
+    // ── SEO title — rotate honest, commercial-intent templates by id ──
+    if ( $is_supply ) {
+        $titles = array(
+            "Buy {$name} — Sterile Lab Supplies | Alluvia Peptides",
+            "{$name} | Peptide Reconstitution Supplies — Shop Alluvia",
+            "Order {$name} — Research-Grade Lab Consumables | Alluvia",
+            "{$name} for the Lab — Fast Dispatch | Alluvia Peptides",
+        );
+    } else {
+        $titles = array(
+            "Buy {$name} — HPLC-Verified + COA | Alluvia Peptides",
+            "{$name} for Research — Lab-Tested Purity, COA | Alluvia",
+            "Order {$name} — Cold-Chain Shipped, COA | Alluvia Peptides",
+            "{$name} | HPLC-Verified Purity & COA — Shop Alluvia",
+        );
+    }
     $title = $titles[ $pid % 4 ];
 
     // ── Meta description (~155, sales-intent, truthful) ──
-    $desc = "Buy {$name} for {$benefit}. HPLC-verified purity, Certificate of Analysis on every batch, cold-chain dispatch. Research use only — not for human consumption.";
+    if ( $is_supply ) {
+        $desc = "Buy {$name} for peptide reconstitution and laboratory workflows. Sterile, research-grade consumables with fast, tracked cold-chain dispatch. For laboratory use.";
+    } else {
+        $desc = "Buy {$name} for {$benefit}. HPLC-verified purity, Certificate of Analysis on every batch, cold-chain dispatch. Research use only — not for human consumption.";
+    }
     if ( mb_strlen( $desc ) > 158 ) { $desc = mb_substr( $desc, 0, 155 ) . '…'; }
 
     // ── Focus + related keywords (curated; no stuffing) ──
@@ -99,12 +115,21 @@ foreach ( $ids as $pid ) {
     ) ) ) );
 
     // ── FAQ (AEO) — 4 honest Q&As ──
-    $faq = array(
-        array( 'q' => "What is {$name}?",          'a' => "{$name} is a research-grade peptide supplied for {$benefit}. Each vial is HPLC-verified and ships with a Certificate of Analysis, intended strictly for laboratory and in-vitro use." ),
-        array( 'q' => "What purity is {$name}?",   'a' => "Every batch of {$name} is HPLC-verified, and a Certificate of Analysis documenting purity is provided with your order." ),
-        array( 'q' => "Is {$name} for human use?", 'a' => "No. {$name} is sold strictly for laboratory and in-vitro research by qualified researchers. It is not for human or animal consumption and is not a drug, food or supplement." ),
-        array( 'q' => "How is {$name} shipped?",   'a' => "Orders dispatch within 24 hours, cold-chain packed and tracked to preserve peptide integrity in transit, with your Certificate of Analysis provided digitally." ),
-    );
+    if ( $is_supply ) {
+        $faq = array(
+            array( 'q' => "What is {$name}?",          'a' => "{$name} is a research-grade laboratory consumable for peptide reconstitution, mixing and storage, supplied for laboratory use by qualified researchers." ),
+            array( 'q' => "What is {$name} used for?", 'a' => "{$name} supports peptide reconstitution and storage workflows in the lab. It is intended for laboratory and in-vitro use only." ),
+            array( 'q' => "Is {$name} sterile?",       'a' => "Yes — {$name} is supplied as a sterile, research-grade consumable suitable for laboratory reconstitution and handling workflows." ),
+            array( 'q' => "How is {$name} shipped?",   'a' => "Orders dispatch within 24 hours, tracked and protectively packed to arrive in lab-ready condition." ),
+        );
+    } else {
+        $faq = array(
+            array( 'q' => "What is {$name}?",          'a' => "{$name} is a research-grade peptide supplied for {$benefit}. Each vial is HPLC-verified and ships with a Certificate of Analysis, intended strictly for laboratory and in-vitro use." ),
+            array( 'q' => "What purity is {$name}?",   'a' => "Every batch of {$name} is HPLC-verified, and a Certificate of Analysis documenting purity is provided with your order." ),
+            array( 'q' => "Is {$name} for human use?", 'a' => "No. {$name} is sold strictly for laboratory and in-vitro research by qualified researchers. It is not for human or animal consumption and is not a drug, food or supplement." ),
+            array( 'q' => "How is {$name} shipped?",   'a' => "Orders dispatch within 24 hours, cold-chain packed and tracked to preserve peptide integrity in transit, with your Certificate of Analysis provided digitally." ),
+        );
+    }
 
     update_post_meta( $pid, '_alluvia_seo_title',     $title );
     update_post_meta( $pid, '_alluvia_seo_desc',      $desc );
