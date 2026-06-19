@@ -1066,3 +1066,95 @@ add_action( 'template_redirect', function() {
 } );
 
 add_action( 'after_switch_theme', 'flush_rewrite_rules' );
+
+/* ═══════════════════════════════════════
+   THEME COLORS — live Customizer controls
+   Appearance → Customize → Theme Colors. Three pickers (primary/teal,
+   accent/gold, navy background) recolor the whole platform by overriding the
+   CSS custom properties defined in alluvia-base.css. Defaults match the shipped
+   palette; the override is only emitted for colors the owner actually changes,
+   so the stock look is untouched until customised. Related shades (teal-dark,
+   gold-light, navy-deep/mid/soft) are derived with color-mix() so the palette
+   stays coherent from just three inputs.
+═══════════════════════════════════════ */
+define( 'ALLUVIA_COLOR_DEFAULTS', array(
+    'alluvia_color_primary' => '#0eaf9f', // --teal
+    'alluvia_color_accent'  => '#c6a253', // --gold
+    'alluvia_color_bg'      => '#0a1a27', // --navy
+) );
+
+add_action( 'customize_register', 'alluvia_customize_colors' );
+function alluvia_customize_colors( $wp_customize ) {
+    $wp_customize->add_section( 'alluvia_theme_colors', array(
+        'title'       => __( 'Theme Colors', 'shopping' ),
+        'priority'    => 30,
+        'description' => __( 'Recolor the whole site. Related shades adjust automatically.', 'shopping' ),
+    ) );
+
+    $fields = array(
+        'alluvia_color_primary' => __( 'Primary (teal)', 'shopping' ),
+        'alluvia_color_accent'  => __( 'Accent (gold)', 'shopping' ),
+        'alluvia_color_bg'      => __( 'Background (navy)', 'shopping' ),
+    );
+    $defaults = ALLUVIA_COLOR_DEFAULTS;
+
+    foreach ( $fields as $id => $label ) {
+        $wp_customize->add_setting( $id, array(
+            'default'           => $defaults[ $id ],
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'postMessage', // instant live preview via customize-preview.js
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $id, array(
+            'label'   => $label,
+            'section' => 'alluvia_theme_colors',
+        ) ) );
+    }
+}
+
+/* Build the :root override CSS from the saved colors (only for changed values). */
+function alluvia_color_overrides_css() {
+    $defaults = ALLUVIA_COLOR_DEFAULTS;
+    $primary  = sanitize_hex_color( get_theme_mod( 'alluvia_color_primary', $defaults['alluvia_color_primary'] ) );
+    $accent   = sanitize_hex_color( get_theme_mod( 'alluvia_color_accent',  $defaults['alluvia_color_accent'] ) );
+    $bg       = sanitize_hex_color( get_theme_mod( 'alluvia_color_bg',       $defaults['alluvia_color_bg'] ) );
+
+    $vars = '';
+    if ( $primary && strtolower( $primary ) !== $defaults['alluvia_color_primary'] ) {
+        $vars .= "--teal:{$primary};";
+        $vars .= "--teal-dark:color-mix(in srgb,{$primary},#000 26%);";
+        $vars .= "--teal-glow:color-mix(in srgb,{$primary} 18%,transparent);";
+    }
+    if ( $accent && strtolower( $accent ) !== $defaults['alluvia_color_accent'] ) {
+        $vars .= "--gold:{$accent};";
+        $vars .= "--gold-light:color-mix(in srgb,{$accent},#fff 28%);";
+    }
+    if ( $bg && strtolower( $bg ) !== $defaults['alluvia_color_bg'] ) {
+        $vars .= "--navy:{$bg};";
+        $vars .= "--navy-deep:color-mix(in srgb,{$bg},#000 45%);";
+        $vars .= "--navy-mid:color-mix(in srgb,{$bg},#fff 12%);";
+        $vars .= "--navy-soft:color-mix(in srgb,{$bg},#fff 26%);";
+    }
+    return $vars ? ":root{{$vars}}" : '';
+}
+
+/* Print the override late in <head> so it wins over alluvia-base.css's :root. */
+add_action( 'wp_head', 'alluvia_print_color_overrides', 100 );
+function alluvia_print_color_overrides() {
+    $css = alluvia_color_overrides_css();
+    if ( $css ) {
+        echo "<style id=\"alluvia-theme-colors\">{$css}</style>\n";
+    }
+}
+
+/* Enqueue the live-preview binder inside the Customizer preview frame. */
+add_action( 'customize_preview_init', 'alluvia_customize_preview_js' );
+function alluvia_customize_preview_js() {
+    $path = get_stylesheet_directory() . '/assets/js/customize-preview.js';
+    wp_enqueue_script(
+        'alluvia-customize-preview',
+        get_stylesheet_directory_uri() . '/assets/js/customize-preview.js',
+        array( 'customize-preview' ),
+        file_exists( $path ) ? filemtime( $path ) : '1.0.0',
+        true
+    );
+}

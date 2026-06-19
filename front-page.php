@@ -101,7 +101,7 @@ add_action( 'wp_head', function() {
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(14,175,159,.1);border:1px solid rgba(14,175,159,.3);border-radius:100px;padding:8px 18px;margin-bottom:28px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s ease forwards}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
 .hero-badge-text{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
-.hero-title{font-family:var(--font-display);font-size:clamp(52px,6.5vw,98px);font-weight:300;line-height:1.03;color:var(--white);margin-bottom:30px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .35s ease forwards}
+.hero-title{font-family:var(--font-display);font-size:clamp(31px,3.9vw,59px);font-weight:300;line-height:1.03;color:var(--white);margin-bottom:30px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .35s ease forwards}
 .hero-title em{font-style:italic;color:var(--teal)}
 .hero-desc{font-size:var(--fs-lead);font-weight:300;line-height:1.85;color:rgba(255,255,255,.85);max-width:520px;margin-bottom:48px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .5s ease forwards}
 .hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(30px);animation:fadeUp .9s .65s ease forwards}
