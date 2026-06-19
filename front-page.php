@@ -95,6 +95,8 @@ add_action( 'wp_head', function() {
 .hero-desc{font-size:var(--fs-lead);font-weight:300;line-height:1.85;color:rgba(255,255,255,.85);max-width:520px;margin-bottom:48px;opacity:0;transform:translateY(30px);animation:fadeUp .9s .5s ease forwards}
 .hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(30px);animation:fadeUp .9s .65s ease forwards}
 .hero-stats{display:flex;gap:40px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1);opacity:0;transform:translateY(20px);animation:fadeUp .9s .85s ease forwards;flex-wrap:wrap}
+/* Stats placed above the slider/buttons (top of hero content) */
+.hero-stats.hero-stats-top{margin-top:0;margin-bottom:30px;padding-top:0;padding-bottom:24px;border-top:none;border-bottom:1px solid rgba(255,255,255,.1);animation-delay:.3s}
 .stat-item{display:flex;flex-direction:column}
 .stat-number{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--white);line-height:1}
 .stat-number span{color:var(--teal)}
@@ -380,6 +382,20 @@ get_header( 'alluvia' );
   <div class="hero-glow" id="heroGlow"></div>
   <div class="hero-inner">
     <div class="hero-content">
+      <div class="hero-stats hero-stats-top">
+        <div class="stat-item">
+          <span class="stat-number"><span data-count="98" data-suffix="%">98%</span></span>
+          <span class="stat-label">Purity Grade</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number"><span data-count="8">8</span></span>
+          <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number"><span data-count="50" data-suffix="+">50+</span></span>
+          <span class="stat-label">Active Peptides</span>
+        </div>
+      </div>
       <div class="hero-slider" id="heroSlider">
 
         <!-- Slide 1 — Longevity -->
@@ -439,21 +455,6 @@ get_header( 'alluvia' );
         <button class="hero-arrow" data-dir="-1" aria-label="Previous slide"><i data-lucide="chevron-left" style="width:18px;height:18px"></i></button>
         <div class="hero-dots" id="heroDots"></div>
         <button class="hero-arrow" data-dir="1" aria-label="Next slide"><i data-lucide="chevron-right" style="width:18px;height:18px"></i></button>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number"><span data-count="98" data-suffix="%">98%</span></span>
-          <span class="stat-label">Purity Grade</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number"><span data-count="8">8</span></span>
-          <span class="stat-label">Categories</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number"><span data-count="50" data-suffix="+">50+</span></span>
-          <span class="stat-label">Active Peptides</span>
-        </div>
       </div>
     </div>
 
@@ -635,19 +636,6 @@ get_header( 'alluvia' );
         <a href="<?php echo esc_url( alluvia_cat_url( 'lab-supplies-accessories' ) ); ?>" class="cat-arrow">Shop Category <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
       </article>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- STATS -->
-<section class="stats-section">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stats-item"><div class="stats-num teal"><span data-count="98" data-suffix="%">98%</span></div><div class="stats-label">Average Purity</div></div>
-      <div class="stats-item"><div class="stats-num"><span data-count="50" data-suffix="+">50+</span></div><div class="stats-label">Peptide SKUs</div></div>
-      <div class="stats-item"><div class="stats-num gold"><span data-count="100" data-suffix="%">100%</span></div><div class="stats-label">COA Documented</div></div>
-      <div class="stats-item"><div class="stats-num teal"><span data-count="24" data-suffix="h">24h</span></div><div class="stats-label">Dispatch Time</div></div>
     </div>
   </div>
 </section>
