@@ -40,9 +40,9 @@ function alluvia_hero_products( $cat_slug, $limit = 4 ) {
 	return $out;
 }
 
-$hero_medical  = alluvia_hero_products( 'medical-peptides', 4 );
-$hero_skincare = alluvia_hero_products( 'skincare-peptides', 4 );
-$hero_sports   = alluvia_hero_products( 'sports-recovery', 4 );
+$hero_medical  = alluvia_hero_products( 'medical-peptides', 2 );
+$hero_skincare = alluvia_hero_products( 'skincare-peptides', 2 );
+$hero_sports   = alluvia_hero_products( 'sports-recovery', 2 );
 
 /** Render a compact hero product-card grid (2 col desktop / 1 col mobile). */
 function alluvia_hero_card_grid( $items ) {
