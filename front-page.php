@@ -117,23 +117,31 @@ add_action( 'wp_head', function() {
 /* Hero Visual */
 .hero-visual{position:relative;opacity:0;transform:translateX(40px) scale(.96);animation:fadeRight 1s .6s ease forwards}
 .hero-molecule{position:relative;width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
-.molecule-ring{position:absolute;border-radius:50%;border:1px solid rgba(14,175,159,.15);animation:spin-slow 20s linear infinite}
-.molecule-ring:nth-child(1){width:90%;height:90%;animation-duration:30s}
-.molecule-ring:nth-child(2){width:70%;height:70%;animation-duration:22s;animation-direction:reverse;border-color:rgba(198,162,83,.15)}
-.molecule-ring:nth-child(3){width:50%;height:50%;animation-duration:16s}
-.molecule-ring::before{content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
-.molecule-ring:nth-child(2)::before{background:var(--gold);box-shadow:0 0 12px var(--gold)}
-.molecule-core{position:relative;z-index:2;width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,var(--navy-soft),var(--navy-mid));border:1px solid rgba(14,175,159,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:0 0 60px rgba(14,175,159,.2),inset 0 1px 0 rgba(255,255,255,.08)}
-.molecule-core svg{color:var(--teal)}
-.molecule-core-label{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
-.hero-floating-cards{position:absolute;inset:0;pointer-events:none}
-.hero-card-float{position:absolute;background:rgba(22,35,54,.9);backdrop-filter:blur(12px);border:1px solid rgba(14,175,159,.2);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;animation:float-card 4s ease-in-out infinite}
-.hero-card-float:nth-child(1){top:8%;right:5%;animation-delay:0s}
-.hero-card-float:nth-child(2){bottom:18%;left:0%;animation-delay:1.5s}
-.hero-card-float:nth-child(3){top:55%;right:2%;animation-delay:.8s}
-.float-card-icon{width:36px;height:36px;border-radius:8px;background:rgba(14,175,159,.12);border:1px solid rgba(14,175,159,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
-.float-card-title{font-family:var(--font-ui);font-size:var(--fs-sm);font-weight:600;color:var(--white);white-space:nowrap}
-.float-card-sub{font-size:var(--fs-xs);color:rgba(255,255,255,.70);white-space:nowrap;margin-top:1px}
+/* soft radial aura pulsing behind the whole orbit system */
+.hero-molecule::before{content:'';position:absolute;width:78%;height:78%;border-radius:50%;background:radial-gradient(circle,rgba(14,175,159,.22),rgba(14,175,159,.06) 46%,transparent 72%);filter:blur(6px);z-index:0;animation:corePulse 5s ease-in-out infinite}
+.molecule-ring{position:absolute;border-radius:50%;border:1.5px solid rgba(14,175,159,.30);box-shadow:inset 0 0 32px rgba(14,175,159,.05);z-index:1;animation:spin-slow 20s linear infinite}
+.molecule-ring:nth-child(1){width:90%;height:90%;animation-duration:30s;border-color:rgba(14,175,159,.30)}
+.molecule-ring:nth-child(2){width:70%;height:70%;animation-duration:22s;animation-direction:reverse;border-color:rgba(198,162,83,.34)}
+.molecule-ring:nth-child(3){width:50%;height:50%;animation-duration:16s;border-color:rgba(14,175,159,.42)}
+/* orbiting particles — brighter & larger, with a second counter particle per ring */
+.molecule-ring::before{content:'';position:absolute;top:-6.5px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--teal);box-shadow:0 0 22px 4px var(--teal)}
+.molecule-ring:nth-child(2)::before{background:var(--gold);box-shadow:0 0 22px 4px var(--gold)}
+.molecule-ring::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 15px 3px var(--teal)}
+.molecule-ring:nth-child(2)::after{box-shadow:0 0 15px 3px var(--gold)}
+.molecule-core{position:relative;z-index:2;width:188px;height:188px;border-radius:50%;background:linear-gradient(135deg,var(--navy-soft),var(--navy-mid));border:1.5px solid rgba(14,175,159,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:0 0 70px rgba(14,175,159,.28),inset 0 1px 0 rgba(255,255,255,.12);animation:corePulse 4s ease-in-out infinite}
+.molecule-core svg{color:var(--teal);filter:drop-shadow(0 0 10px var(--teal-glow))}
+@keyframes corePulse{0%,100%{box-shadow:0 0 60px rgba(14,175,159,.24),inset 0 1px 0 rgba(255,255,255,.12)}50%{box-shadow:0 0 104px rgba(14,175,159,.48),inset 0 1px 0 rgba(255,255,255,.14)}}
+.molecule-core-label{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal)}
+.hero-floating-cards{position:absolute;inset:0;pointer-events:none;z-index:3}
+.hero-card-float{position:absolute;background:linear-gradient(135deg,rgba(28,46,68,.97),rgba(16,28,45,.95));backdrop-filter:blur(16px);border:1px solid rgba(14,175,159,.42);border-radius:16px;padding:15px 20px;display:flex;align-items:center;gap:13px;box-shadow:0 20px 46px -16px rgba(0,0,0,.72),0 0 26px -6px rgba(14,175,159,.40),inset 0 1px 0 rgba(255,255,255,.06);animation:float-card 4s ease-in-out infinite}
+/* "verified" tick badge on every trust card */
+.hero-card-float::after{content:'';position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/12px no-repeat,linear-gradient(135deg,var(--teal),var(--teal-dark));box-shadow:0 0 0 2.5px rgba(10,26,39,.92),0 5px 12px rgba(14,175,159,.55)}
+.hero-card-float:nth-child(1){top:6%;right:5%;animation-delay:0s}
+.hero-card-float:nth-child(2){bottom:16%;left:1%;animation-delay:1.5s}
+.hero-card-float:nth-child(3){top:54%;right:3%;animation-delay:.8s}
+.float-card-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));border:1px solid rgba(255,255,255,.18);box-shadow:0 6px 16px -5px rgba(14,175,159,.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+.float-card-title{font-family:var(--font-ui);font-size:var(--fs-base);font-weight:700;color:var(--white);white-space:nowrap;letter-spacing:.01em}
+.float-card-sub{font-size:var(--fs-sm);color:rgba(255,255,255,.80);white-space:nowrap;margin-top:2px}
 
 /* TRUST STRIP */
 .trust-strip{background:var(--white);border-top:1px solid var(--pearl-dark);border-bottom:1px solid var(--pearl-dark);padding:24px 0;overflow:hidden}
