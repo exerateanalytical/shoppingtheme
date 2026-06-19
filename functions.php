@@ -821,8 +821,8 @@ function alluvia_coa_product_tab_content() {
 
 add_action( 'woocommerce_single_product_summary', 'alluvia_product_ruo_notice', 25 );
 function alluvia_product_ruo_notice() {
-    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid var(--gold,#c6a253);border-left:4px solid var(--gold,#c6a253);background:#fbf7ef;border-radius:8px;font-size:15px;line-height:1.5;color:#3a3320;">'
-        . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:var(--navy,#0a1a27);margin-bottom:4px;">For Research Use Only</strong>'
+    echo '<div class="alluvia-ruo-notice" role="note" style="margin:18px 0;padding:14px 16px;border:1px solid rgba(198,162,83,0.4);border-left:4px solid var(--gold,#c6a253);background:rgba(198,162,83,0.08);border-radius:8px;font-size:15px;line-height:1.5;color:rgba(255,255,255,0.85);">'
+        . '<strong style="display:block;letter-spacing:1px;text-transform:uppercase;color:#c6a253;margin-bottom:4px;">For Research Use Only</strong>'
         . 'This product is supplied strictly for laboratory and in-vitro research by qualified researchers. '
         . 'It is <strong>not for human or animal consumption</strong> and is not a drug, food, cosmetic or dietary supplement.'
         . '</div>';
