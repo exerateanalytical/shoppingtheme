@@ -94,9 +94,7 @@ body.single-product .woocommerce .upsells > h2 { color: #0eaf9f !important; }
    ══════════════════════════════════════════════════════════════ */
 
 body.archive .archive-hero h1,
-body.blog .archive-hero h1,
-body.archive .page-title,
-body.blog .page-title { color: #c6a253 !important; }
+body.blog .archive-hero h1 { color: #c6a253 !important; }
 
 body.archive .archive-hero p,
 body.blog .archive-hero p { color: rgba(255,255,255,0.75) !important; }
@@ -109,13 +107,12 @@ body.blog .post-card .post-meta,
 body.archive .post-card .category-label,
 body.blog .post-card .category-label { color: #0eaf9f !important; }
 
-body.archive .post-card .excerpt,
-body.blog .post-card .excerpt,
-body.archive .post-card .excerpt p,
-body.blog .post-card .excerpt p { color: rgba(255,255,255,0.7) !important; }
+body.archive .post-card .post-excerpt,
+body.blog .post-card .post-excerpt { color: rgba(255,255,255,0.7) !important; }
 
-body.archive .no-posts-found,
-body.blog .no-posts-found { color: rgba(255,255,255,0.6) !important; }
+/* no-posts state: archive.php renders an unstyled div > p (no class) when have_posts() is false */
+body.archive main > div > p,
+body.blog main > div > p { color: rgba(255,255,255,0.6) !important; }
 
 body.archive .sidebar-widget h3,
 body.archive .sidebar-widget h4,
@@ -127,3 +124,6 @@ body.blog .sidebar-widget a { color: rgba(255,255,255,0.75) !important; }
 
 body.archive .sidebar-widget a:hover,
 body.blog .sidebar-widget a:hover { color: #0eaf9f !important; }
+
+body.archive .archive-pagination .page-numbers.current,
+body.blog .archive-pagination .page-numbers.current { background: var(--teal) !important; border-color: var(--teal) !important; color: #0a1a27 !important; }
