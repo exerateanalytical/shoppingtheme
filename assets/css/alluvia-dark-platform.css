@@ -88,3 +88,42 @@ body.single-product .woocommerce .upsells > h2 { color: #0eaf9f !important; }
    ══════════════════════════════════════════════════════════════ */
 
 .faq-section-title { color: rgba(255,255,255,0.55) !important; border-bottom-color: rgba(255,255,255,0.1) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   5. ARCHIVE / BLOG LISTING
+   ══════════════════════════════════════════════════════════════ */
+
+body.archive .archive-hero h1,
+body.blog .archive-hero h1,
+body.archive .page-title,
+body.blog .page-title { color: #c6a253 !important; }
+
+body.archive .archive-hero p,
+body.blog .archive-hero p { color: rgba(255,255,255,0.75) !important; }
+
+body.archive .post-card h2,
+body.blog .post-card h2 { color: #ffffff !important; }
+
+body.archive .post-card .post-meta,
+body.blog .post-card .post-meta,
+body.archive .post-card .category-label,
+body.blog .post-card .category-label { color: #0eaf9f !important; }
+
+body.archive .post-card .excerpt,
+body.blog .post-card .excerpt,
+body.archive .post-card .excerpt p,
+body.blog .post-card .excerpt p { color: rgba(255,255,255,0.7) !important; }
+
+body.archive .no-posts-found,
+body.blog .no-posts-found { color: rgba(255,255,255,0.6) !important; }
+
+body.archive .sidebar-widget h3,
+body.archive .sidebar-widget h4,
+body.blog .sidebar-widget h3,
+body.blog .sidebar-widget h4 { color: #c6a253 !important; }
+
+body.archive .sidebar-widget a,
+body.blog .sidebar-widget a { color: rgba(255,255,255,0.75) !important; }
+
+body.archive .sidebar-widget a:hover,
+body.blog .sidebar-widget a:hover { color: #0eaf9f !important; }
