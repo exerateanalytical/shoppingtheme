@@ -361,6 +361,17 @@ get_header( 'alluvia' );
 .hero-slide{display:none}
 .hero-slide.active{display:block;animation:heroSlideIn .6s cubic-bezier(.23,1,.32,1)}
 @keyframes heroSlideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* Keep the active slide's content visible at rest. The badge/title/desc/actions
+   use a one-shot fadeUp entrance (opacity:0 baseline); the slider's go() only
+   toggles .active and never replays it, so when the carousel returns to a slide
+   its text would stay invisible. On slides 1 & 5 that left the whole hero blank
+   on mobile (their molecule visual is display:none there) — i.e. "not responsive".
+   Pinning the resting state to visible fixes it; the entrance still plays the
+   first time each slide is shown (display:none -> block starts the animation). */
+.hero-slide.active .hero-badge,
+.hero-slide.active .hero-title,
+.hero-slide.active .hero-desc,
+.hero-slide.active .hero-actions{opacity:1;transform:none}
 
 /* per-slide accent palette — vitality / healing / radiance / energy / premium */
 .hero-slide{--accent:var(--teal);--accent-dark:var(--teal-dark)}
