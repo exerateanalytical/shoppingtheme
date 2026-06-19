@@ -200,6 +200,12 @@ function alluvia_handle_subscribe() {
 ═══════════════════════════════════════ */
 add_action( 'wp_head', 'alluvia_seo_meta', 1 );
 function alluvia_seo_meta() {
+    // If a dedicated SEO plugin is active it owns the title/meta/canonical/schema
+    // (fed our curated values by the SEO-plugin bridge below) — yield to avoid
+    // duplicate tags.
+    if ( alluvia_active_seo_plugin() ) {
+        return;
+    }
     if ( is_front_page() ) {
         $desc = 'Alluvia Peptides — pharmaceutical-grade bioactive peptides for skincare, sports recovery, anti-aging, weight-loss, hair growth, and research. HPLC-verified purity with a Certificate of Analysis on every batch.';
         $logo = get_template_directory_uri() . '/assets/images/favicon.svg';
@@ -242,6 +248,9 @@ function alluvia_seo_meta() {
 /* Per-product SEO <title> — use the curated _alluvia_seo_title when present. */
 add_filter( 'pre_get_document_title', 'alluvia_seo_document_title', 20 );
 function alluvia_seo_document_title( $title ) {
+    if ( alluvia_active_seo_plugin() ) {
+        return $title; // the SEO plugin sets the title from the bridged meta
+    }
     if ( is_front_page() ) {
         return 'Alluvia Peptides — Premium Bioactive Peptides | HPLC-Verified Purity & COA';
     }
@@ -404,6 +413,115 @@ function alluvia_product_schema() {
             'mainEntity' => $faqs,
         ) ) . '</script>' . "\n";
     }
+}
+
+/* ═══════════════════════════════════════
+   SEO PLUGIN BRIDGE
+   If a dedicated SEO plugin is later installed, hand it the curated
+   _alluvia_seo_* values so they appear PRE-FILLED in the plugin's own editor
+   fields (SEO title / meta description / focus keyword) and are used for output.
+   The theme's own SEO output (above) yields to the plugin. Non-destructive: a
+   plugin field is only filled when empty, so manual edits inside the plugin win.
+═══════════════════════════════════════ */
+function alluvia_active_seo_plugin() {
+    if ( defined( 'WPSEO_VERSION' ) )                                  { return 'yoast'; }
+    if ( defined( 'RANK_MATH_VERSION' ) )                              { return 'rankmath'; }
+    if ( defined( 'SEOPRESS_VERSION' ) )                               { return 'seopress'; }
+    if ( defined( 'AIOSEO_VERSION' ) || defined( 'AIOSEOP_VERSION' ) ) { return 'aioseo'; }
+    return '';
+}
+
+/* Map our meta to a plugin's post-meta keys. null => not post-meta based (AIOSEO). */
+function alluvia_seo_plugin_keymap( $plugin ) {
+    switch ( $plugin ) {
+        case 'yoast':
+            return array( 'title' => '_yoast_wpseo_title', 'desc' => '_yoast_wpseo_metadesc', 'focus' => '_yoast_wpseo_focuskw', 'related' => '_yoast_wpseo_keywordsynonyms', 'combine' => false );
+        case 'rankmath':
+            return array( 'title' => 'rank_math_title', 'desc' => 'rank_math_description', 'focus' => 'rank_math_focus_keyword', 'related' => null, 'combine' => true );
+        case 'seopress':
+            return array( 'title' => '_seopress_titles_title', 'desc' => '_seopress_titles_desc', 'focus' => '_seopress_analysis_target_kw', 'related' => null, 'combine' => true );
+    }
+    return null;
+}
+
+/* Copy one product's curated meta into the plugin's keys (only where empty). */
+function alluvia_seo_sync_product( $pid, $map ) {
+    $title   = get_post_meta( $pid, '_alluvia_seo_title', true );
+    $desc    = get_post_meta( $pid, '_alluvia_seo_desc', true );
+    $focus   = get_post_meta( $pid, '_alluvia_seo_focuskw', true );
+    $related = get_post_meta( $pid, '_alluvia_seo_related', true );
+    $fill = function ( $key, $val ) use ( $pid ) {
+        if ( $key && '' !== (string) $val && '' === (string) get_post_meta( $pid, $key, true ) ) {
+            update_post_meta( $pid, $key, $val );
+        }
+    };
+    $fill( $map['title'], $title );
+    $fill( $map['desc'], $desc );
+    $fk = ( ! empty( $map['combine'] ) && $related ) ? trim( $focus . ', ' . $related ) : $focus;
+    $fill( $map['focus'], $fk );
+    if ( ! empty( $map['related'] ) ) {
+        $fill( $map['related'], $related );
+    }
+}
+
+/* One-time migration the first admin load after a supported plugin is detected. */
+add_action( 'admin_init', 'alluvia_seo_bridge_migrate' );
+function alluvia_seo_bridge_migrate() {
+    $plugin = alluvia_active_seo_plugin();
+    if ( ! $plugin ) {
+        return;
+    }
+    $map = alluvia_seo_plugin_keymap( $plugin );
+    if ( ! $map ) {
+        return; // AIOSEO: fed via output filters below, no post-meta to migrate
+    }
+    $flag = 'alluvia_seo_bridged_' . $plugin;
+    if ( get_option( $flag ) ) {
+        return;
+    }
+    $ids = get_posts( array( 'post_type' => 'product', 'posts_per_page' => -1, 'fields' => 'ids', 'post_status' => 'any' ) );
+    foreach ( $ids as $pid ) {
+        alluvia_seo_sync_product( $pid, $map );
+    }
+    update_option( $flag, time() );
+}
+
+/* Keep new / re-saved products bridged. */
+add_action( 'save_post_product', 'alluvia_seo_bridge_on_save', 20 );
+function alluvia_seo_bridge_on_save( $pid ) {
+    if ( wp_is_post_revision( $pid ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
+        return;
+    }
+    $plugin = alluvia_active_seo_plugin();
+    if ( ! $plugin ) {
+        return;
+    }
+    $map = alluvia_seo_plugin_keymap( $plugin );
+    if ( $map ) {
+        alluvia_seo_sync_product( $pid, $map );
+    }
+}
+
+/* AIOSEO keeps SEO data in its own table, so feed it through its output filters. */
+add_filter( 'aioseo_title', 'alluvia_seo_aioseo_title' );
+function alluvia_seo_aioseo_title( $title ) {
+    if ( is_singular( 'product' ) ) {
+        $t = get_post_meta( get_the_ID(), '_alluvia_seo_title', true );
+        if ( $t ) {
+            return $t;
+        }
+    }
+    return $title;
+}
+add_filter( 'aioseo_description', 'alluvia_seo_aioseo_desc' );
+function alluvia_seo_aioseo_desc( $desc ) {
+    if ( is_singular( 'product' ) ) {
+        $d = get_post_meta( get_the_ID(), '_alluvia_seo_desc', true );
+        if ( $d ) {
+            return $d;
+        }
+    }
+    return $desc;
 }
 
 /* ═══════════════════════════════════════
