@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+.superpowers/
+.claude/
+og-*.php
+og-sample.jpg
