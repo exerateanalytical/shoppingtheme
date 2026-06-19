@@ -1219,3 +1219,15 @@ input#subscribe-field {
     border-bottom: none;
     border-right: none;
 }
+
+/* ── Archive, Single Post, & Search page content wrappers ──
+   Ensure main content areas have light backgrounds for readability on navy body bg. */
+.archive-wrap,
+.post-layout,
+.search-wrap {
+  background: var(--white, #fff);
+  color: var(--text-dark, #0a1a27);
+  border-radius: var(--radius-md, 16px);
+  margin-left: auto;
+  margin-right: auto;
+}
