@@ -313,6 +313,10 @@ function alluvia_global_assets() {
         $js_path  = $dir . '/assets/js/alluvia-commerce.js';
         // filemtime() versions cache-bust automatically on every file edit.
         wp_enqueue_style( 'alluvia-commerce', $base . '/assets/css/alluvia-commerce.css', array(), file_exists( $css_path ) ? filemtime( $css_path ) : '1.0.0' );
+        $dark_css_path = $dir . '/assets/css/alluvia-dark-platform.css';
+        if ( file_exists( $dark_css_path ) ) {
+            wp_add_inline_style( 'alluvia-commerce', file_get_contents( $dark_css_path ) );
+        }
         wp_enqueue_script( 'alluvia-commerce', $base . '/assets/js/alluvia-commerce.js', array(), file_exists( $js_path ) ? filemtime( $js_path ) : '1.0.0', true );
     }
 }
