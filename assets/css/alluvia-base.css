@@ -236,7 +236,7 @@ a:hover { color: var(--teal-dark); }
 .woocommerce a.button:hover,
 .woocommerce button.button:hover { background: var(--teal-dark); transform: translateY(-2px); }
 .woocommerce a.button.alt,
-.woocommerce button.button.alt { background: var(--navy); color: var(--color-on-navy); }
+.woocommerce button.button.alt { background: var(--navy); color: #fff; }
 .woocommerce form .form-row label { font-family: var(--font-ui); font-size: var(--fs-ui); font-weight: 600; color: var(--navy); margin-bottom: 6px; display: block; }
 .woocommerce form .form-row input.input-text,
 .woocommerce form .form-row select,
