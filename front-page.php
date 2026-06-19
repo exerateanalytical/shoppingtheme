@@ -145,6 +145,24 @@ add_action( 'wp_head', function() {
 
 /* TRUST STRIP */
 .trust-strip{background:var(--white);border-top:1px solid var(--pearl-dark);border-bottom:1px solid var(--pearl-dark);padding:24px 0;overflow:hidden}
+
+/* PROMISE SECTION */
+.promise-section{padding:88px 0 96px;background:var(--pearl);position:relative;overflow:hidden}
+.promise-section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--teal) 30%,var(--gold) 65%,var(--teal) 85%,transparent)}
+.promise-section::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--pearl-dark)}
+.promise-header{text-align:center;margin-bottom:56px}
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.promise-card{background:var(--white);border-radius:var(--radius-md);padding:44px 36px 40px;border:1px solid var(--pearl-dark);display:flex;flex-direction:column;gap:18px;transition:var(--transition);position:relative;overflow:hidden}
+.promise-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pc-color,var(--teal));opacity:.7;transition:opacity .3s}
+.promise-card:hover{border-color:var(--pc-color,var(--teal));box-shadow:0 16px 48px rgba(10,26,39,.10);transform:translateY(-6px)}
+.promise-card:hover::before{opacity:1}
+.promise-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--pc-color,var(--teal)) 12%,transparent);border:1px solid color-mix(in srgb,var(--pc-color,var(--teal)) 28%,transparent);color:var(--pc-color,var(--teal));transition:var(--transition)}
+.promise-card:hover .promise-icon{background:var(--pc-color,var(--teal));color:var(--white);box-shadow:0 8px 24px color-mix(in srgb,var(--pc-color,var(--teal)) 40%,transparent)}
+.promise-title{font-family:var(--font-ui);font-size:20px;font-weight:700;color:var(--navy);line-height:1.2}
+.promise-desc{font-size:15px;font-weight:400;line-height:1.75;color:var(--text-mid)}
+.promise-badge{display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--pc-color,var(--teal)) 10%,transparent);border:1px solid color-mix(in srgb,var(--pc-color,var(--teal)) 24%,transparent);border-radius:100px;padding:5px 14px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pc-color,var(--teal));align-self:flex-start;margin-top:4px}
+@media(max-width:860px){.promise-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+@media(max-width:640px){.promise-section{padding:64px 0 72px}.promise-card{padding:34px 26px 30px}}
 .trust-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
 .trust-item{display:flex;align-items:center;gap:10px;opacity:.9;transition:opacity .3s,transform .3s;cursor:default}
 .trust-item:hover{opacity:1;transform:translateY(-2px)}
@@ -533,6 +551,48 @@ get_header( 'alluvia' );
     <div class="trust-item"><i data-lucide="pill" class="icon-md"></i><span class="trust-text">Pharmaceutical Grade</span></div>
   </div>
 </div>
+
+
+<!-- PROMISE — Quality · 24/7 Support · Fast Delivery -->
+<section class="promise-section">
+  <div class="container">
+    <div class="promise-header reveal">
+      <p class="section-label">The Alluvia Commitment</p>
+      <h2 class="section-title">Built Around <em>You</em></h2>
+      <p class="section-desc" style="margin:0 auto">Every order is backed by pharmaceutical-grade standards, round-the-clock support, and delivery that respects your time.</p>
+    </div>
+    <div class="promise-grid">
+
+      <div class="promise-card reveal" style="--pc-color:#0eaf9f">
+        <div class="promise-icon">
+          <i data-lucide="shield-check" style="width:28px;height:28px;stroke-width:1.6"></i>
+        </div>
+        <h3 class="promise-title">Uncompromising Quality</h3>
+        <p class="promise-desc">Every peptide is independently tested to &ge;98% purity via HPLC and mass spectrometry. No fillers, no proprietary blends &mdash; just verified pharmaceutical-grade bioactives with a Certificate of Analysis on every batch.</p>
+        <span class="promise-badge"><i data-lucide="microscope" style="width:12px;height:12px"></i> COA on Every Batch</span>
+      </div>
+
+      <div class="promise-card reveal reveal-delay-1" style="--pc-color:#c6a253">
+        <div class="promise-icon">
+          <i data-lucide="headphones" style="width:28px;height:28px;stroke-width:1.6"></i>
+        </div>
+        <h3 class="promise-title">24/7 Customer Support</h3>
+        <p class="promise-desc">Questions about dosing, reconstitution, or your order? Our science-literate support team is available around the clock &mdash; via live chat, email, and phone &mdash; so you're never left without an answer.</p>
+        <span class="promise-badge"><i data-lucide="clock" style="width:12px;height:12px"></i> Always Available</span>
+      </div>
+
+      <div class="promise-card reveal reveal-delay-2" style="--pc-color:#ef8246">
+        <div class="promise-icon">
+          <i data-lucide="zap" style="width:28px;height:28px;stroke-width:1.6"></i>
+        </div>
+        <h3 class="promise-title">Fast, Cold-Chain Delivery</h3>
+        <p class="promise-desc">Orders dispatch within 24 hours, cold-chain packed to maintain 2&ndash;8 &deg;C throughout transit. Tracked, insured, and discreetly shipped &mdash; your COA arrives digitally the moment your parcel ships.</p>
+        <span class="promise-badge"><i data-lucide="package-check" style="width:12px;height:12px"></i> Ships in 24 Hours</span>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 
 <!-- ABOUT -->
