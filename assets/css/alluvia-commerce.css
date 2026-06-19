@@ -46,6 +46,43 @@
 .woocommerce div.product p.price del{color:var(--text-light);font-size:16px;font-weight:700;margin-right:10px}
 .woocommerce div.product p.price ins{text-decoration:none}
 .woocommerce div.product .woocommerce-product-details__short-description{font-size:16px;line-height:1.75;color:var(--text-mid);margin:18px 0}
+
+/* ── Single product on the navy platform: legible text + ORANGE titles ──
+   The product page sits on the dark navy body, where the light-theme colors
+   here (navy title, gray description) are illegible. Scoped to body.single-product
+   so the white-card shop & category archives are unaffected. Selectors use
+   `body.single-product div.product` — the woocommerce class is on <body> here,
+   not a wrapper div. */
+body.single-product div.product .product_title{color:#ef8246!important}
+body.single-product div.product p.price,
+body.single-product div.product span.price,
+body.single-product div.product .summary .price{color:#0eaf9f!important}
+body.single-product div.product p.price del,
+body.single-product div.product span.price del{color:rgba(255,255,255,.35)!important}
+body.single-product div.product .woocommerce-product-details__short-description,
+body.single-product div.product .woocommerce-product-details__short-description p,
+body.single-product div.product .woocommerce-product-details__short-description li{color:#fff!important}
+body.single-product div.product .product_meta,
+body.single-product div.product .product_meta span,
+body.single-product div.product .product_meta a{color:rgba(255,255,255,.65)!important}
+body.single-product div.product .product_meta{border-top-color:rgba(255,255,255,.12)!important}
+body.single-product div.product .stock.in-stock{color:#3ddc97!important}
+body.single-product div.product .stock.out-of-stock{color:#db627a!important}
+body.single-product .woocommerce-breadcrumb{color:rgba(255,255,255,.6)!important}
+body.single-product .woocommerce-breadcrumb a{color:#0eaf9f!important}
+body.single-product div.product .woocommerce-tabs ul.tabs{border-bottom-color:rgba(255,255,255,.18)!important}
+body.single-product div.product .woocommerce-tabs ul.tabs li a{color:rgba(255,255,255,.6)!important}
+body.single-product div.product .woocommerce-tabs ul.tabs li.active a,
+body.single-product div.product .woocommerce-tabs ul.tabs li a:hover{color:#ef8246!important;border-bottom-color:#ef8246!important}
+body.single-product div.product .woocommerce-tabs .panel,
+body.single-product div.product .woocommerce-tabs .panel p,
+body.single-product div.product .woocommerce-tabs .panel li{color:rgba(255,255,255,.88)!important}
+body.single-product div.product .woocommerce-tabs .panel h2,
+body.single-product div.product .woocommerce-tabs .panel h3{color:#ef8246!important}
+body.single-product div.product .woocommerce-tabs .panel h4{color:#c6a253!important}
+body.single-product div.product .woocommerce-tabs .panel a{color:#0eaf9f!important}
+body.single-product .related>h2,
+body.single-product .upsells>h2{color:#ef8246!important}
 .woocommerce div.product .product_meta{font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-top:22px;border-top:1px solid var(--pearl-dark);padding-top:18px}
 .woocommerce div.product .product_meta>span{display:block;margin-bottom:6px}
 

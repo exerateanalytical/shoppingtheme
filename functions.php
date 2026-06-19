@@ -131,15 +131,6 @@ function shopping_init() {
             array(),
             file_exists( $base_css_path ) ? filemtime( $base_css_path ) : '1.0.0' // cache-bust on every edit
         );
-        // Dark-platform text-color overrides — appended inline after alluvia-base on
-        // every page so dark-on-navy text (product description, titles, etc.) stays
-        // legible. Color-only; every rule is scoped to its page context
-        // (body.single-product, .checkout-panel, …). Single source of truth:
-        // assets/css/alluvia-dark-platform.css.
-        $dark_css_path = get_stylesheet_directory() . '/assets/css/alluvia-dark-platform.css';
-        if ( file_exists( $dark_css_path ) ) {
-            wp_add_inline_style( 'alluvia-base', file_get_contents( $dark_css_path ) );
-        }
     }
 }
 
