@@ -191,14 +191,15 @@ add_action( 'wp_head', function() {
 .categories-header .section-title{color:var(--white)}
 .categories-header .section-desc{color:rgba(255,255,255,.55);margin:0 auto}
 .categories-header .section-label{justify-content:center}
-.categories-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.categories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .cat-card{position:relative;border-radius:var(--radius-md);padding:32px 24px;background:linear-gradient(165deg,color-mix(in srgb,var(--cat-color,var(--teal)) 9%,transparent) 0%,rgba(255,255,255,.03) 58%);border:1px solid color-mix(in srgb,var(--cat-color,var(--teal)) 18%,rgba(255,255,255,.07));cursor:pointer;transition:var(--transition);overflow:hidden}
 .cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cat-color,var(--teal)),transparent 60%);opacity:0;transition:opacity .45s ease}
 .cat-card:hover::before{opacity:.12}
 .cat-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.3)}
 .cat-number{font-family:var(--font-display);font-size:56px;font-weight:600;line-height:1;color:rgba(255,255,255,.04);position:absolute;top:16px;right:20px;user-select:none;transition:color .45s}
 .cat-card:hover .cat-number{color:rgba(255,255,255,.08)}
-.cat-icon-wrap{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;background:color-mix(in srgb,var(--cat-color,var(--teal)) 16%,transparent);border:1px solid color-mix(in srgb,var(--cat-color,var(--teal)) 34%,transparent);transition:var(--transition);position:relative;z-index:1;color:var(--cat-color,var(--teal))}
+.cat-icon-wrap{width:76px;height:76px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:color-mix(in srgb,var(--cat-color,var(--teal)) 16%,transparent);border:1px solid color-mix(in srgb,var(--cat-color,var(--teal)) 34%,transparent);transition:var(--transition);position:relative;z-index:1;color:var(--cat-color,var(--teal))}
+.cat-icon-wrap svg{width:42px;height:42px}
 .cat-card:hover .cat-icon-wrap{background:var(--cat-color,var(--teal));border-color:var(--cat-color,var(--teal));color:var(--navy);box-shadow:0 10px 28px color-mix(in srgb,var(--cat-color,var(--teal)) 45%,transparent);transform:scale(1.1) rotate(-4deg)}
 .cat-name{font-family:var(--font-ui);font-size:var(--fs-body);font-weight:600;color:var(--white);margin-bottom:10px;line-height:1.3;position:relative;z-index:1}
 .cat-desc{font-size:var(--fs-base);font-weight:300;color:rgba(255,255,255,.65);line-height:1.65;position:relative;z-index:1;transition:color .3s}
@@ -587,7 +588,7 @@ get_header( 'alluvia' );
   <div class="container">
     <div class="categories-header">
       <p class="section-label">What We Offer</p>
-      <h2 class="section-title">Eight Pathways to<br><em>Peak Performance</em></h2>
+      <h2 class="section-title">Nine Pathways to<br><em>Peak Performance</em></h2>
       <p class="section-desc">From cellular repair to hormonal balance — Alluvia covers every dimension of human optimisation with purpose-built peptide formulations.</p>
     </div>
     <div class="categories-grid">
