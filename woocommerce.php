@@ -11,15 +11,16 @@ add_action( 'wp_head', function() {
 .alluvia-woo-wrap { padding-top: 88px; min-height: 60vh; background: transparent; }
 /* Shop/archive loose text sits on the navy platform background — keep it light */
 .alluvia-woo-wrap .woocommerce-products-header__title,
-.alluvia-woo-wrap .page-title,
-.alluvia-woo-inner h1 { color: #fff; }
+.alluvia-woo-wrap .page-title { color: #fff; }
 .alluvia-woo-wrap .woocommerce-result-count,
 .alluvia-woo-wrap .term-description,
 .alluvia-woo-wrap .woocommerce-ordering label { color: rgba(255,255,255,0.7); }
 .alluvia-woo-wrap .woocommerce-ordering select { background: #fff; color: var(--navy); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 9px 16px; }
 .alluvia-woo-wrap .woocommerce-breadcrumb { color: rgba(255,255,255,0.6); }
 .alluvia-woo-wrap .woocommerce-breadcrumb a { color: var(--teal); }
-.alluvia-woo-inner { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
+.alluvia-woo-inner { max-width: 1200px; margin: 40px auto; padding: 60px 40px; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+/* Inner is a white card — bare body text must read dark, not inherit anything light */
+.alluvia-woo-inner, .alluvia-woo-inner p { color: var(--text-dark); }
 .alluvia-woo-inner h1,
 .alluvia-woo-inner .page-title {
   font-family: var(--font-display);
