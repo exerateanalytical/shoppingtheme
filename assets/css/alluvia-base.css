@@ -41,9 +41,10 @@
   --fs-h1:     clamp(48px, 6vw, 80px);
 
   /* Fonts */
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body:    'Inter', system-ui, sans-serif;
-  --font-ui:      'Space Grotesk', system-ui, sans-serif;
+  /* Unified platform typeface — Montserrat across body + headings */
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui:      'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
   /* Radii */
   --radius-sm: 8px;
