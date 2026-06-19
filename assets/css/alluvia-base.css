@@ -18,6 +18,13 @@
   --gold:        #c6a253;
   --gold-light:  #e4c98f;
   --coral:       #db627a;
+  /* Interaction tokens */
+  --color-on-teal:  #0a1a27;   /* text colour on any teal surface */
+  --color-on-navy:  #ffffff;   /* text colour on any navy surface */
+
+  /* Footer gradient accent stops */
+  --gradient-mint:  #1fb074;
+  --gradient-flame: #e07b43;
   --pearl:       #f5f0e7;
   --pearl-dark:  #e8e0d2;
   --white:       #ffffff;
@@ -192,7 +199,7 @@ a:hover { color: var(--teal-dark); }
 
 /* ── Shared footer ── */
 .alluvia-footer { position: relative; background: radial-gradient(ellipse 60% 80% at 15% 0%, rgba(17,182,163,0.06), transparent 55%), radial-gradient(ellipse 50% 70% at 90% 10%, rgba(198,162,83,0.05), transparent 55%), #060e17; padding: 80px 0 0; color: rgba(255,255,255,0.65); }
-.alluvia-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--teal), #1fb074, #e07b43, var(--gold), var(--teal)); opacity: 0.7; }
+.alluvia-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--teal), var(--gradient-mint), var(--gradient-flame), var(--gold), var(--teal)); opacity: 0.7; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding: 0 40px 60px; border-bottom: 1px solid rgba(255,255,255,0.07); max-width: 1280px; margin: 0 auto; }
 .footer-desc { font-size: var(--fs-base); line-height: 1.75; color: rgba(255,255,255,0.55); margin-top: 20px; max-width: 280px; }
 .footer-socials { display: flex; gap: 10px; margin-top: 24px; }
@@ -239,7 +246,7 @@ a:hover { color: var(--teal-dark); }
 .woocommerce table.shop_table { border-collapse: collapse; width: 100%; background: #fff; border-radius: var(--radius-md); overflow: hidden; }
 .woocommerce table.shop_table th { font-family: var(--font-ui); font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); padding: 16px; border-bottom: 1px solid var(--pearl-dark); background: var(--pearl); }
 .woocommerce table.shop_table td { padding: 16px; border-bottom: 1px solid var(--pearl-dark); font-size: var(--fs-base); vertical-align: middle; }
-.woocommerce .price, .woocommerce div.product p.price { color: var(--teal); font-weight: 700; font-size: var(--fs-title); }
+.woocommerce .price { font-weight: 700; font-size: var(--fs-title); }
 .woocommerce-message, .woocommerce-info { border-top: none; border-left: 4px solid var(--teal); background: rgba(14,175,159,0.07); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: var(--fs-base); font-family: var(--font-ui); }
 .woocommerce-error { border-left-color: var(--coral); background: rgba(219,98,122,0.07); }
 .woocommerce .woocommerce-breadcrumb { font-family: var(--font-ui); font-size: var(--fs-sm); color: var(--text-light); margin-bottom: 24px; }
