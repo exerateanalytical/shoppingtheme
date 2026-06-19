@@ -241,6 +241,13 @@ get_header( 'alluvia' );
     </div>
   </div>
 
+  <?php
+  // Comments — renders comments.php when open or existing comments are present.
+  if ( comments_open() || get_comments_number() ) {
+    comments_template();
+  }
+  ?>
+
   <?php endwhile; ?>
 
   <!-- SIDEBAR -->

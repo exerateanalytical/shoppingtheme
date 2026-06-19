@@ -105,6 +105,7 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
 
   </div>
 </nav>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="mobile-overlay" id="mobileNav">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">
