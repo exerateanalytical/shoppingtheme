@@ -290,7 +290,7 @@ h3,
 h4,
 h5,
 h6 {
-	color: #333;
+	color: var(--text-dark, #0a1a27);
 	font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 	font-weight: normal;
 	line-height: 1.2;
@@ -590,7 +590,7 @@ img.alignright,
 
 .entry-title a,
 .sidebar .widget-title a {
-	color: #333;
+	color: var(--text-dark, #0a1a27);
 }
 
 .entry-title a:hover {
