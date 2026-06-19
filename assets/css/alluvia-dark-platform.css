@@ -1,0 +1,90 @@
+/* =============================================================
+   Alluvia Dark Platform — Text color overrides for navy background
+   Injected via wp_add_inline_style() — single source of truth.
+   Never add layout, spacing, or font-size here — only color.
+   ============================================================= */
+
+/* ══════════════════════════════════════════════════════════════
+   1. SINGLE PRODUCT PAGE
+   ══════════════════════════════════════════════════════════════ */
+
+body.single-product .woocommerce-breadcrumb { color: rgba(255,255,255,0.6) !important; }
+body.single-product .woocommerce-breadcrumb a { color: #0eaf9f !important; }
+
+/* Product title → gold */
+body.single-product .woocommerce div.product .product_title,
+body.single-product .woocommerce div.product h1.product_title { color: #c6a253 !important; }
+
+/* Price → teal */
+body.single-product .woocommerce div.product p.price,
+body.single-product .woocommerce div.product span.price,
+body.single-product .woocommerce div.product .summary .price { color: #0eaf9f !important; }
+body.single-product .woocommerce div.product p.price del,
+body.single-product .woocommerce div.product span.price del { color: rgba(255,255,255,0.35) !important; }
+
+/* Short description */
+body.single-product .woocommerce div.product .woocommerce-product-details__short-description,
+body.single-product .woocommerce div.product .woocommerce-product-details__short-description p,
+body.single-product .woocommerce div.product .woocommerce-product-details__short-description li { color: #ffffff !important; }
+
+/* Product meta */
+body.single-product .woocommerce div.product .product_meta,
+body.single-product .woocommerce div.product .product_meta span,
+body.single-product .woocommerce div.product .product_meta a { color: rgba(255,255,255,0.65) !important; }
+body.single-product .woocommerce div.product .product_meta { border-top-color: rgba(255,255,255,0.12) !important; }
+
+/* Stock status */
+body.single-product .woocommerce div.product .stock.in-stock { color: #3ddc97 !important; }
+body.single-product .woocommerce div.product .stock.out-of-stock { color: #db627a !important; }
+
+/* Tab nav */
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom-color: rgba(255,255,255,0.18) !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a { color: rgba(255,255,255,0.6) !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: #c6a253 !important; border-bottom-color: #0eaf9f !important; }
+
+/* Tab panel content */
+body.single-product .woocommerce div.product .woocommerce-tabs .panel,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel p,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel li { color: rgba(255,255,255,0.88) !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h3 { color: #0eaf9f !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h4 { color: #c6a253 !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel a { color: #0eaf9f !important; }
+
+/* Related / upsells */
+body.single-product .woocommerce .related > h2,
+body.single-product .woocommerce .upsells > h2 { color: #0eaf9f !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   2. ALL WOO PAGES — inner page heading on navy platform
+   ══════════════════════════════════════════════════════════════ */
+
+.alluvia-woo-inner h1,
+.alluvia-woo-inner .page-title { color: #ffffff !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   3. BLOG POST — .post-layout article sits on navy
+   ══════════════════════════════════════════════════════════════ */
+
+.post-layout .article p,
+.post-layout .article li { color: rgba(255,255,255,0.85) !important; }
+.post-layout .article h2 { color: #ffffff !important; }
+.post-layout .article h3 { color: rgba(255,255,255,0.9) !important; }
+.post-layout .article .pull-quote p { color: #0eaf9f !important; }
+.post-layout .article .pull-quote cite { color: rgba(255,255,255,0.55) !important; }
+.post-layout .article .pull-quote { background: rgba(14,175,159,0.08) !important; border-left-color: #0eaf9f !important; }
+.post-layout .article .info-box p,
+.post-layout .article .warn-box p { color: rgba(255,255,255,0.8) !important; }
+.post-layout .related-posts h2 { color: #ffffff !important; }
+.post-layout .post-footer-bar { border-top-color: rgba(255,255,255,0.12) !important; }
+.post-layout .tag { background: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.75) !important; }
+.post-layout .share-label { color: rgba(255,255,255,0.55) !important; }
+.post-layout .share-btn { background: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.65) !important; }
+.post-layout .share-btn:hover { background: #0eaf9f !important; color: #0a1a27 !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   4. FAQ — section title labels between white accordion cards
+   ══════════════════════════════════════════════════════════════ */
+
+.faq-section-title { color: rgba(255,255,255,0.55) !important; border-bottom-color: rgba(255,255,255,0.1) !important; }
