@@ -4,14 +4,89 @@
  *
  * @package Shopping
  */
+
+/**
+ * Fetch a few live products from a category for the hero slide showcases.
+ * Returns an array of card data (permalink, title, thumb, price, category).
+ */
+function alluvia_hero_products( $cat_slug, $limit = 4 ) {
+	$out = array();
+	if ( ! function_exists( 'wc_get_product' ) ) {
+		return $out;
+	}
+	$q = new WP_Query( array(
+		'post_type'      => 'product',
+		'post_status'    => 'publish',
+		'posts_per_page' => $limit,
+		'orderby'        => 'meta_value_num',
+		'meta_key'       => 'total_sales',
+		'order'          => 'DESC',
+		'tax_query'      => array( array( 'taxonomy' => 'product_cat', 'field' => 'slug', 'terms' => $cat_slug ) ),
+		'no_found_rows'  => true,
+	) );
+	foreach ( $q->posts as $p ) {
+		$product = wc_get_product( $p->ID );
+		if ( ! $product ) { continue; }
+		$terms = wp_get_post_terms( $p->ID, 'product_cat', array( 'number' => 1 ) );
+		$out[] = array(
+			'url'   => get_permalink( $p->ID ),
+			'name'  => get_the_title( $p->ID ),
+			'thumb' => get_the_post_thumbnail_url( $p->ID, 'woocommerce_thumbnail' ),
+			'price' => $product->get_price_html(),
+			'cat'   => ( ! is_wp_error( $terms ) && $terms ) ? $terms[0]->name : '',
+		);
+	}
+	wp_reset_postdata();
+	return $out;
+}
+
+$hero_medical  = alluvia_hero_products( 'medical-peptides', 4 );
+$hero_skincare = alluvia_hero_products( 'skincare-peptides', 4 );
+$hero_sports   = alluvia_hero_products( 'sports-recovery', 4 );
+
+/** Render a compact hero product-card grid (2 col desktop / 1 col mobile). */
+function alluvia_hero_card_grid( $items ) {
+	if ( empty( $items ) ) { return; }
+	echo '<div class="hero-product-grid">';
+	foreach ( $items as $it ) {
+		echo '<a class="hpc" href="' . esc_url( $it['url'] ) . '">';
+		echo '<div class="hpc-img">';
+		if ( $it['thumb'] ) {
+			echo '<img src="' . esc_url( $it['thumb'] ) . '" alt="' . esc_attr( $it['name'] ) . '" loading="lazy">';
+		} else {
+			echo '<span class="hpc-ph"><i data-lucide="flask-conical" style="width:30px;height:30px;color:var(--teal)"></i></span>';
+		}
+		echo '</div><div class="hpc-body">';
+		if ( $it['cat'] ) { echo '<div class="hpc-cat">' . esc_html( $it['cat'] ) . '</div>'; }
+		echo '<div class="hpc-name">' . esc_html( $it['name'] ) . '</div>';
+		echo '<div class="hpc-price">' . wp_kses_post( $it['price'] ) . '</div>';
+		echo '</div></a>';
+	}
+	echo '</div>';
+}
+
 add_action( 'wp_head', function() {
 ?>
 <style>
 /* HERO */
-.hero{position:relative;min-height:100vh;background:var(--navy);display:flex;align-items:center;overflow:hidden}
+.hero{position:relative;min-height:70vh;background:var(--navy);display:flex;align-items:center;overflow:hidden}
+/* Hero visual slider (molecule on slides 1&5, product grids on 2/3/4) */
+.hero-vslide{display:none}
+.hero-vslide.active{display:block;animation:fadeRight .6s ease}
+.hero-product-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hpc{display:flex;flex-direction:column;background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:transform .25s,box-shadow .25s}
+.hpc:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(0,0,0,.38)}
+.hpc-img{aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),var(--navy-soft));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hpc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hpc-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px}
+.hpc-cat{font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dark)}
+.hpc-name{font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--navy);line-height:1.25}
+.hpc-price{font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--navy);margin-top:2px}
+.hpc-price del{color:var(--text-light);font-weight:400;font-size:12px;margin-right:4px}
+.hpc-price ins{text-decoration:none}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero-gradient{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(14,175,159,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 80% at 20% 80%,rgba(198,162,83,.08) 0%,transparent 50%),linear-gradient(135deg,#0a1a27 0%,#15283b 50%,#0a1a27 100%)}
-.hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:140px 40px 100px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:108px 40px 64px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(14,175,159,.1);border:1px solid rgba(14,175,159,.3);border-radius:100px;padding:8px 18px;margin-bottom:28px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s ease forwards}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
 .hero-badge-text{font-family:var(--font-ui);font-size:var(--fs-micro);font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
@@ -224,8 +299,11 @@ add_action( 'wp_head', function() {
   .hiw-step .hiw-arrow{display:none}
 }
 @media(max-width:900px){
-  .hero-inner{grid-template-columns:1fr;padding:120px 24px 80px}
-  .hero-visual{display:none}
+  .hero-inner{grid-template-columns:1fr;padding:110px 24px 70px}
+  /* hide only the decorative molecule on mobile; product grids stay (1 column) */
+  .hero-vslide.is-molecule{display:none}
+  .hero-product-grid{grid-template-columns:1fr;gap:12px;max-width:340px}
+  .hpc-img{aspect-ratio:16/10}
   .about-grid,.science-grid{grid-template-columns:1fr;gap:60px}
   .about-visual{display:none}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
@@ -380,29 +458,39 @@ get_header( 'alluvia' );
     </div>
 
     <div class="hero-visual">
-      <div class="hero-molecule">
-        <div class="molecule-ring"></div>
-        <div class="molecule-ring"></div>
-        <div class="molecule-ring"></div>
-        <div class="molecule-core">
-          <i data-lucide="dna" style="width:48px;height:48px;color:var(--teal);stroke-width:1.2"></i>
-          <span class="molecule-core-label">Bioactive</span>
+
+      <!-- Molecule visual — shown on slides 1 (Longevity) & 5 (Quality) -->
+      <div class="hero-vslide is-molecule active" data-for="0,4">
+        <div class="hero-molecule">
+          <div class="molecule-ring"></div>
+          <div class="molecule-ring"></div>
+          <div class="molecule-ring"></div>
+          <div class="molecule-core">
+            <i data-lucide="dna" style="width:48px;height:48px;color:var(--teal);stroke-width:1.2"></i>
+            <span class="molecule-core-label">Bioactive</span>
+          </div>
+        </div>
+        <div class="hero-floating-cards">
+          <div class="hero-card-float">
+            <div class="float-card-icon"><i data-lucide="shield-check" class="icon-md"></i></div>
+            <div><div class="float-card-title">Lab Certified</div><div class="float-card-sub">COA Available</div></div>
+          </div>
+          <div class="hero-card-float">
+            <div class="float-card-icon"><i data-lucide="microscope" class="icon-md"></i></div>
+            <div><div class="float-card-title">98%+ Purity</div><div class="float-card-sub">HPLC Verified</div></div>
+          </div>
+          <div class="hero-card-float">
+            <div class="float-card-icon"><i data-lucide="package" class="icon-md"></i></div>
+            <div><div class="float-card-title">Fast Shipping</div><div class="float-card-sub">Cold-Chain Packed</div></div>
+          </div>
         </div>
       </div>
-      <div class="hero-floating-cards">
-        <div class="hero-card-float">
-          <div class="float-card-icon"><i data-lucide="shield-check" class="icon-md"></i></div>
-          <div><div class="float-card-title">Lab Certified</div><div class="float-card-sub">COA Available</div></div>
-        </div>
-        <div class="hero-card-float">
-          <div class="float-card-icon"><i data-lucide="microscope" class="icon-md"></i></div>
-          <div><div class="float-card-title">98%+ Purity</div><div class="float-card-sub">HPLC Verified</div></div>
-        </div>
-        <div class="hero-card-float">
-          <div class="float-card-icon"><i data-lucide="package" class="icon-md"></i></div>
-          <div><div class="float-card-title">Fast Shipping</div><div class="float-card-sub">Cold-Chain Packed</div></div>
-        </div>
-      </div>
+
+      <!-- Product showcases — synced to slides 2/3/4 -->
+      <div class="hero-vslide" data-for="1"><?php alluvia_hero_card_grid( $hero_medical ); ?></div>
+      <div class="hero-vslide" data-for="2"><?php alluvia_hero_card_grid( $hero_skincare ); ?></div>
+      <div class="hero-vslide" data-for="3"><?php alluvia_hero_card_grid( $hero_sports ); ?></div>
+
     </div>
   </div>
 </section>
@@ -807,14 +895,21 @@ lucide.createIcons();
     if(glowEl)glowEl.style.setProperty('--hero-accent',glows[i%glows.length]);
     if(navEl)navEl.style.setProperty('--accent',accents[i%accents.length]);
   }
+  var vslides=[].slice.call(document.querySelectorAll('.hero-vslide'));
+  function syncVisual(){
+    vslides.forEach(function(v){
+      var f=(v.getAttribute('data-for')||'').split(',');
+      v.classList.toggle('active', f.indexOf(String(i))>-1);
+    });
+  }
   function go(n){
     slides[i].classList.remove('active');dots[i].classList.remove('active');
     i=(n+slides.length)%slides.length;
     slides[i].classList.add('active');dots[i].classList.add('active');
-    applyAccent();
+    applyAccent();syncVisual();
     if(window.lucide&&lucide.createIcons)lucide.createIcons();
   }
-  applyAccent();
+  applyAccent();syncVisual();
   function next(){go(i+1);}
   document.querySelectorAll('.hero-arrow').forEach(function(a){
     a.addEventListener('click',function(){go(i+parseInt(a.getAttribute('data-dir'),10));reset();});

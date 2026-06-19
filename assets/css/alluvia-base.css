@@ -104,6 +104,18 @@ body {
 body.alluvia-site {
   background: var(--navy);
 }
+
+/* ── Headings: bold across the whole platform ──
+   Forces every heading element bold, overriding the lighter display weights
+   (300/400/500) that individual templates set on heading classes. */
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .shop-hero h1, .reviews-hero h1,
+.account-hero-info h1, .archive-hero h1, .search-hero h1,
+.product-info h1, .tab-content-card h3,
+.woocommerce div.product .product_title,
+.woocommerce .related > h2, .woocommerce .cart_totals h2 {
+  font-weight: 700 !important;
+}
 /* Push fixed-header content clear of the always-solid nav on templates that
    don't already start with a full-height hero. Heroes use their own top padding. */
 
