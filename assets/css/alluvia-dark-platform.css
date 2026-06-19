@@ -11,9 +11,9 @@
 body.single-product .woocommerce-breadcrumb { color: rgba(255,255,255,0.6) !important; }
 body.single-product .woocommerce-breadcrumb a { color: #0eaf9f !important; }
 
-/* Product title → gold */
+/* Product title → orange */
 body.single-product .woocommerce div.product .product_title,
-body.single-product .woocommerce div.product h1.product_title { color: #c6a253 !important; }
+body.single-product .woocommerce div.product h1.product_title { color: #ef8246 !important; }
 
 /* Price → teal */
 body.single-product .woocommerce div.product p.price,
@@ -41,20 +41,20 @@ body.single-product .woocommerce div.product .stock.out-of-stock { color: #db627
 body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom-color: rgba(255,255,255,0.18) !important; }
 body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a { color: rgba(255,255,255,0.6) !important; }
 body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
-body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: #c6a253 !important; border-bottom-color: #0eaf9f !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover { color: #ef8246 !important; border-bottom-color: #ef8246 !important; }
 
 /* Tab panel content */
 body.single-product .woocommerce div.product .woocommerce-tabs .panel,
 body.single-product .woocommerce div.product .woocommerce-tabs .panel p,
 body.single-product .woocommerce div.product .woocommerce-tabs .panel li { color: rgba(255,255,255,0.88) !important; }
 body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
-body.single-product .woocommerce div.product .woocommerce-tabs .panel h3 { color: #0eaf9f !important; }
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h3 { color: #ef8246 !important; }
 body.single-product .woocommerce div.product .woocommerce-tabs .panel h4 { color: #c6a253 !important; }
 body.single-product .woocommerce div.product .woocommerce-tabs .panel a { color: #0eaf9f !important; }
 
 /* Related / upsells */
 body.single-product .woocommerce .related > h2,
-body.single-product .woocommerce .upsells > h2 { color: #0eaf9f !important; }
+body.single-product .woocommerce .upsells > h2 { color: #ef8246 !important; }
 
 /* Product page extras (page-product.php custom template) */
 body.single-product .breadcrumb { color: rgba(255,255,255,0.6) !important; }
