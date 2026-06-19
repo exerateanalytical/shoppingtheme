@@ -10,8 +10,11 @@
 :root {
   /* Palette */
   --navy:        #0a1a27;
+  --navy-deep:   #050b12;  /* boxed-layout backdrop — one step darker than --navy */
   --navy-mid:    #15283b;
   --navy-soft:   #213f5d;
+  /* Sitewide boxed-layout width (the centered platform "box"). */
+  --box-width:   1280px;
   --teal:        #0eaf9f;
   --teal-dark:   #0a8174;
   --teal-glow:   rgba(14,175,159,0.18);
@@ -105,6 +108,23 @@ body.alluvia-site {
   background: var(--navy);
 }
 
+/* ── Boxed layout (entire platform) ──
+   The whole site sits in a centered box (--box-width) floating on a darker-navy
+   backdrop with a soft shadow. Because every full-bleed section background lives
+   inside <body>, constraining the body's width clips all section backgrounds to
+   the box edge — that's the boxed effect. The fixed nav is centered over the box
+   to match (see .alluvia-nav below). On screens narrower than the box, the box is
+   simply full-width, so mobile is unaffected. */
+html {
+  background: var(--navy-deep);
+}
+body.alluvia-site {
+  max-width: var(--box-width);
+  margin-inline: auto;
+  position: relative;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.55);
+}
+
 /* ── Headings: bold across the whole platform ──
    Forces every heading element bold, overriding the lighter display weights
    (300/400/500) that individual templates set on heading classes. */
@@ -148,7 +168,10 @@ a:hover { color: var(--teal-dark); }
 /* Distinct, consistent header on EVERY page — always a solid navy bar
    (previously transparent until scroll, which made it invisible on light pages). */
 .alluvia-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  /* Centered over the boxed layout: instead of spanning the viewport, the fixed
+     bar is capped at --box-width and centred, so it lines up with the body box. */
+  position: fixed; top: 0; left: 50%; right: auto; transform: translateX(-50%);
+  width: 100%; max-width: var(--box-width); z-index: 1000;
   padding: 14px 0;
   transition: var(--transition);
   background: rgba(10,26,39,0.97);
