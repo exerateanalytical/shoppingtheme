@@ -149,3 +149,154 @@ body.search-results .result-meta { color: rgba(255,255,255,0.5) !important; }
 body.search-results .no-results h2 { color: #c6a253 !important; }
 
 body.search-results .no-results p { color: rgba(255,255,255,0.6) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   7. CHECKOUT PAGE  (custom page-checkout.php template)
+   ══════════════════════════════════════════════════════════════ */
+
+/* Page hero heading */
+.page-hero h1 { color: #ffffff !important; }
+
+/* Panel headers (h2 inside .panel-header, h3 inside .panel-body) */
+.checkout-panel .panel-header h2 { color: #ffffff !important; }
+.checkout-panel .panel-body h3 { color: #c6a253 !important; }
+
+/* Form labels */
+.checkout-panel .form-group label,
+.checkout-layout .form-group label { color: rgba(255,255,255,0.85) !important; }
+
+/* Sidebar header */
+.order-sidebar .sidebar-header h3 { color: #ffffff !important; }
+
+/* Sidebar totals */
+.order-sidebar .s-row .lbl { color: rgba(255,255,255,0.65) !important; }
+.order-sidebar .s-row .val { color: rgba(255,255,255,0.9) !important; }
+.order-sidebar .s-total .lbl { color: #ffffff !important; }
+.order-sidebar .s-total .val { color: #c6a253 !important; }
+
+/* Sidebar item names */
+.order-sidebar .s-item-name { color: rgba(255,255,255,0.9) !important; }
+.order-sidebar .s-item-qty { color: rgba(255,255,255,0.5) !important; }
+
+/* Trust items */
+.order-sidebar .s-trust-item { color: rgba(255,255,255,0.65) !important; }
+
+/* Shipping option labels */
+.checkout-layout .ship-name { color: rgba(255,255,255,0.9) !important; }
+.checkout-layout .ship-desc { color: rgba(255,255,255,0.55) !important; }
+.checkout-layout .ship-price { color: #0eaf9f !important; }
+
+/* Secure note */
+.checkout-layout .secure-note { color: rgba(255,255,255,0.55) !important; }
+
+/* Review items */
+.checkout-layout .review-item-name { color: rgba(255,255,255,0.9) !important; }
+.checkout-layout .review-item-qty { color: rgba(255,255,255,0.55) !important; }
+.checkout-layout .review-item-price { color: #0eaf9f !important; }
+
+/* Progress step labels */
+.checkout-layout .step-label.active,
+.progress-steps .step-label.active { color: #ffffff !important; }
+.checkout-layout .step-label.done,
+.progress-steps .step-label.done { color: #0eaf9f !important; }
+.checkout-layout .step-label.pending,
+.progress-steps .step-label.pending { color: rgba(255,255,255,0.45) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   8. CONTACT PAGE
+   ══════════════════════════════════════════════════════════════ */
+
+.contact-section h2,
+.contact-section h3 { color: #c6a253 !important; }
+
+.contact-section p,
+.contact-layout p { color: rgba(255,255,255,0.85) !important; }
+
+/* Form labels inside the contact form card */
+.contact-form-card .form-group label { color: rgba(255,255,255,0.85) !important; }
+
+/* Sidebar card headings */
+.contact-sidebar .sidebar-card h3 { color: rgba(255,255,255,0.55) !important; }
+
+/* Sidebar response list channel text */
+.contact-sidebar .response-list .channel { color: rgba(255,255,255,0.75) !important; }
+
+/* Hours list */
+.contact-sidebar .hours-list li { color: rgba(255,255,255,0.65) !important; }
+.contact-sidebar .hours-list .day { color: rgba(255,255,255,0.9) !important; }
+
+/* Tracking text */
+.contact-sidebar .tracking-text { color: rgba(255,255,255,0.65) !important; }
+
+/* Tracking link */
+.contact-sidebar .tracking-link { color: #0eaf9f !important; }
+
+/* FAQ questions */
+.faq-section .faq-question h4 { color: rgba(255,255,255,0.9) !important; }
+.faq-section .faq-answer-inner { color: rgba(255,255,255,0.7) !important; }
+
+/* Section heading (FAQ section h2) */
+.faq-section .section-heading h2 { color: #c6a253 !important; }
+.faq-section .section-heading p { color: rgba(255,255,255,0.65) !important; }
+
+/* Newsletter strip (already has navy background) */
+.newsletter-strip .newsletter-inner h3 { color: #ffffff !important; }
+.newsletter-strip .newsletter-inner p { color: rgba(255,255,255,0.7) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   9. MY ACCOUNT PAGE
+   ══════════════════════════════════════════════════════════════ */
+
+/* Hero */
+.account-hero-info h1 { color: #ffffff !important; }
+.account-hero-info p { color: rgba(255,255,255,0.5) !important; }
+
+/* Sidebar nav */
+.account-sidebar .sidebar-user-name { color: #ffffff !important; }
+.account-sidebar .sidebar-user-email { color: rgba(255,255,255,0.45) !important; }
+.account-sidebar .sidebar-nav li a { color: rgba(255,255,255,0.7) !important; }
+.account-sidebar .sidebar-nav li a.active { color: #0eaf9f !important; }
+
+/* Stat cards */
+.account-main .stat-num { color: rgba(255,255,255,0.95) !important; }
+.account-main .stat-label { color: rgba(255,255,255,0.5) !important; }
+
+/* Panel card header */
+.account-main .panel-card-header h3 { color: #c6a253 !important; }
+
+/* WC MyAccount content */
+.account-layout .woocommerce-MyAccount-content h1,
+.account-layout .woocommerce-MyAccount-content h2,
+.account-layout .woocommerce-MyAccount-content h3 { color: #c6a253 !important; }
+
+.account-layout .woocommerce-MyAccount-content p,
+.account-layout .woocommerce-MyAccount-content td { color: rgba(255,255,255,0.85) !important; }
+
+.account-layout .woocommerce-MyAccount-content th { color: rgba(255,255,255,0.55) !important; }
+
+/* Order status */
+.account-layout .woocommerce-orders-table .order-status { color: #3ddc97 !important; }
+
+/* Form labels */
+.account-layout form label { color: rgba(255,255,255,0.85) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   10. SHOP / PRODUCT CATEGORY ARCHIVE
+   ══════════════════════════════════════════════════════════════ */
+
+body.woocommerce-shop h1,
+body.tax-product_cat h1,
+body.woocommerce-shop .woocommerce-products-header__title,
+body.tax-product_cat .woocommerce-products-header__title { color: #c6a253 !important; }
+
+body.woocommerce-shop .woocommerce-result-count,
+body.tax-product_cat .woocommerce-result-count { color: rgba(255,255,255,0.6) !important; }
+
+body.woocommerce-shop .woocommerce-ordering select,
+body.tax-product_cat .woocommerce-ordering select { color: #0a1a27 !important; }
+
+body.woocommerce-shop ul.products li.product .woocommerce-loop-product__title,
+body.tax-product_cat ul.products li.product .woocommerce-loop-product__title { color: #ffffff !important; }
+
+body.woocommerce-shop ul.products li.product .price,
+body.tax-product_cat ul.products li.product .price { color: #0eaf9f !important; }
