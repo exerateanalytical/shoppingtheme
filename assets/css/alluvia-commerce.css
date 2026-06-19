@@ -49,6 +49,14 @@
 .woocommerce div.product .product_meta{font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-top:22px;border-top:1px solid var(--pearl-dark);padding-top:18px}
 .woocommerce div.product .product_meta>span{display:block;margin-bottom:6px}
 
+/* Single product on navy platform — override dark defaults with light colors */
+body.single-product .woocommerce div.product .product_title{color:var(--gold)}
+body.single-product .woocommerce div.product p.price,
+body.single-product .woocommerce div.product span.price{color:var(--teal)}
+body.single-product .woocommerce div.product .woocommerce-product-details__short-description{color:#fff}
+body.single-product .woocommerce div.product .product_meta,
+body.single-product .woocommerce div.product .product_meta a{color:rgba(255,255,255,0.7)}
+
 /* alt button styling (checkout proceed, etc.) */
 .woocommerce a.button.alt,
 .woocommerce button.button.alt { background: var(--navy); color: var(--color-on-navy); }
@@ -82,6 +90,18 @@
 .woocommerce .upsells{grid-column:1/-1;margin-top:48px}
 .woocommerce .related>h2,
 .woocommerce .upsells>h2{font-family:var(--font-display);font-size:30px;font-weight:500;color:var(--navy);margin-bottom:24px}
+
+/* ---- Single product on navy platform background — light text overrides ---- */
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs{border-bottom-color:rgba(255,255,255,0.18)}
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a{color:rgba(255,255,255,0.65)}
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+body.single-product .woocommerce div.product .woocommerce-tabs ul.tabs li a:hover{color:var(--gold);border-bottom-color:var(--teal)}
+body.single-product .woocommerce div.product .woocommerce-tabs .panel{color:#fff}
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h2,
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h3{color:var(--teal)}
+body.single-product .woocommerce div.product .woocommerce-tabs .panel h4{color:var(--gold)}
+body.single-product .woocommerce .related>h2,
+body.single-product .woocommerce .upsells>h2{color:var(--teal)}
 
 /* ---- Cart --------------------------------------------------------------- */
 .woocommerce .cart-collaterals,
