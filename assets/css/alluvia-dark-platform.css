@@ -127,3 +127,25 @@ body.blog .sidebar-widget a:hover { color: #0eaf9f !important; }
 
 body.archive .archive-pagination .page-numbers.current,
 body.blog .archive-pagination .page-numbers.current { background: var(--teal) !important; border-color: var(--teal) !important; color: #0a1a27 !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   6. SEARCH RESULTS
+   ══════════════════════════════════════════════════════════════ */
+
+body.search-results .search-count { color: rgba(255,255,255,0.6) !important; }
+
+body.search-results .search-count strong { color: #ffffff !important; }
+
+body.search-results .result-title { color: #ffffff !important; }
+
+body.search-results .result-title a { color: #ffffff !important; }
+
+body.search-results .result-title a:hover { color: #0eaf9f !important; }
+
+body.search-results .result-excerpt { color: rgba(255,255,255,0.75) !important; }
+
+body.search-results .result-meta { color: rgba(255,255,255,0.5) !important; }
+
+body.search-results .no-results h2 { color: #c6a253 !important; }
+
+body.search-results .no-results p { color: rgba(255,255,255,0.6) !important; }
