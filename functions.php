@@ -216,7 +216,7 @@ function alluvia_seo_meta() {
         echo '<meta property="og:url" content="' . esc_url( home_url( '/' ) ) . '">' . "\n";
         echo '<meta property="og:site_name" content="Alluvia Peptides">' . "\n";
         echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
-        echo '<link rel="canonical" href="' . esc_url( home_url( '/' ) ) . '">' . "\n";
+        // Canonical is supplied by WP core rel_canonical() (the static front page is is_singular) — no duplicate here.
         // Organization schema (logo + description). sameAs left empty — add real social profiles only.
         $org = array(
             '@context'    => 'https://schema.org',
@@ -287,7 +287,6 @@ function alluvia_post_schema() {
     $img = get_the_post_thumbnail_url( $pid, 'large' );
 
     echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
-    echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
     echo '<meta property="og:type" content="article">' . "\n";
     echo '<meta property="og:title" content="' . esc_attr( $seo_title ) . '">' . "\n";
     echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
@@ -391,9 +390,8 @@ function alluvia_product_schema() {
     $seo_title = get_post_meta( $pid, '_alluvia_seo_title', true ) ?: ( $name . ' | Alluvia Peptides' );
     $meta_desc = get_post_meta( $pid, '_alluvia_seo_desc', true ) ?: wp_html_excerpt( $description, 155, '…' );
 
-    /* ── Meta description + canonical + Open Graph / Twitter (product) ── */
+    /* ── Meta description + Open Graph / Twitter (product; canonical via WP core rel_canonical) ── */
     echo '<meta name="description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
-    echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
     echo '<meta property="og:type" content="product">' . "\n";
     echo '<meta property="og:title" content="' . esc_attr( $seo_title ) . '">' . "\n";
     echo '<meta property="og:description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
@@ -2024,6 +2022,14 @@ function alluvia_page_meta() {
 	echo '<meta property="og:title" content="' . esc_attr( $title . ' | ' . get_bloginfo( 'name' ) ) . '">' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
 	echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+}
+
+/* Self-canonical for the blog index (/blog/): is_home() is not is_singular, so WP core emits none. */
+add_action( 'wp_head', 'alluvia_blog_index_canonical', 1 );
+function alluvia_blog_index_canonical() {
+	if ( ! ( is_home() && ! is_front_page() ) ) { return; }
+	$bid = (int) get_option( 'page_for_posts' );
+	if ( $bid ) { echo '<link rel="canonical" href="' . esc_url( get_permalink( $bid ) ) . '">' . "\n"; }
 }
 
 /* Drop the author/users sub-sitemap (no SEO value for a store). */
