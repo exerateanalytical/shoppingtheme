@@ -401,11 +401,17 @@ add_action( 'wp_head', function() {
   .hiw-step .hiw-arrow{display:none}
 }
 @media(max-width:900px){
-  .hero-inner{grid-template-columns:1fr;padding:110px 24px 70px}
-  /* hide only the decorative molecule on mobile; product grids stay (1 column) */
+  /* Keep the desktop split on mobile — text left, ONE product card on the right.
+     The right track is `auto`: it is the card's width on the product slides, and
+     0 on the molecule slides (molecule is hidden), so those get full-width text. */
+  .hero-inner{grid-template-columns:1fr auto;gap:clamp(14px,3.5vw,34px);padding:104px 18px 56px;align-items:center}
   .hero-vslide.is-molecule{display:none}
-  .hero-product-grid{grid-template-columns:1fr 1fr;gap:12px;max-width:480px}
-  .hpc-img{aspect-ratio:16/10}
+  .hero-showcase{gap:12px}
+  .hero-showcase .hero-stats{display:none}                 /* keep the right column compact */
+  .hero-product-grid{grid-template-columns:1fr;gap:0;max-width:none;width:clamp(126px,32vw,240px)} /* 1 column, 1 row */
+  .hero-product-grid .hpc:nth-child(n+2){display:none}     /* show a single card */
+  .hpc-img{aspect-ratio:1/1}
+  .hero-showcase-cta{width:100%;justify-content:center;margin-top:2px}
   .about-grid,.science-grid{grid-template-columns:1fr;gap:60px}
   .about-visual{display:none}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
@@ -432,7 +438,7 @@ add_action( 'wp_head', function() {
   .section-title{font-size:clamp(30px,7.5vw,40px)}
   .section-desc{font-size:var(--fs-base)}
   .hero-title{font-size:clamp(30px,8vw,44px)}
-  .hero-inner{padding:92px 20px 54px;gap:34px}
+  .hero-inner{padding:96px 16px 50px;gap:14px}
   .hero-desc{margin-bottom:32px}
   .hero-stats.hero-stats-inline{gap:18px}
   .promise-section,.about-section,.categories-section,.science-section,.testimonials-section,.cta-section,.hiw-section,.stats-section{padding:64px 0}
