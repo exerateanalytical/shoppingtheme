@@ -358,6 +358,16 @@ add_action( 'wp_head', function() {
   .about-section{padding:80px 0}
   .categories-section,.science-section,.testimonials-section,.cta-section,.hiw-section{padding:80px 0}
 }
+@media(max-width:560px){
+  .section-title{font-size:clamp(30px,7.5vw,40px)}
+  .section-desc{font-size:var(--fs-base)}
+  .hero-title{font-size:clamp(30px,8vw,44px)}
+  .hero-inner{padding:92px 20px 54px;gap:34px}
+  .hero-desc{margin-bottom:32px}
+  .hero-stats.hero-stats-inline{gap:18px}
+  .promise-section,.about-section,.categories-section,.science-section,.testimonials-section,.cta-section,.hiw-section,.stats-section{padding:64px 0}
+  .promise-header,.categories-header,.hiw-header,.testimonials-header{margin-bottom:38px}
+}
 @media(max-width:380px){
   .hero-actions{flex-direction:column;align-items:stretch}
 }

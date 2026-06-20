@@ -95,7 +95,37 @@ add_action( 'wp_head', function() {
 
 @media(max-width:400px){
   .post-hero h1{font-size:32px!important}
-}</style>
+}
+
+/* ARTICLE ON DARK PLATFORM — white body text, purple headings (mirrors the
+   product detail page's white-copy / coloured-heading treatment). The article
+   sits on the navy platform background, so the default dark prose is illegible. */
+.article .post-prose p,
+.article .post-prose li,
+.article .post-prose td,
+.article .post-prose blockquote{color:#fff}
+.article .post-prose h2,
+.article .post-prose h3,
+.article .post-prose h4,
+.article .post-prose h5{color:var(--purple)}
+.article .post-prose strong,
+.article .post-prose b{color:#fff}
+.article .post-prose a{color:var(--teal)}
+.article .post-prose a:hover{color:var(--gold)}
+.article .post-prose ul li::marker,
+.article .post-prose ol li::marker{color:var(--purple)}
+.article .post-prose table{width:100%;border-collapse:collapse;margin:1.75rem 0;font-size:var(--fs-base)}
+.article .post-prose th,
+.article .post-prose td{border:1px solid rgba(255,255,255,0.16);padding:10px 14px;text-align:left;line-height:1.6}
+.article .post-prose th{background:rgba(138,96,193,0.16);color:var(--purple);font-family:var(--font-ui)}
+.article .post-prose blockquote{border-left:3px solid var(--purple);padding:0.25rem 0 0.25rem 1.1rem;margin:1.75rem 0}
+.related-posts h2{color:#fff}
+.post-footer-bar{border-top-color:rgba(255,255,255,0.16)}
+.share-label{color:rgba(255,255,255,0.65)}
+/* sidebar product cards now show real WooCommerce product thumbnails */
+.sp-icon{overflow:hidden;background:rgba(255,255,255,0.05)}
+.sp-icon img{width:40px;height:40px;border-radius:8px;object-fit:cover;display:block}
+</style>
 <?php
 }, 20 );
 get_header( 'alluvia' );
@@ -110,6 +140,56 @@ get_header( 'alluvia' );
   $a_init    = strtoupper( mb_substr( $a_parts[0], 0, 1 ) . ( isset( $a_parts[1] ) ? mb_substr( $a_parts[1], 0, 1 ) : '' ) );
   $a_read    = max( 1, (int) round( str_word_count( wp_strip_all_tags( get_the_content() ) ) / 200 ) );
   $a_bio     = get_the_author_meta( 'description' );
+  $a_pid     = get_the_ID();
+
+  // Render the content with auto-IDed H2s and build a real table of contents
+  // from the article's actual headings (replaces the old hardcoded TOC).
+  $a_content = apply_filters( 'the_content', get_the_content() );
+  $a_toc     = array();
+  $a_content = preg_replace_callback( '/<h2(\b[^>]*)>(.*?)<\/h2>/is', function ( $m ) use ( &$a_toc ) {
+      $text = trim( wp_strip_all_tags( $m[2] ) );
+      if ( '' === $text ) { return $m[0]; }
+      $base = sanitize_title( $text );
+      if ( '' === $base ) { $base = 'section'; }
+      $id = $base; $n = 2;
+      while ( in_array( $id, wp_list_pluck( $a_toc, 'id' ), true ) ) { $id = $base . '-' . $n; $n++; }
+      $a_toc[] = array( 'id' => $id, 'text' => $text );
+      if ( preg_match( '/\sid=/i', $m[1] ) ) { return $m[0]; }
+      return '<h2' . $m[1] . ' id="' . esc_attr( $id ) . '">' . $m[2] . '</h2>';
+  }, $a_content );
+
+  // Real platform products for the sidebar — match the article by focus keyword
+  // or title, then fall back to featured and most-popular products.
+  $a_sidebar_products = array();
+  if ( function_exists( 'wc_get_products' ) ) {
+      $a_seen  = array();
+      $a_focus = get_post_meta( $a_pid, '_alluvia_seo_focuskw', true );
+      $a_pick  = function ( $ids ) use ( &$a_sidebar_products, &$a_seen ) {
+          foreach ( (array) $ids as $pid ) {
+              $pid = (int) $pid;
+              if ( ! $pid || isset( $a_seen[ $pid ] ) || count( $a_sidebar_products ) >= 3 ) { continue; }
+              $prod = wc_get_product( $pid );
+              if ( $prod && $prod->is_visible() ) { $a_seen[ $pid ] = 1; $a_sidebar_products[] = $prod; }
+          }
+      };
+      $a_term = $a_focus ? $a_focus : get_the_title( $a_pid );
+      if ( $a_term ) { $a_pick( wc_get_products( array( 's' => $a_term, 'limit' => 3, 'status' => 'publish', 'return' => 'ids' ) ) ); }
+      if ( count( $a_sidebar_products ) < 3 ) { $a_pick( wc_get_products( array( 'featured' => true, 'limit' => 3, 'status' => 'publish', 'return' => 'ids' ) ) ); }
+      if ( count( $a_sidebar_products ) < 3 ) { $a_pick( wc_get_products( array( 'orderby' => 'popularity', 'limit' => 6, 'status' => 'publish', 'return' => 'ids' ) ) ); }
+  }
+
+  // Real related articles (same category, newest first), with a generic fallback.
+  $a_related = get_posts( array(
+      'post_type'      => 'post',
+      'posts_per_page' => 2,
+      'post__not_in'   => array( $a_pid ),
+      'category__in'   => wp_get_post_categories( $a_pid ),
+      'orderby'        => 'date',
+      'no_found_rows'  => true,
+  ) );
+  if ( ! $a_related ) {
+      $a_related = get_posts( array( 'post_type' => 'post', 'posts_per_page' => 2, 'post__not_in' => array( $a_pid ), 'orderby' => 'date', 'no_found_rows' => true ) );
+  }
 ?>
 <div class="post-hero">
   <div class="post-hero-inner">
@@ -135,7 +215,7 @@ get_header( 'alluvia' );
       <div class="article-img"><?php the_post_thumbnail( 'large' ); ?></div>
     <?php endif; ?>
 
-    <div class="post-prose"><?php the_content(); ?></div>
+    <div class="post-prose"><?php echo $a_content; // already filtered through the_content above ?></div>
 
     <?php if ( false ) : // legacy demo copy retained for design reference, not rendered ?>
     <div class="article-img">
@@ -226,53 +306,58 @@ get_header( 'alluvia' );
       </div>
     </div>
 
+    <?php if ( $a_related ) : ?>
     <div class="related-posts">
       <h2>Related Articles</h2>
       <div class="related-grid">
-        <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="rel-card">
-          <div class="rel-img" style="background:linear-gradient(135deg,rgba(212,102,60,0.12),rgba(212,102,60,0.04))"><i data-lucide="dumbbell" width="36" height="36" style="color:var(--orange)"></i></div>
-          <div class="rel-body"><h4>TB-500 vs BPC-157: Understanding the Recovery Stack</h4><div class="rel-meta"><span>May 28</span><span>·</span><span>7 min</span></div></div>
+        <?php foreach ( $a_related as $rp ) :
+            $r_read = max( 1, (int) round( str_word_count( wp_strip_all_tags( $rp->post_content ) ) / 200 ) );
+        ?>
+        <a href="<?php echo esc_url( get_permalink( $rp->ID ) ); ?>" class="rel-card">
+          <div class="rel-img" style="background:linear-gradient(135deg,rgba(138,96,193,0.16),rgba(14,175,159,0.06))">
+            <?php if ( has_post_thumbnail( $rp->ID ) ) :
+                echo get_the_post_thumbnail( $rp->ID, 'medium', array( 'style' => 'width:100%;height:100%;object-fit:cover' ) );
+            else : ?>
+              <i data-lucide="flask-conical" width="34" height="34" style="color:var(--teal)"></i>
+            <?php endif; ?>
+          </div>
+          <div class="rel-body"><h4><?php echo esc_html( get_the_title( $rp->ID ) ); ?></h4><div class="rel-meta"><span><?php echo esc_html( get_the_date( 'M j', $rp ) ); ?></span><span>·</span><span><?php echo (int) $r_read; ?> min</span></div></div>
         </a>
-        <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="rel-card">
-          <div class="rel-img" style="background:linear-gradient(135deg,rgba(14,175,159,0.12),rgba(14,175,159,0.04))"><i data-lucide="droplets" width="36" height="36" style="color:var(--teal)"></i></div>
-          <div class="rel-body"><h4>Peptide Reconstitution: A Complete Lab Guide</h4><div class="rel-meta"><span>May 15</span><span>·</span><span>5 min</span></div></div>
-        </a>
+        <?php endforeach; ?>
       </div>
     </div>
+    <?php endif; ?>
   </div>
 
   <?php endwhile; ?>
 
   <!-- SIDEBAR -->
   <aside class="post-sidebar">
+    <?php if ( ! empty( $a_toc ) ) : ?>
     <div class="sidebar-card">
       <h4><i data-lucide="list" width="14" height="14"></i> In This Article</h4>
       <ul class="toc-links">
-        <li><a href="#what" class="active">What Is BPC-157?</a></li>
-        <li><a href="#mechanism">Mechanisms of Action</a></li>
-        <li><a href="#findings">Key Research Findings</a></li>
-        <li><a href="#storage">Storage & Handling</a></li>
-        <li><a href="#conclusion">Summary</a></li>
+        <?php foreach ( $a_toc as $i => $t ) : ?>
+        <li><a href="#<?php echo esc_attr( $t['id'] ); ?>"<?php echo 0 === $i ? ' class="active"' : ''; ?>><?php echo esc_html( $t['text'] ); ?></a></li>
+        <?php endforeach; ?>
       </ul>
     </div>
+    <?php endif; ?>
 
+    <?php if ( ! empty( $a_sidebar_products ) ) : ?>
     <div class="sidebar-card">
-      <h4><i data-lucide="shopping-bag" width="14" height="14"></i> In This Article</h4>
-      <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="sidebar-product">
+      <h4><i data-lucide="shopping-bag" width="14" height="14"></i> Related Products</h4>
+      <?php foreach ( $a_sidebar_products as $prod ) : ?>
+      <a href="<?php echo esc_url( $prod->get_permalink() ); ?>" class="sidebar-product">
         <div class="sp-head">
-          <div class="sp-icon" style="background:rgba(14,175,159,0.1)"><i data-lucide="activity" width="20" height="20" style="color:var(--teal)"></i></div>
-          <div><div class="sp-name">BPC-157 — 5 mg</div><div class="sp-price">$65.00 · ≥99% purity</div></div>
+          <div class="sp-icon"><?php echo $prod->get_image( array( 40, 40 ) ); ?></div>
+          <div><div class="sp-name"><?php echo esc_html( $prod->get_name() ); ?></div><div class="sp-price"><?php echo wp_kses_post( $prod->get_price_html() ); ?></div></div>
         </div>
-        <button class="sp-btn">View Product</button>
+        <span class="sp-btn">View Product</span>
       </a>
-      <a href="<?php echo esc_url(alluvia_shop_url()); ?>" class="sidebar-product">
-        <div class="sp-head">
-          <div class="sp-icon" style="background:rgba(212,102,60,0.1)"><i data-lucide="dumbbell" width="20" height="20" style="color:var(--orange)"></i></div>
-          <div><div class="sp-name">TB-500 — 5 mg</div><div class="sp-price">$78.00 · ≥98.5% purity</div></div>
-        </div>
-        <button class="sp-btn">View Product</button>
-      </a>
+      <?php endforeach; ?>
     </div>
+    <?php endif; ?>
 
     <div class="sidebar-card" style="background:var(--navy)">
       <h4 style="color:rgba(255,255,255,0.7)"><i data-lucide="mail" width="14" height="14"></i> Research Digest</h4>
