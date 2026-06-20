@@ -411,7 +411,9 @@ add_action( 'wp_head', function() {
   .hero-product-grid{grid-template-columns:1fr;gap:0;max-width:none;width:clamp(126px,32vw,240px)} /* 1 column, 1 row */
   .hero-product-grid .hpc:nth-child(n+2){display:none}     /* show a single card */
   .hpc-img{aspect-ratio:1/1}
-  .hero-showcase-cta{width:100%;justify-content:center;margin-top:2px}
+  /* the Shop CTA must fit the narrow card column: smaller, wraps if needed */
+  .hero-showcase-cta{width:100%;justify-content:center;margin-top:6px;padding:11px 12px;font-size:12px;letter-spacing:.02em;gap:5px;white-space:normal;text-align:center;line-height:1.25}
+  .hero-showcase-cta .icon-sm,.hero-showcase-cta svg{width:13px;height:13px}
   .about-grid,.science-grid{grid-template-columns:1fr;gap:60px}
   .about-visual{display:none}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
