@@ -1487,3 +1487,336 @@ function alluvia_customize_preview_js() {
         true
     );
 }
+
+/* ═══════════════════════════════════════
+   POST-PURCHASE REVIEW REQUEST (multilingual)
+   When an order is marked completed, schedule a one-off email (after a delay,
+   so the shipment has arrived) inviting the customer to review the exact
+   products they bought. Copy is localised by billing country
+   (EN/FR/DE/NL/IT/ES) and each CTA links to that product's review form. Real,
+   verified-buyer reviews then accrue natively in WooCommerce and feed the
+   existing real-reviews-only Product/AggregateRating schema. No fabrication.
+
+   Controls:
+     option  'alluvia_review_request_enabled'  ('yes' default) — master switch
+     filter  'alluvia_review_request_delay'    — seconds, default 10 days
+     filter  'alluvia_review_request_language'  — force a language code
+     admin   ?alluvia_review_preview=<order_id>[&lang=fr]  — render, do NOT send
+     admin   ?alluvia_review_send_now=<order_id>           — send immediately
+═══════════════════════════════════════ */
+define( 'ALLUVIA_REVIEW_CRON', 'alluvia_review_request_send' );
+
+/* Master on/off (default on), filterable. */
+function alluvia_review_request_enabled() {
+    return apply_filters( 'alluvia_review_request_enabled', 'yes' === get_option( 'alluvia_review_request_enabled', 'yes' ) );
+}
+
+/* Map an order to one of the six supported languages, by stored locale or
+   billing country. Always returns a supported code; filterable. */
+function alluvia_order_language( $order ) {
+    $lang = '';
+    if ( $order ) {
+        $stored = $order->get_meta( 'wpml_language' );
+        if ( ! $stored ) { $stored = $order->get_meta( '_locale' ); }
+        if ( $stored ) { $lang = strtolower( substr( $stored, 0, 2 ) ); }
+        if ( ! $lang ) {
+            $country = strtoupper( (string) $order->get_billing_country() );
+            $map = array(
+                'FR' => 'fr', 'MC' => 'fr',
+                'DE' => 'de', 'AT' => 'de', 'CH' => 'de', 'LI' => 'de',
+                'NL' => 'nl', 'BE' => 'nl',
+                'IT' => 'it', 'SM' => 'it', 'VA' => 'it',
+                'ES' => 'es', 'MX' => 'es', 'AR' => 'es', 'CL' => 'es', 'CO' => 'es',
+                'PE' => 'es', 'VE' => 'es', 'EC' => 'es', 'UY' => 'es', 'BO' => 'es',
+                'PY' => 'es', 'CR' => 'es', 'PA' => 'es', 'DO' => 'es', 'GT' => 'es',
+            );
+            if ( isset( $map[ $country ] ) ) { $lang = $map[ $country ]; }
+        }
+    }
+    if ( ! in_array( $lang, array( 'en', 'fr', 'de', 'nl', 'it', 'es' ), true ) ) {
+        $lang = 'en';
+    }
+    return apply_filters( 'alluvia_review_request_language', $lang, $order );
+}
+
+/* Localised microcopy for the review-request email. Compliant by design: the
+   ask is about quality, packaging, delivery and service — never efficacy. */
+function alluvia_review_request_strings( $lang ) {
+    $t = array(
+        'en' => array(
+            'subject'        => '{shop}: how was your recent order?',
+            'heading'        => 'How did we do?',
+            'greeting'       => 'Hi {name},',
+            'greeting_noname'=> 'Hi there,',
+            'intro'          => 'Thank you for your recent order from {shop}. Your research matters to us — and so does your honest feedback.',
+            'ask'            => "If you have a moment, we'd love to hear what you thought about:",
+            'bullets'        => array( 'Product quality and purity', 'Packaging and cold-chain condition on arrival', 'Delivery speed', 'Our customer service' ),
+            'products_intro' => 'Leave a quick review for the products you ordered:',
+            'cta'            => 'Write a review',
+            'closing'        => 'It takes less than a minute, and your verified-buyer review helps fellow researchers order with confidence.',
+            'signoff'        => "With appreciation,\nThe {shop} team",
+            'ruo'            => 'All products are supplied for laboratory research use only — not for human or animal consumption.',
+            'fallback_name'  => '',
+        ),
+        'fr' => array(
+            'subject'        => '{shop} : comment s\'est passée votre commande ?',
+            'heading'        => 'Votre avis compte',
+            'greeting'       => 'Bonjour {name},',
+            'greeting_noname'=> 'Bonjour,',
+            'intro'          => 'Merci pour votre récente commande chez {shop}. Vos recherches comptent pour nous, tout comme votre avis sincère.',
+            'ask'            => 'Si vous avez un instant, nous aimerions savoir ce que vous avez pensé de :',
+            'bullets'        => array( 'La qualité et la pureté du produit', 'L\'emballage et l\'état de la chaîne du froid à la réception', 'La rapidité de livraison', 'Notre service client' ),
+            'products_intro' => 'Laissez un court avis sur les produits commandés :',
+            'cta'            => 'Rédiger un avis',
+            'closing'        => 'Cela prend moins d\'une minute, et votre avis d\'acheteur vérifié aide d\'autres chercheurs à commander en toute confiance.',
+            'signoff'        => "Avec nos remerciements,\nL'équipe {shop}",
+            'ruo'            => 'Tous les produits sont fournis exclusivement à des fins de recherche en laboratoire — ne convient pas à la consommation humaine ou animale.',
+            'fallback_name'  => '',
+        ),
+        'de' => array(
+            'subject'        => '{shop}: Wie war Ihre Bestellung?',
+            'heading'        => 'Ihre Meinung zählt',
+            'greeting'       => 'Hallo {name},',
+            'greeting_noname'=> 'Hallo,',
+            'intro'          => 'Vielen Dank für Ihre kürzliche Bestellung bei {shop}. Ihre Forschung ist uns wichtig – und Ihr ehrliches Feedback ebenso.',
+            'ask'            => 'Wenn Sie einen Moment Zeit haben, würden wir gerne erfahren, wie Ihnen Folgendes gefallen hat:',
+            'bullets'        => array( 'Produktqualität und Reinheit', 'Verpackung und Zustand der Kühlkette bei Ankunft', 'Liefergeschwindigkeit', 'Unser Kundenservice' ),
+            'products_intro' => 'Hinterlassen Sie eine kurze Bewertung für die bestellten Produkte:',
+            'cta'            => 'Bewertung schreiben',
+            'closing'        => 'Es dauert weniger als eine Minute, und Ihre Bewertung als verifizierter Käufer hilft anderen Forschenden, mit Vertrauen zu bestellen.',
+            'signoff'        => "Mit herzlichem Dank,\nIhr {shop}-Team",
+            'ruo'            => 'Alle Produkte werden ausschließlich für Forschungszwecke im Labor geliefert – nicht für den menschlichen oder tierischen Gebrauch bestimmt.',
+            'fallback_name'  => '',
+        ),
+        'nl' => array(
+            'subject'        => '{shop}: hoe was uw bestelling?',
+            'heading'        => 'Uw mening telt',
+            'greeting'       => 'Hallo {name},',
+            'greeting_noname'=> 'Hallo,',
+            'intro'          => 'Bedankt voor uw recente bestelling bij {shop}. Uw onderzoek is belangrijk voor ons, en uw eerlijke feedback net zo goed.',
+            'ask'            => 'Als u even tijd heeft, horen we graag wat u vond van:',
+            'bullets'        => array( 'Productkwaliteit en zuiverheid', 'Verpakking en staat van de koelketen bij aankomst', 'Leversnelheid', 'Onze klantenservice' ),
+            'products_intro' => 'Laat een korte review achter voor de bestelde producten:',
+            'cta'            => 'Schrijf een review',
+            'closing'        => 'Het kost minder dan een minuut, en uw review als geverifieerde koper helpt andere onderzoekers met vertrouwen te bestellen.',
+            'signoff'        => "Met dank,\nHet team van {shop}",
+            'ruo'            => 'Alle producten worden uitsluitend geleverd voor laboratoriumonderzoek — niet voor menselijke of dierlijke consumptie.',
+            'fallback_name'  => '',
+        ),
+        'it' => array(
+            'subject'        => '{shop}: com\'è andato il tuo ordine?',
+            'heading'        => 'La tua opinione conta',
+            'greeting'       => 'Ciao {name},',
+            'greeting_noname'=> 'Ciao,',
+            'intro'          => 'Grazie per il tuo recente ordine su {shop}. La tua ricerca è importante per noi, così come il tuo parere sincero.',
+            'ask'            => 'Se hai un momento, ci piacerebbe sapere cosa ne pensi di:',
+            'bullets'        => array( 'Qualità e purezza del prodotto', 'Imballaggio e stato della catena del freddo all\'arrivo', 'Velocità di consegna', 'Il nostro servizio clienti' ),
+            'products_intro' => 'Lascia una breve recensione per i prodotti ordinati:',
+            'cta'            => 'Scrivi una recensione',
+            'closing'        => 'Bastano meno di un minuto e la tua recensione di acquirente verificato aiuta altri ricercatori a ordinare con fiducia.',
+            'signoff'        => "Con gratitudine,\nIl team di {shop}",
+            'ruo'            => 'Tutti i prodotti sono forniti esclusivamente per uso di ricerca in laboratorio — non destinati al consumo umano o animale.',
+            'fallback_name'  => '',
+        ),
+        'es' => array(
+            'subject'        => '{shop}: ¿qué tal tu pedido?',
+            'heading'        => 'Tu opinión cuenta',
+            'greeting'       => 'Hola {name},',
+            'greeting_noname'=> 'Hola,',
+            'intro'          => 'Gracias por tu reciente pedido en {shop}. Tu investigación nos importa, y tu opinión sincera también.',
+            'ask'            => 'Si tienes un momento, nos encantaría saber qué te pareció:',
+            'bullets'        => array( 'La calidad y pureza del producto', 'El embalaje y el estado de la cadena de frío a la llegada', 'La rapidez de entrega', 'Nuestra atención al cliente' ),
+            'products_intro' => 'Deja una breve reseña de los productos que pediste:',
+            'cta'            => 'Escribir una reseña',
+            'closing'        => 'Te llevará menos de un minuto, y tu reseña como comprador verificado ayuda a otros investigadores a pedir con confianza.',
+            'signoff'        => "Con agradecimiento,\nEl equipo de {shop}",
+            'ruo'            => 'Todos los productos se suministran exclusivamente para uso de investigación en laboratorio, no aptos para el consumo humano o animal.',
+            'fallback_name'  => '',
+        ),
+    );
+    return isset( $t[ $lang ] ) ? $t[ $lang ] : $t['en'];
+}
+
+/* Unique, published, reviewable product IDs from an order's line items. */
+function alluvia_order_reviewable_products( $order ) {
+    $ids = array();
+    if ( ! $order || ! method_exists( $order, 'get_items' ) ) {
+        return $ids;
+    }
+    foreach ( $order->get_items() as $item ) {
+        $pid = (int) $item->get_product_id();
+        if ( $pid && 'product' === get_post_type( $pid ) && 'publish' === get_post_status( $pid ) && ! in_array( $pid, $ids, true ) ) {
+            $ids[] = $pid;
+        }
+    }
+    return $ids;
+}
+
+/* Build the localised review-request email. Returns [subject, html]. Pure: it
+   takes plain inputs so it can be previewed without sending a real message. */
+function alluvia_review_request_render( $lang, $first_name, $product_ids, $order = null ) {
+    $s    = alluvia_review_request_strings( $lang );
+    $shop = get_bloginfo( 'name' );
+
+    $teal = '#0eaf9f'; $navy = '#0a1a27'; $gold = '#c6a253';
+    $ink  = '#1b2733'; $muted = '#5b6b78'; $line = '#e6ebef';
+
+    $first_name = trim( (string) $first_name );
+    $greeting   = $first_name
+        ? str_replace( '{name}', $first_name, $s['greeting'] )
+        : $s['greeting_noname'];
+
+    $items = '';
+    foreach ( (array) $product_ids as $pid ) {
+        $pid = (int) $pid;
+        if ( ! $pid || 'product' !== get_post_type( $pid ) ) {
+            continue;
+        }
+        $url   = esc_url( get_permalink( $pid ) . '#reviews' );
+        $title = esc_html( get_the_title( $pid ) );
+        $items .= '<tr><td style="padding:11px 0;border-bottom:1px solid ' . $line . '">'
+            . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
+            . '<td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:' . $ink . ';font-weight:600;vertical-align:middle;padding-right:12px">' . $title . '</td>'
+            . '<td align="right" style="vertical-align:middle"><a href="' . $url . '" style="display:inline-block;background:' . $teal . ';color:' . $navy . ';font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;text-decoration:none;padding:9px 16px;border-radius:100px;white-space:nowrap">' . esc_html( $s['cta'] ) . '</a></td>'
+            . '</tr></table></td></tr>';
+    }
+
+    $bullets = '';
+    foreach ( $s['bullets'] as $b ) {
+        $bullets .= '<li style="margin:0 0 6px">' . esc_html( $b ) . '</li>';
+    }
+
+    $signoff = str_replace( '{shop}', $shop, $s['signoff'] );
+
+    $content  = '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.7;color:' . $ink . '">';
+    $content .= '<p style="margin:0 0 14px">' . esc_html( $greeting ) . '</p>';
+    $content .= '<p style="margin:0 0 14px">' . esc_html( str_replace( '{shop}', $shop, $s['intro'] ) ) . '</p>';
+    $content .= '<p style="margin:0 0 8px">' . esc_html( $s['ask'] ) . '</p>';
+    $content .= '<ul style="margin:0 0 18px;padding-left:20px;color:' . $muted . '">' . $bullets . '</ul>';
+    $content .= '<p style="margin:0 0 4px;font-weight:600">' . esc_html( $s['products_intro'] ) . '</p>';
+    $content .= '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' . $items . '</table>';
+    $content .= '<p style="margin:18px 0 14px">' . esc_html( $s['closing'] ) . '</p>';
+    $content .= '<p style="margin:0">' . nl2br( esc_html( $signoff ) ) . '</p>';
+    $content .= '</div>';
+
+    $html  = '<!DOCTYPE html><html lang="' . esc_attr( $lang ) . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>';
+    $html .= '<body style="margin:0;padding:0;background:#f4f6f8">';
+    $html .= '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f8;padding:24px 0"><tr><td align="center">';
+    $html .= '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:92%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid ' . $line . '">';
+    $html .= '<tr><td style="background:' . $navy . ';padding:22px 28px">'
+        . '<span style="font-family:Georgia,\'Times New Roman\',serif;font-size:20px;color:#ffffff;font-weight:600;letter-spacing:.5px">' . esc_html( $shop ) . '</span>'
+        . '<span style="display:block;height:3px;width:46px;background:' . $gold . ';margin-top:10px;border-radius:2px"></span></td></tr>';
+    $html .= '<tr><td style="padding:28px 28px 0"><h1 style="margin:0;font-family:Georgia,\'Times New Roman\',serif;font-size:24px;font-weight:600;color:' . $navy . '">' . esc_html( $s['heading'] ) . '</h1></td></tr>';
+    $html .= '<tr><td style="padding:16px 28px 28px">' . $content . '</td></tr>';
+    $html .= '<tr><td style="background:#f0f3f5;padding:18px 28px">'
+        . '<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:' . $muted . '">' . esc_html( $s['ruo'] ) . '</p>'
+        . '<p style="margin:8px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:' . $muted . '">&copy; ' . esc_html( gmdate( 'Y' ) ) . ' ' . esc_html( $shop ) . '</p></td></tr>';
+    $html .= '</table></td></tr></table></body></html>';
+
+    $subject = str_replace( '{shop}', $shop, $s['subject'] );
+    return array( 'subject' => $subject, 'html' => $html );
+}
+
+/* Send via WooCommerce's mailer (proper From + HTML) with a wp_mail fallback. */
+function alluvia_review_request_dispatch( $to, $subject, $html ) {
+    $headers = array( 'Content-Type: text/html; charset=UTF-8' );
+    if ( function_exists( 'WC' ) && WC()->mailer() ) {
+        return (bool) WC()->mailer()->send( $to, $subject, $html, $headers );
+    }
+    return (bool) wp_mail( $to, $subject, $html, $headers );
+}
+
+/* On order completion, schedule the request once, after a delay. */
+add_action( 'woocommerce_order_status_completed', 'alluvia_schedule_review_request', 20, 1 );
+function alluvia_schedule_review_request( $order_id ) {
+    if ( ! alluvia_review_request_enabled() ) {
+        return;
+    }
+    $order = wc_get_order( $order_id );
+    if ( ! $order || $order->get_meta( '_alluvia_review_request_sent' ) || $order->get_meta( '_alluvia_review_request_scheduled' ) ) {
+        return;
+    }
+    if ( ! $order->get_billing_email() ) {
+        return;
+    }
+    $delay = (int) apply_filters( 'alluvia_review_request_delay', 10 * DAY_IN_SECONDS, $order );
+    $args  = array( (int) $order_id );
+    if ( ! wp_next_scheduled( ALLUVIA_REVIEW_CRON, $args ) ) {
+        wp_schedule_single_event( time() + max( 60, $delay ), ALLUVIA_REVIEW_CRON, $args );
+    }
+    $order->update_meta_data( '_alluvia_review_request_scheduled', time() );
+    $order->save();
+}
+
+/* Cancelled / refunded before send → drop the pending request. */
+add_action( 'woocommerce_order_status_cancelled', 'alluvia_unschedule_review_request' );
+add_action( 'woocommerce_order_status_refunded', 'alluvia_unschedule_review_request' );
+function alluvia_unschedule_review_request( $order_id ) {
+    $args = array( (int) $order_id );
+    $ts   = wp_next_scheduled( ALLUVIA_REVIEW_CRON, $args );
+    if ( $ts ) {
+        wp_unschedule_event( $ts, ALLUVIA_REVIEW_CRON, $args );
+    }
+}
+
+/* The scheduled callback: build + send once, then mark the order. */
+add_action( ALLUVIA_REVIEW_CRON, 'alluvia_send_review_request', 10, 1 );
+function alluvia_send_review_request( $order_id ) {
+    if ( ! alluvia_review_request_enabled() ) {
+        return;
+    }
+    $order = wc_get_order( $order_id );
+    if ( ! $order || $order->get_meta( '_alluvia_review_request_sent' ) ) {
+        return;
+    }
+    $to = $order->get_billing_email();
+    if ( ! $to ) {
+        return;
+    }
+    $product_ids = alluvia_order_reviewable_products( $order );
+    if ( empty( $product_ids ) ) {
+        return;
+    }
+    $lang  = alluvia_order_language( $order );
+    $email = alluvia_review_request_render( $lang, $order->get_billing_first_name(), $product_ids, $order );
+
+    if ( alluvia_review_request_dispatch( $to, $email['subject'], $email['html'] ) ) {
+        $order->update_meta_data( '_alluvia_review_request_sent', time() );
+        $order->update_meta_data( '_alluvia_review_request_lang', $lang );
+        $order->save();
+        if ( method_exists( $order, 'add_order_note' ) ) {
+            $order->add_order_note( sprintf( 'Review-request email sent (%s).', strtoupper( $lang ) ) );
+        }
+    }
+}
+
+/* Admin helpers: preview (no send) and send-now. Mirrors the existing
+   ?alluvia_reset_pages pattern; gated to manage_options. */
+add_action( 'admin_init', function () {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+    if ( isset( $_GET['alluvia_review_preview'] ) ) {
+        $oid   = absint( $_GET['alluvia_review_preview'] );
+        $order = $oid ? wc_get_order( $oid ) : null;
+        $lang  = isset( $_GET['lang'] ) ? sanitize_key( wp_unslash( $_GET['lang'] ) ) : ( $order ? alluvia_order_language( $order ) : 'en' );
+        $first = $order ? $order->get_billing_first_name() : 'Alex';
+        $pids  = $order ? alluvia_order_reviewable_products( $order ) : array();
+        if ( empty( $pids ) && function_exists( 'wc_get_products' ) ) {
+            $pids = wc_get_products( array( 'limit' => 2, 'status' => 'publish', 'return' => 'ids' ) );
+        }
+        $email = alluvia_review_request_render( $lang, $first, $pids, $order );
+        header( 'Content-Type: text/html; charset=utf-8' );
+        echo '<div style="font-family:monospace;background:#101820;color:#37e0a8;padding:10px 14px">PREVIEW ONLY — not sent &nbsp;|&nbsp; LANG: ' . esc_html( $lang ) . ' &nbsp;|&nbsp; SUBJECT: ' . esc_html( $email['subject'] ) . '</div>';
+        echo $email['html']; // already escaped during build
+        exit;
+    }
+    if ( isset( $_GET['alluvia_review_send_now'] ) ) {
+        $oid = absint( $_GET['alluvia_review_send_now'] );
+        if ( $oid ) {
+            alluvia_send_review_request( $oid );
+        }
+        wp_safe_redirect( admin_url( 'admin.php?page=wc-orders' ) );
+        exit;
+    }
+} );
