@@ -167,6 +167,19 @@ add_action( 'wp_head', function() { ?>
   background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 2px 16px rgba(0,0,0,.06)
 }
 .account-login-wrap form.login,.account-login-wrap form.register{border:0;padding:0;margin:0}
+/* Force a TRUE 2-column login + register layout on desktop. WooCommerce's
+   col2-set was relying on flex:1 1 300px + flex-wrap, which could collapse to a
+   single column; an explicit grid is deterministic. id-scoped so it always wins. */
+.account-login-wrap #customer_login.col2-set,
+.account-login-wrap .col2-set,
+.account-login-wrap .u-columns{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;align-items:start;width:100%}
+.account-login-wrap .col2-set>div,
+.account-login-wrap .u-columns>div{flex:none!important;width:auto!important;float:none!important;margin:0!important;min-width:0}
+@media(max-width:768px){
+  .account-login-wrap #customer_login.col2-set,
+  .account-login-wrap .col2-set,
+  .account-login-wrap .u-columns{grid-template-columns:1fr}
+}
 
 @media(max-width:640px){
   .account-layout form .form-row-first,
