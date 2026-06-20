@@ -96,7 +96,7 @@ function alluvia_featured_products( $limit = 4 ) {
 	foreach ( $curated as $kw ) {
 		if ( count( $ids ) >= $limit ) { break; }
 		$best = 0; $blen = 99999;
-		foreach ( (array) wc_get_products( array( 's' => $kw, 'status' => 'publish', 'limit' => 10, 'return' => 'ids' ) ) as $mid ) {
+		foreach ( (array) wc_get_products( array( 's' => $kw, 'status' => 'publish', 'limit' => 40, 'return' => 'ids' ) ) as $mid ) {
 			if ( has_term( 'lab-supplies-accessories', 'product_cat', $mid ) ) { continue; }
 			$t = get_the_title( $mid );
 			if ( stripos( $t, $kw ) === false ) { continue; }
