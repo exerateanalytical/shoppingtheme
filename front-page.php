@@ -89,13 +89,17 @@ function alluvia_hero_card_grid( $items ) {
 function alluvia_featured_products( $limit = 4 ) {
 	$out = array();
 	if ( ! function_exists( 'wc_get_product' ) ) { return $out; }
-	$ids = (array) wc_get_products( array( 'featured' => true, 'status' => 'publish', 'limit' => $limit, 'return' => 'ids' ) );
-	if ( count( $ids ) < $limit ) {
-		$fill = (array) wc_get_products( array( 'status' => 'publish', 'orderby' => 'popularity', 'limit' => $limit * 4, 'return' => 'ids' ) );
-		foreach ( $fill as $fid ) {
-			if ( count( $ids ) >= $limit ) { break; }
-			if ( ! in_array( $fid, $ids, true ) ) { $ids[] = $fid; }
-		}
+	// Prefer WooCommerce "featured" products, then fill from most-popular — but
+	// always skip Lab Supplies / accessories (saline, water, syringes) so the
+	// showcase stays on actual research peptides.
+	$ids  = array();
+	$feat = (array) wc_get_products( array( 'featured' => true, 'status' => 'publish', 'limit' => $limit * 8, 'return' => 'ids' ) );
+	$pop  = (array) wc_get_products( array( 'status' => 'publish', 'orderby' => 'popularity', 'limit' => $limit * 8, 'return' => 'ids' ) );
+	foreach ( array_merge( $feat, $pop ) as $pid ) {
+		if ( count( $ids ) >= $limit ) { break; }
+		if ( in_array( $pid, $ids, true ) ) { continue; }
+		if ( has_term( 'lab-supplies-accessories', 'product_cat', $pid ) ) { continue; }
+		$ids[] = $pid;
 	}
 	$ids = array_slice( $ids, 0, $limit );
 	foreach ( $ids as $pid ) {
