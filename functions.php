@@ -1908,6 +1908,9 @@ add_action( 'template_redirect', 'alluvia_serve_llms_txt' );
 function alluvia_serve_llms_txt() {
 	$path = isset( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) : '';
 	if ( '/llms.txt' !== untrailingslashit( (string) $path ) ) { return; }
+	global $wp_query;
+	if ( $wp_query instanceof WP_Query ) { $wp_query->is_404 = false; } // it's a real resource, not a 404
+	status_header( 200 );
 	nocache_headers();
 	header( 'Content-Type: text/plain; charset=utf-8' );
 	echo alluvia_llms_txt();
