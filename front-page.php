@@ -89,17 +89,33 @@ function alluvia_hero_card_grid( $items ) {
 function alluvia_featured_products( $limit = 4 ) {
 	$out = array();
 	if ( ! function_exists( 'wc_get_product' ) ) { return $out; }
-	// Prefer WooCommerce "featured" products, then fill from most-popular — but
-	// always skip Lab Supplies / accessories (saline, water, syringes) so the
-	// showcase stays on actual research peptides.
-	$ids  = array();
-	$feat = (array) wc_get_products( array( 'featured' => true, 'status' => 'publish', 'limit' => $limit * 8, 'return' => 'ids' ) );
-	$pop  = (array) wc_get_products( array( 'status' => 'publish', 'orderby' => 'popularity', 'limit' => $limit * 8, 'return' => 'ids' ) );
-	foreach ( array_merge( $feat, $pop ) as $pid ) {
+	$ids = array();
+	// 1) curated hero peptides shown first (filterable). Picks the standalone
+	//    single product (shortest title) for each, never a Lab Supply.
+	$curated = apply_filters( 'alluvia_featured_keywords', array( 'BPC-157', 'TB-500', 'Semaglutide', 'GHK-Cu', 'Tirzepatide', 'Retatrutide' ) );
+	foreach ( $curated as $kw ) {
 		if ( count( $ids ) >= $limit ) { break; }
-		if ( in_array( $pid, $ids, true ) ) { continue; }
-		if ( has_term( 'lab-supplies-accessories', 'product_cat', $pid ) ) { continue; }
-		$ids[] = $pid;
+		$best = 0; $blen = 99999;
+		foreach ( (array) wc_get_products( array( 's' => $kw, 'status' => 'publish', 'limit' => 10, 'return' => 'ids' ) ) as $mid ) {
+			if ( has_term( 'lab-supplies-accessories', 'product_cat', $mid ) ) { continue; }
+			$t = get_the_title( $mid );
+			if ( stripos( $t, $kw ) === false ) { continue; }
+			if ( strlen( $t ) < $blen ) { $blen = strlen( $t ); $best = $mid; }
+		}
+		if ( $best && ! in_array( $best, $ids, true ) ) { $ids[] = $best; }
+	}
+	// 2) fill any shortfall from WooCommerce featured, then most-popular — never accessories.
+	if ( count( $ids ) < $limit ) {
+		$pool = array_merge(
+			(array) wc_get_products( array( 'featured' => true, 'status' => 'publish', 'limit' => $limit * 8, 'return' => 'ids' ) ),
+			(array) wc_get_products( array( 'status' => 'publish', 'orderby' => 'popularity', 'limit' => $limit * 8, 'return' => 'ids' ) )
+		);
+		foreach ( $pool as $pid ) {
+			if ( count( $ids ) >= $limit ) { break; }
+			if ( in_array( $pid, $ids, true ) ) { continue; }
+			if ( has_term( 'lab-supplies-accessories', 'product_cat', $pid ) ) { continue; }
+			$ids[] = $pid;
+		}
 	}
 	$ids = array_slice( $ids, 0, $limit );
 	foreach ( $ids as $pid ) {
