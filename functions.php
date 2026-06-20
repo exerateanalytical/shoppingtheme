@@ -1935,7 +1935,7 @@ function alluvia_llms_txt() {
 			$out .= "## Product categories\n";
 			foreach ( $terms as $t ) {
 				$link = get_term_link( $t );
-				if ( ! is_wp_error( $link ) ) { $out .= "- [{$t->name}]({$link}) — {$t->count} products\n"; }
+				if ( ! is_wp_error( $link ) ) { $out .= '- [' . html_entity_decode( $t->name, ENT_QUOTES, 'UTF-8' ) . "]({$link}) — {$t->count} products\n"; }
 			}
 			$out .= "\n";
 		}
