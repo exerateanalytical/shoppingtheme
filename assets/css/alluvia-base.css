@@ -206,12 +206,41 @@ a:hover { color: var(--teal-dark); }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 10; }
 .nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); }
 
-/* ── Mobile overlay ── */
-.mobile-overlay { position: fixed; inset: 0; z-index: 999; background: var(--navy); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 14px; padding: 88px 32px 48px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.mobile-overlay.open { opacity: 1; pointer-events: all; }
-.mobile-overlay a { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: #fff; text-decoration: none; transition: color 0.25s; line-height: 1.1; }
-.mobile-overlay a:hover { color: var(--teal); }
-.mobile-close { position: fixed; top: 20px; right: 22px; z-index: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; width: 42px; height: 42px; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+/* ── Mobile overlay menu ── */
+.mobile-overlay { position: fixed; inset: 0; z-index: 999; background: linear-gradient(170deg,#0c2031 0%, var(--navy) 55%, #081019 100%); display: flex; flex-direction: column; padding: 0 0 28px; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity .3s ease, transform .3s ease; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.mobile-overlay.open { opacity: 1; pointer-events: all; transform: none; }
+/* sticky brand bar */
+.mobile-top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background: rgba(10,26,39,.82); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.08); }
+.mobile-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.mobile-brand svg { width: 30px; height: 30px; }
+.mobile-brand-text { display: flex; flex-direction: column; line-height: 1; }
+.mobile-brand-text b { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: #fff; }
+.mobile-brand-text small { font-family: var(--font-ui); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-top: 3px; }
+.mobile-close { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 50%; width: 40px; height: 40px; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mobile-close svg { width: 22px; height: 22px; }
+.mobile-close:hover { background: rgba(255,255,255,.14); }
+/* primary links */
+.mobile-links { display: flex; flex-direction: column; padding: 12px 14px 2px; }
+.mobile-links a { display: flex; align-items: center; gap: 14px; padding: 14px 12px; font-family: var(--font-ui); font-size: 16px; font-weight: 600; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.06); border-radius: 10px; transition: color .2s, background .2s; }
+.mobile-links a > span { flex: 1; }
+.mobile-links a > svg:first-child { width: 19px; height: 19px; color: var(--teal); flex-shrink: 0; }
+.mobile-links a .m-arrow { width: 16px; height: 16px; color: rgba(255,255,255,.32); }
+.mobile-links a:hover, .mobile-links a:active { background: rgba(255,255,255,.05); color: var(--teal); }
+/* category chips */
+.mobile-cat-label { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); padding: 20px 26px 12px; }
+.mobile-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 20px; }
+.mobile-cat { display: flex; align-items: center; gap: 11px; padding: 11px 12px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); font-family: var(--font-ui); font-size: 13.5px; font-weight: 600; color: #fff; text-decoration: none; transition: .2s; }
+.mobile-cat:hover, .mobile-cat:active { background: color-mix(in srgb, var(--c,var(--teal)) 16%, transparent); border-color: color-mix(in srgb, var(--c,var(--teal)) 48%, transparent); }
+.mc-ic { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--c,var(--teal)); color: #0a1a27; box-shadow: 0 6px 16px color-mix(in srgb, var(--c,var(--teal)) 45%, transparent); }
+.mc-ic svg { width: 18px; height: 18px; stroke-width: 2.4; }
+/* footer CTAs */
+.mobile-foot { display: flex; gap: 12px; padding: 24px 20px 6px; }
+.mobile-cta { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px; border-radius: 100px; font-family: var(--font-ui); font-size: 14px; font-weight: 700; text-decoration: none; transition: .2s; }
+.mobile-cta svg { width: 17px; height: 17px; }
+.mobile-cta:not(.ghost) { background: var(--teal); color: var(--navy); }
+.mobile-cta:not(.ghost):active { background: var(--teal-dark); }
+.mobile-cta.ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.2); }
+.mobile-cta.ghost:active { border-color: var(--teal); color: var(--teal); }
 
 /* ── Shared footer ── */
 .alluvia-footer { position: relative; background: radial-gradient(ellipse 60% 80% at 15% 0%, rgba(17,182,163,0.06), transparent 55%), radial-gradient(ellipse 50% 70% at 90% 10%, rgba(198,162,83,0.05), transparent 55%), #060e17; padding: 80px 0 0; color: rgba(255,255,255,0.65); }

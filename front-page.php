@@ -357,10 +357,11 @@ add_action( 'wp_head', function() {
 }
 @media(max-width:640px){
   .categories-grid{gap:14px}
-  .cat-card{flex-basis:calc(50% - 7px);min-height:128px;padding:22px 12px}
-  .cat-icon-wrap{width:62px;height:62px;border-radius:16px;margin-bottom:10px}
-  .cat-icon-wrap svg{width:32px;height:32px}
-  .cat-name{font-size:13px}
+  /* square cards with bold, vivid, distinct solid-colour icon tiles on mobile */
+  .cat-card{flex-basis:calc(50% - 7px);aspect-ratio:1/1;min-height:0;padding:16px 10px;justify-content:center;border-width:1.5px}
+  .cat-icon-wrap{width:60px;height:60px;border-radius:18px;margin-bottom:14px;background:var(--cat-color,var(--teal));border-color:var(--cat-color,var(--teal));color:#0a1a27;box-shadow:0 10px 26px color-mix(in srgb,var(--cat-color,var(--teal)) 45%,transparent)}
+  .cat-icon-wrap svg{width:32px;height:32px;stroke-width:2.4}
+  .cat-name{font-size:13.5px;color:#fff;line-height:1.2}
   .hiw-steps{grid-template-columns:1fr;gap:40px}
   .hiw-icon-ring{width:88px;height:88px}
   .stats-grid{grid-template-columns:1fr 1fr}

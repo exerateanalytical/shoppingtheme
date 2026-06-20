@@ -106,29 +106,47 @@ $cart_count = function_exists('WC') ? WC()->cart->get_cart_contents_count() : 0;
   </div>
 </nav>
 
-<div class="mobile-overlay" id="mobileNav">
-  <button class="mobile-close" id="mobileClose" aria-label="Close menu">
-    <i data-lucide="x" style="width:28px;height:28px;color:white"></i>
-  </button>
-  <a href="<?php echo esc_url( home_url('/') ); ?>" onclick="closeMobile()">Home</a>
-  <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" onclick="closeMobile()">All Products</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Medical Peptides</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Skincare</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Sports &amp; Recovery</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('weight-loss-metabolic') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Weight-Loss</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('hormone-anti-aging') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Hormone &amp; Anti-Aging</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('hair-growth-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Hair Growth</a>
-  <a href="<?php echo esc_url( alluvia_cat_url('research-peptides') ); ?>" onclick="closeMobile()" style="font-size:clamp(20px,4vw,30px);opacity:.7">Research</a>
-  <a href="<?php echo esc_url( home_url('/about/') ); ?>" onclick="closeMobile()">About</a>
-  <a href="<?php echo esc_url( get_option('page_for_posts') ? get_permalink( get_option('page_for_posts') ) : home_url('/blog/') ); ?>" onclick="closeMobile()">Blog</a>
-  <a href="<?php echo esc_url( function_exists('alluvia_reviews_url') ? alluvia_reviews_url() : home_url('/reviews/') ); ?>" onclick="closeMobile()">Reviews</a>
-  <a href="<?php echo esc_url( home_url('/faq/') ); ?>" onclick="closeMobile()">FAQ</a>
-  <a href="<?php echo esc_url( home_url('/coa-library/') ); ?>" onclick="closeMobile()">COA Library</a>
-  <a href="<?php echo esc_url( home_url('/contact/') ); ?>" onclick="closeMobile()">Contact</a>
-  <a href="<?php echo esc_url( alluvia_cart_url() ); ?>" onclick="closeMobile()">
-    Cart<?php if ( $cart_count > 0 ) echo ' (' . esc_html($cart_count) . ')'; ?>
-  </a>
-  <a href="<?php echo esc_url( alluvia_account_url() ); ?>" onclick="closeMobile()">My Account</a>
+<div class="mobile-overlay" id="mobileNav" aria-hidden="true">
+  <div class="mobile-top">
+    <a href="<?php echo esc_url( home_url('/') ); ?>" class="mobile-brand" onclick="closeMobile()" aria-label="Alluvia Peptides home">
+      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="17,2 30,9.5 30,24.5 17,32 4,24.5 4,9.5" stroke="#0eaf9f" stroke-width="1.6" fill="none" opacity="0.9"/>
+        <circle cx="17" cy="10" r="2.2" fill="#0eaf9f"/><circle cx="10.5" cy="21" r="2.2" fill="#0eaf9f"/><circle cx="23.5" cy="21" r="2.2" fill="#0eaf9f"/>
+        <line x1="17" y1="10" x2="10.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="17" y1="10" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/><line x1="10.5" y1="21" x2="23.5" y2="21" stroke="#0eaf9f" stroke-width="1.1" opacity="0.5"/>
+      </svg>
+      <span class="mobile-brand-text"><b>Alluvia</b><small>Peptides</small></span>
+    </a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu"><i data-lucide="x"></i></button>
+  </div>
+
+  <nav class="mobile-links" aria-label="Mobile">
+    <a href="<?php echo esc_url( home_url('/') ); ?>" onclick="closeMobile()"><i data-lucide="home"></i><span>Home</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" onclick="closeMobile()"><i data-lucide="layers"></i><span>All Products</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( home_url('/about/') ); ?>" onclick="closeMobile()"><i data-lucide="info"></i><span>About</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( get_option('page_for_posts') ? get_permalink( get_option('page_for_posts') ) : home_url('/blog/') ); ?>" onclick="closeMobile()"><i data-lucide="book-open"></i><span>Blog</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( function_exists('alluvia_reviews_url') ? alluvia_reviews_url() : home_url('/reviews/') ); ?>" onclick="closeMobile()"><i data-lucide="star"></i><span>Reviews</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( home_url('/faq/') ); ?>" onclick="closeMobile()"><i data-lucide="help-circle"></i><span>FAQ</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( home_url('/coa-library/') ); ?>" onclick="closeMobile()"><i data-lucide="file-check-2"></i><span>COA Library</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+    <a href="<?php echo esc_url( home_url('/contact/') ); ?>" onclick="closeMobile()"><i data-lucide="mail"></i><span>Contact</span><i data-lucide="chevron-right" class="m-arrow"></i></a>
+  </nav>
+
+  <div class="mobile-cat-label">Shop by Category</div>
+  <div class="mobile-cats">
+    <a href="<?php echo esc_url( alluvia_cat_url('medical-peptides') ); ?>" class="mobile-cat" style="--c:#0eaf9f" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="heart-pulse"></i></span>Medical</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('skincare-peptides') ); ?>" class="mobile-cat" style="--c:#c6a253" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="sparkles"></i></span>Skincare</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('collagen-peptides') ); ?>" class="mobile-cat" style="--c:#6aa6c6" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="bone"></i></span>Collagen</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('sports-recovery') ); ?>" class="mobile-cat" style="--c:#d4663c" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="zap"></i></span>Sports</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('weight-loss-metabolic') ); ?>" class="mobile-cat" style="--c:#8a60c1" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="flame"></i></span>Weight-Loss</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('hormone-anti-aging') ); ?>" class="mobile-cat" style="--c:#d4b566" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="timer"></i></span>Anti-Aging</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('hair-growth-peptides') ); ?>" class="mobile-cat" style="--c:#58b488" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="sprout"></i></span>Hair Growth</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('research-peptides') ); ?>" class="mobile-cat" style="--c:#11b6a3" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="test-tube-2"></i></span>Research</a>
+    <a href="<?php echo esc_url( alluvia_cat_url('lab-supplies-accessories') ); ?>" class="mobile-cat" style="--c:#5b7186" onclick="closeMobile()"><span class="mc-ic"><i data-lucide="flask-conical"></i></span>Lab Supplies</a>
+  </div>
+
+  <div class="mobile-foot">
+    <a href="<?php echo esc_url( alluvia_cart_url() ); ?>" class="mobile-cta" onclick="closeMobile()"><i data-lucide="shopping-cart"></i> Cart<?php if ( $cart_count > 0 ) echo ' (' . esc_html($cart_count) . ')'; ?></a>
+    <a href="<?php echo esc_url( alluvia_account_url() ); ?>" class="mobile-cta ghost" onclick="closeMobile()"><i data-lucide="user"></i> Account</a>
+  </div>
 </div>
 <script>
 (function(){
