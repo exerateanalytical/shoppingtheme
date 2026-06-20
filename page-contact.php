@@ -947,7 +947,7 @@ get_header( 'alluvia' );
 
             <div class="checkbox-group">
               <input type="checkbox" id="consent" name="consent" />
-              <label for="consent">I consent to Alluvia Peptides storing my data in accordance with the <a href="<?php echo esc_url(home_url('/terms-conditions/')); ?>">Privacy Policy</a></label>
+              <label for="consent">I consent to Alluvia Peptides storing my data in accordance with the <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy Policy</a></label>
             </div>
 
             <button type="submit" class="btn-submit">
@@ -997,16 +997,10 @@ get_header( 'alluvia' );
           </div>
         </div>
 
-        <div class="sidebar-card teal-bg">
-          <h3>Book a Consultation</h3>
-          <p>Not sure which peptide protocol is right for your research? Book a free 15-minute consultation with one of our specialists.</p>
-          <a href="#" class="btn-ghost-white">Book Now</a>
-        </div>
-
         <div class="sidebar-card">
           <h3>Order Tracking</h3>
           <p class="tracking-text">Already placed an order? Track your shipment in real time using your order number and email address.</p>
-          <a href="#" class="tracking-link">
+          <a href="<?php echo esc_url( function_exists('wc_get_account_endpoint_url') ? wc_get_account_endpoint_url('orders') : home_url('/my-account/') ); ?>" class="tracking-link">
             Track Your Order
             <i data-lucide="arrow-right"></i>
           </a>
@@ -1107,7 +1101,7 @@ get_header( 'alluvia' );
         <i data-lucide="map-pin" style="width: 28px; height: 28px;"></i>
       </div>
       <h3>Miami, Florida</h3>
-      <p>Exact address provided upon appointment booking</p>
+      <p>Exact address provided after order confirmation</p>
     </div>
   </section>
 
@@ -1117,9 +1111,10 @@ get_header( 'alluvia' );
       <h3>Stay Informed</h3>
       <p>Research updates, new product launches, and exclusive offers delivered to your inbox.</p>
       <div class="newsletter-form">
-        <input type="email" placeholder="Enter your email address" aria-label="Email address" />
-        <button class="btn-subscribe" type="button">Subscribe</button>
+        <input type="email" id="newsletterEmail" placeholder="Enter your email address" aria-label="Email address" />
+        <button class="btn-subscribe" type="button" id="newsletterSubscribe">Subscribe</button>
       </div>
+      <p class="newsletter-feedback" id="newsletterFeedback" role="status" aria-live="polite" style="display:none;margin-top:12px;"></p>
     </div>
   </section>
 
@@ -1170,6 +1165,54 @@ get_header( 'alluvia' );
         alert('Network error. Please email us directly.');
       });
     });
+
+    // ---- Newsletter subscribe ----
+    (function () {
+      var subBtn = document.getElementById('newsletterSubscribe');
+      var subEmail = document.getElementById('newsletterEmail');
+      var subFeedback = document.getElementById('newsletterFeedback');
+      if (!subBtn || !subEmail) { return; }
+
+      function showFeedback(msg, ok) {
+        if (!subFeedback) { return; }
+        subFeedback.textContent = msg;
+        subFeedback.style.color = ok ? '#0f766e' : '#b91c1c';
+        subFeedback.style.display = 'block';
+      }
+
+      function subscribe() {
+        var email = (subEmail.value || '').trim();
+        if (!email) { showFeedback('Please enter your email address.', false); return; }
+        var cfg = window.alluviaAjax || {};
+        var orig = subBtn.textContent;
+        subBtn.disabled = true; subBtn.textContent = 'Subscribing…';
+        fetch(cfg.ajax_url || '/wp-admin/admin-ajax.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            action: 'alluvia_subscribe',
+            nonce: cfg.sub_nonce || '',
+            email: email
+          })
+        }).then(function (r) { return r.json(); }).then(function (res) {
+          subBtn.disabled = false; subBtn.textContent = orig;
+          if (res && res.success) {
+            subEmail.value = '';
+            showFeedback((res.data && res.data.message) || 'You\'re on the list.', true);
+          } else {
+            showFeedback((res && res.data && res.data.message) || 'Could not subscribe. Please try again.', false);
+          }
+        }).catch(function () {
+          subBtn.disabled = false; subBtn.textContent = orig;
+          showFeedback('Network error. Please try again.', false);
+        });
+      }
+
+      subBtn.addEventListener('click', subscribe);
+      subEmail.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); subscribe(); }
+      });
+    })();
 
     // ---- FAQ Accordion ----
     var faqItems = document.querySelectorAll('.faq-item');

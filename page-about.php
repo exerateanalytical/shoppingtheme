@@ -207,7 +207,7 @@ get_header( 'alluvia' );
       Our Story
     </div>
     <h1>Built on <em>Biology</em>,<br>Delivered with <span class="gold">Precision</span></h1>
-    <p class="page-hero-desc">We are scientists, researchers, and optimisers who believe the body's own chemical language holds the key to peak human performance.</p>
+    <p class="page-hero-desc">We are scientists, researchers, and optimisers who believe the body's own chemical language is one of the most compelling frontiers in modern biochemical research.</p>
   </div>
 </section>
 
@@ -220,100 +220,14 @@ get_header( 'alluvia' );
         <div class="mv-icon"><i data-lucide="target" class="icon-xl"></i></div>
         <div class="mv-label">Our Mission</div>
         <h2 class="mv-title">To Make Peptide<br>Science Accessible</h2>
-        <p class="mv-text">Alluvia Peptides exists to close the gap between cutting-edge biochemical research and the people who need it most. We believe pharmaceutical-grade peptides should be available to everyone — not just research institutions — with the same rigorous quality controls, full documentation, and transparent sourcing that science demands.</p>
+        <p class="mv-text">Alluvia Peptides exists to close the gap between cutting-edge biochemical research and the people who need it most. We believe pharmaceutical-grade research peptides should be available to every qualified researcher — with the same rigorous quality controls that science demands, full documentation, and transparent sourcing.</p>
       </div>
       <div class="mv-card">
         <div class="mv-icon"><i data-lucide="eye" class="icon-xl"></i></div>
         <div class="mv-label">Our Vision</div>
-        <h2 class="mv-title">A World of Informed<br>Human Optimisation</h2>
-        <p class="mv-text">We envision a future where every person has access to the molecular tools their body needs to heal faster, age better, and perform at its peak — guided by data, not hype. Alluvia is building the infrastructure for that future: one verified peptide, one honest COA, and one educated customer at a time.</p>
+        <h2 class="mv-title">A World of Informed<br>Peptide Research</h2>
+        <p class="mv-text">We envision a future where every researcher has access to verified, fully-documented research peptides — guided by data, not hype. Alluvia is building the infrastructure for that future: one verified peptide, one honest COA, and one educated customer at a time.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- STORY TIMELINE -->
-<section class="story-section">
-  <div class="container">
-    <div class="story-header reveal">
-      <p class="section-label">How We Got Here</p>
-      <h2 class="section-title">The Alluvia <em>Story</em></h2>
-      <p class="section-desc">From a shared frustration with low-quality, undocumented peptides to building one of the most trusted sources in the industry — this is our journey.</p>
-    </div>
-
-    <div class="timeline">
-
-      <div class="timeline-item reveal">
-        <div class="timeline-content-l">
-          <div class="timeline-card">
-            <div class="timeline-card-title">The Problem Identified</div>
-            <p class="timeline-card-text">Our founders — a biochemist and a sports physician — discovered that most peptide suppliers offered products with no purity data, inconsistent dosing, and zero traceability. The market was broken.</p>
-          </div>
-        </div>
-        <div class="timeline-dot-wrap">
-          <div class="timeline-dot"><i data-lucide="search" style="width:18px;height:18px"></i></div>
-          <div class="timeline-year">2020</div>
-        </div>
-        <div class="timeline-content-r"></div>
-      </div>
-
-      <div class="timeline-item reveal reveal-delay-1">
-        <div class="timeline-content-l"></div>
-        <div class="timeline-dot-wrap">
-          <div class="timeline-dot"><i data-lucide="flask-conical" style="width:18px;height:18px"></i></div>
-          <div class="timeline-year">2021</div>
-        </div>
-        <div class="timeline-content-r">
-          <div class="timeline-card">
-            <div class="timeline-card-title">First Lab Partnerships</div>
-            <p class="timeline-card-text">We secured relationships with three ISO-accredited synthesis facilities and an independent testing laboratory — establishing the quality chain that defines every Alluvia product to this day.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal reveal-delay-2">
-        <div class="timeline-content-l">
-          <div class="timeline-card">
-            <div class="timeline-card-title">Launch &amp; First Products</div>
-            <p class="timeline-card-text">Alluvia launched with seven foundational peptides, each accompanied by a full Certificate of Analysis. Within six months, we had served over 500 customers across 12 countries — all on organic reputation alone.</p>
-          </div>
-        </div>
-        <div class="timeline-dot-wrap">
-          <div class="timeline-dot"><i data-lucide="rocket" style="width:18px;height:18px"></i></div>
-          <div class="timeline-year">2022</div>
-        </div>
-        <div class="timeline-content-r"></div>
-      </div>
-
-      <div class="timeline-item reveal reveal-delay-3">
-        <div class="timeline-content-l"></div>
-        <div class="timeline-dot-wrap">
-          <div class="timeline-dot"><i data-lucide="layers" style="width:18px;height:18px"></i></div>
-          <div class="timeline-year">2023</div>
-        </div>
-        <div class="timeline-content-r">
-          <div class="timeline-card">
-            <div class="timeline-card-title">Full Category Expansion</div>
-            <p class="timeline-card-text">We expanded to all 8 peptide categories — skincare, collagen, sports, metabolic, anti-aging, hair growth, and research — bringing our catalogue to 50+ SKUs, each formulated by our in-house biochemistry team.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal reveal-delay-4">
-        <div class="timeline-content-l">
-          <div class="timeline-card">
-            <div class="timeline-card-title">Today &amp; Beyond</div>
-            <p class="timeline-card-text">Alluvia continues to grow as the benchmark for quality and transparency in the peptide industry. Our mission remains unchanged: make the science real, make it accessible, and make it verifiable.</p>
-          </div>
-        </div>
-        <div class="timeline-dot-wrap">
-          <div class="timeline-dot" style="background:var(--teal);border-color:var(--teal);color:var(--navy)"><i data-lucide="star" style="width:18px;height:18px;fill:var(--navy);stroke:none"></i></div>
-          <div class="timeline-year">2025</div>
-        </div>
-        <div class="timeline-content-r"></div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -357,56 +271,6 @@ get_header( 'alluvia' );
         <div class="value-icon"><i data-lucide="heart-handshake" class="icon-lg"></i></div>
         <h3 class="value-title">Community First</h3>
         <p class="value-text">From forum support to personalised protocol advice from our team — we're here for every step of your peptide journey.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- TEAM -->
-<section class="team-section">
-  <div class="container">
-    <div class="team-header reveal">
-      <p class="section-label">The People Behind Alluvia</p>
-      <h2 class="section-title">Meet Our <em>Team</em></h2>
-      <p class="section-desc">Scientists, clinicians, and optimisers who are customers before they're colleagues.</p>
-    </div>
-    <div class="team-grid">
-      <div class="team-card reveal">
-        <div class="team-photo">
-          <div class="team-photo-ring"></div>
-          <div class="team-photo-ring-2"></div>
-          <span class="team-photo-initials">DR</span>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Dr. Rachel Osei</div>
-          <div class="team-role">Chief Science Officer</div>
-          <p class="team-bio">PhD in Biochemistry, 12 years in peptide synthesis research. Rachel oversees all formulation decisions and quality standards at Alluvia.</p>
-        </div>
-      </div>
-      <div class="team-card reveal reveal-delay-1">
-        <div class="team-photo">
-          <div class="team-photo-ring"></div>
-          <div class="team-photo-ring-2"></div>
-          <span class="team-photo-initials">JM</span>
-        </div>
-        <div class="team-info">
-          <div class="team-name">James Mercer</div>
-          <div class="team-role">Co-Founder & CEO</div>
-          <p class="team-bio">Former competitive athlete turned biohacker. James co-founded Alluvia after years of frustration with the lack of quality peptide suppliers in the market.</p>
-        </div>
-      </div>
-      <div class="team-card reveal reveal-delay-2">
-        <div class="team-photo">
-          <div class="team-photo-ring"></div>
-          <div class="team-photo-ring-2"></div>
-          <span class="team-photo-initials">AL</span>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Dr. Amara Levi</div>
-          <div class="team-role">Medical Advisor</div>
-          <p class="team-bio">Sports medicine physician with a focus on regenerative therapies. Amara advises on protocols, dosing recommendations, and safety standards.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -485,6 +349,6 @@ lucide.createIcons();
 
 // Scroll Reveal
 var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('reveal-done');ro.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal,.team-card,.value-card,.timeline-item').forEach(function(el){ro.observe(el);});
+document.querySelectorAll('.reveal,.value-card').forEach(function(el){ro.observe(el);});
 </script>
 <?php get_footer( 'alluvia' ); ?>

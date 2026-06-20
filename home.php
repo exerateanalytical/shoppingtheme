@@ -77,14 +77,15 @@ get_header( 'alluvia' );
 </div>
 
 <div class="blog-wrap">
+  <?php $b_filter_cats = get_categories( array( 'hide_empty' => true ) ); ?>
+  <?php if ( ! empty( $b_filter_cats ) && ! is_wp_error( $b_filter_cats ) ) : ?>
   <div class="cat-filter">
-    <button class="cat-pill active">All Articles</button>
-    <button class="cat-pill">Research</button>
-    <button class="cat-pill">Skincare</button>
-    <button class="cat-pill">Recovery</button>
-    <button class="cat-pill">Anti-Aging</button>
-    <button class="cat-pill">Guides</button>
+    <a class="cat-pill<?php echo ( is_home() || is_front_page() ) ? ' active' : ''; ?>" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/' ) ); ?>">All Articles</a>
+    <?php foreach ( $b_filter_cats as $b_filter_cat ) : ?>
+    <a class="cat-pill<?php echo is_category( $b_filter_cat->term_id ) ? ' active' : ''; ?>" href="<?php echo esc_url( get_category_link( $b_filter_cat ) ); ?>"><?php echo esc_html( $b_filter_cat->name ); ?></a>
+    <?php endforeach; ?>
   </div>
+  <?php endif; ?>
 
   <?php if ( have_posts() ) : $a_idx = 0; ?>
   <?php while ( have_posts() ) : the_post();
@@ -99,7 +100,7 @@ get_header( 'alluvia' );
           <h2><?php the_title(); ?></h2>
           <p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 36 ) ); ?></p>
           <div class="post-meta">
-            <span><i data-lucide="user" width="13" height="13"></i> <?php the_author(); ?></span>
+            <span><i data-lucide="user" width="13" height="13"></i> <?php $b_author = get_the_author(); echo esc_html( $b_author ? $b_author : 'Alluvia Research Team' ); ?></span>
             <span><i data-lucide="calendar" width="13" height="13"></i> <?php echo esc_html( get_the_date() ); ?></span>
             <span><i data-lucide="clock" width="13" height="13"></i> <?php echo (int) $b_read; ?> min read</span>
           </div>
@@ -211,7 +212,7 @@ get_header( 'alluvia' );
   <!-- NEWSLETTER -->
   <div class="newsletter">
     <h2>Stay Ahead of the Research</h2>
-    <p>Join 12,000+ researchers receiving our monthly digest of peptide science and protocol updates.</p>
+    <p>Get our monthly digest of peptide science and protocol updates.</p>
     <form class="newsletter-form" onsubmit="alluviaBlogSub(event)">
       <input type="email" placeholder="your@email.com" required>
       <button type="submit">Subscribe</button>
@@ -225,7 +226,6 @@ get_header( 'alluvia' );
 <?php get_template_part('partials/footer-alluvia'); ?>
 <script>
 lucide.createIcons();
-document.querySelectorAll('.cat-pill').forEach(p=>p.addEventListener('click',function(){document.querySelectorAll('.cat-pill').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
 function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)',transition:'opacity 0.3s'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
 </script>
 <?php get_footer( 'alluvia' ); ?>

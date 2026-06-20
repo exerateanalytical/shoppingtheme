@@ -45,11 +45,20 @@ $hero_skincare = alluvia_hero_products( 'skincare-peptides', 2 );
 $hero_sports   = alluvia_hero_products( 'sports-recovery', 2 );
 
 // Shared stats row, rendered inside each slide just above its CTA buttons.
+// Counts are derived from the live catalogue so the figures never drift from reality.
+$alluvia_cat_count = 0;
+if ( taxonomy_exists( 'product_cat' ) ) {
+	$_acats = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => true, 'exclude' => array( absint( get_option( 'default_product_cat' ) ) ), 'fields' => 'ids' ) );
+	$alluvia_cat_count = is_wp_error( $_acats ) ? 0 : count( $_acats );
+}
+$_apc               = wp_count_posts( 'product' );
+$alluvia_prod_count = $_apc ? (int) $_apc->publish : 0;
+$alluvia_prod_round = $alluvia_prod_count >= 50 ? ( (int) floor( $alluvia_prod_count / 50 ) * 50 ) . '+' : (string) $alluvia_prod_count;
 $hero_stats_html =
 	'<div class="hero-stats hero-stats-inline">'
-	. '<div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">Purity Grade</span></div>'
-	. '<div class="stat-item"><span class="stat-number">8</span><span class="stat-label">Categories</span></div>'
-	. '<div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Active Peptides</span></div>'
+	. '<div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">Min Purity (HPLC)</span></div>'
+	. '<div class="stat-item"><span class="stat-number">' . esc_html( $alluvia_cat_count ) . '</span><span class="stat-label">Categories</span></div>'
+	. '<div class="stat-item"><span class="stat-number">' . esc_html( $alluvia_prod_round ) . '</span><span class="stat-label">Research Products</span></div>'
 	. '</div>';
 
 /** Render a compact hero product-card grid (2 col desktop / 1 col mobile). */
@@ -448,7 +457,7 @@ get_header( 'alluvia' );
         <div class="hero-slide active">
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Bioactive Peptide Science</span></div>
           <h1 class="hero-title">Science That Makes<br>You <em>Younger</em></h1>
-          <p class="hero-desc">Pharmaceutical-grade bioactive peptides backed by peer-reviewed research — formulated for real, measurable results in skin, body, and longevity.</p>
+          <p class="hero-desc">Research-grade bioactive peptides backed by peer-reviewed science — characterised for purity and studied across skin, tissue and longevity research.</p>
           <?php echo $hero_stats_html; ?>
           <div class="hero-actions">
             <a href="<?php echo esc_url( alluvia_shop_url() ); ?>" class="btn-primary">Explore Products <i data-lucide="arrow-right" class="icon-sm"></i></a>
@@ -460,21 +469,21 @@ get_header( 'alluvia' );
         <div class="hero-slide">
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Tissue Repair &amp; Recovery</span></div>
           <h1 class="hero-title">Repair. Recover.<br><em>Rebuild.</em></h1>
-          <p class="hero-desc">BPC-157, TB-500 and recovery peptides engineered to accelerate healing of tendons, gut lining and soft tissue — the gold standard for repair.</p>
+          <p class="hero-desc">BPC-157, TB-500 and related compounds — among the most extensively studied peptides in tendon, gut-lining and soft-tissue repair research.</p>
         </div>
 
         <!-- Slide 3 — Skincare -->
         <div class="hero-slide">
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Dermal Renewal</span></div>
           <h1 class="hero-title">Radiance From<br><em>Within</em></h1>
-          <p class="hero-desc">Copper peptides and matrikines like GHK-Cu that stimulate collagen synthesis, firmness and visible skin renewal at the dermal matrix.</p>
+          <p class="hero-desc">Copper peptides and matrikines like GHK-Cu — widely studied for their role in collagen and dermal-matrix research.</p>
         </div>
 
         <!-- Slide 4 — Sports / Performance -->
         <div class="hero-slide">
           <div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">Performance Engineered</span></div>
           <h1 class="hero-title">Peak Performance,<br><em>Engineered</em></h1>
-          <p class="hero-desc">Growth-hormone secretagogues and recovery stacks for lean mass, deeper sleep and faster training adaptation — cleanly dosed.</p>
+          <p class="hero-desc">Growth-hormone secretagogues and recovery compounds — a focus of metabolic, body-composition and sleep research.</p>
         </div>
 
         <!-- Slide 5 — Quality / COA -->
@@ -591,7 +600,7 @@ get_header( 'alluvia' );
           <i data-lucide="headphones" style="width:28px;height:28px;stroke-width:1.6"></i>
         </div>
         <h3 class="promise-title">24/7 Customer Support</h3>
-        <p class="promise-desc">Questions about dosing, reconstitution, or your order? Our science-literate support team is available around the clock &mdash; via live chat, email, and phone &mdash; so you're never left without an answer.</p>
+        <p class="promise-desc">Questions about reconstitution, storage, or your order? Our science-literate support team is available around the clock &mdash; via live chat, email, and phone &mdash; so you're never left without an answer.</p>
         <span class="promise-badge"><i data-lucide="clock" style="width:12px;height:12px"></i> Always Available</span>
       </div>
 
@@ -621,7 +630,7 @@ get_header( 'alluvia' );
           </div>
         </div>
         <div class="about-accent-card">
-          <div class="about-accent-num">8</div>
+          <div class="about-accent-num"><?php echo esc_html( $alluvia_cat_count ); ?></div>
           <div class="about-accent-text">Peptide Categories</div>
         </div>
       </div>
@@ -631,13 +640,13 @@ get_header( 'alluvia' );
           <h2 class="section-title">Built on <em>Biology</em>,<br>Delivered with <span class="gold">Precision</span></h2>
         </div>
         <p class="section-desc reveal reveal-delay-1">
-          Alluvia Peptides was founded on a simple belief: your body already knows how to heal,
-          regenerate, and perform — it just needs the right molecular signals. We deliver the
-          world's most studied bioactive peptides directly to you, with zero compromise on quality.
+          Alluvia Peptides was founded on a simple belief: rigorous, well-documented peptides are the
+          foundation of credible research. We supply the world's most studied bioactive peptides —
+          characterised, COA-backed and fully traceable — to the researchers who rely on them.
         </p>
         <ul class="about-list reveal reveal-delay-2">
           <li><span class="check-wrap"><i data-lucide="check" style="width:12px;height:12px;stroke-width:3"></i></span>Every product is independently tested with a Certificate of Analysis</li>
-          <li><span class="check-wrap"><i data-lucide="check" style="width:12px;height:12px;stroke-width:3"></i></span>Formulated by biochemists, not marketers — doses that actually work</li>
+          <li><span class="check-wrap"><i data-lucide="check" style="width:12px;height:12px;stroke-width:3"></i></span>Characterised by biochemists, not marketers — purity you can independently verify</li>
           <li><span class="check-wrap"><i data-lucide="check" style="width:12px;height:12px;stroke-width:3"></i></span>Transparent sourcing with full supply chain traceability</li>
           <li><span class="check-wrap"><i data-lucide="check" style="width:12px;height:12px;stroke-width:3"></i></span>Cold-chain preserved and shipped to maintain structural integrity</li>
         </ul>
@@ -815,66 +824,10 @@ get_header( 'alluvia' );
 </section>
 
 
-<!-- TESTIMONIALS -->
-<section class="testimonials-section" id="testimonials">
-  <div class="container">
-    <div class="testimonials-header">
-      <p class="section-label">Real Results</p>
-      <h2 class="section-title">What Our Customers<br><em>Are Saying</em></h2>
-      <p class="section-desc">From biohackers to dermatologists — Alluvia is trusted by people who demand results they can measure.</p>
-    </div>
-    <div class="testimonials-grid">
-      <article class="testi-card reveal">
-        <div class="testi-stars">
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-        </div>
-        <span class="quote-open">"</span>
-        <p class="testi-quote">After 8 weeks on BPC-157 I saw measurable improvement in my shoulder tendon pain that I had been managing for two years. The COA gave me real confidence in the product.</p>
-        <footer class="testi-author">
-          <div class="testi-avatar">MK</div>
-          <div><div class="testi-name">Marcus K.</div><div class="testi-meta">Strength &amp; Conditioning Coach</div></div>
-          <span class="testi-product">Medical</span>
-        </footer>
-      </article>
-      <article class="testi-card reveal reveal-delay-1">
-        <div class="testi-stars">
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-        </div>
-        <span class="quote-open">"</span>
-        <p class="testi-quote">The skincare peptides are the real deal. Matrixyl and GHK-Cu together genuinely changed the texture and firmness of my skin within 6 weeks. I'm completely hooked.</p>
-        <footer class="testi-author">
-          <div class="testi-avatar">SP</div>
-          <div><div class="testi-name">Sophie P.</div><div class="testi-meta">Aesthetics Practitioner</div></div>
-          <span class="testi-product">Skincare</span>
-        </footer>
-      </article>
-      <article class="testi-card reveal reveal-delay-2">
-        <div class="testi-stars">
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-          <i data-lucide="star" style="width:15px;height:15px;fill:var(--gold);stroke:none"></i>
-        </div>
-        <span class="quote-open">"</span>
-        <p class="testi-quote">I use the Ipamorelin/CJC stack for sleep and recovery. Delivery was fast, product arrived cold, and the results on deep sleep quality were immediate. Top tier.</p>
-        <footer class="testi-author">
-          <div class="testi-avatar">RJ</div>
-          <div><div class="testi-name">Ryan J.</div><div class="testi-meta">Longevity Researcher</div></div>
-          <span class="testi-product">Anti-Aging</span>
-        </footer>
-      </article>
-    </div>
-  </div>
-</section>
+<!-- TESTIMONIALS removed: were fabricated, named reviews making human-use / efficacy
+     claims that contradict the research-use-only positioning. Genuine verified-buyer
+     reviews now accrue via the post-purchase review-request flow and surface on the
+     product pages and the Reviews page. -->
 
 
 <!-- CTA -->

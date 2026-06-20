@@ -14,8 +14,8 @@ add_action( 'wp_head', function() { ?>
 .search-bar input { flex: 1; border: none; outline: none; padding: 16px 24px; font-family: var(--font-body); font-size: 16px; color: var(--text-dark); background: transparent; }
 .search-bar button { background: linear-gradient(135deg,var(--teal),var(--teal-dark)); color: var(--navy); border: none; padding: 16px 28px; font-family: var(--font-ui); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: .3s; white-space: nowrap; }
 .search-bar button:hover { background: var(--teal-dark); }
-.search-count { font-family: var(--font-ui); font-size: 14px; color: var(--text-mid); margin-bottom: 32px; }
-.search-count strong { color: var(--navy); }
+.search-count { font-family: var(--font-ui); font-size: 14px; color: rgba(255,255,255,.72); margin-bottom: 32px; }
+.search-count strong { color: #fff; }
 .search-results { display: flex; flex-direction: column; gap: 24px; }
 .result-card { background: #fff; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--pearl-dark); transition: var(--transition); }
 .result-card:hover { box-shadow: var(--shadow-md); border-color: rgba(14,175,159,.25); }
@@ -26,8 +26,8 @@ add_action( 'wp_head', function() { ?>
 .result-excerpt { font-size: 15px; color: var(--text-mid); line-height: 1.6; }
 .result-meta { font-size: 13px; color: var(--text-light); margin-top: 10px; font-family: var(--font-ui); }
 .no-results { text-align: center; padding: 60px 20px; }
-.no-results h2 { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--navy); margin-bottom: 12px; }
-.no-results p { color: var(--text-mid); font-size: 16px; margin-bottom: 24px; }
+.no-results h2 { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: #fff; margin-bottom: 12px; }
+.no-results p { color: rgba(255,255,255,.72); font-size: 16px; margin-bottom: 24px; }
 </style>
 <?php }, 20 );
 get_header('alluvia');
@@ -59,7 +59,7 @@ get_header('alluvia');
         <?php if (get_the_excerpt()) : ?>
           <p class="result-excerpt"><?php echo wp_trim_words(get_the_excerpt(), 30); ?></p>
         <?php endif; ?>
-        <div class="result-meta"><?php echo get_the_date(); ?> · <?php the_author(); ?></div>
+        <div class="result-meta"><?php echo get_the_date(); ?><?php $rm_a = get_the_author(); if ( $rm_a ) echo ' · ' . esc_html( $rm_a ); ?></div>
       </div>
       <?php endwhile; ?>
     </div>

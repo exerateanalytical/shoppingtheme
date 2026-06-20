@@ -135,9 +135,16 @@ get_header( 'alluvia' );
 <?php while ( have_posts() ) : the_post();
   $a_cats    = get_the_category();
   $a_catname = ( $a_cats && ! is_wp_error( $a_cats ) ) ? $a_cats[0]->name : 'Research';
-  $a_author  = get_the_author();
-  $a_parts   = preg_split( '/\s+/', trim( $a_author ) );
-  $a_init    = strtoupper( mb_substr( $a_parts[0], 0, 1 ) . ( isset( $a_parts[1] ) ? mb_substr( $a_parts[1], 0, 1 ) : '' ) );
+  $a_author  = trim( (string) get_the_author() );
+  // Imported posts have post_author=0, so get_the_author() returns "" — fall back
+  // to a brand byline so the hero name and avatar initials never render blank.
+  if ( '' === $a_author ) {
+      $a_author = 'Alluvia Research Team';
+      $a_init   = 'AR';
+  } else {
+      $a_parts = preg_split( '/\s+/', $a_author );
+      $a_init  = strtoupper( mb_substr( $a_parts[0], 0, 1 ) . ( isset( $a_parts[1] ) ? mb_substr( $a_parts[1], 0, 1 ) : '' ) );
+  }
   $a_read    = max( 1, (int) round( str_word_count( wp_strip_all_tags( get_the_content() ) ) / 200 ) );
   $a_bio     = get_the_author_meta( 'description' );
   $a_pid     = get_the_ID();
@@ -362,8 +369,10 @@ get_header( 'alluvia' );
     <div class="sidebar-card" style="background:var(--navy)">
       <h4 style="color:rgba(255,255,255,0.7)"><i data-lucide="mail" width="14" height="14"></i> Research Digest</h4>
       <p style="font-size:var(--fs-base);color:rgba(255,255,255,0.65);margin-bottom:1rem">Monthly peptide science updates, new COA releases, and protocol guides.</p>
-      <input type="email" placeholder="your@email.com" style="width:100%;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.6rem 0.9rem;background:rgba(255,255,255,0.07);color:#fff;font-size:var(--fs-base);outline:none;font-family:var(--font-body);margin-bottom:0.6rem">
-      <button onclick="showToast('Subscribed!')" style="width:100%;background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.6rem;font-family:var(--font-ui);font-weight:700;font-size:var(--fs-ui);cursor:pointer">Subscribe Free</button>
+      <form class="sidebar-sub-form" onsubmit="alluviaSidebarSub(event)">
+        <input type="email" placeholder="your@email.com" required style="width:100%;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.6rem 0.9rem;background:rgba(255,255,255,0.07);color:#fff;font-size:var(--fs-base);outline:none;font-family:var(--font-body);margin-bottom:0.6rem">
+        <button type="submit" style="width:100%;background:var(--teal);color:var(--navy);border:none;border-radius:8px;padding:0.6rem;font-family:var(--font-ui);font-weight:700;font-size:var(--fs-ui);cursor:pointer">Subscribe Free</button>
+      </form>
     </div>
   </aside>
 </div>
@@ -372,6 +381,10 @@ get_header( 'alluvia' );
 <script>
 lucide.createIcons();
 function showToast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',bottom:'2rem',left:'50%',transform:'translateX(-50%)',background:'#0eaf9f',color:'#0a1a27',padding:'0.75rem 1.5rem',borderRadius:'50px',fontFamily:"var(--font-ui)",fontSize:'0.85rem',fontWeight:'600',zIndex:'9999',boxShadow:'0 8px 24px rgba(0,0,0,0.2)'});document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2200);}
+// Sidebar "Research Digest" subscribe — actually POSTs the email to the
+// alluvia_subscribe admin-ajax endpoint (mirrors the blog-listing form) and only
+// toasts success on a successful JSON response; shows an error toast otherwise.
+function alluviaSidebarSub(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]'),cfg=window.alluviaAjax||{};b.textContent='…';fetch(cfg.ajax_url||'/wp-admin/admin-ajax.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({action:'alluvia_subscribe',nonce:cfg.sub_nonce||'',email:i.value})}).then(function(r){return r.json();}).then(function(res){var msg=(res&&res.data&&res.data.message)||(res&&res.success?'Subscribed!':'Subscription failed. Please try again.');if(typeof showToast==='function')showToast(msg);if(res&&res.success)i.value='';b.textContent='Subscribe Free';}).catch(function(){if(typeof showToast==='function')showToast('Subscription failed. Please try again.');b.textContent='Subscribe Free';});}
 window.addEventListener('scroll',()=>{const links=document.querySelectorAll('.toc-links a');links.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(sec&&window.scrollY>=sec.offsetTop-140)links.forEach(x=>x.classList.remove('active'))&&a.classList.add('active');});});
 document.querySelectorAll('.share-btn').forEach(b=>b.addEventListener('click',()=>showToast('Link copied!')));
 </script>

@@ -200,12 +200,16 @@ get_header( 'alluvia' );
       <?php if ($cat_name) : ?><div class="prod-cat"><?php echo esc_html($cat_name); ?></div><?php endif; ?>
       <h1><?php echo esc_html(get_the_title()); ?></h1>
       <?php if ($short_desc) : ?><p class="prod-subtitle"><?php echo wp_kses_post($short_desc); ?></p><?php endif; ?>
-      <?php if ($avg_rating > 0) : ?>
+      <?php if ($review_count > 0) : ?>
       <div class="prod-rating">
         <span class="stars">
           <?php for ($s=1;$s<=5;$s++): ?><svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo $s<=round($avg_rating)?'currentColor':'none'; ?>" stroke="currentColor" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><?php endfor; ?>
         </span>
-        <span class="rating-text"><?php echo esc_html(number_format($avg_rating,1)); ?><?php if($review_count>0): ?> · <a href="#reviews"><?php echo esc_html($review_count); ?> verified reviews</a><?php endif; ?></span>
+        <span class="rating-text"><?php echo esc_html(number_format($avg_rating,1)); ?> · <a href="#reviews"><?php echo esc_html($review_count . ' ' . _n('verified review', 'verified reviews', $review_count, 'shopping')); ?></a></span>
+      </div>
+      <?php else : ?>
+      <div class="prod-rating">
+        <span class="rating-text" style="color:var(--text-light)">No reviews yet</span>
       </div>
       <?php endif; ?>
       <div class="prod-price-row">
@@ -262,7 +266,7 @@ get_header( 'alluvia' );
     <button class="tab-btn" onclick="showTab('research',this)">Research</button>
     <button class="tab-btn" onclick="showTab('specs',this)">Specifications</button>
     <button class="tab-btn" onclick="showTab('coa',this)">COA</button>
-    <button class="tab-btn" onclick="showTab('reviews',this)">Reviews (214)</button>
+    <button class="tab-btn" onclick="showTab('reviews',this)">Reviews<?php if ($review_count > 0) { echo ' (' . (int) $review_count . ')'; } ?></button>
   </div>
 
   <div class="tab-pane active" id="tab-desc">
@@ -358,66 +362,59 @@ if ($coa_url || $lot_number) : ?>
   <div class="tab-pane" id="tab-reviews">
     <div class="tab-content-card" id="reviews">
       <h3>Customer Reviews</h3>
+      <?php
+      // Real approved reviews for this product (WooCommerce stores reviews as comments of type "review").
+      $reviews = get_comments(array(
+        'post_id' => get_the_ID(),
+        'type'    => 'review',
+        'status'  => 'approve',
+      ));
+      if ($review_count > 0) :
+      ?>
       <div class="review-summary">
         <div class="review-score">
-          <div class="big">4.9</div>
+          <div class="big"><?php echo esc_html(number_format($avg_rating, 1)); ?></div>
           <span class="stars" style="justify-content:center">
-            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
-            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
-            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
-            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
-            <i data-lucide="star" width="14" height="14" fill="currentColor"></i>
+            <?php for ($s = 1; $s <= 5; $s++) : ?>
+            <i data-lucide="star" width="14" height="14"<?php echo $s <= round($avg_rating) ? ' fill="currentColor"' : ''; ?>></i>
+            <?php endfor; ?>
           </span>
-          <div style="font-size:0.78rem;color:var(--text-light);margin-top:0.4rem">214 reviews</div>
-        </div>
-        <div class="review-bars">
-          <div class="review-bar-row"><span class="lbl">5 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:92%"></div></div><span>92%</span></div>
-          <div class="review-bar-row"><span class="lbl">4 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:6%"></div></div><span>6%</span></div>
-          <div class="review-bar-row"><span class="lbl">3 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span>1%</span></div>
-          <div class="review-bar-row"><span class="lbl">2 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span>1%</span></div>
-          <div class="review-bar-row"><span class="lbl">1 star</span><div class="review-bar-track"><div class="review-bar-fill" style="width:0%"></div></div><span>0%</span></div>
+          <div style="font-size:0.78rem;color:var(--text-light);margin-top:0.4rem"><?php echo esc_html($review_count . ' ' . _n('review', 'reviews', $review_count, 'shopping')); ?></div>
         </div>
       </div>
+      <?php endif; ?>
 
-      <div class="review-card">
-        <div class="review-head">
-          <div class="reviewer">
-            <div class="reviewer-avatar">DM</div>
-            <div>
-              <div class="reviewer-name">Dr. Michael R.</div>
-              <div class="reviewer-meta"><span class="verified-tag"><i data-lucide="badge-check" width="12" height="12"></i> Verified Buyer</span> · May 2025</div>
+      <?php if (!empty($reviews)) : ?>
+        <?php foreach ($reviews as $c) :
+          $r_name   = trim($c->comment_author);
+          if ($r_name === '') { $r_name = __('Anonymous', 'shopping'); }
+          $r_rating = (int) get_comment_meta($c->comment_ID, 'rating', true);
+          $r_date   = mysql2date(get_option('date_format'), $c->comment_date);
+          $initials = '';
+          foreach (preg_split('/\s+/', $r_name) as $word) {
+            if ($word !== '' && strlen($initials) < 2) { $initials .= strtoupper(substr($word, 0, 1)); }
+          }
+          if ($initials === '') { $initials = '?'; }
+        ?>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="reviewer">
+              <div class="reviewer-avatar"><?php echo esc_html($initials); ?></div>
+              <div>
+                <div class="reviewer-name"><?php echo esc_html($r_name); ?></div>
+                <div class="reviewer-meta"><?php echo esc_html($r_date); ?></div>
+              </div>
             </div>
+            <?php if ($r_rating > 0) : ?>
+            <span class="stars"><?php for ($s = 1; $s <= 5; $s++) : ?><i data-lucide="star" width="14" height="14"<?php echo $s <= $r_rating ? ' fill="currentColor"' : ''; ?>></i><?php endfor; ?></span>
+            <?php endif; ?>
           </div>
-          <span class="stars"><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i></span>
+          <p class="review-body"><?php echo wp_kses_post($c->comment_content); ?></p>
         </div>
-        <p class="review-body">Consistent purity across multiple orders. The COA matched my own independent HPLC verification within margin. Cold-chain packaging arrived perfectly intact with the temperature card still in range. This is now my standard supplier for tissue-repair research.</p>
-      </div>
-      <div class="review-card">
-        <div class="review-head">
-          <div class="reviewer">
-            <div class="reviewer-avatar">SK</div>
-            <div>
-              <div class="reviewer-name">Sarah K.</div>
-              <div class="reviewer-meta"><span class="verified-tag"><i data-lucide="badge-check" width="12" height="12"></i> Verified Buyer</span> · April 2025</div>
-            </div>
-          </div>
-          <span class="stars"><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i></span>
-        </div>
-        <p class="review-body">Fast dispatch and excellent reconstitution clarity — no cloudiness, fully soluble. The lyophilized cake was intact and properly sealed under nitrogen. Documentation was thorough. Highly recommend for any serious lab.</p>
-      </div>
-      <div class="review-card">
-        <div class="review-head">
-          <div class="reviewer">
-            <div class="reviewer-avatar">JT</div>
-            <div>
-              <div class="reviewer-name">James T.</div>
-              <div class="reviewer-meta"><span class="verified-tag"><i data-lucide="badge-check" width="12" height="12"></i> Verified Buyer</span> · March 2025</div>
-            </div>
-          </div>
-          <span class="stars"><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14" fill="currentColor"></i><i data-lucide="star" width="14" height="14"></i></span>
-        </div>
-        <p class="review-body">Reliable quality and the loyalty points are a nice touch. Took one star off only because express shipping was a day later than estimated, but the product itself is top-tier. Will order again.</p>
-      </div>
+        <?php endforeach; ?>
+      <?php else : ?>
+        <p style="color:var(--text-light)">No reviews yet — be the first to review this product.</p>
+      <?php endif; ?>
     </div>
   </div>
 </div>

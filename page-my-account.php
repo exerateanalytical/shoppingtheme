@@ -33,7 +33,7 @@ add_action( 'wp_head', function() { ?>
 .account-main{}
 
 /* STAT CARDS */
-.stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:2rem}
+.stat-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2rem}
 .stat-card{background:#fff;border-radius:var(--radius);padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:3px solid transparent}
 .stat-card.teal{border-top-color:var(--teal)}
 .stat-card.gold{border-top-color:var(--gold)}
@@ -283,16 +283,6 @@ $account_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalin
         <div class="stat-icon gold-bg"><i data-lucide="dollar-sign" style="width:20px;height:20px"></i></div>
         <div class="stat-num">$<?php echo esc_html( number_format( $total_spent, 0 ) ); ?></div>
         <div class="stat-label">Total Spent</div>
-      </div>
-      <div class="stat-card coral">
-        <div class="stat-icon coral-bg"><i data-lucide="heart" style="width:20px;height:20px"></i></div>
-        <div class="stat-num">—</div>
-        <div class="stat-label">Wishlist</div>
-      </div>
-      <div class="stat-card mint">
-        <div class="stat-icon mint-bg"><i data-lucide="award" style="width:20px;height:20px"></i></div>
-        <div class="stat-num">—</div>
-        <div class="stat-label">Loyalty Pts</div>
       </div>
     </div>
     <?php endif; ?>

@@ -58,14 +58,14 @@ get_header( 'alluvia' );
 <div class="page-hero"><div class="page-hero-inner">
   <div class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Home</a><i data-lucide="chevron-right" width="14" height="14"></i><span>COA Library</span></div>
   <h1>Certificate of Analysis Library</h1>
-  <p>Third-party verified batch reports for every Alluvia Peptides product. HPLC + mass spectrometry on every lot.</p>
+  <p>Full HPLC and mass-spectrometry batch reports for every Alluvia Peptides product — a Certificate of Analysis on every lot.</p>
 </div></div>
 
 <div class="trust-strip"><div class="trust-strip-inner">
-  <span class="trust-item"><i data-lucide="award" width="16" height="16"></i> Independent third-party testing</span>
+  <span class="trust-item"><i data-lucide="award" width="16" height="16"></i> In-house HPLC &amp; MS testing</span>
   <span class="trust-item"><i data-lucide="beaker" width="16" height="16"></i> HPLC purity analysis on every batch</span>
   <span class="trust-item"><i data-lucide="scan" width="16" height="16"></i> Mass spectrometry identity confirmation</span>
-  <span class="trust-item"><i data-lucide="shield-check" width="16" height="16"></i> Janoshik Analytical verified</span>
+  <span class="trust-item"><i data-lucide="shield-check" width="16" height="16"></i> COA on every lot</span>
 </div></div>
 
 <div class="coa-wrap">

@@ -20,13 +20,7 @@ if (is_wp_error($_footer_cats)) $_footer_cats = [];
       <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-logo" style="margin-bottom:4px">
         <?php echo function_exists('alluvia_logo_svg') ? alluvia_logo_svg() : ''; ?>
       </a>
-      <p class="footer-desc">Pharmaceutical-grade bioactive peptides — backed by science, delivered with integrity.</p>
-      <div class="footer-socials">
-        <a href="#" class="social-btn"><i data-lucide="instagram" style="width:16px;height:16px"></i></a>
-        <a href="#" class="social-btn"><i data-lucide="twitter" style="width:16px;height:16px"></i></a>
-        <a href="#" class="social-btn"><i data-lucide="facebook" style="width:16px;height:16px"></i></a>
-        <a href="#" class="social-btn"><i data-lucide="youtube" style="width:16px;height:16px"></i></a>
-      </div>
+      <p class="footer-desc">Research-grade bioactive peptides — backed by science, delivered with integrity.</p>
     </div>
     <div>
       <h3 class="footer-col-title">Products</h3>

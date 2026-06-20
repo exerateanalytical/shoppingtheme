@@ -108,8 +108,8 @@ get_header( 'alluvia' );
     </div>
     <div class="cold-stat">
       <div class="cold-stat-icon"><i data-lucide="package-check" width="24" height="24"></i></div>
-      <div class="cold-stat-num">99.7%</div>
-      <div class="cold-stat-label">Orders arrive with full peptide integrity</div>
+      <div class="cold-stat-num">2–8°C</div>
+      <div class="cold-stat-label">Temperature-controlled transit</div>
     </div>
     <div class="cold-stat">
       <div class="cold-stat-icon"><i data-lucide="clock" width="24" height="24"></i></div>
@@ -190,7 +190,7 @@ get_header( 'alluvia' );
     </table>
     </div>
     <div class="warn-card" style="margin-top:1rem">
-      <strong style="color:var(--text-dark)">Why we recommend Cold-Chain:</strong> Peptide bonds are susceptible to thermal degradation. While lyophilized peptides tolerate short ambient exposure, prolonged warm transit can reduce bioactivity. Cold-chain shipping ensures 2–8°C throughout the entire journey, preserving ≥99% potency.
+      <strong style="color:var(--text-dark)">Why we recommend Cold-Chain:</strong> Peptide bonds are susceptible to thermal degradation. While lyophilized peptides tolerate short ambient exposure, prolonged warm transit can reduce bioactivity. Cold-chain shipping maintains 2–8°C throughout transit to protect peptide stability.
     </div>
   </div>
 
