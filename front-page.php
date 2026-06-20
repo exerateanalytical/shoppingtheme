@@ -406,9 +406,11 @@ add_action( 'wp_head', function() {
      0 on the molecule slides (molecule is hidden), so those get full-width text. */
   .hero-inner{grid-template-columns:1fr auto;gap:clamp(14px,3.5vw,34px);padding:104px 18px 56px;align-items:center}
   .hero-vslide.is-molecule{display:none}
-  .hero-showcase{gap:12px}
+  /* fixed-width showcase pinned to the right so EVERY product slide lines its
+     card up at the extreme right (the CTA label length no longer shifts it). */
+  .hero-showcase{gap:12px;width:clamp(132px,33vw,240px);margin-left:auto;align-items:stretch}
   .hero-showcase .hero-stats{display:none}                 /* keep the right column compact */
-  .hero-product-grid{grid-template-columns:1fr;gap:0;max-width:none;width:clamp(126px,32vw,240px)} /* 1 column, 1 row */
+  .hero-product-grid{grid-template-columns:1fr;gap:0;max-width:none;width:100%} /* 1 column, 1 row */
   .hero-product-grid .hpc:nth-child(n+2){display:none}     /* show a single card */
   .hpc-img{aspect-ratio:1/1}
   /* the Shop CTA must fit the narrow card column: smaller, wraps if needed */
