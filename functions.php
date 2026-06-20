@@ -1820,3 +1820,57 @@ add_action( 'admin_init', function () {
         exit;
     }
 } );
+
+/* ═══════════════════════════════════════
+   CONTACT PAGE INFO — editable in the Customizer
+   Appearance → Customize → "Contact Page Info". Every contact detail on the
+   Contact page (email, phone, location, business hours, response times) is a
+   text setting whose default is the original copy, so the page is unchanged
+   until the owner edits it. page-contact.php reads these via alluvia_contact().
+═══════════════════════════════════════ */
+function alluvia_contact_fields() {
+	return array(
+		'email'           => array( 'Email address', 'hello@alluviapeptides.com' ),
+		'email_note'      => array( 'Email — response note', 'Response within 4 hours' ),
+		'phone'           => array( 'Phone number', '+1 (800) 555-0192' ),
+		'phone_note'      => array( 'Phone — hours note', 'Mon–Fri 9am–6pm EST' ),
+		'chat_note'       => array( 'Live chat — hours note', 'Mon–Fri 9am–8pm EST' ),
+		'location'        => array( 'Location', 'Miami, Florida, USA' ),
+		'location_note'   => array( 'Location — note', 'By appointment only' ),
+		'wholesale_email' => array( 'Wholesale / B2B email', 'wholesale@alluviapeptides.com' ),
+		'hours_weekday'   => array( 'Business hours — Mon–Fri', '9:00am – 6:00pm EST' ),
+		'hours_sat'       => array( 'Business hours — Saturday', 'Closed' ),
+		'hours_sun'       => array( 'Business hours — Sunday', 'Closed' ),
+		'resp_email'      => array( 'Response time — Email', 'Within 4 hours' ),
+		'resp_chat'       => array( 'Response time — Live Chat', 'Instant' ),
+		'resp_phone'      => array( 'Response time — Phone', 'Immediate' ),
+		'resp_wholesale'  => array( 'Response time — Wholesale', 'Within 24h' ),
+	);
+}
+/* Get a contact field value (Customizer override, else the original default). */
+function alluvia_contact( $key ) {
+	$fields  = alluvia_contact_fields();
+	$default = isset( $fields[ $key ] ) ? $fields[ $key ][1] : '';
+	return get_theme_mod( 'alluvia_contact_' . $key, $default );
+}
+add_action( 'customize_register', 'alluvia_customize_contact' );
+function alluvia_customize_contact( $wp_customize ) {
+	$wp_customize->add_section( 'alluvia_contact_info', array(
+		'title'       => __( 'Contact Page Info', 'shopping' ),
+		'priority'    => 35,
+		'description' => __( 'Edit the details shown on the Contact page — email, phone, location, hours and response times.', 'shopping' ),
+	) );
+	foreach ( alluvia_contact_fields() as $key => $f ) {
+		$id = 'alluvia_contact_' . $key;
+		$wp_customize->add_setting( $id, array(
+			'default'           => $f[1],
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'         => 'refresh',
+		) );
+		$wp_customize->add_control( $id, array(
+			'label'   => $f[0],
+			'section' => 'alluvia_contact_info',
+			'type'    => 'text',
+		) );
+	}
+}

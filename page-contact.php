@@ -877,26 +877,26 @@ get_header( 'alluvia' );
       <div class="info-card">
         <div class="info-card-icon"><i data-lucide="mail"></i></div>
         <h3>Email Us</h3>
-        <div class="info-value">hello@alluviapeptides.com</div>
-        <div class="info-note">Response within 4 hours</div>
+        <div class="info-value"><?php echo esc_html( alluvia_contact( 'email' ) ); ?></div>
+        <div class="info-note"><?php echo esc_html( alluvia_contact( 'email_note' ) ); ?></div>
       </div>
       <div class="info-card">
         <div class="info-card-icon"><i data-lucide="phone"></i></div>
         <h3>Call Us</h3>
-        <div class="info-value">+1 (800) 555-0192</div>
-        <div class="info-note">Mon–Fri 9am–6pm EST</div>
+        <div class="info-value"><?php echo esc_html( alluvia_contact( 'phone' ) ); ?></div>
+        <div class="info-note"><?php echo esc_html( alluvia_contact( 'phone_note' ) ); ?></div>
       </div>
       <div class="info-card">
         <div class="info-card-icon"><i data-lucide="message-circle"></i></div>
         <h3>Live Chat</h3>
         <div class="info-value">Available on site</div>
-        <div class="info-note">Mon–Fri 9am–8pm EST</div>
+        <div class="info-note"><?php echo esc_html( alluvia_contact( 'chat_note' ) ); ?></div>
       </div>
       <div class="info-card">
         <div class="info-card-icon"><i data-lucide="map-pin"></i></div>
         <h3>Location</h3>
-        <div class="info-value">Miami, Florida, USA</div>
-        <div class="info-note">By appointment only</div>
+        <div class="info-value"><?php echo esc_html( alluvia_contact( 'location' ) ); ?></div>
+        <div class="info-note"><?php echo esc_html( alluvia_contact( 'location_note' ) ); ?></div>
       </div>
     </div>
   </section>
@@ -973,23 +973,23 @@ get_header( 'alluvia' );
         <div class="sidebar-card">
           <h3>Response Times</h3>
           <ul class="response-list">
-            <li><span class="channel">Email</span><span class="time">Within 4 hours</span></li>
-            <li><span class="channel">Live Chat</span><span class="time">Instant</span></li>
-            <li><span class="channel">Phone</span><span class="time">Immediate</span></li>
-            <li><span class="channel">Wholesale Enquiries</span><span class="time">Within 24h</span></li>
+            <li><span class="channel">Email</span><span class="time"><?php echo esc_html( alluvia_contact( 'resp_email' ) ); ?></span></li>
+            <li><span class="channel">Live Chat</span><span class="time"><?php echo esc_html( alluvia_contact( 'resp_chat' ) ); ?></span></li>
+            <li><span class="channel">Phone</span><span class="time"><?php echo esc_html( alluvia_contact( 'resp_phone' ) ); ?></span></li>
+            <li><span class="channel">Wholesale Enquiries</span><span class="time"><?php echo esc_html( alluvia_contact( 'resp_wholesale' ) ); ?></span></li>
           </ul>
         </div>
 
         <div class="sidebar-card">
           <h3>Business Hours</h3>
           <ul class="hours-list">
-            <li><span class="day">Monday</span><span>9:00am – 6:00pm EST</span></li>
-            <li><span class="day">Tuesday</span><span>9:00am – 6:00pm EST</span></li>
-            <li><span class="day">Wednesday</span><span>9:00am – 6:00pm EST</span></li>
-            <li><span class="day">Thursday</span><span>9:00am – 6:00pm EST</span></li>
-            <li><span class="day">Friday</span><span>9:00am – 6:00pm EST</span></li>
-            <li><span class="day">Saturday</span><span>Closed</span></li>
-            <li><span class="day">Sunday</span><span>Closed</span></li>
+            <li><span class="day">Monday</span><span><?php echo esc_html( alluvia_contact( 'hours_weekday' ) ); ?></span></li>
+            <li><span class="day">Tuesday</span><span><?php echo esc_html( alluvia_contact( 'hours_weekday' ) ); ?></span></li>
+            <li><span class="day">Wednesday</span><span><?php echo esc_html( alluvia_contact( 'hours_weekday' ) ); ?></span></li>
+            <li><span class="day">Thursday</span><span><?php echo esc_html( alluvia_contact( 'hours_weekday' ) ); ?></span></li>
+            <li><span class="day">Friday</span><span><?php echo esc_html( alluvia_contact( 'hours_weekday' ) ); ?></span></li>
+            <li><span class="day">Saturday</span><span><?php echo esc_html( alluvia_contact( 'hours_sat' ) ); ?></span></li>
+            <li><span class="day">Sunday</span><span><?php echo esc_html( alluvia_contact( 'hours_sun' ) ); ?></span></li>
           </ul>
           <div class="open-badge" id="openNowBadge">
             <span class="open-dot"></span>
@@ -1086,7 +1086,7 @@ get_header( 'alluvia' );
         </div>
         <div class="faq-answer" role="region">
           <div class="faq-answer-inner">
-            Yes. Alluvia Peptides offers competitive wholesale and B2B pricing for qualified research institutions, compounding pharmacies, clinical facilities, and registered distributors. Volume-tiered discounts are available across our full catalogue. To enquire about wholesale pricing, preferred supplier agreements, or custom formulation requests, please email our dedicated team at wholesale@alluviapeptides.com or select "Wholesale / B2B" from the contact form above.
+            Yes. Alluvia Peptides offers competitive wholesale and B2B pricing for qualified research institutions, compounding pharmacies, clinical facilities, and registered distributors. Volume-tiered discounts are available across our full catalogue. To enquire about wholesale pricing, preferred supplier agreements, or custom formulation requests, please email our dedicated team at <?php echo esc_html( alluvia_contact( 'wholesale_email' ) ); ?> or select "Wholesale / B2B" from the contact form above.
           </div>
         </div>
       </div>
@@ -1100,7 +1100,7 @@ get_header( 'alluvia' );
       <div class="map-icon-wrap">
         <i data-lucide="map-pin" style="width: 28px; height: 28px;"></i>
       </div>
-      <h3>Miami, Florida</h3>
+      <h3><?php echo esc_html( alluvia_contact( 'location' ) ); ?></h3>
       <p>Exact address provided after order confirmation</p>
     </div>
   </section>
