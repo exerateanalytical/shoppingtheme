@@ -173,6 +173,13 @@ add_action( 'wp_head', function() { ?>
 .account-login-wrap #customer_login.col2-set,
 .account-login-wrap .col2-set,
 .account-login-wrap .u-columns{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;align-items:start;width:100%}
+/* Kill WooCommerce's clearfix ::before/::after — on a grid container they become
+   phantom grid items that shove the two cards into a diagonal (login up-right,
+   register down-left). Removing them leaves exactly 2 items = clean side-by-side. */
+.account-login-wrap .col2-set::before,
+.account-login-wrap .col2-set::after,
+.account-login-wrap .u-columns::before,
+.account-login-wrap .u-columns::after{content:none!important;display:none!important}
 .account-login-wrap .col2-set>div,
 .account-login-wrap .u-columns>div{flex:none!important;width:auto!important;float:none!important;margin:0!important;min-width:0}
 @media(max-width:768px){
