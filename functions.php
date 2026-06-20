@@ -1874,3 +1874,160 @@ function alluvia_customize_contact( $wp_customize ) {
 		) );
 	}
 }
+
+/* ═══════════════════════════════════════
+   DEPLOY SEO / GEO / AEO — robots.txt, llms.txt, FAQ + archive schema, served by
+   the THEME so they travel to any host and regenerate from home_url() (no physical
+   files, domain auto-adjusts on the new server).
+═══════════════════════════════════════ */
+
+/* Dynamic robots.txt: crawl rules + sitemap pointer (domain-aware). */
+add_filter( 'robots_txt', 'alluvia_robots_txt', 10, 2 );
+function alluvia_robots_txt( $output, $public ) {
+	if ( '1' != $public ) { return $output; } // honour Settings → Reading "discourage search engines"
+	$lines = array(
+		'User-agent: *',
+		'Allow: /',
+		'Disallow: /wp-admin/',
+		'Allow: /wp-admin/admin-ajax.php',
+		'Disallow: /cart/',
+		'Disallow: /checkout/',
+		'Disallow: /my-account/',
+		'Disallow: /*add-to-cart=',
+		'Disallow: /*?orderby=',
+		'Disallow: /*?min_price=',
+		'Disallow: /*?max_price=',
+		'Disallow: /*?s=',
+		'',
+		'Sitemap: ' . home_url( '/wp-sitemap.xml' ),
+		'',
+	);
+	return implode( "\n", $lines ) . "\n";
+}
+
+/* Theme-served /llms.txt for AI / answer engines (GEO). */
+add_action( 'template_redirect', 'alluvia_serve_llms_txt' );
+function alluvia_serve_llms_txt() {
+	$path = isset( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) : '';
+	if ( '/llms.txt' !== untrailingslashit( (string) $path ) ) { return; }
+	nocache_headers();
+	header( 'Content-Type: text/plain; charset=utf-8' );
+	echo alluvia_llms_txt();
+	exit;
+}
+function alluvia_llms_txt() {
+	$name = get_bloginfo( 'name' );
+	$desc = get_bloginfo( 'description' );
+	$home = home_url( '/' );
+	$out  = "# {$name}\n\n";
+	if ( $desc ) { $out .= "> {$desc}\n\n"; }
+	$out .= "Research-grade bioactive peptides for laboratory research use only — not for human or animal consumption. Every product is HPLC-verified and ships with a Certificate of Analysis.\n\n";
+	$out .= "## Key pages\n";
+	$out .= '- [Shop all peptides](' . ( function_exists( 'alluvia_shop_url' ) ? alluvia_shop_url() : $home . 'shop/' ) . ")\n";
+	$out .= '- [COA Library](' . $home . "coa-library/)\n";
+	$out .= '- [FAQ](' . $home . "faq/)\n";
+	$out .= '- [About](' . $home . "about/)\n";
+	$out .= '- [Contact](' . $home . "contact/)\n";
+	$out .= '- [Research articles / blog](' . $home . "blog/)\n\n";
+	if ( taxonomy_exists( 'product_cat' ) ) {
+		$terms = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => true, 'exclude' => array( absint( get_option( 'default_product_cat' ) ) ) ) );
+		if ( ! is_wp_error( $terms ) && $terms ) {
+			$out .= "## Product categories\n";
+			foreach ( $terms as $t ) {
+				$link = get_term_link( $t );
+				if ( ! is_wp_error( $link ) ) { $out .= "- [{$t->name}]({$link}) — {$t->count} products\n"; }
+			}
+			$out .= "\n";
+		}
+	}
+	$out .= "## Sitemap\n" . home_url( '/wp-sitemap.xml' ) . "\n";
+	return $out;
+}
+
+/* FAQPage JSON-LD on the FAQ page, extracted from its rendered Q&A (AEO). */
+add_action( 'wp_head', 'alluvia_faq_schema' );
+function alluvia_faq_schema() {
+	if ( ! is_page( 'faq' ) ) { return; }
+	$file = get_template_directory() . '/page-faq.php';
+	if ( ! is_readable( $file ) ) { return; }
+	$html = file_get_contents( $file );
+	if ( ! preg_match_all( '/<div class="faq-q"[^>]*>(.*?)<i\s/s', $html, $qm ) ) { return; }
+	preg_match_all( '/<div class="faq-a">(.*?)<\/div>/s', $html, $am );
+	$n     = min( count( $qm[1] ), count( $am[1] ) );
+	$items = array();
+	for ( $i = 0; $i < $n; $i++ ) {
+		$q = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $qm[1][ $i ] ) ) );
+		$a = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $am[1][ $i ] ) ) );
+		if ( $q && $a ) {
+			$items[] = array( '@type' => 'Question', 'name' => $q, 'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $a ) );
+		}
+	}
+	if ( $items ) {
+		echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $items ) ) . '</script>' . "\n";
+	}
+}
+
+/* Shop + product-category/tag archives had no meta/OG/canonical/schema. Add them. */
+add_action( 'wp_head', 'alluvia_archive_seo', 1 );
+function alluvia_archive_seo() {
+	if ( ! function_exists( 'is_shop' ) || ! ( is_shop() || is_product_category() || is_product_tag() ) ) { return; }
+	$shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
+	if ( is_shop() ) {
+		$url    = $shop_url;
+		$title  = 'Shop';
+		$desc   = 'Browse research-grade peptides at ' . get_bloginfo( 'name' ) . ' — HPLC-verified, COA on every batch, cold-chain shipped. Research use only.';
+		$crumbs = array(
+			array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url( '/' ) ),
+			array( '@type' => 'ListItem', 'position' => 2, 'name' => $title, 'item' => $url ),
+		);
+	} else {
+		$term = get_queried_object();
+		$url  = get_term_link( $term );
+		if ( is_wp_error( $url ) ) { return; }
+		$title  = $term->name;
+		$desc   = $term->description ? wp_strip_all_tags( $term->description ) : ( $term->name . ' — research-grade peptides, HPLC-verified with a Certificate of Analysis. Research use only. ' . (int) $term->count . ' products.' );
+		$crumbs = array(
+			array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url( '/' ) ),
+			array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Shop', 'item' => $shop_url ),
+			array( '@type' => 'ListItem', 'position' => 3, 'name' => $title, 'item' => $url ),
+		);
+	}
+	$desc = trim( mb_substr( $desc, 0, 160 ) );
+	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+	echo '<meta property="og:type" content="website">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( $title . ' | ' . get_bloginfo( 'name' ) ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+	echo '<script type="application/ld+json">' . wp_json_encode( array(
+		'@context' => 'https://schema.org', '@type' => 'CollectionPage', 'name' => $title, 'description' => $desc, 'url' => $url,
+		'isPartOf' => array( '@type' => 'WebSite', 'name' => get_bloginfo( 'name' ), 'url' => home_url( '/' ) ),
+	) ) . '</script>' . "\n";
+	echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => $crumbs ) ) . '</script>' . "\n";
+}
+
+/* Generic pages (About, FAQ, COA, Contact, legal) had no meta description / OG. */
+add_action( 'wp_head', 'alluvia_page_meta', 1 );
+function alluvia_page_meta() {
+	if ( ! is_page() || is_front_page() ) { return; }
+	if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_page() ) ) { return; }
+	$pid = get_queried_object_id();
+	if ( ! $pid ) { return; }
+	$excerpt = get_post_field( 'post_excerpt', $pid );
+	$desc    = $excerpt ? $excerpt : wp_html_excerpt( wp_strip_all_tags( get_post_field( 'post_content', $pid ) ), 155, '…' );
+	if ( ! $desc ) { $desc = get_bloginfo( 'name' ) . ' — research-grade peptides, research use only.'; }
+	$url   = get_permalink( $pid );
+	$title = wp_strip_all_tags( get_the_title( $pid ) );
+	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:type" content="website">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( $title . ' | ' . get_bloginfo( 'name' ) ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+}
+
+/* Drop the author/users sub-sitemap (no SEO value for a store). */
+add_filter( 'wp_sitemaps_add_provider', 'alluvia_sitemap_providers', 10, 2 );
+function alluvia_sitemap_providers( $provider, $name ) {
+	return ( 'users' === $name ) ? false : $provider;
+}
