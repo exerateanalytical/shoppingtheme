@@ -275,14 +275,15 @@ add_action( 'wp_head', function() {
 .categories-header .section-desc{color:rgba(255,255,255,.55);margin:0 auto}
 .categories-header .section-label{justify-content:center}
 .categories-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
-.cat-card{flex:0 1 calc(25% - 15px);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;min-height:152px;border-radius:var(--radius-md);padding:28px 20px;background:linear-gradient(165deg,color-mix(in srgb,var(--cat-color,var(--teal)) 13%,transparent) 0%,rgba(255,255,255,.03) 60%);border:1px solid color-mix(in srgb,var(--cat-color,var(--teal)) 24%,rgba(255,255,255,.07));cursor:pointer;transition:var(--transition);overflow:hidden}
-.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cat-color,var(--teal)),transparent 60%);opacity:0;transition:opacity .45s ease}
-.cat-card:hover::before{opacity:.14}
-.cat-card:hover{border-color:color-mix(in srgb,var(--cat-color,var(--teal)) 55%,transparent);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.34)}
-.cat-card:focus-visible{outline:2px solid var(--cat-color,var(--teal));outline-offset:3px}
-.cat-icon-wrap{width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;background:color-mix(in srgb,var(--cat-color,var(--teal)) 18%,transparent);border:1px solid color-mix(in srgb,var(--cat-color,var(--teal)) 38%,transparent);transition:var(--transition);position:relative;z-index:1;color:var(--cat-color,var(--teal))}
-.cat-icon-wrap svg{width:44px;height:44px}
-.cat-card:hover .cat-icon-wrap{background:var(--cat-color,var(--teal));border-color:var(--cat-color,var(--teal));color:var(--navy);box-shadow:0 12px 30px color-mix(in srgb,var(--cat-color,var(--teal)) 48%,transparent);transform:scale(1.08) rotate(-4deg)}
+/* No card — just a big, glossy 3D icon tile + the category title. */
+.cat-card{flex:0 1 calc(25% - 18px);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;text-decoration:none;background:none;border:none;padding:10px 6px;cursor:pointer;transition:transform .3s ease}
+.cat-card::before{display:none}
+.cat-card:hover{transform:none;box-shadow:none;border:none}
+.cat-card:focus-visible{outline:none}
+.cat-card:focus-visible .cat-icon-wrap{outline:2px solid #fff;outline-offset:4px}
+.cat-icon-wrap{width:108px;height:108px;border-radius:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;border:none;position:relative;z-index:1;color:#fff;background:linear-gradient(150deg,color-mix(in srgb,var(--cat-color,var(--teal)) 70%,#fff) 0%,var(--cat-color,var(--teal)) 50%,color-mix(in srgb,var(--cat-color,var(--teal)) 80%,#000) 100%);box-shadow:0 24px 38px -14px color-mix(in srgb,var(--cat-color,var(--teal)) 60%,transparent),inset 0 3px 5px rgba(255,255,255,.55),inset 0 -7px 14px rgba(0,0,0,.28);transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease}
+.cat-icon-wrap svg{width:56px;height:56px;stroke-width:2;filter:drop-shadow(0 3px 4px rgba(0,0,0,.42))}
+.cat-card:hover .cat-icon-wrap{transform:translateY(-8px) scale(1.06);box-shadow:0 34px 52px -14px color-mix(in srgb,var(--cat-color,var(--teal)) 70%,transparent),inset 0 3px 5px rgba(255,255,255,.6),inset 0 -7px 14px rgba(0,0,0,.3)}
 .cat-name{font-family:var(--font-ui);font-size:var(--fs-body);font-weight:700;color:var(--white);margin:0;line-height:1.28;letter-spacing:.01em;position:relative;z-index:1;transition:color .3s}
 .cat-card:hover .cat-name{color:#fff}
 
@@ -422,11 +423,11 @@ add_action( 'wp_head', function() {
   .testimonials-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
 }
 @media(max-width:640px){
-  .categories-grid{gap:14px}
-  /* square cards with bold, vivid, distinct solid-colour icon tiles on mobile */
-  .cat-card{flex-basis:calc(50% - 7px);aspect-ratio:1/1;min-height:0;padding:16px 10px;justify-content:center;border-width:1.5px}
-  .cat-icon-wrap{width:60px;height:60px;border-radius:18px;margin-bottom:14px;background:var(--cat-color,var(--teal));border-color:var(--cat-color,var(--teal));color:#0a1a27;box-shadow:0 10px 26px color-mix(in srgb,var(--cat-color,var(--teal)) 45%,transparent)}
-  .cat-icon-wrap svg{width:32px;height:32px;stroke-width:2.4}
+  .categories-grid{gap:20px 14px}
+  /* no card on mobile either — just the bigger 3D icon + title */
+  .cat-card{flex-basis:calc(50% - 7px);min-height:0;padding:6px}
+  .cat-icon-wrap{width:88px;height:88px;border-radius:25px;margin-bottom:12px;box-shadow:0 18px 28px -12px color-mix(in srgb,var(--cat-color,var(--teal)) 60%,transparent),inset 0 2px 4px rgba(255,255,255,.55),inset 0 -6px 11px rgba(0,0,0,.28)}
+  .cat-icon-wrap svg{width:45px;height:45px}
   .cat-name{font-size:13.5px;color:#fff;line-height:1.2}
   .hiw-steps{grid-template-columns:1fr;gap:40px}
   .hiw-icon-ring{width:88px;height:88px}
