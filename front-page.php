@@ -339,7 +339,7 @@ add_action( 'wp_head', function() {
   .hero-inner{grid-template-columns:1fr;padding:110px 24px 70px}
   /* hide only the decorative molecule on mobile; product grids stay (1 column) */
   .hero-vslide.is-molecule{display:none}
-  .hero-product-grid{grid-template-columns:1fr;gap:12px;max-width:340px}
+  .hero-product-grid{grid-template-columns:1fr 1fr;gap:12px;max-width:480px}
   .hpc-img{aspect-ratio:16/10}
   .about-grid,.science-grid{grid-template-columns:1fr;gap:60px}
   .about-visual{display:none}
@@ -347,7 +347,11 @@ add_action( 'wp_head', function() {
   .testimonials-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
 }
 @media(max-width:640px){
-  .cat-card{flex-basis:100%}
+  .categories-grid{gap:14px}
+  .cat-card{flex-basis:calc(50% - 7px);min-height:128px;padding:22px 12px}
+  .cat-icon-wrap{width:62px;height:62px;border-radius:16px;margin-bottom:10px}
+  .cat-icon-wrap svg{width:32px;height:32px}
+  .cat-name{font-size:13px}
   .hiw-steps{grid-template-columns:1fr;gap:40px}
   .hiw-icon-ring{width:88px;height:88px}
   .stats-grid{grid-template-columns:1fr 1fr}
